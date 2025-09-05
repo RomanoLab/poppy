@@ -1,0 +1,76 @@
+ontology:
+  schema_path: data/ontology/phytotherapies_schema.owl
+  schema_format: xml
+  base_namespace: http://example.org/phytotherapies#
+sources:
+  db:
+    enabled: true
+    host: romanodb1.pmacs.upenn.edu
+    port: 5432
+    dbname: your_db
+    user: your_user
+    password: your_password
+    queries:
+      plants: SELECT id AS plant_id, name AS scientific_name FROM coconut.organisms;
+      compounds: SELECT DISTINCT p.molecule_id AS compound_id, e.name AS name, s.smiles
+        AS smiles, mo.organism_id AS plant_id FROM coconut.properties p JOIN coconut.entries
+        e   ON p.molecule_id = e.molecule_id LEFT JOIN coconut.structures s ON p.molecule_id
+        = s.molecule_id LEFT JOIN coconut.organism_map mo ON p.molecule_id = mo.molecule_id
+        WHERE s.smiles IS NOT NULL;
+      genes: SELECT gene_id, symbol FROM public.genes LIMIT 100;
+      pathways: SELECT pathway_id, name FROM public.pathways LIMIT 100;
+  csv:
+    enabled: true
+    files:
+      cmap_plant_ingredient:
+        path: data/raw/CMAUPv2.0_download_Plant_Ingredient_Associations_allIngredients.txt
+        sep: "\t"
+        columns:
+        - Plant_ID
+        - Ingredient_ID
+        rename:
+          Plant_ID: plant_id
+          Ingredient_ID: compound_id
+      cmap_plants:
+        path: data/raw/CMAUPv2.0_download_Plants.txt
+        sep: "\t"
+        columns: []
+        rename:
+          Plant_ID: plant_id
+          Scientific_Name: scientific_name
+      cmap_ingredient_targets:
+        path: data/raw/CMAUPv2.0_download_Ingredient_Target_Associations_ActivityValues_References.txt
+        sep: "\t"
+        columns: []
+        rename:
+          Ingredient_ID: compound_id
+          Target_ID: gene_id
+      npass_targets:
+        path: data/raw/NPASSv1.0_download_naturalProducts_targetInfo.txt
+        sep: "\t"
+        columns: []
+        rename:
+          NP_ID: compound_id
+          Target: gene_id
+      chembl_mechanisms:
+        path: data/raw/ChEMBL_drug_mechanisms.csv
+        sep: ','
+        columns: []
+        rename:
+          molecule_chembl_id: compound_id
+          target_chembl_id: gene_id
+          action_type: action_type
+steps:
+  add_plants: true
+  add_compounds: true
+  add_genes: true
+  add_pathways: false
+  link_compound_to_plant: true
+  link_gene_to_pathway: false
+  link_compound_to_pathway: false
+export:
+  out_path: data/processed/phytotherapies_enriched.ttl
+  format: turtle
+provenance:
+  write_stats_json: true
+  stats_path: results/ontology_stats.json

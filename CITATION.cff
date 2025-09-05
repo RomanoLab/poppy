@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: POPPy — Phyto-Ontology Platform for Pharmacology
+message: "If you use this repository, please cite it as below."
+type: software
+authors:
+  - family-names: Hewryk
+    given-names: Oresta S. I.
+  - family-names: Pan
+    given-names: Ian Tong
+  - family-names: Romano
+    given-names: Joseph D.
+version: "0.1.0"
+license: MIT

@@ -1,0 +1,11 @@
+column,type,description,source,required,example
+plant_id,string,"Stable ID for plant (e.g., from CMAUP/COCONUT).",CMAUP/COCONUT,yes,PLANT_12345
+scientific_name,string,Accepted binomial name.,CMAUP/Plants.csv,yes,Curcuma longa
+compound_id,string,Stable ID for compound.,CMAUP/ChEMBL/COCONUT,yes,CMPD_98765
+name,string,Compound common name.,Multiple,no,Curcumin
+smiles,string,Canonical SMILES for the compound.,ChEMBL/COCONUT,no,COc1cc(... )
+gene_id,string,Target gene/protein identifier.,UniProt/ChEMBL,no,P35228
+pathway_id,string,Reactome/KEGG pathway id.,Reactome/KEGG,no,R-HSA-399997
+atc_code,string,ATC classification code.,DrugCentral/WHO,no,A07EA01
+references,string,PMIDs/DOIs/evidence.,PubMed,no,PMID:12345678; doi:10.1234/abcd
+notes,string,Free-text notes.,Curator,no,Flag for review

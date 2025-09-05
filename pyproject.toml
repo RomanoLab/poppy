@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poppy"
+version = "0.1.0"
+description = "Phyto-Ontology Platform for Pharmacology"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Oresta S. I. Hewryk et al." }]
+license = { text = "MIT" }
+dependencies = [
+  "requests>=2.32",
+  "pandas>=2.2",
+  "polars>=1.5",
+  "numpy>=1.26",
+  "rdflib>=7.0",
+  "pyyaml>=6.0",
+  "scikit-learn>=1.5",
+  "matplotlib>=3.9",
+  "tqdm>=4.66",
+  "biopython>=1.84",
+  "psycopg2-binary>=2.9"
+]
+
+[project.optional-dependencies]
+chem = [
+  "rdkit-pypi>=2022.9.5"
+]
+
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+  "black>=24.0",
+  "mypy>=1.10",
+  "pre-commit>=3.7",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
