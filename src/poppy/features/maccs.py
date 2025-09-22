@@ -1,10 +1,12 @@
 from typing import Optional
+
 try:
     from rdkit import Chem
     from rdkit.Chem import MACCSkeys
-except Exception as e:
+except Exception:
     Chem = None
     MACCSkeys = None
+
 
 def maccs_bits_from_smiles(smiles: str) -> Optional[str]:
     if Chem is None or MACCSkeys is None:

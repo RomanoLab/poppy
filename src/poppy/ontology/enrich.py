@@ -5,6 +5,7 @@ from .utils import sanitize_for_uri
 
 OWL_CLASS = URIRef("http://www.w3.org/2002/07/owl#Class")
 
+
 def ensure_class(g: Graph, ns: Namespace, class_name: str, label: Optional[str] = None):
     c = URIRef(ns + class_name)
     if (c, RDF.type, None) not in g:
@@ -13,7 +14,14 @@ def ensure_class(g: Graph, ns: Namespace, class_name: str, label: Optional[str] 
         g.add((c, RDFS.label, Literal(label)))
     return c
 
-def add_plants(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: str = "plant_id", name_key: str = "scientific_name"):
+
+def add_plants(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    id_key: str = "plant_id",
+    name_key: str = "scientific_name",
+):
     plant_cls = ensure_class(g, ns, "Plant", "Plant")
     for r in rows:
         pid = sanitize_for_uri(r.get(id_key) or r.get(name_key))
@@ -24,7 +32,15 @@ def add_plants(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: 
         if r.get(name_key):
             g.add((subj, RDFS.label, Literal(r[name_key])))
 
-def add_compounds(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: str = "compound_id", name_key: str = "name", smiles_key: str = "smiles"):
+
+def add_compounds(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    id_key: str = "compound_id",
+    name_key: str = "name",
+    smiles_key: str = "smiles",
+):
     cmpd_cls = ensure_class(g, ns, "Compound", "Compound")
     has_smiles = URIRef(ns + "hasSMILES")
     for r in rows:
@@ -38,7 +54,14 @@ def add_compounds(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_ke
         if r.get(smiles_key):
             g.add((subj, has_smiles, Literal(r[smiles_key])))
 
-def add_genes(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: str = "gene_id", sym_key: str = "symbol"):
+
+def add_genes(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    id_key: str = "gene_id",
+    sym_key: str = "symbol",
+):
     gene_cls = ensure_class(g, ns, "Gene", "Gene")
     for r in rows:
         gid = sanitize_for_uri(r.get(id_key) or r.get(sym_key))
@@ -49,7 +72,14 @@ def add_genes(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: s
         if r.get(sym_key):
             g.add((subj, RDFS.label, Literal(r[sym_key])))
 
-def add_pathways(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key: str = "pathway_id", name_key: str = "name"):
+
+def add_pathways(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    id_key: str = "pathway_id",
+    name_key: str = "name",
+):
     pwy_cls = ensure_class(g, ns, "Pathway", "Pathway")
     for r in rows:
         pid = sanitize_for_uri(r.get(id_key) or r.get(name_key))
@@ -60,7 +90,14 @@ def add_pathways(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], id_key
         if r.get(name_key):
             g.add((subj, RDFS.label, Literal(r[name_key])))
 
-def link_compound_to_plant(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], compound_id_key: str = "compound_id", plant_id_key: str = "plant_id"):
+
+def link_compound_to_plant(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    compound_id_key: str = "compound_id",
+    plant_id_key: str = "plant_id",
+):
     pred = URIRef(ns + "isDerivedFrom")
     for r in rows:
         cid = sanitize_for_uri(r.get(compound_id_key))
@@ -71,7 +108,14 @@ def link_compound_to_plant(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any
         plant = URIRef(ns + f"Plant_{pid}")
         g.add((cmpd, pred, plant))
 
-def link_gene_to_pathway(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], gene_id_key: str = "gene_id", pathway_id_key: str = "pathway_id"):
+
+def link_gene_to_pathway(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    gene_id_key: str = "gene_id",
+    pathway_id_key: str = "pathway_id",
+):
     pred = URIRef(ns + "geneInPathway")
     for r in rows:
         gid = sanitize_for_uri(r.get(gene_id_key))
@@ -79,10 +123,17 @@ def link_gene_to_pathway(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]]
         if not gid or not pid:
             continue
         gene = URIRef(ns + f"Gene_{gid}")
-        pwy  = URIRef(ns + f"Pathway_{pid}")
+        pwy = URIRef(ns + f"Pathway_{pid}")
         g.add((gene, pred, pwy))
 
-def link_compound_to_pathway(g: Graph, ns: Namespace, rows: Iterable[Dict[str, Any]], compound_id_key: str = "compound_id", pathway_id_key: str = "pathway_id"):
+
+def link_compound_to_pathway(
+    g: Graph,
+    ns: Namespace,
+    rows: Iterable[Dict[str, Any]],
+    compound_id_key: str = "compound_id",
+    pathway_id_key: str = "pathway_id",
+):
     pred = URIRef(ns + "targetsPathway")
     for r in rows:
         cid = sanitize_for_uri(r.get(compound_id_key))
@@ -90,5 +141,5 @@ def link_compound_to_pathway(g: Graph, ns: Namespace, rows: Iterable[Dict[str, A
         if not cid or not pid:
             continue
         cmpd = URIRef(ns + f"Compound_{cid}")
-        pwy  = URIRef(ns + f"Pathway_{pid}")
+        pwy = URIRef(ns + f"Pathway_{pid}")
         g.add((cmpd, pred, pwy))

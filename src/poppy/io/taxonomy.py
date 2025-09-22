@@ -1,8 +1,10 @@
 from typing import Optional
 from Bio import Entrez
 
+
 def set_email(email: str):
     Entrez.email = email
+
 
 def get_class_from_taxid(tax_id: str) -> Optional[str]:
     """Return the scientific name at rank 'class' for a taxonomy ID, or None."""
@@ -17,6 +19,7 @@ def get_class_from_taxid(tax_id: str) -> Optional[str]:
     except Exception:
         return None
     return None
+
 
 def is_plantae_by_name(scientific_name: str, email: Optional[str] = None) -> bool:
     """Return True if the scientific_name is in Plantae/Viridiplantae (NCBI)."""
@@ -34,7 +37,10 @@ def is_plantae_by_name(scientific_name: str, email: Optional[str] = None) -> boo
         fetch.close()
         rec = records[0]
         for rank in rec.get("LineageEx", []):
-            if rank["Rank"].lower() == "kingdom" and ("plantae" in rank["ScientificName"].lower() or "viridiplantae" in rank["ScientificName"].lower()):
+            if rank["Rank"].lower() == "kingdom" and (
+                "plantae" in rank["ScientificName"].lower()
+                or "viridiplantae" in rank["ScientificName"].lower()
+            ):
                 return True
         lineage_str = rec.get("Lineage", "").lower()
         if "plantae" in lineage_str or "viridiplantae" in lineage_str:
