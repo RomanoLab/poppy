@@ -24,6 +24,8 @@ pip install -e ".[dev]"
 # 3) Build ontology from config (see configs/ontology.yaml)
 python scripts/build_ontology.py --config configs/ontology.yaml
 
+---
+
 ## Build commands (Makefile)
 
 Run these from the repo root:
