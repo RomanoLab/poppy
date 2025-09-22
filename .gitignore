@@ -20,3 +20,6 @@ web/data/*.ttl
 # Literature ingestion outputs & caches
 .cache/
 data/processed/literature/*.csv
+# Literature ingestion outputs & caches
+.cache/
+data/processed/literature/*.csv
