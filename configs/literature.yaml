@@ -1,0 +1,8 @@
+email: "you@uni.edu"
+start_year: 1975
+end_year: 2025
+ret_chunk: 1000
+pmid_chunk: 200
+compute_maccs: true
+out_csv: "data/processed/literature/pubmed_plants_compounds_1975_2025.csv"
+cache_dir: ".cache/literature"
