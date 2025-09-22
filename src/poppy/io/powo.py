@@ -1,5 +1,6 @@
 import requests
 
+
 def is_powo_plant(scientific_name: str, timeout: int = 10) -> bool:
     query = scientific_name.strip()
     url = f"https://powo.science.kew.org/api/2/search?q={query.replace(' ', '%20')}"

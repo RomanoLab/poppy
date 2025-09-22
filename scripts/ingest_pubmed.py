@@ -2,6 +2,7 @@
 import argparse
 from poppy.literature.pubmed import run
 
+
 def main():
     ap = argparse.ArgumentParser("Ingest PubMed → plants + compounds CSV")
     ap.add_argument("--email", required=True, help="Contact email for NCBI")
@@ -23,6 +24,7 @@ def main():
         compute_maccs=not args.no_maccs,
     )
     print(f"✅ wrote {path}")
+
 
 if __name__ == "__main__":
     main()

@@ -1,1 +1,1 @@
-ONTOLOGY_NS = 'http://example.org/phytotherapies#'
+ONTOLOGY_NS = "http://example.org/phytotherapies#"
