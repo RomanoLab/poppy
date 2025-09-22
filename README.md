@@ -23,3 +23,13 @@ pip install -e ".[dev]"
 
 # 3) Build ontology from config (see configs/ontology.yaml)
 python scripts/build_ontology.py --config configs/ontology.yaml
+
+## Build commands (Makefile)
+
+Run these from the repo root:
+
+```bash
+make -C build ontology   # build ontology via configs/ontology.yaml
+make -C build figures    # optional example figure(s) -> docs/figures
+make -C build web-data   # copy processed TTL + stats into web/data/
+make -C build all        # ontology + figures + web-data
