@@ -35,3 +35,4 @@ make -C build ontology   # build ontology via configs/ontology.yaml
 make -C build figures    # optional example figure(s) -> docs/figures
 make -C build web-data   # copy processed TTL + stats into web/data/
 make -C build all        # ontology + figures + web-data
+- [Ontology data ingest guide](docs/recipes/ontology-data-ingest.md)
