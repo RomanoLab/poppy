@@ -1,4 +1,4 @@
-# data
+# Data
 
 This directory contains small, versioned data assets that are required to run or build POPPy.
 
