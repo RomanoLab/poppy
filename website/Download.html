@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPPy — Download (preview)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f3e9cd; --parchment-deep: #ead9b0; --parchment-light: #fdf8e9;
+      --ink: #1a1f17; --forest: #243025; --forest-deep: #19211b;
+      --accent: #3d5b3e; --umber: #7a5a3a; --rule: #8a7a4a; --rule-soft: #bca97a;
+      --display: "EB Garamond", "Cardo", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--parchment); color: var(--ink); font-family: var(--display); font-size: 18px; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .mono-cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+
+    .herb-divider { display: flex; align-items: center; gap: 14px; color: var(--rule); margin: 32px 0; }
+    .herb-divider .rule { flex: 1; height: 1px; background: currentColor; opacity: 0.5; }
+    .herb-divider .double { flex: 1; height: 3px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; opacity: 0.5; }
+    .herb-divider .ornament { font-family: var(--display); font-size: 22px; opacity: 0.7; line-height: 1; }
+
+    /* NAV */
+    .nav { border-top: 3px double var(--rule); border-bottom: 1px solid rgba(138, 122, 74, 0.4); background: var(--parchment); position: relative; z-index: 10; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; max-width: 1180px; margin: 0 auto; }
+    .wordmark { display: flex; align-items: baseline; gap: 14px; }
+    .wordmark .name { font-family: var(--display); font-size: 36px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
+    .wordmark .name em { font-style: italic; }
+    .wordmark .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-size: 16px; color: var(--ink); padding-bottom: 2px; border-bottom: 2px solid transparent; }
+    .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links { align-items: center; }
+    .nav-item { position: relative; display: flex; align-items: center; }
+    .nav-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--parchment-light); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(36, 48, 37, 0.16); padding: 6px; min-width: 176px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; z-index: 40; }
+    .nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-menu a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; padding: 9px 16px; color: var(--ink); border-bottom: none; white-space: nowrap; }
+    .nav-menu a.active { color: var(--accent); }
+    .nav-menu a:hover { background: var(--parchment-deep); color: var(--accent); }
+
+    /* PAGE HERO */
+    .page-hero { padding: 80px 48px 40px; text-align: center; }
+    .page-hero .hero-inner { max-width: 880px; margin: 0 auto; }
+    .page-hero h1 { font-family: var(--display); font-weight: 500; font-size: 64px; line-height: 1.05; letter-spacing: -0.015em; margin: 16px 0 24px; color: var(--forest); text-wrap: balance; }
+    .page-hero h1 em { font-style: italic; }
+    .page-hero .lede { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--umber); margin: 0 auto; max-width: 760px; line-height: 1.4; }
+
+    .herb-card { background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.35); }
+    .section-h2 { font-family: var(--display); font-size: 40px; font-weight: 500; color: var(--forest); margin: 8px 0 0; }
+    .section-label-row { text-align: center; margin-bottom: 40px; }
+
+    .btn-herb {
+      font-family: var(--display);
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.18em;
+      font-size: 16px;
+      padding: 14px 32px;
+      background: var(--forest);
+      color: var(--parchment);
+      border: 1px solid var(--forest);
+      border-radius: 0;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 150ms ease;
+    }
+    .btn-herb:hover { background: var(--forest-deep); }
+    .btn-herb.btn-outline { background: transparent; color: var(--forest); }
+    .btn-herb.btn-outline:hover { background: var(--forest); color: var(--parchment); }
+    .btn-herb.btn-cream { background: var(--parchment); color: var(--forest); border-color: var(--parchment); }
+
+    /* ─── THE WHOLE RELEASE ─── */
+    .whole { padding: 20px 48px 40px; }
+    .whole-inner { max-width: 1000px; margin: 0 auto; }
+    .whole-header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; margin-bottom: 0; border-bottom: 2px solid var(--rule); }
+    .whole-header .l { font-family: var(--display); font-size: 28px; color: var(--forest); }
+
+    .release-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .release-row {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 28px 4px;
+      border-bottom: 1px dotted var(--rule);
+    }
+    .release-row:last-child { border-bottom: 0; }
+    .release-row .rr-num {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 32px;
+      color: var(--umber);
+      line-height: 1;
+    }
+    .release-row .rr-title {
+      font-family: var(--display);
+      font-size: 28px;
+      color: var(--forest);
+      line-height: 1.1;
+    }
+    .release-row .rr-blurb {
+      font-family: var(--display);
+      font-size: 16px;
+      line-height: 1.55;
+      opacity: 0.85;
+      margin: 6px 0 10px;
+      max-width: 580px;
+    }
+    .release-row .rr-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--umber);
+      text-transform: uppercase;
+    }
+    .release-row .rr-size { color: var(--accent); }
+    .release-row .rr-stats { opacity: 0.85; }
+    .release-row .rr-formats { display: inline-flex; gap: 4px; }
+    .release-row .rr-formats span {
+      padding: 2px 6px;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      background: var(--parchment);
+    }
+    .release-row .rr-btn { white-space: nowrap; }
+
+    /* ─── BUILD A CUSTOM SLICE ─── */
+    .slice { padding: 60px 48px; background: rgba(234, 217, 176, 0.4); margin-top: 40px; border-top: 1px solid rgba(138, 122, 74, 0.4); border-bottom: 1px solid rgba(138, 122, 74, 0.4); }
+    .slice-inner { max-width: 1100px; margin: 0 auto; }
+    .slice-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
+
+    /* form column */
+    .slice-form { background: var(--parchment-light); border: 1px solid var(--rule); padding: 36px 40px; }
+    .slice-group { padding: 22px 0; }
+    .slice-group + .slice-group { border-top: 1px dotted var(--rule); }
+    .slice-group:first-child { padding-top: 0; }
+    .slice-group:last-child { padding-bottom: 0; }
+    .slice-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--umber); margin-bottom: 14px; }
+
+    /* entity checkboxes */
+    .entity-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .check {
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .check input { position: absolute; left: -9999px; opacity: 0; }
+    .check .box {
+      width: 18px; height: 18px;
+      border: 1px solid var(--rule);
+      background: var(--parchment);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display);
+      color: var(--forest);
+      font-style: italic;
+      font-size: 14px;
+    }
+    .check input:checked + .box::after { content: "✓"; }
+    .check .label-name { font-family: var(--display); font-size: 19px; color: var(--forest); }
+    .check .label-count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--umber); margin-left: 6px; }
+
+    /* search + chips */
+    .typeahead { position: relative; }
+    .typeahead input {
+      width: 100%;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      padding: 10px 14px;
+      font-family: var(--display);
+      font-size: 17px;
+      color: var(--ink);
+      outline: none;
+    }
+    .typeahead input::placeholder { font-style: italic; color: rgba(26, 31, 23, 0.4); }
+    .typeahead input:focus { border-color: var(--accent); }
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      max-height: 260px;
+      overflow-y: auto;
+      background: var(--parchment-light);
+      border: 1px solid var(--rule);
+      z-index: 10;
+      display: none;
+    }
+    .dropdown.open { display: block; }
+    .dropdown-item {
+      padding: 10px 14px;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 10px;
+    }
+    .dropdown-item + .dropdown-item { border-top: 1px dotted var(--rule); }
+    .dropdown-item:hover { background: var(--parchment); }
+    .dropdown-item .lat { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--forest); }
+    .dropdown-item .com { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--umber); text-transform: uppercase; }
+    .dropdown-item .cnt { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+    .dropdown-empty { padding: 14px; color: var(--umber); font-style: italic; font-size: 14px; text-align: center; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; min-height: 8px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 8px 5px 12px;
+      background: var(--accent);
+      color: var(--parchment);
+      font-family: var(--display);
+      font-size: 15px;
+      font-style: italic;
+    }
+    .chip button {
+      background: transparent;
+      border: 0;
+      color: var(--parchment);
+      font-family: var(--mono);
+      font-size: 14px;
+      font-style: normal;
+      cursor: pointer;
+      padding: 0 2px;
+      opacity: 0.75;
+    }
+    .chip button:hover { opacity: 1; }
+
+    .chips-empty { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--umber); opacity: 0.7; margin-top: 10px; }
+
+    /* entity-type colour coding (cytoscape palette) */
+    .chip[data-type="plant"]    { border-left: 4px solid #009E73; padding-left: 10px; }
+    .chip[data-type="compound"] { border-left: 4px solid #0072B2; padding-left: 10px; }
+    .chip[data-type="target"]   { border-left: 4px solid #E69F00; padding-left: 10px; }
+    .chip[data-type="effect"]   { border-left: 4px solid #CC79A7; padding-left: 10px; }
+    .chip[data-type="citation"] { border-left: 4px solid #888; padding-left: 10px; }
+
+    .dropdown-item .dd-name-mono {
+      font-family: var(--mono); font-size: 14px; font-style: normal; color: var(--forest);
+    }
+    .type-pill {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      color: #fff;
+      align-self: center;
+    }
+    .type-pill[data-type="plant"]    { background: #009E73; }
+    .type-pill[data-type="compound"] { background: #0072B2; }
+    .type-pill[data-type="target"]   { background: #E69F00; color: #1a1f17; }
+    .type-pill[data-type="effect"]   { background: #CC79A7; }
+    .type-pill[data-type="citation"] { background: #666; }
+    .dropdown-item .dd-right { display: flex; align-items: center; gap: 10px; }
+
+    /* year range */
+    .year-range { display: flex; align-items: center; gap: 14px; font-family: var(--display); font-size: 17px; }
+    .year-range input {
+      width: 90px;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      padding: 8px 10px;
+      font-family: var(--mono);
+      font-size: 14px;
+      text-align: center;
+      color: var(--ink);
+      outline: none;
+    }
+    .year-range input:focus { border-color: var(--accent); }
+    .year-range span { font-style: italic; color: var(--umber); }
+
+    /* toggle */
+    .toggle {
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .toggle input { position: absolute; left: -9999px; opacity: 0; }
+    .toggle .track {
+      width: 40px; height: 22px;
+      border: 1px solid var(--rule);
+      background: var(--parchment);
+      position: relative;
+      transition: background 150ms ease;
+    }
+    .toggle .track::after {
+      content: "";
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 16px; height: 16px;
+      background: var(--umber);
+      transition: transform 150ms ease, background 150ms ease;
+    }
+    .toggle input:checked + .track { background: var(--accent); }
+    .toggle input:checked + .track::after { transform: translateX(18px); background: var(--parchment); }
+    .toggle .label-name { font-family: var(--display); font-size: 17px; color: var(--forest); }
+
+    /* format chips */
+    .formats { display: flex; gap: 8px; flex-wrap: wrap; }
+    .format-chip {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      padding: 10px 16px;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .format-chip:hover { background: var(--parchment-deep); }
+    .format-chip.active { background: var(--forest); color: var(--parchment); border-color: var(--forest); }
+
+    /* summary column */
+    .slice-summary {
+      background: var(--parchment-light);
+      border: 1px solid var(--rule);
+      padding: 32px 30px;
+      position: sticky;
+      top: 20px;
+    }
+    .slice-summary .summary-title { font-family: var(--display); font-style: italic; font-size: 28px; color: var(--forest); margin: 0 0 4px; }
+    .slice-summary .summary-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--umber); margin-bottom: 18px; }
+    .summary-rows { border-top: 1px solid var(--rule); }
+    .summary-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px dotted var(--rule);
+      font-family: var(--display);
+    }
+    .summary-row .k { font-style: italic; color: var(--ink); }
+    .summary-row .v { font-family: var(--mono); font-size: 15px; color: var(--accent); }
+    .summary-row.disabled .k, .summary-row.disabled .v { opacity: 0.3; }
+
+    .summary-size {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 18px 0 8px;
+      font-family: var(--display);
+    }
+    .summary-size .k { font-style: italic; color: var(--umber); }
+    .summary-size .v { font-family: var(--display); font-size: 26px; color: var(--forest); }
+
+    .summary-format { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--umber); margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+
+    .download-btn { width: 100%; text-align: center; }
+
+    /* ─── DOCS & CITE ─── */
+    .docs { padding: 60px 48px 40px; }
+    .docs-inner { max-width: 1100px; margin: 0 auto; }
+    .docs-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .doc-card { padding: 22px 22px 24px; }
+    .doc-card .doc-h { font-family: var(--display); font-size: 22px; color: var(--forest); margin: 0 0 4px; }
+    .doc-card .doc-file { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 10px; }
+    .doc-card p { font-family: var(--display); font-size: 14px; line-height: 1.5; opacity: 0.85; margin: 0 0 14px; }
+    .doc-card a.btn-herb { font-size: 12px; padding: 8px 16px; }
+
+    /* license */
+    .license { padding: 20px 48px 80px; }
+    .license-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .license-inner p { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--umber); line-height: 1.5; margin: 20px 0 0; }
+
+    /* footer */
+    .footer { background: var(--forest-deep); color: var(--parchment); padding: 56px 48px 28px; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+    .footer h3 { font-family: var(--display); font-size: 32px; font-style: italic; margin: 0; }
+    .footer .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
+    .footer .blurb { font-size: 15px; line-height: 1.55; opacity: 0.75; margin-top: 18px; max-width: 320px; }
+    .footer .col-h { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
+    .footer .col-link { display: block; font-size: 16px; padding: 4px 0; opacity: 0.85; color: inherit; text-decoration: none; }
+    .footer a.col-link:hover { color: var(--accent); opacity: 1; }
+    .footer-bottom a.ft-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243, 233, 205, 0.4); transition: color 150ms ease, border-color 150ms ease; } .footer-bottom a.ft-link:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-bottom { border-top: 1px solid rgba(243, 233, 205, 0.2); padding-top: 18px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; }
+
+    /* preview note */
+    .demo-note {
+      max-width: 1100px; margin: 0 auto 20px;
+      padding: 16px 22px;
+      background: rgba(122, 90, 58, 0.08);
+      border-left: 3px solid var(--umber);
+      font-family: var(--display); font-style: italic; font-size: 15px;
+      color: var(--ink);
+    }
+    .demo-note code { font-family: var(--mono); font-style: normal; background: rgba(36, 48, 37, 0.08); padding: 1px 6px; border-radius: 2px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="wordmark"><img class="logo-img" src="assets/poppy-logo.png" alt="POPPy" style="height:38px;width:auto;display:block;"><div class="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div></div>
+      <div class="nav-links">
+        <a href="Home.html">Home</a>
+        <a href="Explore.html">Explore</a>
+        <a href="#" class="active">Download</a>
+        <div class="nav-item">
+          <a href="About.html">About</a>
+          <div class="nav-menu">
+            <a href="About.html">Overview</a>
+            <a href="Method.html">Method</a>
+            <a href="Team.html">Team</a>
+            <a href="Citation.html">Citation</a>
+          </div>
+        </div>
+        <a href="Contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <div class="mono-cap" style="color: var(--umber)">Download</div>
+      <h1>Take the <em>whole shelf</em> — or just one plant.</h1>
+      <p class="lede">Download the full ontology, the schema by itself, or build a custom slice filtered to the plants and entity types you care about.</p>
+      <div class="herb-divider"><span class="rule"></span><span class="double"></span><span class="ornament">❦</span><span class="double"></span><span class="rule"></span></div>
+    </div>
+  </section>
+
+  <!-- THE WHOLE RELEASE -->
+  <section class="whole">
+    <div class="whole-inner">
+      <div class="whole-header">
+        <div class="l">The whole release · v 0.1.0</div>
+        <div class="mono-cap">Released 21 May 2026</div>
+      </div>
+
+      <ol class="release-list">
+        <li class="release-row">
+          <div class="rr-num">I.</div>
+          <div class="rr-body">
+            <div class="rr-title">Schema</div>
+            <p class="rr-blurb">The empty ontology — classes, properties, axioms. Plug in your own data or extend the schema.</p>
+            <div class="rr-meta">
+              <span class="rr-size">1.2 MB</span>
+              <span class="rr-formats"><span>OWL</span><span>TTL</span><span>RDF</span></span>
+            </div>
+          </div>
+          <a class="btn-herb btn-outline rr-btn" href="/downloads/poppy-schema.ttl" download>Download</a>
+        </li>
+        <li class="release-row">
+          <div class="rr-num">II.</div>
+          <div class="rr-body">
+            <div class="rr-title">Full ontology</div>
+            <p class="rr-blurb">Everything: classes, instances, relationships, and the citation provenance for every edge.</p>
+            <div class="rr-meta">
+              <span class="rr-size">48.2 MB</span>
+              <span class="rr-stats">70k+ compounds · 184k+ citations</span>
+              <span class="rr-formats"><span>OWL</span><span>TTL</span><span>RDF</span><span>JSON-LD</span></span>
+            </div>
+          </div>
+          <a class="btn-herb rr-btn" href="/downloads/poppy.ttl" download>Download</a>
+        </li>
+        <li class="release-row">
+          <div class="rr-num">III.</div>
+          <div class="rr-body">
+            <div class="rr-title">Full archive</div>
+            <p class="rr-blurb">The full release plus documentation PDF and a CSV mirror of the core tables.</p>
+            <div class="rr-meta">
+              <span class="rr-size">54.8 MB</span>
+              <span class="rr-formats"><span>ZIP</span></span>
+            </div>
+          </div>
+          <a class="btn-herb btn-outline rr-btn" href="/downloads/poppy-archive.zip" download>Download&nbsp;.zip</a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- BUILD A CUSTOM SLICE -->
+  <section class="slice">
+    <div class="slice-inner">
+      <div class="section-label-row">
+        <div class="mono-cap" style="color: var(--umber)">Custom export</div>
+        <h2 class="section-h2">Build a slice</h2>
+        <p style="font-style:italic;color:var(--umber);max-width:640px;margin:14px auto 0;font-size:19px;line-height:1.5;">Pick the entity types you want, optionally filter to specific plants, and choose a serialization. Everything updates live.</p>
+      </div>
+
+      <div class="demo-note">
+        <strong>Preview note:</strong> the form below is fully interactive — counts and size update live. In production the <code>Download slice</code> button will POST to <code>/api/ontology/export</code> and stream back a file. The endpoint isn't wired yet.
+      </div>
+
+      <div class="slice-grid">
+        <!-- FORM -->
+        <form id="slice-form" class="slice-form">
+
+          <!-- entity types -->
+          <div class="slice-group">
+            <label class="slice-label">What do you want?</label>
+            <div class="entity-list">
+              <label class="check">
+                <input type="checkbox" name="entity" value="plants" checked>
+                <span class="box"></span>
+                <span class="label-name">Plants <span class="label-count">63,722</span></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="entity" value="compounds" checked>
+                <span class="box"></span>
+                <span class="label-name">Compounds <span class="label-count">70,062</span></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="entity" value="targets" checked>
+                <span class="box"></span>
+                <span class="label-name">Targets <span class="label-count">1,334</span></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="entity" value="effects" checked>
+                <span class="box"></span>
+                <span class="label-name">Effects <span class="label-count">2,418</span></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="entity" value="citations">
+                <span class="box"></span>
+                <span class="label-name">Citations <span class="label-count">184,500+</span></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- entity filter (plants / compounds / targets / effects / citations) -->
+          <div class="slice-group">
+            <label class="slice-label">Filter by specific entities</label>
+            <div class="typeahead">
+              <input id="entity-search" type="text" placeholder="Search plants, compounds, targets, effects, or citations…" autocomplete="off" />
+              <div id="entity-dropdown" class="dropdown"></div>
+            </div>
+            <div id="entity-chips" class="chips"></div>
+            <div id="entity-chips-empty" class="chips-empty">No filter — including the full ontology.</div>
+          </div>
+
+          <!-- year range -->
+          <div class="slice-group">
+            <label class="slice-label">Citation year range</label>
+            <div class="year-range">
+              <span>From</span>
+              <input id="year-from" type="number" min="1700" max="2026" value="1700">
+              <span>to</span>
+              <input id="year-to" type="number" min="1700" max="2026" value="2026">
+            </div>
+          </div>
+
+          <!-- include neighbors -->
+          <div class="slice-group">
+            <label class="toggle">
+              <input id="include-neighbors" type="checkbox">
+              <span class="track"></span>
+              <span class="label-name">Include 1-hop neighbours <span class="mono-cap" style="display:inline-block;margin-left:6px;color:var(--umber);">(expand each entity by its directly-linked others)</span></span>
+            </label>
+          </div>
+
+          <!-- format -->
+          <div class="slice-group">
+            <label class="slice-label">Format</label>
+            <div class="formats" id="formats">
+              <button type="button" class="format-chip active" data-format="ttl">Turtle (.ttl)</button>
+              <button type="button" class="format-chip" data-format="owl">OWL (.owl)</button>
+              <button type="button" class="format-chip" data-format="rdf">RDF/XML (.rdf)</button>
+              <button type="button" class="format-chip" data-format="jsonld">JSON-LD</button>
+              <button type="button" class="format-chip" data-format="csv">CSV (one table per entity)</button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- SUMMARY -->
+        <aside class="slice-summary herb-card">
+          <h3 class="summary-title">Your slice</h3>
+          <div class="summary-sub">As configured</div>
+
+          <div class="summary-rows" id="summary-rows">
+            <div class="summary-row" data-row="plants">     <div class="k">Plants</div>     <div class="v" id="cnt-plants">63,722</div></div>
+            <div class="summary-row" data-row="compounds">  <div class="k">Compounds</div>  <div class="v" id="cnt-compounds">70,062</div></div>
+            <div class="summary-row" data-row="targets">    <div class="k">Targets</div>    <div class="v" id="cnt-targets">1,334</div></div>
+            <div class="summary-row" data-row="effects">    <div class="k">Effects</div>    <div class="v" id="cnt-effects">2,418</div></div>
+            <div class="summary-row disabled" data-row="citations"><div class="k">Citations</div><div class="v" id="cnt-citations">0</div></div>
+          </div>
+
+          <div class="summary-size">
+            <div class="k">Estimated size</div>
+            <div class="v" id="cnt-size">~ 31.5 MB</div>
+          </div>
+          <div class="summary-format">
+            Format: <span id="cnt-format">Turtle (.ttl)</span>
+          </div>
+
+          <button type="button" class="btn-herb download-btn" id="download-btn">Download slice</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- LICENSE -->
+  <section class="license">
+    <div class="license-inner">
+      <div class="herb-divider"><span class="rule"></span><span class="double"></span><span class="ornament">❦</span><span class="double"></span><span class="rule"></span></div>
+      <p>Released under Creative Commons Attribution–NonCommercial 4.0. Cite us, fork us, build on us — only do not forget where the knowledge came from.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h3>POPPy</h3>
+          <div class="tag">Phyto-Ontology Platform<br/>for Pharmacology</div>
+          <p class="blurb">An open registry of medicinal plants, their compounds, targets, and citations — for the next generation of AI-assisted drug discovery.</p>
+        </div>
+        <div>
+          <div class="col-h">Explore</div>
+          <a class="col-link" href="Home.html">Home</a>
+          <a class="col-link" href="Explore.html">Explore</a>
+          <a class="col-link" href="Download.html">Download</a>
+          <a class="col-link" href="About.html">About</a>
+          <a class="col-link" href="Contact.html">Contact</a>
+        </div>
+        <div>
+          <div class="col-h">About</div>
+          <a class="col-link" href="About.html">Overview</a>
+          <a class="col-link" href="Method.html">Method</a>
+          <a class="col-link" href="Team.html">Team</a>
+          <a class="col-link" href="Citation.html">Citation</a>
+        </div>
+        <div>
+          <div class="col-h">Legal</div>
+          <a class="col-link" href="Privacy.html">Privacy</a>
+          <a class="col-link" href="Terms.html">Terms</a>
+          <a class="col-link" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">License</a>
+        </div>
+      </div>
+      <div class="footer-land" style="font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 14px; line-height: 1.5; opacity: 0.7; padding: 0 0 20px; max-width: 680px;">This resource was developed on Lenapehoking, the traditional ancestral homeland of the Lenape people.</div>
+      <div class="footer-bottom">
+        <span>© MMXXVI · <a href="https://romanolab.org" target="_blank" rel="noopener" class="ft-link">ROMANO LAB</a> AT THE <a href="https://www.upenn.edu" target="_blank" rel="noopener" class="ft-link">UNIVERSITY OF PENNSYLVANIA</a></span>
+        <span>Editio Prima · v 0.1</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Mock plant database ─────────────────────────────────────────
+    const PLANTS = [
+      { id: "papaver-rhoeas",        lat: "Papaver rhoeas",         com: "Corn poppy",         n: 412 },
+      { id: "papaver-somniferum",    lat: "Papaver somniferum",     com: "Opium poppy",        n: 489 },
+      { id: "digitalis-purpurea",    lat: "Digitalis purpurea",     com: "Foxglove",           n: 287 },
+      { id: "atropa-belladonna",     lat: "Atropa belladonna",      com: "Deadly nightshade",  n: 198 },
+      { id: "hypericum-perforatum",  lat: "Hypericum perforatum",   com: "St. John's wort",    n: 318 },
+      { id: "filipendula-ulmaria",   lat: "Filipendula ulmaria",    com: "Meadowsweet",        n: 156 },
+      { id: "valeriana-officinalis", lat: "Valeriana officinalis",  com: "Common valerian",    n: 142 },
+      { id: "achillea-millefolium",  lat: "Achillea millefolium",   com: "Yarrow",             n: 264 },
+      { id: "sambucus-nigra",        lat: "Sambucus nigra",         com: "Black elder",        n: 207 },
+      { id: "tanacetum-parthenium",  lat: "Tanacetum parthenium",   com: "Feverfew",           n: 89 },
+      { id: "verbascum-thapsus",     lat: "Verbascum thapsus",      com: "Great mullein",      n: 134 },
+      { id: "chelidonium-majus",     lat: "Chelidonium majus",      com: "Greater celandine",  n: 121 },
+      { id: "conium-maculatum",      lat: "Conium maculatum",       com: "Hemlock",            n: 47  },
+      { id: "urtica-dioica",         lat: "Urtica dioica",          com: "Stinging nettle",    n: 178 },
+      { id: "plantago-major",        lat: "Plantago major",         com: "Greater plantain",   n: 92  },
+      { id: "crataegus-monogyna",    lat: "Crataegus monogyna",     com: "Common hawthorn",    n: 215 },
+      { id: "glycyrrhiza-glabra",    lat: "Glycyrrhiza glabra",     com: "Liquorice",          n: 412 },
+      { id: "mentha-piperita",       lat: "Mentha piperita",        com: "Peppermint",         n: 234 },
+      { id: "echinacea-purpurea",    lat: "Echinacea purpurea",     com: "Purple coneflower",  n: 156 },
+      { id: "withania-somnifera",    lat: "Withania somnifera",     com: "Ashwagandha",        n: 203 },
+      { id: "curcuma-longa",         lat: "Curcuma longa",          com: "Turmeric",           n: 289 },
+      { id: "salvia-officinalis",    lat: "Salvia officinalis",     com: "Common sage",        n: 176 },
+    ];
+
+    // ─── State ────────────────────────────────────────────────────────
+    const state = {
+      entities: { plants: true, compounds: true, targets: true, effects: true, citations: false },
+      selectedPlants: [],
+      yearFrom: 1700, yearTo: 2026,
+      includeNeighbors: false,
+      format: "ttl",
+    };
+
+    const FORMAT_LABELS = {
+      ttl: "Turtle (.ttl)", owl: "OWL (.owl)", rdf: "RDF/XML (.rdf)",
+      jsonld: "JSON-LD", csv: "CSV (one table per entity)",
+    };
+    // bytes per record, by entity
+    const REC_BYTES = { plants: 220, compounds: 380, targets: 240, effects: 200, citations: 160 };
+    // format multiplier
+    const FMT_MULT = { ttl: 1.0, owl: 1.6, rdf: 1.8, jsonld: 1.4, csv: 0.75 };
+
+    // ─── Compute counts ───────────────────────────────────────────────
+    function compute() {
+      const selected = state.selectedPlants;
+      const hasPlantFilter = selected.length > 0;
+      const yearFraction =
+        Math.max(0, Math.min(1, (state.yearTo - state.yearFrom) / (2026 - 1700)));
+
+      let plants, compounds, targets, effects, citations;
+
+      if (hasPlantFilter) {
+        plants = selected.length;
+        compounds = selected.reduce((s, p) => s + p.n, 0);
+        // mock: each compound ~ 0.06 targets, scaled because of overlap
+        targets = Math.min(state.entities.targets ? Math.round(compounds * 0.08 + 12) : 0, 1334);
+        effects = Math.round(compounds * 0.18);
+        citations = Math.round((compounds + targets + effects) * 2.4 * yearFraction);
+      } else {
+        plants = 63722;
+        compounds = 70062;
+        targets = 1334;
+        effects = 2418;
+        citations = Math.round(184500 * yearFraction);
+      }
+
+      // apply 1-hop expansion (mild bump)
+      if (state.includeNeighbors) {
+        compounds = Math.round(compounds * 1.25);
+        targets = Math.round(targets * 1.4);
+        effects = Math.round(effects * 1.3);
+        citations = Math.round(citations * 1.5);
+      }
+
+      // zero out anything not selected
+      if (!state.entities.plants)    plants    = 0;
+      if (!state.entities.compounds) compounds = 0;
+      if (!state.entities.targets)   targets   = 0;
+      if (!state.entities.effects)   effects   = 0;
+      if (!state.entities.citations) citations = 0;
+
+      const rawBytes =
+        plants    * REC_BYTES.plants +
+        compounds * REC_BYTES.compounds +
+        targets   * REC_BYTES.targets +
+        effects   * REC_BYTES.effects +
+        citations * REC_BYTES.citations;
+      const bytes = rawBytes * (FMT_MULT[state.format] || 1);
+
+      return { plants, compounds, targets, effects, citations, bytes };
+    }
+
+    function fmtBytes(b) {
+      if (!b) return "0 B";
+      if (b < 1024) return `~ ${Math.round(b)} B`;
+      if (b < 1024 * 1024) return `~ ${(b / 1024).toFixed(1)} KB`;
+      if (b < 1024 * 1024 * 1024) return `~ ${(b / 1024 / 1024).toFixed(1)} MB`;
+      return `~ ${(b / 1024 / 1024 / 1024).toFixed(2)} GB`;
+    }
+    function fmtN(n) { return n.toLocaleString(); }
+
+    // ─── Render ───────────────────────────────────────────────────────
+    function render() {
+      const r = compute();
+      for (const k of ["plants", "compounds", "targets", "effects", "citations"]) {
+        const row = document.querySelector(`.summary-row[data-row="${k}"]`);
+        const val = document.getElementById(`cnt-${k}`);
+        const active = state.entities[k];
+        row.classList.toggle("disabled", !active);
+        val.textContent = active ? fmtN(r[k]) : "0";
+      }
+      document.getElementById("cnt-size").textContent = fmtBytes(r.bytes);
+      document.getElementById("cnt-format").textContent = FORMAT_LABELS[state.format];
+
+      // chips
+      const chipsHost = document.getElementById("entity-chips");
+      const chipsEmpty = document.getElementById("entity-chips-empty");
+      chipsHost.innerHTML = "";
+      for (const p of state.selectedPlants) {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.innerHTML = `<em>${p.lat}</em><button data-remove="${p.id}" aria-label="remove">×</button>`;
+        chipsHost.appendChild(chip);
+      }
+      chipsEmpty.style.display = state.selectedPlants.length ? "none" : "block";
+    }
+
+    // ─── Wire events ──────────────────────────────────────────────────
+    // entity checkboxes
+    document.querySelectorAll('input[name="entity"]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        state.entities[cb.value] = cb.checked;
+        render();
+      });
+    });
+
+    // plant typeahead
+    const searchEl = document.getElementById("entity-search");
+    const dropdown = document.getElementById("entity-dropdown");
+
+    function renderDropdown(q) {
+      const query = q.toLowerCase().trim();
+      const selectedIds = new Set(state.selectedPlants.map((p) => p.id));
+      const matches = PLANTS
+        .filter((p) => !selectedIds.has(p.id))
+        .filter((p) =>
+          !query ||
+          p.lat.toLowerCase().includes(query) ||
+          p.com.toLowerCase().includes(query)
+        )
+        .slice(0, 8);
+
+      dropdown.innerHTML = "";
+      if (!matches.length) {
+        dropdown.innerHTML = `<div class="dropdown-empty">No more matches.</div>`;
+      } else {
+        for (const p of matches) {
+          const it = document.createElement("div");
+          it.className = "dropdown-item";
+          it.dataset.id = p.id;
+          it.innerHTML = `
+            <div>
+              <div class="lat">${p.lat}</div>
+              <div class="com">${p.com}</div>
+            </div>
+            <div class="cnt">${p.n} cmpds</div>`;
+          dropdown.appendChild(it);
+        }
+      }
+      dropdown.classList.add("open");
+    }
+
+    searchEl.addEventListener("focus", () => renderDropdown(searchEl.value));
+    searchEl.addEventListener("input", () => renderDropdown(searchEl.value));
+    searchEl.addEventListener("blur", () => {
+      // delay so a click on a dropdown item registers first
+      setTimeout(() => dropdown.classList.remove("open"), 150);
+    });
+    dropdown.addEventListener("mousedown", (e) => {
+      const it = e.target.closest(".dropdown-item");
+      if (!it) return;
+      e.preventDefault();
+      const id = it.dataset.id;
+      const p = PLANTS.find((x) => x.id === id);
+      if (p && !state.selectedPlants.find((x) => x.id === id)) {
+        state.selectedPlants.push(p);
+        searchEl.value = "";
+        renderDropdown("");
+        render();
+      }
+    });
+
+    // chip remove
+    document.getElementById("entity-chips").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-remove]");
+      if (!btn) return;
+      const id = btn.dataset.remove;
+      state.selectedPlants = state.selectedPlants.filter((p) => p.id !== id);
+      render();
+    });
+
+    // year inputs
+    document.getElementById("year-from").addEventListener("input", (e) => {
+      state.yearFrom = Math.max(1700, Math.min(2026, Number(e.target.value) || 1700));
+      render();
+    });
+    document.getElementById("year-to").addEventListener("input", (e) => {
+      state.yearTo = Math.max(1700, Math.min(2026, Number(e.target.value) || 2026));
+      render();
+    });
+
+    // include neighbors
+    document.getElementById("include-neighbors").addEventListener("change", (e) => {
+      state.includeNeighbors = e.target.checked;
+      render();
+    });
+
+    // format chips
+    document.getElementById("formats").addEventListener("click", (e) => {
+      const chip = e.target.closest(".format-chip");
+      if (!chip) return;
+      document.querySelectorAll(".format-chip").forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      state.format = chip.dataset.format;
+      render();
+    });
+
+    // download
+    document.getElementById("download-btn").addEventListener("click", () => {
+      const r = compute();
+      const ext = { ttl: "ttl", owl: "owl", rdf: "rdf", jsonld: "jsonld", csv: "zip" }[state.format];
+      const total = r.plants + r.compounds + r.targets + r.effects + r.citations;
+      alert(
+        `(preview) Would download poppy-slice.${ext}\n\n` +
+        `Plants:    ${fmtN(r.plants)}\n` +
+        `Compounds: ${fmtN(r.compounds)}\n` +
+        `Targets:   ${fmtN(r.targets)}\n` +
+        `Effects:   ${fmtN(r.effects)}\n` +
+        `Citations: ${fmtN(r.citations)}\n` +
+        `Total:     ${fmtN(total)} entities\n` +
+        `Size:      ${fmtBytes(r.bytes)}\n` +
+        `Format:    ${FORMAT_LABELS[state.format]}\n\n` +
+        `In production this will hit POST /api/ontology/export.`
+      );
+    });
+
+    render();
+  </script>
+  <script id="bm-inline">
+/* ============================================================
+   Botanical Margins — POPPy
+   A diagonal ladder of "specimen slots" anchored down the page,
+   alternating left / right. Each slot draws the NEXT species from
+   a rotating sequence every time it scrolls into view — so
+   scrolling down reveals fresh plants, and scrolling back up puts
+   DIFFERENT specimens where the old ones were. Hold the cursor on
+   one for ~1s and the full Köhler plate cross-fades in.
+
+   Cut-out images are deferred until after the page has painted, so
+   they never block initial load.
+
+   Assets:
+     assets/cutouts/<slug>.png   — transparent cut-out (rest)
+     assets/plates/<slug>.jpg    — full plate scan (1s hover)
+
+   Tunable via CSS variables on :root (set by the Tweaks panel):
+     --bm-rest-op   resting cut-out opacity   (default 0.3)
+     --bm-full-op   revealed plate opacity     (default 0.94)
+     --bm-scale     size multiplier            (default 1)
+   And body.bm-hidden hides every specimen.
+
+   Optional <body> attributes:
+     data-bm-exclude="papaver-somniferum,digitalis-purpurea"
+     data-bm-start="7"
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PLATES = [
+    { slug: "papaver-somniferum",    bin: "Papaver somniferum" },
+    { slug: "digitalis-purpurea",    bin: "Digitalis purpurea" },
+    { slug: "datura-stramonium",     bin: "Datura stramonium" },
+    { slug: "nicotiana-tabacum",     bin: "Nicotiana tabacum" },
+    { slug: "erythraea-centaurium",  bin: "Erythraea centaurium" },
+    { slug: "tussilago-farfara",     bin: "Tussilago farfara" },
+    { slug: "verbascum-phlomoides",  bin: "Verbascum phlomoides" },
+    { slug: "anacyclus-pyrethrum",   bin: "Anacyclus pyrethrum" },
+    { slug: "levisticum-officinale", bin: "Levisticum officinale" },
+    { slug: "ipomoea-purga",         bin: "Ipomoea purga" },
+    { slug: "croton-tiglium",        bin: "Croton tiglium" },
+    { slug: "cinnamomum-zeylanicum", bin: "Cinnamomum zeylanicum" },
+    { slug: "camellia-thea",         bin: "Camellia thea" },
+    { slug: "rosa-centifolia",       bin: "Rosa centifolia" },
+    { slug: "rubus-idaeus",          bin: "Rubus idaeus" },
+    { slug: "prunus-cerasus",        bin: "Prunus cerasus" },
+    { slug: "pirus-malus",           bin: "Pirus malus" },
+    { slug: "cydonia-vulgaris",      bin: "Cydonia vulgaris" },
+    { slug: "quercus-sessiliflora",  bin: "Quercus sessiliflora" },
+    { slug: "citrus-limonum",        bin: "Citrus limonum" },
+    { slug: "citrus-vulgaris",       bin: "Citrus vulgaris" },
+    { slug: "inula-helenium",        bin: "Inula helenium" },
+    { slug: "cnicus-benedictus",     bin: "Cnicus benedictus" },
+    { slug: "chrysanthemum-roseum",  bin: "Chrysanthemum roseum" }
+  ];
+
+  var CUT  = "assets/cutouts/";
+  var FULL = "assets/plates/";
+  var HOLD_MS = 1000;   // hover dwell before the full plate reveals
+  var GALLERY = "Herbarium.html";   // click a revealed plate → the gallery
+
+  var deck, rotation = 0, plants = [], imagesReady = false;
+
+  function init() {
+    var body = document.body;
+    if (!body) return;
+
+    var exclude = (body.getAttribute("data-bm-exclude") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
+    if (deck.length < 4) deck = PLATES.slice();
+    rotation = parseInt(body.getAttribute("data-bm-start") || "0", 10) || 0;
+
+    injectCSS();
+    layout();
+
+    var scanQueued = false;
+    window.addEventListener("scroll", function () {
+      if (scanQueued) return;
+      scanQueued = true;
+      requestAnimationFrame(function () { scanQueued = false; scan(); });
+    }, { passive: true });
+
+    // hover detection (specimens sit behind content, so track the pointer)
+    var moveQueued = false, lastEvt = null;
+    document.addEventListener("pointermove", function (e) {
+      lastEvt = e;
+      if (moveQueued) return;
+      moveQueued = true;
+      requestAnimationFrame(function () { moveQueued = false; hoverTest(lastEvt); });
+    }, { passive: true });
+
+    var relayoutTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(relayoutTimer);
+      relayoutTimer = setTimeout(function () { layout(); scan(); }, 200);
+    });
+
+    // Defer image loading until just after first paint — keeps the heavy
+    // cut-outs out of the critical load path (no white-on-reload) — but
+    // GUARANTEE they appear even if the load event is slow or never fires.
+    function enableImages() {
+      if (imagesReady) return;
+      imagesReady = true;
+      layout();   // doc height is final now
+      scan();
+    }
+    if (document.readyState === "complete") {
+      requestAnimationFrame(function () { setTimeout(enableImages, 150); });
+    } else {
+      window.addEventListener("load", function () { setTimeout(enableImages, 150); });
+    }
+    setTimeout(enableImages, 1500);   // hard fallback
+  }
+
+  // Build / rebuild the diagonal ladder of slots (no species yet — those are
+  // assigned on viewport entry).
+  function layout() {
+    if (window.innerWidth < 920) {              // too narrow — stand down
+      plants.forEach(function (p) { p.el.remove(); });
+      plants = [];
+      return;
+    }
+
+    var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var startY = Math.round(window.innerHeight * 0.55);
+    var endPad = Math.round(window.innerHeight * 0.6);
+    var step   = Math.max(520, Math.round(window.innerHeight * 0.72));
+    var count  = Math.max(2, Math.floor((docH - startY - endPad) / step) + 1);
+
+    while (plants.length < count) plants.push(makePlant());
+    while (plants.length > count) { var ex = plants.pop(); ex.el.remove(); }
+
+    plants.forEach(function (p, i) {
+      var side = (i % 2 === 0) ? "left" : "right";
+      p.el.className = "bm-plant bm-" + side + (p.inView ? " bm-in" : "");
+      p.el.style.top = (startY + i * step) + "px";
+      if (!p.el.parentNode) document.body.appendChild(p.el);
+    });
+  }
+
+  function makePlant() {
+    var el = document.createElement("figure");
+    el.className = "bm-plant";
+
+    var stack = document.createElement("div");
+    stack.className = "bm-stack";
+
+    var cut = document.createElement("img");
+    cut.className = "bm-cut"; cut.alt = ""; cut.decoding = "async"; cut.loading = "lazy";
+    var full = document.createElement("img");
+    full.className = "bm-full"; full.alt = ""; full.decoding = "async"; full.loading = "lazy";
+    stack.appendChild(cut);
+    stack.appendChild(full);
+
+    var cap = document.createElement("figcaption");
+    cap.className = "bm-cap";
+
+    el.appendChild(stack);
+    el.appendChild(cap);
+
+    el.title = "Open the herbarium gallery";
+    el.addEventListener("click", function () {
+      if (el.classList.contains("bm-reveal")) window.location.href = GALLERY;
+    });
+
+    return { el: el, stack: stack, cut: cut, full: full, cap: cap,
+             slug: null, cutSrc: null, fullSrc: null, fullLoaded: false,
+             inView: false, hovering: false, timer: null, revealed: false };
+  }
+
+  // Give a slot the next species in the rotation and (lazily) load its cut-out.
+  function assignNext(p) {
+    var sp = deck[((rotation++) % deck.length + deck.length) % deck.length];
+    p.slug = sp.slug;
+    p.cutSrc = CUT + sp.slug + ".png";
+    p.fullSrc = FULL + sp.slug + ".jpg";
+    p.fullLoaded = false;
+    p.revealed = false;
+    p.el.classList.remove("bm-reveal");
+    p.full.removeAttribute("src");
+    p.cap.textContent = sp.bin;
+    if (imagesReady) p.cut.src = p.cutSrc;
+  }
+
+  // Reveal slots entering the viewport; fade out those leaving so they can be
+  // re-assigned a different species on their next entrance.
+  function scan() {
+    if (!imagesReady) return;
+    var vh = window.innerHeight;
+    plants.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      var h = p.el.offsetHeight || 1;
+      var isIn = r.top < vh * 0.9 && (r.top + h) > vh * 0.12;
+      if (isIn && !p.inView) {
+        p.inView = true;
+        assignNext(p);                 // fresh specimen each entrance
+        p.el.classList.add("bm-in");
+      } else if (!isIn && p.inView) {
+        p.inView = false;
+        p.el.classList.remove("bm-in"); // fade out; next entry brings a new plant
+      }
+    });
+  }
+
+  function hoverTest(e) {
+    if (!e) return;
+    plants.forEach(function (p) {
+      if (!p.inView) return;
+      var r = p.stack.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (inside && !p.hovering) {
+        p.hovering = true;
+        if (!p.fullLoaded && p.fullSrc) { p.full.src = p.fullSrc; p.fullLoaded = true; }
+        p.timer = setTimeout(function () { setReveal(p, true); }, HOLD_MS);
+      } else if (!inside && p.hovering) {
+        p.hovering = false;
+        clearTimeout(p.timer);
+        setReveal(p, false);
+      }
+    });
+  }
+
+  function setReveal(p, on) {
+    p.revealed = on;
+    p.el.classList.toggle("bm-reveal", on);
+    p.el.style.zIndex = on ? "55" : "";
+    p.el.style.pointerEvents = on ? "auto" : "";
+    p.el.style.cursor = on ? "pointer" : "";
+  }
+
+  function injectCSS() {
+    if (document.getElementById("bm-style")) return;
+    var css = [
+      ".bm-plant{",
+      "  position:absolute;margin:0;width:calc(var(--bm-w,300px) * var(--bm-scale,1));",
+      "  --bm-w:clamp(220px,23vw,330px);",
+      "  display:flex;flex-direction:column;align-items:center;gap:12px;",
+      "  z-index:-1;pointer-events:none;",
+      "  opacity:0;transform:translateY(22px);",
+      "  transition:opacity 1100ms ease,transform 1100ms cubic-bezier(.22,.61,.36,1);",
+      "}",
+      ".bm-plant.bm-in{opacity:1;transform:none;}",
+      "body.bm-hidden .bm-plant{display:none;}",
+      ".bm-left{left:clamp(4px,2vw,52px);}",
+      ".bm-right{right:clamp(4px,2vw,52px);}",
+      ".bm-stack{",
+      "  position:relative;width:100%;height:calc(var(--bm-h,440px) * var(--bm-scale,1));",
+      "  --bm-h:clamp(320px,46vh,500px);",
+      "}",
+      ".bm-stack img{",
+      "  position:absolute;inset:0;width:100%;height:100%;",
+      "  object-fit:contain;object-position:center;",
+      "  transition:opacity 700ms ease;",
+      "}",
+      ".bm-cut{opacity:var(--bm-rest-op,0.3);filter:saturate(.96) drop-shadow(0 3px 9px rgba(36,48,37,.08));}",
+      ".bm-full{",
+      "  opacity:0;background:#fbf5e3;padding:8px;box-sizing:border-box;",
+      "  box-shadow:0 16px 44px rgba(36,48,37,.3),0 0 0 1px rgba(122,90,58,.4);",
+      "}",
+      ".bm-plant.bm-reveal .bm-cut{opacity:0;}",
+      ".bm-plant.bm-reveal .bm-full{opacity:var(--bm-full-op,0.94);}",
+      ".bm-cap{",
+      "  font-family:'EB Garamond',Georgia,serif;font-style:italic;",
+      "  font-size:clamp(15px,1.1vw,18px);line-height:1.2;color:var(--forest,#243025);",
+      "  text-align:center;max-width:100%;text-wrap:balance;opacity:.5;",
+      "  transition:opacity 300ms ease;",
+      "}",
+      ".bm-plant.bm-reveal .bm-cap{opacity:0;}",
+      "@media (prefers-reduced-motion: reduce){",
+      "  .bm-plant{transition:opacity 400ms ease;transform:none;}",
+      "}",
+      "@media (max-width:920px){ .bm-plant{display:none;} }"
+    ].join("\n");
+    var s = document.createElement("style");
+    s.id = "bm-style";
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  var booted = false;
+  function boot() {
+    if (booted) return;
+    if (!document.body) return;
+    booted = true;
+    init();
+  }
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("load", boot);
+  boot();
+})();
+</script>
+</body>
+</html>

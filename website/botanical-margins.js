@@ -1,0 +1,292 @@
+/* ============================================================
+   Botanical Margins — POPPy
+   A diagonal ladder of "specimen slots" anchored down the page,
+   alternating left / right. Each slot draws the NEXT species from
+   a rotating sequence every time it scrolls into view — so
+   scrolling down reveals fresh plants, and scrolling back up puts
+   DIFFERENT specimens where the old ones were. Hold the cursor on
+   one for ~1s and the full Köhler plate cross-fades in.
+
+   Cut-out images are deferred until after the page has painted, so
+   they never block initial load.
+
+   Assets:
+     assets/cutouts/<slug>.png   — transparent cut-out (rest)
+     assets/plates/<slug>.jpg    — full plate scan (1s hover)
+
+   Tunable via CSS variables on :root (set by the Tweaks panel):
+     --bm-rest-op   resting cut-out opacity   (default 0.3)
+     --bm-full-op   revealed plate opacity     (default 0.94)
+     --bm-scale     size multiplier            (default 1)
+   And body.bm-hidden hides every specimen.
+
+   Optional <body> attributes:
+     data-bm-exclude="papaver-somniferum,digitalis-purpurea"
+     data-bm-start="7"
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PLATES = [
+    { slug: "papaver-somniferum",    bin: "Papaver somniferum" },
+    { slug: "digitalis-purpurea",    bin: "Digitalis purpurea" },
+    { slug: "datura-stramonium",     bin: "Datura stramonium" },
+    { slug: "nicotiana-tabacum",     bin: "Nicotiana tabacum" },
+    { slug: "erythraea-centaurium",  bin: "Erythraea centaurium" },
+    { slug: "tussilago-farfara",     bin: "Tussilago farfara" },
+    { slug: "verbascum-phlomoides",  bin: "Verbascum phlomoides" },
+    { slug: "anacyclus-pyrethrum",   bin: "Anacyclus pyrethrum" },
+    { slug: "levisticum-officinale", bin: "Levisticum officinale" },
+    { slug: "ipomoea-purga",         bin: "Ipomoea purga" },
+    { slug: "croton-tiglium",        bin: "Croton tiglium" },
+    { slug: "cinnamomum-zeylanicum", bin: "Cinnamomum zeylanicum" },
+    { slug: "camellia-thea",         bin: "Camellia thea" },
+    { slug: "rosa-centifolia",       bin: "Rosa centifolia" },
+    { slug: "rubus-idaeus",          bin: "Rubus idaeus" },
+    { slug: "prunus-cerasus",        bin: "Prunus cerasus" },
+    { slug: "pirus-malus",           bin: "Pirus malus" },
+    { slug: "cydonia-vulgaris",      bin: "Cydonia vulgaris" },
+    { slug: "quercus-sessiliflora",  bin: "Quercus sessiliflora" },
+    { slug: "citrus-limonum",        bin: "Citrus limonum" },
+    { slug: "citrus-vulgaris",       bin: "Citrus vulgaris" },
+    { slug: "inula-helenium",        bin: "Inula helenium" },
+    { slug: "cnicus-benedictus",     bin: "Cnicus benedictus" },
+    { slug: "chrysanthemum-roseum",  bin: "Chrysanthemum roseum" }
+  ];
+
+  var CUT  = "assets/cutouts/";
+  var FULL = "assets/plates/";
+  var HOLD_MS = 1000;   // hover dwell before the full plate reveals
+  var GALLERY = "Herbarium.html";   // click a revealed plate → the gallery
+
+  var deck, rotation = 0, plants = [], imagesReady = false;
+
+  function init() {
+    var body = document.body;
+    if (!body) return;
+
+    var exclude = (body.getAttribute("data-bm-exclude") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
+    if (deck.length < 4) deck = PLATES.slice();
+    rotation = parseInt(body.getAttribute("data-bm-start") || "0", 10) || 0;
+
+    injectCSS();
+    layout();
+
+    var scanQueued = false;
+    window.addEventListener("scroll", function () {
+      if (scanQueued) return;
+      scanQueued = true;
+      requestAnimationFrame(function () { scanQueued = false; scan(); });
+    }, { passive: true });
+
+    // hover detection (specimens sit behind content, so track the pointer)
+    var moveQueued = false, lastEvt = null;
+    document.addEventListener("pointermove", function (e) {
+      lastEvt = e;
+      if (moveQueued) return;
+      moveQueued = true;
+      requestAnimationFrame(function () { moveQueued = false; hoverTest(lastEvt); });
+    }, { passive: true });
+
+    var relayoutTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(relayoutTimer);
+      relayoutTimer = setTimeout(function () { layout(); scan(); }, 200);
+    });
+
+    // Defer image loading until just after first paint — keeps the heavy
+    // cut-outs out of the critical load path (no white-on-reload) — but
+    // GUARANTEE they appear even if the load event is slow or never fires.
+    function enableImages() {
+      if (imagesReady) return;
+      imagesReady = true;
+      layout();   // doc height is final now
+      scan();
+    }
+    if (document.readyState === "complete") {
+      requestAnimationFrame(function () { setTimeout(enableImages, 150); });
+    } else {
+      window.addEventListener("load", function () { setTimeout(enableImages, 150); });
+    }
+    setTimeout(enableImages, 1500);   // hard fallback
+  }
+
+  // Build / rebuild the diagonal ladder of slots (no species yet — those are
+  // assigned on viewport entry).
+  function layout() {
+    if (window.innerWidth < 920) {              // too narrow — stand down
+      plants.forEach(function (p) { p.el.remove(); });
+      plants = [];
+      return;
+    }
+
+    var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var startY = Math.round(window.innerHeight * 0.55);
+    var endPad = Math.round(window.innerHeight * 0.6);
+    var step   = Math.max(520, Math.round(window.innerHeight * 0.72));
+    var count  = Math.max(2, Math.floor((docH - startY - endPad) / step) + 1);
+
+    while (plants.length < count) plants.push(makePlant());
+    while (plants.length > count) { var ex = plants.pop(); ex.el.remove(); }
+
+    plants.forEach(function (p, i) {
+      var side = (i % 2 === 0) ? "left" : "right";
+      p.el.className = "bm-plant bm-" + side + (p.inView ? " bm-in" : "");
+      p.el.style.top = (startY + i * step) + "px";
+      if (!p.el.parentNode) document.body.appendChild(p.el);
+    });
+  }
+
+  function makePlant() {
+    var el = document.createElement("figure");
+    el.className = "bm-plant";
+
+    var stack = document.createElement("div");
+    stack.className = "bm-stack";
+
+    var cut = document.createElement("img");
+    cut.className = "bm-cut"; cut.alt = ""; cut.decoding = "async"; cut.loading = "lazy";
+    var full = document.createElement("img");
+    full.className = "bm-full"; full.alt = ""; full.decoding = "async"; full.loading = "lazy";
+    stack.appendChild(cut);
+    stack.appendChild(full);
+
+    var cap = document.createElement("figcaption");
+    cap.className = "bm-cap";
+
+    el.appendChild(stack);
+    el.appendChild(cap);
+
+    el.title = "Open the herbarium gallery";
+    el.addEventListener("click", function () {
+      if (el.classList.contains("bm-reveal")) window.location.href = GALLERY;
+    });
+
+    return { el: el, stack: stack, cut: cut, full: full, cap: cap,
+             slug: null, cutSrc: null, fullSrc: null, fullLoaded: false,
+             inView: false, hovering: false, timer: null, revealed: false };
+  }
+
+  // Give a slot the next species in the rotation and (lazily) load its cut-out.
+  function assignNext(p) {
+    var sp = deck[((rotation++) % deck.length + deck.length) % deck.length];
+    p.slug = sp.slug;
+    p.cutSrc = CUT + sp.slug + ".png";
+    p.fullSrc = FULL + sp.slug + ".jpg";
+    p.fullLoaded = false;
+    p.revealed = false;
+    p.el.classList.remove("bm-reveal");
+    p.full.removeAttribute("src");
+    p.cap.textContent = sp.bin;
+    if (imagesReady) p.cut.src = p.cutSrc;
+  }
+
+  // Reveal slots entering the viewport; fade out those leaving so they can be
+  // re-assigned a different species on their next entrance.
+  function scan() {
+    if (!imagesReady) return;
+    var vh = window.innerHeight;
+    plants.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      var h = p.el.offsetHeight || 1;
+      var isIn = r.top < vh * 0.9 && (r.top + h) > vh * 0.12;
+      if (isIn && !p.inView) {
+        p.inView = true;
+        assignNext(p);                 // fresh specimen each entrance
+        p.el.classList.add("bm-in");
+      } else if (!isIn && p.inView) {
+        p.inView = false;
+        p.el.classList.remove("bm-in"); // fade out; next entry brings a new plant
+      }
+    });
+  }
+
+  function hoverTest(e) {
+    if (!e) return;
+    plants.forEach(function (p) {
+      if (!p.inView) return;
+      var r = p.stack.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (inside && !p.hovering) {
+        p.hovering = true;
+        if (!p.fullLoaded && p.fullSrc) { p.full.src = p.fullSrc; p.fullLoaded = true; }
+        p.timer = setTimeout(function () { setReveal(p, true); }, HOLD_MS);
+      } else if (!inside && p.hovering) {
+        p.hovering = false;
+        clearTimeout(p.timer);
+        setReveal(p, false);
+      }
+    });
+  }
+
+  function setReveal(p, on) {
+    p.revealed = on;
+    p.el.classList.toggle("bm-reveal", on);
+    p.el.style.zIndex = on ? "55" : "";
+    p.el.style.pointerEvents = on ? "auto" : "";
+    p.el.style.cursor = on ? "pointer" : "";
+  }
+
+  function injectCSS() {
+    if (document.getElementById("bm-style")) return;
+    var css = [
+      ".bm-plant{",
+      "  position:absolute;margin:0;width:calc(var(--bm-w,300px) * var(--bm-scale,1));",
+      "  --bm-w:clamp(220px,23vw,330px);",
+      "  display:flex;flex-direction:column;align-items:center;gap:12px;",
+      "  z-index:-1;pointer-events:none;",
+      "  opacity:0;transform:translateY(22px);",
+      "  transition:opacity 1100ms ease,transform 1100ms cubic-bezier(.22,.61,.36,1);",
+      "}",
+      ".bm-plant.bm-in{opacity:1;transform:none;}",
+      "body.bm-hidden .bm-plant{display:none;}",
+      ".bm-left{left:clamp(4px,2vw,52px);}",
+      ".bm-right{right:clamp(4px,2vw,52px);}",
+      ".bm-stack{",
+      "  position:relative;width:100%;height:calc(var(--bm-h,440px) * var(--bm-scale,1));",
+      "  --bm-h:clamp(320px,46vh,500px);",
+      "}",
+      ".bm-stack img{",
+      "  position:absolute;inset:0;width:100%;height:100%;",
+      "  object-fit:contain;object-position:center;",
+      "  transition:opacity 700ms ease;",
+      "}",
+      ".bm-cut{opacity:var(--bm-rest-op,0.3);filter:saturate(.96) drop-shadow(0 3px 9px rgba(36,48,37,.08));}",
+      ".bm-full{",
+      "  opacity:0;background:#fbf5e3;padding:8px;box-sizing:border-box;",
+      "  box-shadow:0 16px 44px rgba(36,48,37,.3),0 0 0 1px rgba(122,90,58,.4);",
+      "}",
+      ".bm-plant.bm-reveal .bm-cut{opacity:0;}",
+      ".bm-plant.bm-reveal .bm-full{opacity:var(--bm-full-op,0.94);}",
+      ".bm-cap{",
+      "  font-family:'EB Garamond',Georgia,serif;font-style:italic;",
+      "  font-size:clamp(15px,1.1vw,18px);line-height:1.2;color:var(--forest,#243025);",
+      "  text-align:center;max-width:100%;text-wrap:balance;opacity:.5;",
+      "  transition:opacity 300ms ease;",
+      "}",
+      ".bm-plant.bm-reveal .bm-cap{opacity:0;}",
+      "@media (prefers-reduced-motion: reduce){",
+      "  .bm-plant{transition:opacity 400ms ease;transform:none;}",
+      "}",
+      "@media (max-width:920px){ .bm-plant{display:none;} }"
+    ].join("\n");
+    var s = document.createElement("style");
+    s.id = "bm-style";
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  var booted = false;
+  function boot() {
+    if (booted) return;
+    if (!document.body) return;
+    booted = true;
+    init();
+  }
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("load", boot);
+  boot();
+})();
