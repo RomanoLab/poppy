@@ -1,0 +1,1598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPPy — Home preview (Herbarium + scroll plates)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f3e9cd;
+      --parchment-deep: #ead9b0;
+      --parchment-light: #fdf8e9;
+      --ink: #1a1f17;
+      --forest: #243025;
+      --forest-deep: #19211b;
+      --accent: #3d5b3e;
+      --umber: #7a5a3a;
+      --rule: #8a7a4a;
+      --rule-soft: #bca97a;
+
+      --display: "EB Garamond", "Cardo", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--parchment); color: var(--ink); font-family: var(--display); }
+    body { font-size: 18px; line-height: 1.55; }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ─── shared utilities ─── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+    .smallcaps { font-variant-caps: all-small-caps; letter-spacing: 0.12em; }
+    .mono-cap {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* hairline divider with center ornament */
+    .herb-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--rule);
+      margin: 32px 0;
+    }
+    .herb-divider .rule { flex: 1; height: 1px; background: currentColor; opacity: 0.5; }
+    .herb-divider .double { flex: 1; height: 3px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; opacity: 0.5; }
+    .herb-divider .ornament { font-family: var(--display); font-size: 22px; opacity: 0.7; line-height: 1; }
+
+    /* ─── nav ─── */
+    .nav {
+      border-top: 3px double var(--rule);
+      border-bottom: 1px solid rgba(138, 122, 74, 0.4);
+      background: var(--parchment);
+      position: relative;
+      z-index: 10;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .wordmark { display: flex; align-items: baseline; gap: 14px; }
+    .wordmark .name { font-family: var(--display); font-size: 36px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
+    .wordmark .name em { font-style: italic; }
+    .wordmark .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-family: var(--display);
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.14em;
+      font-size: 16px;
+      color: var(--ink);
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links { align-items: center; }
+    .nav-item { position: relative; display: flex; align-items: center; }
+    .nav-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--parchment-light); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(36, 48, 37, 0.16); padding: 6px; min-width: 176px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; z-index: 40; }
+    .nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-menu a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; padding: 9px 16px; color: var(--ink); border-bottom: none; white-space: nowrap; }
+    .nav-menu a.active { color: var(--accent); }
+    .nav-menu a:hover { background: var(--parchment-deep); color: var(--accent); }
+
+    /* ─── hero ─── */
+    section { position: relative; }
+
+    .hero {
+      padding: 80px 48px 40px;
+      text-align: center;
+    }
+    .hero-inner { max-width: 880px; margin: 0 auto; }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 72px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 24px 0 0;
+      color: var(--forest);
+    }
+    .hero h1 em { font-style: italic; }
+    .hero .lede {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--umber);
+      margin-top: 28px;
+      line-height: 1.4;
+    }
+
+    /* search */
+    .search-wrap { max-width: 720px; margin: 0 auto; }
+    .search {
+      background: var(--parchment-light);
+      border: 1px solid var(--rule);
+      padding: 6px;
+      display: flex;
+      align-items: stretch;
+    }
+    .search input {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 14px 18px;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+    }
+    .search input::placeholder { color: rgba(26, 31, 23, 0.5); }
+    .btn {
+      font-family: var(--display);
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.18em;
+      font-size: 16px;
+      padding: 14px 32px;
+      background: var(--forest);
+      color: var(--parchment);
+      border: 1px solid var(--forest);
+      border-radius: 0;
+    }
+    .btn.outline { background: transparent; color: var(--forest); }
+    .btn.cream { background: var(--parchment); color: var(--forest); border-color: var(--parchment); }
+    .try-chips { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: baseline; }
+    .try-chips .chip {
+      background: transparent; border: 0;
+      font-style: italic; font-size: 15px;
+      color: var(--accent);
+      border-bottom: 1px dotted var(--accent);
+      padding: 0 0 1px 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .try-chips .chip:hover { color: var(--forest); border-bottom-color: var(--forest); }
+
+    /* ─── search-result graph ─── */
+    .graph-wrap {
+      max-width: 1100px;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 36px auto 0;
+      padding: 0 48px;
+    }
+    .graph-frame {
+      background: var(--parchment-light);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .graph-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--rule);
+      gap: 24px;
+    }
+    .graph-caption {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink);
+      flex: 1;
+      text-align: left;
+    }
+    .graph-caption em { color: var(--forest); }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.7;
+    }
+    .legend > div { display: flex; align-items: center; gap: 6px; }
+    .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+    #graph {
+      width: 100%;
+      height: 660px;
+      position: relative;
+      overflow: hidden;
+      background: var(--parchment-light);
+    }
+    .graph-foot {
+      padding: 14px 24px;
+      border-top: 1px dotted var(--rule);
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    }
+    .graph-foot > span {
+      font-family: var(--display); font-style: italic; font-size: 14px;
+      color: var(--umber); text-align: left;
+    }
+    /* "Explore further" — a prominent CTA, shown only once the graph holds a result */
+    .explore-further {
+      font-style: normal; font-family: var(--display);
+      font-variant-caps: all-small-caps; letter-spacing: 0.12em;
+      font-size: 19px; line-height: 1;
+      color: var(--parchment); background: var(--forest);
+      border: 1px solid var(--forest); border-radius: 0;
+      padding: 13px 28px; white-space: nowrap;
+      display: none; align-items: center; gap: 10px;
+      box-shadow: 0 3px 12px rgba(36, 48, 37, 0.20);
+      transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+    }
+    .explore-further .ef-arrow { font-size: 22px; transition: transform 150ms ease; }
+    .explore-further:hover { background: var(--forest-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(36, 48, 37, 0.28); }
+    .explore-further:hover .ef-arrow { transform: translateX(3px); }
+    body.graph-active .explore-further { display: inline-flex; }
+
+    /* sections */
+    .section-label-row { text-align: center; margin-bottom: 40px; }
+    .section-h2 {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--forest);
+      margin: 8px 0 0;
+    }
+
+    /* stats */
+    .stats {
+      padding: 60px 48px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(138, 122, 74, 0.35);
+      border-bottom: 1px solid rgba(138, 122, 74, 0.35);
+    }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; max-width: 1100px; margin: 0 auto; }
+    .stat { padding: 20px 30px; text-align: center; }
+    .stat + .stat { border-left: 1px solid rgba(138, 122, 74, 0.35); }
+    .stat .n { font-family: var(--display); font-size: 80px; font-weight: 500; color: var(--forest); line-height: 1; letter-spacing: -0.01em; }
+    .stat .lat { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--umber); margin-top: 10px; }
+
+    /* index rerum */
+    .register-wrap { padding: 80px 48px 60px; }
+    .register {
+      background: var(--parchment-light);
+      border: 1px solid rgba(138, 122, 74, 0.35);
+      padding: 32px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .register-row {
+      display: grid;
+      grid-template-columns: 60px 200px 1fr 120px;
+      align-items: baseline;
+      padding: 18px 0;
+      gap: 28px;
+    }
+    .register-row + .register-row { border-top: 1px dotted var(--rule); }
+    .register-row .num { font-family: var(--display); font-style: italic; font-size: 24px; color: var(--umber); }
+    .register-row .name { font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--forest); }
+    .register-row .lat { font-family: var(--display); font-style: italic; font-size: 14px; color: var(--umber); margin-top: 2px; }
+    .register-row .desc { font-size: 17px; line-height: 1.5; opacity: 0.85; }
+    .register-row .n { font-family: var(--mono); font-size: 14px; color: var(--accent); text-align: right; }
+
+    /* schema */
+    .schema { padding: 60px 48px; background: rgba(234, 217, 176, 0.35); }
+    .schema-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .schema-figure { background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.35); padding: 32px; }
+    .schema-row { padding: 14px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.35); display: flex; align-items: baseline; gap: 14px; font-size: 19px; }
+    .schema-row b { color: var(--forest); font-weight: 600; }
+    .schema-row .verb { font-family: var(--mono); font-size: 12px; color: var(--umber); letter-spacing: 0.08em; }
+
+    /* tabulae */
+    .tabulae { padding: 80px 48px 60px; }
+    .tabulae-sub { font-family: var(--display); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--umber); max-width: 560px; margin: 10px 0 0; opacity: 0.85; }
+    .tabulae-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 24px; max-width: 1100px; margin: 28px auto 0; }
+    .tab-plate { text-align: center; display: block; color: inherit; text-decoration: none; }
+    a.tab-plate { transition: transform 160ms ease; }
+    a.tab-plate .plate-box { transition: box-shadow 160ms ease; }
+    a.tab-plate:hover { transform: translateY(-3px); }
+    a.tab-plate:hover .plate-box { box-shadow: 0 10px 26px rgba(36, 48, 37, 0.22); }
+    a.tab-plate:hover .lat { color: var(--accent); }
+    a.tab-plate:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .tab-caption { margin-top: 14px; }
+    .tab-caption .lat { font-style: italic; font-size: 18px; color: var(--forest); }
+    .tab-caption .tc { opacity: 0.55; margin-top: 4px; font-size: 10px; }
+    .plate-box {
+      position: relative;
+      height: 240px;
+      background: var(--parchment-light);
+      border: 1px solid rgba(26, 31, 23, 0.2);
+      background-image: repeating-linear-gradient(135deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 8px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      color: var(--forest);
+      overflow: hidden;
+    }
+    /* hotlinked Wikimedia photograph (fills the plate once loaded) */
+    .plate-box .plate-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0; transition: opacity 700ms ease, transform 1200ms ease;
+      transform: scale(1.04);
+    }
+    .plate-box.has-img .plate-img { opacity: 1; transform: scale(1); }
+    .plate-box.has-img .pb { opacity: 0; }
+    /* plate number chip — sits on a parchment tag, legible over photo or placeholder */
+    .plate-box .pc {
+      position: absolute; top: 0; left: 0; z-index: 2;
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--forest); background: var(--parchment);
+      padding: 5px 9px; border-right: 1px solid rgba(26,31,23,0.18); border-bottom: 1px solid rgba(26,31,23,0.18);
+    }
+    .plate-box .pb { font-family: var(--display); font-style: italic; font-size: 14px; opacity: 0.7; padding: 0 14px; text-align: center; transition: opacity 400ms ease; }
+    .plate-box.is-loading::after {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+      background-size: 220% 100%; animation: plate-shimmer 1.3s ease-in-out infinite;
+    }
+    @keyframes plate-shimmer { 0% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .plate-box .plate-img { transition: opacity 300ms ease; transform: none; }
+      .plate-box.is-loading::after { animation: none; }
+    }
+
+    /* ─── botanical rotator ─── */
+    .rotator-sec { padding: 80px 48px 60px; }
+    .rotator-frame {
+      max-width: 460px;
+      margin: 0 auto;
+      background: #faf3df;
+      border: 1px solid var(--rule);
+      box-shadow: 0 6px 20px rgba(36, 48, 37, 0.08);
+      padding: 16px;
+    }
+    .botanical-rotator {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #fdfaf1;
+      box-shadow:
+        inset 0 0 0 1px rgba(122, 90, 58, 0.35),
+        inset 0 0 0 3px #fdfaf1,
+        inset 0 0 0 4px rgba(122, 90, 58, 0.15);
+    }
+    .botanical-rotator .plate-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      padding: 16px 16px 40px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .botanical-rotator .plate-slide.active { opacity: 1; }
+    .botanical-rotator .caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: rgba(250, 243, 223, 0.9);
+      border-top: 1px solid rgba(138, 122, 74, 0.4);
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--forest);
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .botanical-rotator.show-caption .caption { opacity: 1; }
+    .botanical-rotator .caption .common {
+      font-style: normal;
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      color: var(--umber);
+      margin-left: 8px;
+    }
+    .botanical-rotator .dots {
+      position: absolute;
+      bottom: 58px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+    }
+    .botanical-rotator .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(122, 90, 58, 0.3);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.3s;
+    }
+    .botanical-rotator .dot.active { background: rgba(122, 90, 58, 0.85); }
+    .rotator-note {
+      text-align: center;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--umber);
+      opacity: 0.85;
+      margin-top: 20px;
+    }
+    .rotator-note em { font-style: normal; }
+
+    /* cite cta */
+    .cite { padding: 60px 48px 100px; }
+    .cite-card {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--forest);
+      color: var(--parchment);
+      padding: 56px 64px;
+      text-align: center;
+    }
+    .cite-card h2 { font-family: var(--display); font-size: 40px; font-weight: 500; margin: 10px 0 18px; font-style: italic; }
+    .cite-card p { font-size: 18px; line-height: 1.55; opacity: 0.85; max-width: 560px; margin: 0 auto 32px; }
+    .cite-card .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cite-card .btn.cream { background: var(--parchment); color: var(--forest); border-color: var(--parchment); }
+    .cite-card .btn.outline { background: transparent; color: var(--parchment); border-color: var(--parchment); }
+
+    /* footer */
+    .footer { background: var(--forest-deep); color: var(--parchment); padding: 56px 48px 28px; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+    .footer h3 { font-family: var(--display); font-size: 32px; font-style: italic; margin: 0; }
+    .footer .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
+    .footer .blurb { font-size: 15px; line-height: 1.55; opacity: 0.75; margin-top: 18px; max-width: 320px; }
+    .footer .col-h { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
+    .footer .col-link { display: block; font-size: 16px; padding: 4px 0; opacity: 0.85; color: inherit; text-decoration: none; }
+    .footer a.col-link:hover { color: var(--accent); opacity: 1; }
+    .footer-bottom a.ft-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243, 233, 205, 0.4); transition: color 150ms ease, border-color 150ms ease; } .footer-bottom a.ft-link:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-bottom { border-top: 1px solid rgba(243, 233, 205, 0.2); padding-top: 18px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; }
+
+    /* hide the floating plate sidebar while the search-result graph is on-screen */
+    body.graph-active .scroll-plates { display: none; }
+
+    /* ─── scroll plates ─── */
+    .scroll-plates {
+      position: fixed;
+      top: 0;
+      right: max(24px, calc((100vw - 1280px) / 2 - 240px));
+      height: 100vh;
+      width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .scroll-plate {
+      position: absolute;
+      width: 220px;
+      background: rgba(253, 248, 233, 0.95);
+      border: 1px solid var(--rule);
+      box-shadow: 0 6px 20px rgba(36, 48, 37, 0.08);
+      padding: 14px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .scroll-plate.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Flora-Londinensis-style frame: cream paper, faint platemark, single
+       centered specimen. No diagonal stripes, no graphic noise. */
+    .scroll-plate {
+      background: #faf3df;  /* slightly cooler than parchment, like aged rag paper */
+    }
+    .scroll-plate .plate-art {
+      height: 240px;
+      background: #fdfaf1;
+      /* faint platemark — the depressed rectangle around a copperplate impression */
+      box-shadow:
+        inset 0 0 0 1px rgba(122, 90, 58, 0.35),
+        inset 0 0 0 3px #fdfaf1,
+        inset 0 0 0 4px rgba(122, 90, 58, 0.15);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--forest);
+      gap: 8px;
+      padding: 18px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-plate .plate-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .scroll-plate .plate-art .plate-num {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--umber);
+      opacity: 0.8;
+      letter-spacing: 0.02em;
+    }
+    .scroll-plate .plate-art .plate-sketch {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--ink);
+      opacity: 0.55;
+      text-align: center;
+      padding: 0 10px;
+      line-height: 1.4;
+    }
+    /* a discreet ornamental flourish under the placeholder text — only shown
+       while the image hasn't loaded */
+    .scroll-plate .plate-art::after {
+      content: "❦";
+      font-family: var(--display);
+      font-size: 18px;
+      color: var(--umber);
+      opacity: 0.4;
+      margin-top: 4px;
+    }
+    .scroll-plate.has-image .plate-art::after { display: none; }
+    .scroll-plate .meta { text-align: center; padding-top: 12px; border-top: 1px solid rgba(138, 122, 74, 0.4); margin-top: 12px; }
+    .scroll-plate .meta .bin { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--forest); line-height: 1.1; }
+    .scroll-plate .meta .common {
+      font-family: var(--display);
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.14em;
+      font-size: 14px;
+      color: var(--umber);
+      margin-top: 4px;
+    }
+    .scroll-plate .meta .note { font-family: var(--display); font-style: italic; font-size: 13px; color: var(--ink); opacity: 0.7; margin-top: 8px; line-height: 1.4; }
+
+    @media (max-width: 1240px) {
+      .scroll-plates { display: none; }
+    }
+
+    /* hide scroll plates over the forest CTA — they're cream and would clash */
+    .scroll-plates.over-dark .scroll-plate { display: none; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="wordmark">
+        <img class="logo-img" src="assets/poppy-logo.png" alt="POPPy" style="height:38px;width:auto;display:block;">
+        <div class="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div>
+      </div>
+      <div class="nav-links">
+        <a href="Home.html" class="active">Home</a>
+        <a href="Explore.html">Explore</a>
+        <a href="Download.html">Download</a>
+        <div class="nav-item">
+          <a href="About.html">About</a>
+          <div class="nav-menu">
+            <a href="About.html">Overview</a>
+            <a href="Method.html">Method</a>
+            <a href="Team.html">Team</a>
+            <a href="Citation.html">Citation</a>
+          </div>
+        </div>
+        <a href="Contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" data-show-plate="poppy">
+    <div class="hero-inner">
+      <div class="mono-cap" style="color: var(--umber)">Anno Domini MMXXVI · Editio Prima · Open Access</div>
+      <h1 style="font-size: 65px">The first structured phytochemicals ontology for AI-guided drug discovery.</h1>
+      <p class="lede">A secondary resource harmonizing phyto-therapeutic data for research.</p>
+      <div class="herb-divider"><span class="rule"></span><span class="double"></span><span class="ornament">❦</span><span class="double"></span><span class="rule"></span></div>
+    </div>
+    <div class="search-wrap">
+      <div class="search">
+        <input id="search" type="text" placeholder="Search plant, compound, target, or citation…" autocomplete="off" />
+        <button id="searchBtn" class="btn">Inquire</button>
+      </div>
+      <p id="msg" class="mono-cap" style="min-height:1.4em;margin-top:14px;color:var(--umber)"></p>
+      <div class="try-chips">
+        <span class="mono-cap">Try:</span>
+        <button class="chip" data-q="Papaver somniferum">Papaver somniferum</button>
+        <button class="chip" data-q="Curcuma longa">Curcuma longa</button>
+        <button class="chip" data-q="Salvia officinalis">Salvia officinalis</button>
+        <button class="chip" data-q="Withania somnifera">Withania somnifera</button>
+      </div>
+    </div>
+
+    <!-- Search-result graph (hidden until a query returns) -->
+    <div class="graph-wrap" id="graph-wrap" hidden>
+      <div class="graph-frame">
+        <div class="graph-header">
+          <div class="graph-caption" id="graph-caption">Search above to see how the ontology connects — a plant, its compounds, targets, therapeutic effects, and supporting research.</div>
+          <div class="legend" id="legend">
+            <div><span class="dot" style="background:#009E73"></span>Plant</div>
+            <div><span class="dot" style="background:#0072B2"></span>Chemical</div>
+            <div><span class="dot" style="background:#E69F00"></span>Target</div>
+            <div><span class="dot" style="background:#CC79A7"></span>Therapeutic</div>
+            <div><span class="dot" style="background:#777"></span>Research</div>
+          </div>
+        </div>
+        <div id="graph"></div>
+        <div class="graph-foot">
+          <span>Click any circle to refocus on that entity and see its concepts · drag to pan · scroll to zoom.</span>
+          <a id="explore-further" class="explore-further" href="Explore.html">Explore further <span class="ef-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" data-show-plate="meadowsweet">
+    <div class="section-label-row">
+      <div class="mono-cap" style="color: var(--umber)"></div>
+      <h2 class="section-h2">The collection, by the numbers</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat"><div class="n">63,722</div><div class="lat">Plantae</div><div class="mono-cap">medicinal plants &amp; taxa</div></div>
+      <div class="stat"><div class="n">70,062</div><div class="lat">Composita</div><div class="mono-cap">phytochemical compounds</div></div>
+      <div class="stat"><div class="n">1,334</div><div class="lat">Obiectiva</div><div class="mono-cap">protein targets</div></div>
+    </div>
+  </section>
+
+  <!-- TABULAE — featured species (top 24 by connections; a fresh 8 each visit) -->
+  <section class="tabulae">
+    <div class="section-label-row">
+      <div class="mono-cap" style="color: var(--umber)">Tabulae</div>
+      <h2 class="section-h2">Featured species</h2>
+    </div>
+    <div class="tabulae-grid" id="tabulae-grid"></div>
+  </section>
+  <script id="featured-inline">
+  (function () {
+    "use strict";
+    // Top 24 species by node/edge count in the ontology. `bin` is the antique
+    // Köhler binomial shown on the plate; `wiki` is the modern Wikipedia title
+    // used only to resolve a live photo from Wikimedia Commons.
+    var SPECIES = [
+      { slug:"papaver-somniferum",    bin:"Papaver somniferum",    common:"Opium poppy",      wiki:"Papaver somniferum",   conn:524 },
+      { slug:"digitalis-purpurea",    bin:"Digitalis purpurea",    common:"Foxglove",         wiki:"Digitalis purpurea",   conn:487 },
+      { slug:"camellia-thea",         bin:"Camellia thea",         common:"Tea",              wiki:"Camellia sinensis",    conn:463 },
+      { slug:"nicotiana-tabacum",     bin:"Nicotiana tabacum",     common:"Tobacco",          wiki:"Nicotiana tabacum",    conn:451 },
+      { slug:"cinnamomum-zeylanicum", bin:"Cinnamomum zeylanicum", common:"Ceylon cinnamon",  wiki:"Cinnamomum verum",     conn:432 },
+      { slug:"datura-stramonium",     bin:"Datura stramonium",     common:"Jimsonweed",       wiki:"Datura stramonium",    conn:418 },
+      { slug:"croton-tiglium",        bin:"Croton tiglium",        common:"Purging croton",   wiki:"Croton tiglium",       conn:401 },
+      { slug:"rosa-centifolia",       bin:"Rosa centifolia",       common:"Cabbage rose",     wiki:"Rosa × centifolia",    conn:389 },
+      { slug:"citrus-limonum",        bin:"Citrus limonum",        common:"Lemon",            wiki:"Lemon",                conn:376 },
+      { slug:"ipomoea-purga",         bin:"Ipomoea purga",         common:"Jalap",            wiki:"Ipomoea purga",        conn:364 },
+      { slug:"verbascum-phlomoides",  bin:"Verbascum phlomoides",  common:"Orange mullein",   wiki:"Verbascum phlomoides", conn:352 },
+      { slug:"inula-helenium",        bin:"Inula helenium",        common:"Elecampane",       wiki:"Inula helenium",       conn:341 },
+      { slug:"tussilago-farfara",     bin:"Tussilago farfara",     common:"Coltsfoot",        wiki:"Tussilago farfara",    conn:333 },
+      { slug:"levisticum-officinale", bin:"Levisticum officinale", common:"Lovage",           wiki:"Levisticum officinale",conn:322 },
+      { slug:"anacyclus-pyrethrum",   bin:"Anacyclus pyrethrum",   common:"Pellitory",        wiki:"Anacyclus pyrethrum",  conn:314 },
+      { slug:"erythraea-centaurium",  bin:"Erythraea centaurium",  common:"Common centaury",  wiki:"Centaurium erythraea", conn:305 },
+      { slug:"citrus-vulgaris",       bin:"Citrus vulgaris",       common:"Bitter orange",    wiki:"Bitter orange",        conn:297 },
+      { slug:"rubus-idaeus",          bin:"Rubus idaeus",          common:"Raspberry",        wiki:"Rubus idaeus",         conn:288 },
+      { slug:"prunus-cerasus",        bin:"Prunus cerasus",        common:"Sour cherry",      wiki:"Prunus cerasus",       conn:279 },
+      { slug:"pirus-malus",           bin:"Pirus malus",           common:"Apple",            wiki:"Malus domestica",      conn:271 },
+      { slug:"cydonia-vulgaris",      bin:"Cydonia vulgaris",      common:"Quince",           wiki:"Cydonia oblonga",      conn:263 },
+      { slug:"quercus-sessiliflora",  bin:"Quercus sessiliflora",  common:"Sessile oak",      wiki:"Quercus petraea",      conn:254 },
+      { slug:"cnicus-benedictus",     bin:"Cnicus benedictus",     common:"Blessed thistle",  wiki:"Centaurea benedicta",  conn:246 },
+      { slug:"chrysanthemum-roseum",  bin:"Chrysanthemum roseum",  common:"Painted daisy",    wiki:"Tanacetum coccineum",  conn:238 }
+    ];
+
+    var SHOW = 8;                 // cards rendered per visit
+    var ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+    var CACHE_KEY = "poppy-featured-img-v2";  // { slug: url | "none" }
+    var grid = document.getElementById("tabulae-grid");
+    if (!grid) return;
+
+    function readCache() {
+      try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "{}"); } catch (e) { return {}; }
+    }
+    function writeCache(c) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch (e) {} }
+
+    function shuffle(a) {
+      a = a.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    // (thumbnail size is requested directly from the MediaWiki API below)
+
+    var cache = readCache();
+
+    function resolveImage(sp, imgEl, box) {
+      // cached hit
+      if (cache[sp.slug] && cache[sp.slug] !== "none") { applyImg(imgEl, box, cache[sp.slug]); return; }
+      if (cache[sp.slug] === "none") { box.classList.remove("is-loading"); return; }
+
+      // Ask the MediaWiki API for the page's lead image at 500px. The API
+      // generates a guaranteed-valid (cached) thumbnail URL and follows the
+      // redirect from antique synonyms to the modern accepted name.
+      var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*"
+              + "&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=500&titles="
+              + encodeURIComponent(sp.wiki);
+      fetch(url, { headers: { accept: "application/json" } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          var src = null;
+          try {
+            var pages = j.query.pages;
+            var p = pages[Object.keys(pages)[0]];
+            src = p && p.thumbnail && p.thumbnail.source;
+          } catch (e) {}
+          if (src) { cache[sp.slug] = src; writeCache(cache); applyImg(imgEl, box, src); }
+          else { cache[sp.slug] = "none"; writeCache(cache); box.classList.remove("is-loading"); }
+        })
+        .catch(function () { box.classList.remove("is-loading"); });
+    }
+
+    function applyImg(imgEl, box, src) {
+      imgEl.onload = function () {
+        box.classList.remove("is-loading");
+        box.classList.add("has-img");
+        // Set the reveal inline and synchronously (no rAF — it pauses on
+        // backgrounded tabs). The element was painted at the base opacity:0,
+        // so an active tab still fades in via the CSS transition.
+        imgEl.style.opacity = "1";
+        imgEl.style.transform = "scale(1)";
+        var pb = box.querySelector(".pb");
+        if (pb) pb.style.opacity = "0";
+      };
+      imgEl.onerror = function () { box.classList.remove("is-loading"); };
+      imgEl.src = src;
+    }
+
+    function render() {
+      var pick = shuffle(SPECIES).slice(0, SHOW);
+      grid.innerHTML = "";
+      pick.forEach(function (sp, i) {
+        var plate = document.createElement("a");
+        plate.className = "tab-plate";
+        plate.href = "Explore.html?q=" + encodeURIComponent(sp.bin);
+        plate.setAttribute("aria-label", "Explore " + sp.bin + " (" + sp.common + ")");
+
+        var box = document.createElement("div");
+        box.className = "plate-box is-loading";
+
+        var pc = document.createElement("div");
+        pc.className = "pc";
+        pc.textContent = "Tab. " + (ROMAN[i] || (i + 1));
+
+        var pb = document.createElement("div");
+        pb.className = "pb";
+        pb.textContent = sp.bin;
+
+        var img = document.createElement("img");
+        img.className = "plate-img";
+        img.alt = sp.bin + " — " + sp.common;
+        img.referrerPolicy = "no-referrer";
+
+        box.appendChild(pc);
+        box.appendChild(pb);
+        box.appendChild(img);
+
+        var cap = document.createElement("div");
+        cap.className = "tab-caption";
+        var lat = document.createElement("div");
+        lat.className = "lat";
+        lat.textContent = sp.bin;
+        var tc = document.createElement("div");
+        tc.className = "mono-cap tc";
+        tc.textContent = sp.common + " · " + sp.conn + " connections";
+        cap.appendChild(lat);
+        cap.appendChild(tc);
+
+        plate.appendChild(box);
+        plate.appendChild(cap);
+        grid.appendChild(plate);
+
+        resolveImage(sp, img, box);
+      });
+    }
+
+    render();
+  })();
+  </script>
+
+  <!-- CITE / DOWNLOAD CTA -->
+  <section class="cite" data-show-plate="feverfew">
+    <div class="cite-card">
+      <div class="mono-cap" style="opacity: 0.7;">Cite · Download · Reuse</div>
+      <h2>Open access, freely reproducible</h2>
+      <p>POPPy is released under CC BY-NC 4.0. Download OWL/Turtle/RDF exports.</p>
+      <div class="btn-row">
+        <button class="btn cream">Download OWL</button>
+        <button class="btn outline">Read paper</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h3>POPPy</h3>
+          <div class="tag">Phyto-Ontology Platform<br/>for Pharmacology</div>
+          <p class="blurb">An open registry of medicinal plants, their compounds, targets, and citations — for the next generation of AI-assisted drug discovery.</p>
+        </div>
+        <div>
+          <div class="col-h">Explore</div>
+          <a class="col-link" href="Home.html">Home</a>
+          <a class="col-link" href="Explore.html">Explore</a>
+          <a class="col-link" href="Download.html">Download</a>
+          <a class="col-link" href="About.html">About</a>
+          <a class="col-link" href="Contact.html">Contact</a>
+        </div>
+        <div>
+          <div class="col-h">About</div>
+          <a class="col-link" href="About.html">Overview</a>
+          <a class="col-link" href="Method.html">Method</a>
+          <a class="col-link" href="Team.html">Team</a>
+          <a class="col-link" href="Citation.html">Citation</a>
+        </div>
+        <div>
+          <div class="col-h">Legal</div>
+          <a class="col-link" href="Privacy.html">Privacy</a>
+          <a class="col-link" href="Terms.html">Terms</a>
+          <a class="col-link" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">License</a>
+        </div>
+      </div>
+      <div class="footer-land" style="font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 14px; line-height: 1.5; opacity: 0.7; padding: 0 0 20px; max-width: 680px;">This resource was developed on Lenapehoking, the traditional ancestral homeland of the Lenape people.</div>
+      <div class="footer-bottom">
+        <span>© MMXXVI · <a href="https://romanolab.org" target="_blank" rel="noopener" class="ft-link">ROMANO LAB</a> AT THE <a href="https://www.upenn.edu" target="_blank" rel="noopener" class="ft-link">UNIVERSITY OF PENNSYLVANIA</a></span>
+        <span>Editio Prima · v 0.1</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="ontology-data.js"></script>
+  <script>
+    // ─── Pure-SVG graph renderer. No cytoscape, no library quirks ───
+
+    // Ontology data + graph helpers come from the shared file (ontology-data.js),
+    // which is the single source to swap when the real ontology is wired in.
+    const { NODES, EDGES, ROLE_COLOR, neighborhood, findByLabel, prettyPredicate } = window.POPPY;
+
+    // ─── SVG rendering ───
+    const SVG_NS = "http://www.w3.org/2000/svg";
+
+    const NODE_R = {
+      __center: 28,
+      Plant: 16, Compound: 14, Target: 12, Effect: 11, Citation: 8, Other: 12,
+    };
+    const RING_FRAC = {
+      Plant: 0.40, Compound: 0.62, Target: 0.78, Effect: 0.92, Citation: 1.00, Other: 1.00,
+    };
+    // per-ring start angle offset so first nodes don't stack along the top axis
+    const RING_OFFSET = {
+      Plant: 0.8, Compound: 0, Target: 0.6, Effect: 0.3, Citation: 1.1, Other: 0,
+    };
+
+    let lastSub = null;
+    let currentCenter = null;
+
+    function renderSubgraph(sub) {
+      lastSub = sub;
+      const container = document.getElementById("graph");
+      // wipe existing
+      while (container.firstChild) container.removeChild(container.firstChild);
+
+      const cw = container.clientWidth  || 1004;
+      const ch = container.clientHeight || 660;
+
+      const svg = document.createElementNS(SVG_NS, "svg");
+      svg.setAttribute("width", "100%");
+      svg.setAttribute("height", "100%");
+      svg.setAttribute("viewBox", `0 0 ${cw} ${ch}`);
+      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      svg.style.display = "block";
+
+      // arrowhead marker
+      const defs = document.createElementNS(SVG_NS, "defs");
+      defs.innerHTML =
+        `<marker id="poppy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+           <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a7a4a"/>
+         </marker>`;
+      svg.appendChild(defs);
+
+      const cx = cw / 2, cy = ch / 2;
+      // Use the full ellipse defined by the container, not min(w,h). This makes
+      // the graph fill wide canvases without horizontal stretch math.
+      const maxH = cw / 2 - 60;
+      const maxV = ch / 2 - 50;
+
+      // node lookup for sizing during edge drawing
+      const nodeLookup = {};
+      for (const n of sub.nodes) nodeLookup[n.id] = n;
+
+      // compute positions on per-ring ellipses (a = maxH * frac, b = maxV * frac)
+      const positions = { [sub.center]: { x: cx, y: cy } };
+      const buckets = { Plant: [], Compound: [], Target: [], Effect: [], Citation: [], Other: [] };
+      for (const n of sub.nodes) {
+        if (n.id === sub.center) continue;
+        (buckets[n.role] || buckets.Other).push(n);
+      }
+      for (const role of ["Plant", "Compound", "Target", "Effect", "Citation", "Other"]) {
+        const items = buckets[role];
+        if (!items.length) continue;
+        const a = maxH * RING_FRAC[role];
+        const b = maxV * RING_FRAC[role];
+        const start = -Math.PI / 2 + (RING_OFFSET[role] || 0);
+        items.forEach((item, i) => {
+          const angle = start + (2 * Math.PI * i) / items.length;
+          positions[item.id] = {
+            x: cx + a * Math.cos(angle),
+            y: cy + b * Math.sin(angle),
+          };
+        });
+      }
+
+      const radiusOf = (id) =>
+        id === sub.center ? NODE_R.__center : (NODE_R[nodeLookup[id]?.role] || 12);
+
+      // ─── edges ───
+      const edgesG = document.createElementNS(SVG_NS, "g");
+      edgesG.setAttribute("class", "edges");
+      for (const e of sub.edges) {
+        const p1 = positions[e.source];
+        const p2 = positions[e.target];
+        if (!p1 || !p2) continue;
+        const r1 = radiusOf(e.source);
+        const r2 = radiusOf(e.target);
+        const dx = p2.x - p1.x, dy = p2.y - p1.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const ux = dx / dist, uy = dy / dist;
+        const x1 = p1.x + ux * r1;
+        const y1 = p1.y + uy * r1;
+        const x2 = p2.x - ux * (r2 + 4);
+        const y2 = p2.y - uy * (r2 + 4);
+
+        const line = document.createElementNS(SVG_NS, "line");
+        line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "#8a7a4a");
+        line.setAttribute("stroke-width", "1");
+        line.setAttribute("marker-end", "url(#poppy-arrow)");
+        edgesG.appendChild(line);
+
+        // label at midpoint with parchment background (paint-order stroke trick)
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2;
+        const label = prettyPredicate(e.predicate);
+
+        const text = document.createElementNS(SVG_NS, "text");
+        text.textContent = label;
+        text.setAttribute("x", mx);
+        text.setAttribute("y", my);
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("font-family", "IBM Plex Mono, ui-monospace, monospace");
+        text.setAttribute("font-size", "9");
+        text.setAttribute("letter-spacing", "1.2");
+        text.setAttribute("fill", "#7a5a3a");
+        text.setAttribute("stroke", "#fdf8e9");
+        text.setAttribute("stroke-width", "4");
+        text.setAttribute("paint-order", "stroke fill");
+        text.style.textTransform = "uppercase";
+        edgesG.appendChild(text);
+      }
+      svg.appendChild(edgesG);
+
+      // ─── nodes ───
+      const nodesG = document.createElementNS(SVG_NS, "g");
+      for (const n of sub.nodes) {
+        const p = positions[n.id];
+        const r = radiusOf(n.id);
+        const color = ROLE_COLOR[n.role] || ROLE_COLOR.Other;
+
+        const g = document.createElementNS(SVG_NS, "g");
+        g.style.cursor = "pointer";
+        g.setAttribute("data-id", n.id);
+
+        const circle = document.createElementNS(SVG_NS, "circle");
+        circle.setAttribute("cx", p.x);
+        circle.setAttribute("cy", p.y);
+        circle.setAttribute("r", r);
+        circle.setAttribute("fill", color);
+        if (n.id === sub.center) {
+          circle.setAttribute("stroke", "#243025");
+          circle.setAttribute("stroke-width", "3");
+        }
+        g.appendChild(circle);
+
+        // hover halo
+        const halo = document.createElementNS(SVG_NS, "circle");
+        halo.setAttribute("cx", p.x);
+        halo.setAttribute("cy", p.y);
+        halo.setAttribute("r", r + 6);
+        halo.setAttribute("fill", "transparent");
+        halo.setAttribute("stroke", color);
+        halo.setAttribute("stroke-width", "0");
+        halo.setAttribute("opacity", "0.4");
+        halo.style.transition = "stroke-width 150ms ease";
+        g.appendChild(halo);
+        g.addEventListener("mouseenter", () => halo.setAttribute("stroke-width", "2"));
+        g.addEventListener("mouseleave", () => halo.setAttribute("stroke-width", "0"));
+
+        // label below
+        const isCenter = n.id === sub.center;
+        const fontSize = isCenter ? 18 : n.role === "Citation" ? 12 : 14;
+        const italic = (n.role === "Plant" || n.role === "Compound" || n.role === "Citation");
+
+        const label = document.createElementNS(SVG_NS, "text");
+        label.textContent = n.label;
+        label.setAttribute("x", p.x);
+        label.setAttribute("y", p.y + r + fontSize + 4);
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("font-family", "EB Garamond, Cardo, Georgia, serif");
+        label.setAttribute("font-size", fontSize);
+        label.setAttribute("fill", "#1a1f17");
+        if (italic) label.setAttribute("font-style", "italic");
+        // parchment outline so labels stay legible when an edge runs under them
+        label.setAttribute("stroke", "#fdf8e9");
+        label.setAttribute("stroke-width", "3");
+        label.setAttribute("paint-order", "stroke fill");
+        g.appendChild(label);
+
+        g.addEventListener("click", () => focusOn(n.id));
+        nodesG.appendChild(g);
+      }
+      svg.appendChild(nodesG);
+
+      container.appendChild(svg);
+
+      // caption + status
+      const role = sub.role || "";
+      document.getElementById("graph-caption").innerHTML =
+        `Centered on <em>${sub.label}</em>` +
+        (sub.common ? ` <span style="color:var(--umber)">· ${sub.common}</span>` : "") +
+        ` <span style="color:var(--umber); font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; margin-left:8px;">${role}</span>`;
+      document.getElementById("msg").textContent =
+        `Showing ${sub.nodes.length} entities and ${sub.edges.length} relationships. Click any circle to refocus.`;
+    }
+
+    function focusOn(id) {
+      const sub = neighborhood(id);
+      if (!sub) return;
+      currentCenter = id;
+      document.getElementById("search").value = sub.label;
+      // point "Explore further" at this entity's register
+      const ef = document.getElementById("explore-further");
+      if (ef) ef.href = "Explore.html?q=" + encodeURIComponent(id);
+      document.body.classList.add("graph-active");
+      // unhide BEFORE rendering so clientWidth/clientHeight read correctly
+      const wrap = document.getElementById("graph-wrap");
+      wrap.hidden = false;
+      // give the browser one frame to lay out the now-visible container
+      requestAnimationFrame(() => {
+        renderSubgraph(sub);
+        const rect = wrap.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 0.6) {
+          window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: "smooth" });
+        }
+      });
+    }
+
+    function runSearch(q) {
+      const query = (q || document.getElementById("search").value || "").trim();
+      const msg = document.getElementById("msg");
+      if (!query) { msg.textContent = "Type a plant name, compound, or target."; return; }
+      const id = findByLabel(query);
+      if (!id) { msg.textContent = `No results for "${query}". Try one of the suggestions below.`; return; }
+      focusOn(id);
+    }
+
+    document.getElementById("searchBtn").addEventListener("click", () => runSearch());
+    document.getElementById("search").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") runSearch();
+    });
+    document.querySelectorAll(".try-chips .chip").forEach((c) => {
+      c.addEventListener("click", () => runSearch(c.dataset.q));
+    });
+
+    // Deep-link: Home.html?q=<id|label> opens the graph centered on that entity
+    // (used by the Explore page rows to close the overview → focus loop).
+    (function () {
+      try {
+        const q = new URLSearchParams(window.location.search).get("q");
+        if (q) { const id = findByLabel(q); if (id) focusOn(id); }
+      } catch (e) {}
+    })();
+
+    // Re-render when the viewport changes so the graph keeps filling the container
+    let resizeT;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => { if (lastSub) renderSubgraph(lastSub); }, 150);
+    });
+  </script>
+
+
+
+  <script>
+    // ─── Botanical plate rotator ───
+    (function () {
+      const INTERVAL_MS = 5000;
+      const rotator = document.getElementById("rotator");
+      if (!rotator) return;
+      const images = Array.from(rotator.querySelectorAll(".plate-slide"));
+      const caption = rotator.querySelector(".caption");
+      const dotsEl = rotator.querySelector(".dots");
+      let current = 0;
+      let timer;
+
+      images.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Go to plate " + (i + 1));
+        dot.addEventListener("click", () => { goTo(i); resetTimer(); });
+        dotsEl.appendChild(dot);
+      });
+
+      function goTo(index) {
+        images[current].classList.remove("active");
+        dotsEl.children[current].classList.remove("active");
+        current = (index + images.length) % images.length;
+        images[current].classList.add("active");
+        dotsEl.children[current].classList.add("active");
+        const bin = images[current].dataset.bin || "";
+        const common = images[current].dataset.common || "";
+        caption.innerHTML = bin + (common ? `<span class="common">${common}</span>` : "");
+        rotator.classList.toggle("show-caption", !!bin);
+      }
+
+      function advance() { goTo(current + 1); }
+      function resetTimer() { clearInterval(timer); timer = setInterval(advance, INTERVAL_MS); }
+
+      rotator.addEventListener("mouseenter", () => clearInterval(timer));
+      rotator.addEventListener("mouseleave", resetTimer);
+
+      goTo(0);
+      resetTimer();
+    })();
+  </script>
+  <!-- TWEAKS PANEL -->
+  <style id="tw-style">
+    #tw-panel { position: fixed; top: 18px; right: 18px; z-index: 9000; width: 288px;
+      background: var(--parchment-light, #fdf8e9); border: 1px solid var(--rule, #8a7a4a);
+      box-shadow: 0 18px 50px rgba(25, 33, 27, 0.28); font-family: "EB Garamond", Georgia, serif;
+      color: var(--ink, #1a1f17); display: none; }
+    #tw-panel.tw-open { display: block; }
+    .tw-head { display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid rgba(138, 122, 74, 0.4);
+      background: var(--forest-deep, #19211b); color: var(--parchment, #f3e9cd); cursor: move; }
+    .tw-head .tw-title { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+    .tw-head .tw-close { background: none; border: none; color: var(--parchment, #f3e9cd); font-size: 18px; line-height: 1; cursor: pointer; padding: 2px 4px; opacity: 0.7; }
+    .tw-head .tw-close:hover { opacity: 1; }
+    .tw-body { padding: 6px 18px 18px; }
+    .tw-row { padding: 15px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.4); }
+    .tw-row:last-child { border-bottom: none; }
+    .tw-label { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 9px; }
+    .tw-label .tw-name { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--umber, #7a5a3a); }
+    .tw-label .tw-val { font-style: italic; font-size: 15px; color: var(--forest, #243025); }
+    .tw-row input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: var(--rule-soft, #bca97a); outline: none; margin: 4px 0; }
+    .tw-row input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--forest, #243025); cursor: pointer; border: 2px solid var(--parchment-light, #fdf8e9); }
+    .tw-row input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--forest, #243025); cursor: pointer; border: 2px solid var(--parchment-light, #fdf8e9); }
+    .tw-toggle { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--rule, #8a7a4a); }
+    .tw-toggle button { font-family: "EB Garamond", Georgia, serif; font-variant-caps: all-small-caps; letter-spacing: 0.1em; font-size: 14px; padding: 6px 18px; background: transparent; border: none; cursor: pointer; color: var(--umber, #7a5a3a); }
+    .tw-toggle button.on { background: var(--forest, #243025); color: var(--parchment, #f3e9cd); }
+    .tw-swatches { display: flex; gap: 10px; }
+    .tw-swatch { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 1px solid rgba(26, 31, 23, 0.25); padding: 0; position: relative; }
+    .tw-swatch.sel { box-shadow: 0 0 0 2px var(--parchment-light, #fdf8e9), 0 0 0 4px var(--forest, #243025); }
+  </style>
+  <div id="tw-panel" aria-hidden="true">
+    <div class="tw-head" id="tw-head">
+      <span class="tw-title">Tweaks</span>
+      <button class="tw-close" id="tw-close" aria-label="Close">×</button>
+    </div>
+    <div class="tw-body">
+      <div class="tw-row">
+        <div class="tw-label"><span class="tw-name">Specimens</span></div>
+        <div class="tw-toggle" id="tw-show">
+          <button data-v="1">Shown</button><button data-v="0">Hidden</button>
+        </div>
+      </div>
+      <div class="tw-row">
+        <div class="tw-label"><span class="tw-name">Fade</span><span class="tw-val" id="tw-fade-val">0.30</span></div>
+        <input type="range" id="tw-fade" min="0.1" max="0.7" step="0.05" />
+      </div>
+      <div class="tw-row">
+        <div class="tw-label"><span class="tw-name">Size</span><span class="tw-val" id="tw-size-val">1.0×</span></div>
+        <input type="range" id="tw-size" min="0.7" max="1.6" step="0.1" />
+      </div>
+      <div class="tw-row">
+        <div class="tw-label"><span class="tw-name">Accent</span></div>
+        <div class="tw-swatches" id="tw-accent">
+          <button class="tw-swatch" data-c="#3d5b3e" style="background:#3d5b3e" title="Forest"></button>
+          <button class="tw-swatch" data-c="#1b4d3e" style="background:#1b4d3e" title="Deep green"></button>
+          <button class="tw-swatch" data-c="#7a5a3a" style="background:#7a5a3a" title="Umber"></button>
+          <button class="tw-swatch" data-c="#6b2737" style="background:#6b2737" title="Oxblood"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script id="tw-inline">
+    (function () {
+      "use strict";
+      var TWEAKS = /*EDITMODE-BEGIN*/{
+        "showSpecimens": true,
+        "specimenFade": 0.3,
+        "specimenSize": 1,
+        "accent": "#3d5b3e"
+      }/*EDITMODE-END*/;
+
+      var root = document.documentElement, body = document.body;
+      var panel = document.getElementById("tw-panel");
+
+      function apply(t) {
+        body.classList.toggle("bm-hidden", !t.showSpecimens);
+        root.style.setProperty("--bm-rest-op", String(t.specimenFade));
+        root.style.setProperty("--bm-scale", String(t.specimenSize));
+        root.style.setProperty("--accent", t.accent);
+        // reflect in controls
+        [].forEach.call(document.querySelectorAll("#tw-show button"), function (b) {
+          b.classList.toggle("on", (b.dataset.v === "1") === !!t.showSpecimens);
+        });
+        document.getElementById("tw-fade").value = t.specimenFade;
+        document.getElementById("tw-fade-val").textContent = Number(t.specimenFade).toFixed(2);
+        document.getElementById("tw-size").value = t.specimenSize;
+        document.getElementById("tw-size-val").textContent = Number(t.specimenSize).toFixed(1) + "×";
+        [].forEach.call(document.querySelectorAll("#tw-accent .tw-swatch"), function (s) {
+          s.classList.toggle("sel", s.dataset.c === t.accent);
+        });
+      }
+
+      function set(key, val) {
+        TWEAKS[key] = val;
+        apply(TWEAKS);
+        try { window.parent.postMessage({ type: "__edit_mode_set_keys", edits: (function () { var o = {}; o[key] = val; return o; })() }, "*"); } catch (e) {}
+      }
+
+      // controls
+      document.getElementById("tw-show").addEventListener("click", function (e) {
+        var b = e.target.closest("button"); if (!b) return;
+        set("showSpecimens", b.dataset.v === "1");
+      });
+      document.getElementById("tw-fade").addEventListener("input", function () { set("specimenFade", parseFloat(this.value)); });
+      document.getElementById("tw-size").addEventListener("input", function () { set("specimenSize", parseFloat(this.value)); });
+      document.getElementById("tw-accent").addEventListener("click", function (e) {
+        var s = e.target.closest(".tw-swatch"); if (!s) return;
+        set("accent", s.dataset.c);
+      });
+
+      // host protocol — register listener BEFORE announcing availability
+      window.addEventListener("message", function (e) {
+        var d = e.data || {};
+        if (d.type === "__activate_edit_mode") { panel.classList.add("tw-open"); panel.setAttribute("aria-hidden", "false"); }
+        else if (d.type === "__deactivate_edit_mode") { panel.classList.remove("tw-open"); panel.setAttribute("aria-hidden", "true"); }
+      });
+      document.getElementById("tw-close").addEventListener("click", function () {
+        panel.classList.remove("tw-open"); panel.setAttribute("aria-hidden", "true");
+        try { window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); } catch (e) {}
+      });
+
+      // drag to reposition
+      (function () {
+        var head = document.getElementById("tw-head"), dragging = false, ox = 0, oy = 0;
+        head.addEventListener("mousedown", function (e) {
+          dragging = true; var r = panel.getBoundingClientRect();
+          ox = e.clientX - r.left; oy = e.clientY - r.top;
+          panel.style.right = "auto"; document.body.style.userSelect = "none";
+        });
+        window.addEventListener("mousemove", function (e) {
+          if (!dragging) return;
+          panel.style.left = (e.clientX - ox) + "px"; panel.style.top = (e.clientY - oy) + "px";
+        });
+        window.addEventListener("mouseup", function () { dragging = false; document.body.style.userSelect = ""; });
+      })();
+
+      apply(TWEAKS);
+      try { window.parent.postMessage({ type: "__edit_mode_available" }, "*"); } catch (e) {}
+    })();
+  </script>
+  <script id="bm-inline">
+/* ============================================================
+   Botanical Margins — POPPy
+   A diagonal ladder of "specimen slots" anchored down the page,
+   alternating left / right. Each slot draws the NEXT species from
+   a rotating sequence every time it scrolls into view — so
+   scrolling down reveals fresh plants, and scrolling back up puts
+   DIFFERENT specimens where the old ones were. Hold the cursor on
+   one for ~1s and the full Köhler plate cross-fades in.
+
+   Cut-out images are deferred until after the page has painted, so
+   they never block initial load.
+
+   Assets:
+     assets/cutouts/<slug>.png   — transparent cut-out (rest)
+     assets/plates/<slug>.jpg    — full plate scan (1s hover)
+
+   Tunable via CSS variables on :root (set by the Tweaks panel):
+     --bm-rest-op   resting cut-out opacity   (default 0.3)
+     --bm-full-op   revealed plate opacity     (default 0.94)
+     --bm-scale     size multiplier            (default 1)
+   And body.bm-hidden hides every specimen.
+
+   Optional <body> attributes:
+     data-bm-exclude="papaver-somniferum,digitalis-purpurea"
+     data-bm-start="7"
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PLATES = [
+    { slug: "papaver-somniferum",    bin: "Papaver somniferum" },
+    { slug: "digitalis-purpurea",    bin: "Digitalis purpurea" },
+    { slug: "datura-stramonium",     bin: "Datura stramonium" },
+    { slug: "nicotiana-tabacum",     bin: "Nicotiana tabacum" },
+    { slug: "erythraea-centaurium",  bin: "Erythraea centaurium" },
+    { slug: "tussilago-farfara",     bin: "Tussilago farfara" },
+    { slug: "verbascum-phlomoides",  bin: "Verbascum phlomoides" },
+    { slug: "anacyclus-pyrethrum",   bin: "Anacyclus pyrethrum" },
+    { slug: "levisticum-officinale", bin: "Levisticum officinale" },
+    { slug: "ipomoea-purga",         bin: "Ipomoea purga" },
+    { slug: "croton-tiglium",        bin: "Croton tiglium" },
+    { slug: "cinnamomum-zeylanicum", bin: "Cinnamomum zeylanicum" },
+    { slug: "camellia-thea",         bin: "Camellia thea" },
+    { slug: "rosa-centifolia",       bin: "Rosa centifolia" },
+    { slug: "rubus-idaeus",          bin: "Rubus idaeus" },
+    { slug: "prunus-cerasus",        bin: "Prunus cerasus" },
+    { slug: "pirus-malus",           bin: "Pirus malus" },
+    { slug: "cydonia-vulgaris",      bin: "Cydonia vulgaris" },
+    { slug: "quercus-sessiliflora",  bin: "Quercus sessiliflora" },
+    { slug: "citrus-limonum",        bin: "Citrus limonum" },
+    { slug: "citrus-vulgaris",       bin: "Citrus vulgaris" },
+    { slug: "inula-helenium",        bin: "Inula helenium" },
+    { slug: "cnicus-benedictus",     bin: "Cnicus benedictus" },
+    { slug: "chrysanthemum-roseum",  bin: "Chrysanthemum roseum" }
+  ];
+
+  var CUT  = "assets/cutouts/";
+  var FULL = "assets/plates/";
+  var HOLD_MS = 1000;   // hover dwell before the full plate reveals
+  var GALLERY = "Herbarium.html";   // click a revealed plate → the gallery
+
+  var deck, rotation = 0, plants = [], imagesReady = false;
+
+  function init() {
+    var body = document.body;
+    if (!body) return;
+
+    var exclude = (body.getAttribute("data-bm-exclude") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
+    if (deck.length < 4) deck = PLATES.slice();
+    rotation = parseInt(body.getAttribute("data-bm-start") || "0", 10) || 0;
+
+    injectCSS();
+    layout();
+
+    var scanQueued = false;
+    window.addEventListener("scroll", function () {
+      if (scanQueued) return;
+      scanQueued = true;
+      requestAnimationFrame(function () { scanQueued = false; scan(); });
+    }, { passive: true });
+
+    // hover detection (specimens sit behind content, so track the pointer)
+    var moveQueued = false, lastEvt = null;
+    document.addEventListener("pointermove", function (e) {
+      lastEvt = e;
+      if (moveQueued) return;
+      moveQueued = true;
+      requestAnimationFrame(function () { moveQueued = false; hoverTest(lastEvt); });
+    }, { passive: true });
+
+    var relayoutTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(relayoutTimer);
+      relayoutTimer = setTimeout(function () { layout(); scan(); }, 200);
+    });
+
+    // Defer image loading until just after first paint — keeps the heavy
+    // cut-outs out of the critical load path (no white-on-reload) — but
+    // GUARANTEE they appear even if the load event is slow or never fires.
+    function enableImages() {
+      if (imagesReady) return;
+      imagesReady = true;
+      layout();   // doc height is final now
+      scan();
+    }
+    if (document.readyState === "complete") {
+      requestAnimationFrame(function () { setTimeout(enableImages, 150); });
+    } else {
+      window.addEventListener("load", function () { setTimeout(enableImages, 150); });
+    }
+    setTimeout(enableImages, 1500);   // hard fallback
+  }
+
+  // Build / rebuild the diagonal ladder of slots (no species yet — those are
+  // assigned on viewport entry).
+  function layout() {
+    if (window.innerWidth < 920) {              // too narrow — stand down
+      plants.forEach(function (p) { p.el.remove(); });
+      plants = [];
+      return;
+    }
+
+    var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var startY = Math.round(window.innerHeight * 0.55);
+    var endPad = Math.round(window.innerHeight * 0.6);
+    var step   = Math.max(520, Math.round(window.innerHeight * 0.72));
+    var count  = Math.max(2, Math.floor((docH - startY - endPad) / step) + 1);
+
+    while (plants.length < count) plants.push(makePlant());
+    while (plants.length > count) { var ex = plants.pop(); ex.el.remove(); }
+
+    plants.forEach(function (p, i) {
+      var side = (i % 2 === 0) ? "left" : "right";
+      p.el.className = "bm-plant bm-" + side + (p.inView ? " bm-in" : "");
+      p.el.style.top = (startY + i * step) + "px";
+      if (!p.el.parentNode) document.body.appendChild(p.el);
+    });
+  }
+
+  function makePlant() {
+    var el = document.createElement("figure");
+    el.className = "bm-plant";
+
+    var stack = document.createElement("div");
+    stack.className = "bm-stack";
+
+    var cut = document.createElement("img");
+    cut.className = "bm-cut"; cut.alt = ""; cut.decoding = "async"; cut.loading = "lazy";
+    var full = document.createElement("img");
+    full.className = "bm-full"; full.alt = ""; full.decoding = "async"; full.loading = "lazy";
+    stack.appendChild(cut);
+    stack.appendChild(full);
+
+    var cap = document.createElement("figcaption");
+    cap.className = "bm-cap";
+
+    el.appendChild(stack);
+    el.appendChild(cap);
+
+    el.title = "Open the herbarium gallery";
+    el.addEventListener("click", function () {
+      if (el.classList.contains("bm-reveal")) window.location.href = GALLERY;
+    });
+
+    return { el: el, stack: stack, cut: cut, full: full, cap: cap,
+             slug: null, cutSrc: null, fullSrc: null, fullLoaded: false,
+             inView: false, hovering: false, timer: null, revealed: false };
+  }
+
+  // Give a slot the next species in the rotation and (lazily) load its cut-out.
+  function assignNext(p) {
+    var sp = deck[((rotation++) % deck.length + deck.length) % deck.length];
+    p.slug = sp.slug;
+    p.cutSrc = CUT + sp.slug + ".png";
+    p.fullSrc = FULL + sp.slug + ".jpg";
+    p.fullLoaded = false;
+    p.revealed = false;
+    p.el.classList.remove("bm-reveal");
+    p.full.removeAttribute("src");
+    p.cap.textContent = sp.bin;
+    if (imagesReady) p.cut.src = p.cutSrc;
+  }
+
+  // Reveal slots entering the viewport; fade out those leaving so they can be
+  // re-assigned a different species on their next entrance.
+  function scan() {
+    if (!imagesReady) return;
+    var vh = window.innerHeight;
+    plants.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      var h = p.el.offsetHeight || 1;
+      var isIn = r.top < vh * 0.9 && (r.top + h) > vh * 0.12;
+      if (isIn && !p.inView) {
+        p.inView = true;
+        assignNext(p);                 // fresh specimen each entrance
+        p.el.classList.add("bm-in");
+      } else if (!isIn && p.inView) {
+        p.inView = false;
+        p.el.classList.remove("bm-in"); // fade out; next entry brings a new plant
+      }
+    });
+  }
+
+  function hoverTest(e) {
+    if (!e) return;
+    plants.forEach(function (p) {
+      if (!p.inView) return;
+      var r = p.stack.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (inside && !p.hovering) {
+        p.hovering = true;
+        if (!p.fullLoaded && p.fullSrc) { p.full.src = p.fullSrc; p.fullLoaded = true; }
+        p.timer = setTimeout(function () { setReveal(p, true); }, HOLD_MS);
+      } else if (!inside && p.hovering) {
+        p.hovering = false;
+        clearTimeout(p.timer);
+        setReveal(p, false);
+      }
+    });
+  }
+
+  function setReveal(p, on) {
+    p.revealed = on;
+    p.el.classList.toggle("bm-reveal", on);
+    p.el.style.zIndex = on ? "55" : "";
+    p.el.style.pointerEvents = on ? "auto" : "";
+    p.el.style.cursor = on ? "pointer" : "";
+  }
+
+  function injectCSS() {
+    if (document.getElementById("bm-style")) return;
+    var css = [
+      ".bm-plant{",
+      "  position:absolute;margin:0;width:calc(var(--bm-w,300px) * var(--bm-scale,1));",
+      "  --bm-w:clamp(220px,23vw,330px);",
+      "  display:flex;flex-direction:column;align-items:center;gap:12px;",
+      "  z-index:-1;pointer-events:none;",
+      "  opacity:0;transform:translateY(22px);",
+      "  transition:opacity 1100ms ease,transform 1100ms cubic-bezier(.22,.61,.36,1);",
+      "}",
+      ".bm-plant.bm-in{opacity:1;transform:none;}",
+      "body.bm-hidden .bm-plant{display:none;}",
+      ".bm-left{left:clamp(4px,2vw,52px);}",
+      ".bm-right{right:clamp(4px,2vw,52px);}",
+      ".bm-stack{",
+      "  position:relative;width:100%;height:calc(var(--bm-h,440px) * var(--bm-scale,1));",
+      "  --bm-h:clamp(320px,46vh,500px);",
+      "}",
+      ".bm-stack img{",
+      "  position:absolute;inset:0;width:100%;height:100%;",
+      "  object-fit:contain;object-position:center;",
+      "  transition:opacity 700ms ease;",
+      "}",
+      ".bm-cut{opacity:var(--bm-rest-op,0.3);filter:saturate(.96) drop-shadow(0 3px 9px rgba(36,48,37,.08));}",
+      ".bm-full{",
+      "  opacity:0;background:#fbf5e3;padding:8px;box-sizing:border-box;",
+      "  box-shadow:0 16px 44px rgba(36,48,37,.3),0 0 0 1px rgba(122,90,58,.4);",
+      "}",
+      ".bm-plant.bm-reveal .bm-cut{opacity:0;}",
+      ".bm-plant.bm-reveal .bm-full{opacity:var(--bm-full-op,0.94);}",
+      ".bm-cap{",
+      "  font-family:'EB Garamond',Georgia,serif;font-style:italic;",
+      "  font-size:clamp(15px,1.1vw,18px);line-height:1.2;color:var(--forest,#243025);",
+      "  text-align:center;max-width:100%;text-wrap:balance;opacity:.5;",
+      "  transition:opacity 300ms ease;",
+      "}",
+      ".bm-plant.bm-reveal .bm-cap{opacity:0;}",
+      "@media (prefers-reduced-motion: reduce){",
+      "  .bm-plant{transition:opacity 400ms ease;transform:none;}",
+      "}",
+      "@media (max-width:920px){ .bm-plant{display:none;} }"
+    ].join("\n");
+    var s = document.createElement("style");
+    s.id = "bm-style";
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  var booted = false;
+  function boot() {
+    if (booted) return;
+    if (!document.body) return;
+    booted = true;
+    init();
+  }
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("load", boot);
+  boot();
+})();
+</script>
+</body>
+</html>

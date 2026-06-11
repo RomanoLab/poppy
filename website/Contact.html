@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPPy — Contact (preview)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f3e9cd; --parchment-deep: #ead9b0; --parchment-light: #fdf8e9;
+      --ink: #1a1f17; --forest: #243025; --forest-deep: #19211b;
+      --accent: #3d5b3e; --umber: #7a5a3a; --rule: #8a7a4a; --rule-soft: #bca97a;
+      --display: "EB Garamond", "Cardo", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--parchment); color: var(--ink); font-family: var(--display); font-size: 18px; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .smallcaps { font-variant-caps: all-small-caps; letter-spacing: 0.12em; }
+    .mono-cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+
+    .herb-divider { display: flex; align-items: center; gap: 14px; color: var(--rule); margin: 32px 0; }
+    .herb-divider .rule { flex: 1; height: 1px; background: currentColor; opacity: 0.5; }
+    .herb-divider .double { flex: 1; height: 3px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; opacity: 0.5; }
+    .herb-divider .ornament { font-family: var(--display); font-size: 22px; opacity: 0.7; line-height: 1; }
+
+    /* NAV (same as Home) */
+    .nav { border-top: 3px double var(--rule); border-bottom: 1px solid rgba(138, 122, 74, 0.4); background: var(--parchment); position: relative; z-index: 10; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; max-width: 1180px; margin: 0 auto; }
+    .wordmark { display: flex; align-items: baseline; gap: 14px; }
+    .wordmark .name { font-family: var(--display); font-size: 36px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
+    .wordmark .name em { font-style: italic; }
+    .wordmark .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-size: 16px; color: var(--ink); padding-bottom: 2px; border-bottom: 2px solid transparent; }
+    .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links { align-items: center; }
+    .nav-item { position: relative; display: flex; align-items: center; }
+    .nav-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--parchment-light); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(36, 48, 37, 0.16); padding: 6px; min-width: 176px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; z-index: 40; }
+    .nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-menu a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; padding: 9px 16px; color: var(--ink); border-bottom: none; white-space: nowrap; }
+    .nav-menu a.active { color: var(--accent); }
+    .nav-menu a:hover { background: var(--parchment-deep); color: var(--accent); }
+
+    /* PAGE HERO */
+    .page-hero { padding: 80px 48px 40px; text-align: center; }
+    .page-hero .hero-inner { max-width: 880px; margin: 0 auto; }
+    .page-hero h1 { font-family: var(--display); font-weight: 500; font-size: 64px; line-height: 1.05; letter-spacing: -0.015em; margin: 16px 0 24px; color: var(--forest); }
+    .page-hero h1 em { font-style: italic; }
+    .page-hero .lede { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--umber); margin: 0 auto; max-width: 760px; line-height: 1.4; }
+
+    /* HERO affiliation line */
+    .page-hero .affiliation {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      opacity: 0.85;
+      margin: 12px auto 0;
+      max-width: 640px;
+    }
+    .page-hero .affiliation a {
+      color: var(--accent);
+      font-style: normal;
+      border-bottom: 1px dotted var(--accent);
+      padding-bottom: 1px;
+    }
+    .page-hero .affiliation a:hover { color: var(--forest); border-bottom-color: var(--forest); }
+    .page-hero .affiliation .smallcaps {
+      font-style: normal;
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.12em;
+      color: var(--umber);
+    }
+
+    /* CONTACT */
+    .contact-main { padding: 20px 48px 80px; }
+    .contact-grid { max-width: 720px; margin: 0 auto; }
+
+    .herb-card { background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.35); }
+
+    .contact-form { padding: 40px 44px; }
+    .field { display: block; margin-bottom: 22px; }
+    .field-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--umber); margin-bottom: 6px; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%; background: transparent; border: 0;
+      border-bottom: 1px solid var(--rule);
+      padding: 8px 0;
+      font-family: var(--display); font-size: 18px; color: var(--ink);
+      outline: none; resize: vertical;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { font-style: italic; color: rgba(26, 31, 23, 0.4); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-bottom-color: var(--accent); }
+    .visually-hidden { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+
+    .btn-herb {
+      font-family: var(--display);
+      font-variant-caps: all-small-caps;
+      letter-spacing: 0.18em;
+      font-size: 16px;
+      padding: 14px 32px;
+      background: var(--forest);
+      color: var(--parchment);
+      border: 1px solid var(--forest);
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 150ms ease;
+    }
+    .btn-herb:hover { background: var(--forest-deep); }
+    .btn-herb[disabled] { opacity: 0.55; cursor: progress; }
+
+    .form-status {
+      margin-top: 18px;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 1.5em;
+    }
+    .form-status.success {
+      color: var(--accent);
+      padding: 14px 16px;
+      background: rgba(61, 91, 62, 0.08);
+      border-left: 3px solid var(--accent);
+    }
+    .form-status.error {
+      color: #8a2a1a;
+      padding: 14px 16px;
+      background: rgba(138, 42, 26, 0.08);
+      border-left: 3px solid #8a2a1a;
+    }
+
+    .contact-side { padding-top: 12px; }
+    .contact-list { margin-top: 20px; }
+    .contact-row { padding: 16px 0; border-bottom: 1px dotted var(--rule); }
+    .contact-row .k { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--umber); }
+    .contact-row .v { font-family: var(--mono); font-size: 14px; color: var(--forest); margin-top: 4px; }
+
+    .office-card { margin-top: 36px; padding: 24px 28px; background: var(--forest); color: var(--parchment); }
+    .office-card p { font-family: var(--display); font-style: italic; font-size: 17px; line-height: 1.5; margin: 0; }
+
+    /* DEMO NOTE — only in this preview file */
+    .demo-note {
+      max-width: 1000px; margin: 0 auto 28px;
+      padding: 18px 24px;
+      background: rgba(122, 90, 58, 0.08);
+      border-left: 3px solid var(--umber);
+      font-family: var(--display); font-style: italic; font-size: 16px;
+      color: var(--ink);
+    }
+    .demo-note code { font-family: var(--mono); font-style: normal; background: rgba(36, 48, 37, 0.08); padding: 1px 6px; border-radius: 2px; font-size: 14px; }
+
+    /* FOOTER */
+    .footer { background: var(--forest-deep); color: var(--parchment); padding: 56px 48px 28px; margin-top: 64px; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+    .footer h3 { font-family: var(--display); font-size: 32px; font-style: italic; margin: 0; }
+    .footer .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
+    .footer .blurb { font-size: 15px; line-height: 1.55; opacity: 0.75; margin-top: 18px; max-width: 320px; }
+    .footer .col-h { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
+    .footer .col-link { display: block; font-size: 16px; padding: 4px 0; opacity: 0.85; color: inherit; text-decoration: none; }
+    .footer a.col-link:hover { color: var(--accent); opacity: 1; }
+    .footer-bottom a.ft-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243, 233, 205, 0.4); transition: color 150ms ease, border-color 150ms ease; } .footer-bottom a.ft-link:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-bottom { border-top: 1px solid rgba(243, 233, 205, 0.2); padding-top: 18px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="wordmark">
+        <img class="logo-img" src="assets/poppy-logo.png" alt="POPPy" style="height:38px;width:auto;display:block;">
+        <div class="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div>
+      </div>
+      <div class="nav-links">
+        <a href="Home.html">Home</a>
+        <a href="Explore.html">Explore</a>
+        <a href="Download.html">Download</a>
+        <div class="nav-item">
+          <a href="About.html">About</a>
+          <div class="nav-menu">
+            <a href="About.html">Overview</a>
+            <a href="Method.html">Method</a>
+            <a href="Team.html">Team</a>
+            <a href="Citation.html">Citation</a>
+          </div>
+        </div>
+        <a href="#" class="active">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <div class="mono-cap" style="color: var(--umber)">Epistola · Contact</div>
+      <h1>Write us a <em>letter</em>.</h1>
+      <p class="lede">Questions, collaborations, corrections, or a species we ought to have included.</p>
+      <div class="herb-divider">
+        <span class="rule"></span><span class="double"></span><span class="ornament">❦</span><span class="double"></span><span class="rule"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO NOTE -->
+  <div class="demo-note">
+    <strong>Preview note:</strong> this form is wired to a Formspree-compatible flow. In production, submit will POST to your form endpoint and the response will be delivered to your email. In this preview, "Send letter" will simulate the success state — no actual email is sent. To wire it up, sign up at <code>formspree.io</code> with your email, paste the form's endpoint into <code>params.contact_form_action</code> in <code>src/config/config.json</code>.
+  </div>
+
+  <!-- CONTACT FORM -->
+  <section class="contact-main">
+    <div class="contact-grid">
+      <form id="contact-form" class="contact-form herb-card" novalidate>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="visually-hidden" />
+
+        <label class="field">
+          <span class="field-label">Name</span>
+          <input name="name" type="text" required placeholder="Your name" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input name="email" type="email" required placeholder="you@institution.org" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Message</span>
+          <textarea name="message" rows="6" required placeholder="Tell us what you're working on…"></textarea>
+        </label>
+
+        <button type="submit" class="btn-herb" id="contact-submit">Send letter</button>
+
+        <div class="form-status" id="form-status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h3>POPPy</h3>
+          <div class="tag">Phyto-Ontology Platform<br/>for Pharmacology</div>
+          <p class="blurb">An open registry of medicinal plants, their compounds, targets, and citations — for the next generation of AI-assisted drug discovery.</p>
+        </div>
+        <div>
+          <div class="col-h">Explore</div>
+          <a class="col-link" href="Home.html">Home</a>
+          <a class="col-link" href="Explore.html">Explore</a>
+          <a class="col-link" href="Download.html">Download</a>
+          <a class="col-link" href="About.html">About</a>
+          <a class="col-link" href="Contact.html">Contact</a>
+        </div>
+        <div>
+          <div class="col-h">About</div>
+          <a class="col-link" href="About.html">Overview</a>
+          <a class="col-link" href="Method.html">Method</a>
+          <a class="col-link" href="Team.html">Team</a>
+          <a class="col-link" href="Citation.html">Citation</a>
+        </div>
+        <div>
+          <div class="col-h">Legal</div>
+          <a class="col-link" href="Privacy.html">Privacy</a>
+          <a class="col-link" href="Terms.html">Terms</a>
+          <a class="col-link" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">License</a>
+        </div>
+      </div>
+      <div class="footer-land" style="font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 14px; line-height: 1.5; opacity: 0.7; padding: 0 0 20px; max-width: 680px;">This resource was developed on Lenapehoking, the traditional ancestral homeland of the Lenape people.</div>
+      <div class="footer-bottom">
+        <span>© MMXXVI · <a href="https://romanolab.org" target="_blank" rel="noopener" class="ft-link">ROMANO LAB</a> AT THE <a href="https://www.upenn.edu" target="_blank" rel="noopener" class="ft-link">UNIVERSITY OF PENNSYLVANIA</a></span>
+        <span>Editio Prima · v 0.1</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Demo handler — simulates Formspree round-trip with a small delay.
+    // The real Astro page does an actual fetch() against your form endpoint.
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("form-status");
+    const button = document.getElementById("contact-submit");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      status.className = "form-status";
+
+      // simple in-browser validation
+      const name = form.elements["name"].value.trim();
+      const email = form.elements["email"].value.trim();
+      const message = form.elements["message"].value.trim();
+      if (!name || !email || !message) {
+        status.textContent = "All three fields are required.";
+        status.classList.add("error");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = "That email doesn't look right.";
+        status.classList.add("error");
+        return;
+      }
+
+      button.disabled = true;
+      const oldLabel = button.textContent;
+      button.textContent = "Sending…";
+
+      // Simulated round-trip
+      await new Promise((r) => setTimeout(r, 800));
+
+      form.reset();
+      status.textContent = "Thank you. We've received your letter and will reply within a few days.";
+      status.classList.add("success");
+      button.disabled = false;
+      button.textContent = oldLabel;
+    });
+  </script>
+  <script id="bm-inline">
+/* ============================================================
+   Botanical Margins — POPPy
+   A diagonal ladder of "specimen slots" anchored down the page,
+   alternating left / right. Each slot draws the NEXT species from
+   a rotating sequence every time it scrolls into view — so
+   scrolling down reveals fresh plants, and scrolling back up puts
+   DIFFERENT specimens where the old ones were. Hold the cursor on
+   one for ~1s and the full Köhler plate cross-fades in.
+
+   Cut-out images are deferred until after the page has painted, so
+   they never block initial load.
+
+   Assets:
+     assets/cutouts/<slug>.png   — transparent cut-out (rest)
+     assets/plates/<slug>.jpg    — full plate scan (1s hover)
+
+   Tunable via CSS variables on :root (set by the Tweaks panel):
+     --bm-rest-op   resting cut-out opacity   (default 0.3)
+     --bm-full-op   revealed plate opacity     (default 0.94)
+     --bm-scale     size multiplier            (default 1)
+   And body.bm-hidden hides every specimen.
+
+   Optional <body> attributes:
+     data-bm-exclude="papaver-somniferum,digitalis-purpurea"
+     data-bm-start="7"
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PLATES = [
+    { slug: "papaver-somniferum",    bin: "Papaver somniferum" },
+    { slug: "digitalis-purpurea",    bin: "Digitalis purpurea" },
+    { slug: "datura-stramonium",     bin: "Datura stramonium" },
+    { slug: "nicotiana-tabacum",     bin: "Nicotiana tabacum" },
+    { slug: "erythraea-centaurium",  bin: "Erythraea centaurium" },
+    { slug: "tussilago-farfara",     bin: "Tussilago farfara" },
+    { slug: "verbascum-phlomoides",  bin: "Verbascum phlomoides" },
+    { slug: "anacyclus-pyrethrum",   bin: "Anacyclus pyrethrum" },
+    { slug: "levisticum-officinale", bin: "Levisticum officinale" },
+    { slug: "ipomoea-purga",         bin: "Ipomoea purga" },
+    { slug: "croton-tiglium",        bin: "Croton tiglium" },
+    { slug: "cinnamomum-zeylanicum", bin: "Cinnamomum zeylanicum" },
+    { slug: "camellia-thea",         bin: "Camellia thea" },
+    { slug: "rosa-centifolia",       bin: "Rosa centifolia" },
+    { slug: "rubus-idaeus",          bin: "Rubus idaeus" },
+    { slug: "prunus-cerasus",        bin: "Prunus cerasus" },
+    { slug: "pirus-malus",           bin: "Pirus malus" },
+    { slug: "cydonia-vulgaris",      bin: "Cydonia vulgaris" },
+    { slug: "quercus-sessiliflora",  bin: "Quercus sessiliflora" },
+    { slug: "citrus-limonum",        bin: "Citrus limonum" },
+    { slug: "citrus-vulgaris",       bin: "Citrus vulgaris" },
+    { slug: "inula-helenium",        bin: "Inula helenium" },
+    { slug: "cnicus-benedictus",     bin: "Cnicus benedictus" },
+    { slug: "chrysanthemum-roseum",  bin: "Chrysanthemum roseum" }
+  ];
+
+  var CUT  = "assets/cutouts/";
+  var FULL = "assets/plates/";
+  var HOLD_MS = 1000;   // hover dwell before the full plate reveals
+  var GALLERY = "Herbarium.html";   // click a revealed plate → the gallery
+
+  var deck, rotation = 0, plants = [], imagesReady = false;
+
+  function init() {
+    var body = document.body;
+    if (!body) return;
+
+    var exclude = (body.getAttribute("data-bm-exclude") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
+    if (deck.length < 4) deck = PLATES.slice();
+    rotation = parseInt(body.getAttribute("data-bm-start") || "0", 10) || 0;
+
+    injectCSS();
+    layout();
+
+    var scanQueued = false;
+    window.addEventListener("scroll", function () {
+      if (scanQueued) return;
+      scanQueued = true;
+      requestAnimationFrame(function () { scanQueued = false; scan(); });
+    }, { passive: true });
+
+    // hover detection (specimens sit behind content, so track the pointer)
+    var moveQueued = false, lastEvt = null;
+    document.addEventListener("pointermove", function (e) {
+      lastEvt = e;
+      if (moveQueued) return;
+      moveQueued = true;
+      requestAnimationFrame(function () { moveQueued = false; hoverTest(lastEvt); });
+    }, { passive: true });
+
+    var relayoutTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(relayoutTimer);
+      relayoutTimer = setTimeout(function () { layout(); scan(); }, 200);
+    });
+
+    // Defer image loading until just after first paint — keeps the heavy
+    // cut-outs out of the critical load path (no white-on-reload) — but
+    // GUARANTEE they appear even if the load event is slow or never fires.
+    function enableImages() {
+      if (imagesReady) return;
+      imagesReady = true;
+      layout();   // doc height is final now
+      scan();
+    }
+    if (document.readyState === "complete") {
+      requestAnimationFrame(function () { setTimeout(enableImages, 150); });
+    } else {
+      window.addEventListener("load", function () { setTimeout(enableImages, 150); });
+    }
+    setTimeout(enableImages, 1500);   // hard fallback
+  }
+
+  // Build / rebuild the diagonal ladder of slots (no species yet — those are
+  // assigned on viewport entry).
+  function layout() {
+    if (window.innerWidth < 920) {              // too narrow — stand down
+      plants.forEach(function (p) { p.el.remove(); });
+      plants = [];
+      return;
+    }
+
+    var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var startY = Math.round(window.innerHeight * 0.55);
+    var endPad = Math.round(window.innerHeight * 0.6);
+    var step   = Math.max(520, Math.round(window.innerHeight * 0.72));
+    var count  = Math.max(2, Math.floor((docH - startY - endPad) / step) + 1);
+
+    while (plants.length < count) plants.push(makePlant());
+    while (plants.length > count) { var ex = plants.pop(); ex.el.remove(); }
+
+    plants.forEach(function (p, i) {
+      var side = (i % 2 === 0) ? "left" : "right";
+      p.el.className = "bm-plant bm-" + side + (p.inView ? " bm-in" : "");
+      p.el.style.top = (startY + i * step) + "px";
+      if (!p.el.parentNode) document.body.appendChild(p.el);
+    });
+  }
+
+  function makePlant() {
+    var el = document.createElement("figure");
+    el.className = "bm-plant";
+
+    var stack = document.createElement("div");
+    stack.className = "bm-stack";
+
+    var cut = document.createElement("img");
+    cut.className = "bm-cut"; cut.alt = ""; cut.decoding = "async"; cut.loading = "lazy";
+    var full = document.createElement("img");
+    full.className = "bm-full"; full.alt = ""; full.decoding = "async"; full.loading = "lazy";
+    stack.appendChild(cut);
+    stack.appendChild(full);
+
+    var cap = document.createElement("figcaption");
+    cap.className = "bm-cap";
+
+    el.appendChild(stack);
+    el.appendChild(cap);
+
+    el.title = "Open the herbarium gallery";
+    el.addEventListener("click", function () {
+      if (el.classList.contains("bm-reveal")) window.location.href = GALLERY;
+    });
+
+    return { el: el, stack: stack, cut: cut, full: full, cap: cap,
+             slug: null, cutSrc: null, fullSrc: null, fullLoaded: false,
+             inView: false, hovering: false, timer: null, revealed: false };
+  }
+
+  // Give a slot the next species in the rotation and (lazily) load its cut-out.
+  function assignNext(p) {
+    var sp = deck[((rotation++) % deck.length + deck.length) % deck.length];
+    p.slug = sp.slug;
+    p.cutSrc = CUT + sp.slug + ".png";
+    p.fullSrc = FULL + sp.slug + ".jpg";
+    p.fullLoaded = false;
+    p.revealed = false;
+    p.el.classList.remove("bm-reveal");
+    p.full.removeAttribute("src");
+    p.cap.textContent = sp.bin;
+    if (imagesReady) p.cut.src = p.cutSrc;
+  }
+
+  // Reveal slots entering the viewport; fade out those leaving so they can be
+  // re-assigned a different species on their next entrance.
+  function scan() {
+    if (!imagesReady) return;
+    var vh = window.innerHeight;
+    plants.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      var h = p.el.offsetHeight || 1;
+      var isIn = r.top < vh * 0.9 && (r.top + h) > vh * 0.12;
+      if (isIn && !p.inView) {
+        p.inView = true;
+        assignNext(p);                 // fresh specimen each entrance
+        p.el.classList.add("bm-in");
+      } else if (!isIn && p.inView) {
+        p.inView = false;
+        p.el.classList.remove("bm-in"); // fade out; next entry brings a new plant
+      }
+    });
+  }
+
+  function hoverTest(e) {
+    if (!e) return;
+    plants.forEach(function (p) {
+      if (!p.inView) return;
+      var r = p.stack.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (inside && !p.hovering) {
+        p.hovering = true;
+        if (!p.fullLoaded && p.fullSrc) { p.full.src = p.fullSrc; p.fullLoaded = true; }
+        p.timer = setTimeout(function () { setReveal(p, true); }, HOLD_MS);
+      } else if (!inside && p.hovering) {
+        p.hovering = false;
+        clearTimeout(p.timer);
+        setReveal(p, false);
+      }
+    });
+  }
+
+  function setReveal(p, on) {
+    p.revealed = on;
+    p.el.classList.toggle("bm-reveal", on);
+    p.el.style.zIndex = on ? "55" : "";
+    p.el.style.pointerEvents = on ? "auto" : "";
+    p.el.style.cursor = on ? "pointer" : "";
+  }
+
+  function injectCSS() {
+    if (document.getElementById("bm-style")) return;
+    var css = [
+      ".bm-plant{",
+      "  position:absolute;margin:0;width:calc(var(--bm-w,300px) * var(--bm-scale,1));",
+      "  --bm-w:clamp(220px,23vw,330px);",
+      "  display:flex;flex-direction:column;align-items:center;gap:12px;",
+      "  z-index:-1;pointer-events:none;",
+      "  opacity:0;transform:translateY(22px);",
+      "  transition:opacity 1100ms ease,transform 1100ms cubic-bezier(.22,.61,.36,1);",
+      "}",
+      ".bm-plant.bm-in{opacity:1;transform:none;}",
+      "body.bm-hidden .bm-plant{display:none;}",
+      ".bm-left{left:clamp(4px,2vw,52px);}",
+      ".bm-right{right:clamp(4px,2vw,52px);}",
+      ".bm-stack{",
+      "  position:relative;width:100%;height:calc(var(--bm-h,440px) * var(--bm-scale,1));",
+      "  --bm-h:clamp(320px,46vh,500px);",
+      "}",
+      ".bm-stack img{",
+      "  position:absolute;inset:0;width:100%;height:100%;",
+      "  object-fit:contain;object-position:center;",
+      "  transition:opacity 700ms ease;",
+      "}",
+      ".bm-cut{opacity:var(--bm-rest-op,0.3);filter:saturate(.96) drop-shadow(0 3px 9px rgba(36,48,37,.08));}",
+      ".bm-full{",
+      "  opacity:0;background:#fbf5e3;padding:8px;box-sizing:border-box;",
+      "  box-shadow:0 16px 44px rgba(36,48,37,.3),0 0 0 1px rgba(122,90,58,.4);",
+      "}",
+      ".bm-plant.bm-reveal .bm-cut{opacity:0;}",
+      ".bm-plant.bm-reveal .bm-full{opacity:var(--bm-full-op,0.94);}",
+      ".bm-cap{",
+      "  font-family:'EB Garamond',Georgia,serif;font-style:italic;",
+      "  font-size:clamp(15px,1.1vw,18px);line-height:1.2;color:var(--forest,#243025);",
+      "  text-align:center;max-width:100%;text-wrap:balance;opacity:.5;",
+      "  transition:opacity 300ms ease;",
+      "}",
+      ".bm-plant.bm-reveal .bm-cap{opacity:0;}",
+      "@media (prefers-reduced-motion: reduce){",
+      "  .bm-plant{transition:opacity 400ms ease;transform:none;}",
+      "}",
+      "@media (max-width:920px){ .bm-plant{display:none;} }"
+    ].join("\n");
+    var s = document.createElement("style");
+    s.id = "bm-style";
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  var booted = false;
+  function boot() {
+    if (booted) return;
+    if (!document.body) return;
+    booted = true;
+    init();
+  }
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("load", boot);
+  boot();
+})();
+</script>
+</body>
+</html>
