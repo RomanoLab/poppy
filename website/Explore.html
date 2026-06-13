@@ -285,6 +285,48 @@
       var msg = document.getElementById("reg-msg");
       var input = document.getElementById("reg-search");
       var currentId = null;
+      // ---- full-ontology browse: search all plants, lazy-load shards ----
+      var FULL = [], FULL_BY_ID = {}, COMP_CACHE = {};
+      function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
+      fetch("data/plants_index.json").then(function(r){return r.ok?r.json():[];}).then(function(a){
+        FULL=a||[]; for(var i=0;i<FULL.length;i++){FULL_BY_ID[FULL[i].id]=FULL[i];}
+      }).catch(function(){});
+      function fullFindPlant(q){
+        q=String(q||"").toLowerCase().trim(); if(!q)return null;
+        if(FULL_BY_ID[q])return q;
+        var partial=null;
+        for(var i=0;i<FULL.length;i++){var nm=(FULL[i].name||"").toLowerCase();
+          if(nm===q)return FULL[i].id; if(!partial&&nm.indexOf(q)!==-1)partial=FULL[i].id;}
+        return partial;
+      }
+      function fetchCompShard(b){
+        if(COMP_CACHE[b])return Promise.resolve(COMP_CACHE[b]);
+        return fetch("data/compounds/"+b+".json").then(function(r){return r.ok?r.json():{};})
+          .then(function(j){COMP_CACHE[b]=j;return j;}).catch(function(){COMP_CACHE[b]={};return {};});
+      }
+      function loadFullPlant(pid){
+        var meta=FULL_BY_ID[pid]||{name:pid};
+        msg.textContent="Loading "+(meta.name||pid)+"...";
+        fetch("data/plant_edges/"+djb2(pid)+".json").then(function(r){return r.ok?r.json():{};}).then(function(ed){
+          var cids=ed[pid]||[], bk={}; cids.forEach(function(c){bk[djb2(c)]=true;});
+          return Promise.all(Object.keys(bk).map(fetchCompShard)).then(function(){
+            var N=window.POPPY.NODES, E=window.POPPY.EDGES;
+            N[pid]={label:meta.name||pid, role:"Plant",
+              props:[["clinicalTrialCount",String(meta.trials||0)],["compoundCount",String(cids.length)]]};
+            cids.forEach(function(c){
+              var rec=(COMP_CACHE[djb2(c)]||{})[c];
+              if(!N[c]){var p=[];
+                if(rec){if(rec.formula)p.push(["hasMolecularFormula",rec.formula]);
+                        if(rec.mw)p.push(["hasMolecularWeight",rec.mw]);
+                        if(rec.inchikey)p.push(["hasInChIKey",rec.inchikey]);}
+                N[c]={label:(rec&&rec.name)||c, role:"Compound", props:p};}
+              if(!E.some(function(e){return e.s===pid&&e.t===c;}))E.push({s:pid,t:c,p:"hasCompound"});
+            });
+            msg.textContent=""; render(pid);
+          });
+        }).catch(function(){msg.textContent="Could not load "+(meta.name||pid)+".";});
+      }
+
 
       // ── CSV export — the focused entity's neighbourhood as a triple table.
       //    (subject, predicate, object, object_type) keeps the connections
@@ -541,8 +583,10 @@
         var query = (q || input.value || "").trim();
         if (!query) { msg.textContent = "Type a name to look up."; return; }
         var id = P.findByLabel(query);
-        if (!id) { msg.textContent = 'No entry for "' + query + '". Try a suggestion below.'; return; }
-        render(id);
+        if (id) { render(id); return; }
+        var fid = fullFindPlant(query);
+        if (fid) { loadFullPlant(fid); return; }
+        msg.textContent = 'No entry for "' + query + '".';
       }
 
       document.getElementById("reg-search-btn").addEventListener("click", function () { lookup(); });
