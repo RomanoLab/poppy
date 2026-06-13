@@ -1,0 +1,6 @@
+{
+ "plants": 59738,
+ "compounds": 278433,
+ "plant_compound_links": 1238279,
+ "shard": "djb2(plantId)&255"
+}
