@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPPy — Explore · Index Rerum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f3e9cd;
+      --parchment-deep: #ead9b0;
+      --parchment-light: #fdf8e9;
+      --ink: #1a1f17;
+      --forest: #243025;
+      --forest-deep: #19211b;
+      --accent: #3d5b3e;
+      --umber: #7a5a3a;
+      --rule: #8a7a4a;
+      --rule-soft: #bca97a;
+      --display: "EB Garamond", "Cardo", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--parchment); color: var(--ink); font-family: var(--display); }
+    body { font-size: 18px; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    .mono-cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+
+    /* ─── nav (shared) ─── */
+    .nav { border-top: 3px double var(--rule); border-bottom: 1px solid rgba(138, 122, 74, 0.4); background: var(--parchment); position: relative; z-index: 10; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; max-width: 1180px; margin: 0 auto; }
+    .wordmark { display: flex; align-items: baseline; gap: 14px; }
+    .wordmark .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-size: 16px; color: var(--ink); padding-bottom: 2px; border-bottom: 2px solid transparent; }
+    .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-item { position: relative; display: flex; align-items: center; }
+    .nav-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--parchment-light); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(36, 48, 37, 0.16); padding: 6px; min-width: 176px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; z-index: 40; }
+    .nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-menu a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; padding: 9px 16px; color: var(--ink); border-bottom: none; white-space: nowrap; }
+    .nav-menu a.active { color: var(--accent); }
+    .nav-menu a:hover { background: var(--parchment-deep); color: var(--accent); }
+
+    /* ─── page shell ─── */
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 48px; }
+
+    /* masthead */
+    .reg-head { padding: 56px 0 28px; text-align: center; border-bottom: 3px double var(--rule); }
+    .reg-kicker { color: var(--umber); }
+    .reg-title { font-family: var(--display); font-weight: 500; font-size: 56px; line-height: 1.05; letter-spacing: -0.015em; margin: 14px 0 16px; color: var(--forest); }
+    .reg-title em { font-style: italic; }
+    .reg-lede { font-family: var(--display); font-style: italic; font-size: 21px; color: var(--umber); margin: 0 auto; max-width: 660px; line-height: 1.4; }
+    .reg-divider { display: flex; align-items: center; gap: 14px; color: var(--rule); margin: 22px auto; max-width: 460px; }
+    .reg-divider .rule { flex: 1; height: 1px; background: currentColor; opacity: 0.5; }
+    .reg-divider .ornament { font-size: 20px; opacity: 0.7; line-height: 1; }
+
+    /* search to change the focused entity */
+    .reg-search { display: flex; gap: 0; max-width: 520px; margin: 0 auto; border: 1px solid var(--rule); background: var(--parchment-light); }
+    .reg-search input { flex: 1; border: none; background: transparent; padding: 13px 16px; font-family: var(--display); font-size: 18px; color: var(--ink); outline: none; }
+    .reg-search input::placeholder { color: rgba(26, 31, 23, 0.5); }
+    .reg-search button { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; background: var(--forest); color: var(--parchment); border: none; padding: 0 22px; }
+    .reg-search button:hover { background: var(--forest-deep); }
+    .reg-msg { min-height: 1.3em; margin: 12px 0 0; color: var(--umber); }
+    .reg-chips { margin-top: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; align-items: baseline; }
+    .reg-chips .chip { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--forest); background: transparent; border: none; border-bottom: 1px dotted var(--rule); padding: 0 2px 2px; }
+    .reg-chips .chip:hover { color: var(--accent); border-bottom-style: solid; }
+
+    /* focused entity title block */
+    .subject { padding: 40px 0 8px; }
+    .subject-top { display: flex; gap: 44px; align-items: flex-start; justify-content: space-between; }
+    .subject-text { flex: 1 1 auto; min-width: 0; }
+    /* specimen plate: a Wikimedia photo (plants) or a PubChem 2D structure (compounds) */
+    .subject-media { flex: 0 0 auto; width: 272px; margin-top: 4px; }
+    .subject-media .plate {
+      position: relative; width: 100%; height: 272px; overflow: hidden;
+      background: #fdfaf1; border: 1px solid var(--rule);
+      box-shadow: inset 0 0 0 1px rgba(122, 90, 58, 0.30), inset 0 0 0 4px #fdfaf1, inset 0 0 0 5px rgba(122, 90, 58, 0.14);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .subject-media img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 600ms ease; }
+    .subject-media.has-img img { opacity: 1; }
+    .subject-media[data-kind="Plant"] img { object-fit: cover; }
+    .subject-media[data-kind="Compound"] img { object-fit: contain; padding: 22px; background: #fffdf6; }
+    .subject-media .plate-fallback { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--umber); opacity: 0.7; text-align: center; padding: 0 18px; }
+    .subject-media.has-img .plate-fallback { display: none; }
+    .subject-media.is-loading .plate::after {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+      background-size: 220% 100%; animation: plate-shimmer 1.3s ease-in-out infinite;
+    }
+    @keyframes plate-shimmer { 0% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+    .subject-media .src-cap { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--umber); opacity: 0.7; text-align: center; margin-top: 9px; }
+    @media (prefers-reduced-motion: reduce) { .subject-media.is-loading .plate::after { animation: none; } }
+    @media (max-width: 760px) { .subject-top { flex-direction: column-reverse; gap: 24px; } .subject-media { width: 100%; max-width: 320px; } }
+    .subject-type { display: inline-flex; align-items: center; gap: 9px; }
+    .subject-type .swatch { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .subject h1 { font-family: var(--display); font-weight: 500; font-style: italic; font-size: 58px; line-height: 1.04; color: var(--forest); margin: 14px 0 0; }
+    .subject .common { font-family: var(--display); font-size: 21px; color: var(--umber); margin-top: 6px; }
+    .subject .doi { margin-top: 12px; }
+    .subject .doi a { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--umber); border-bottom: 1px solid rgba(122, 90, 58, 0.5); padding-bottom: 2px; transition: color 150ms ease, border-color 150ms ease; }
+    .subject .doi a:hover { color: var(--accent); border-color: var(--accent); }
+    .subject .doi a .ext { opacity: 0.6; margin-left: 4px; }
+    .subject .meta { display: flex; gap: 22px; align-items: baseline; margin-top: 18px; flex-wrap: wrap; }
+    .subject .meta .count { font-family: var(--display); font-size: 19px; color: var(--ink); }
+    .subject .meta .count b { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .graph-link { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.1em; font-size: 16px; color: var(--forest); border-bottom: 1px solid var(--forest); padding-bottom: 1px; transition: color 150ms ease, border-color 150ms ease; }
+    .graph-link:hover { color: var(--accent); border-color: var(--accent); }
+    .dl-link { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.1em; font-size: 16px; color: var(--forest); background: none; border: none; border-bottom: 1px solid var(--forest); padding: 0 0 1px; cursor: pointer; transition: color 150ms ease, border-color 150ms ease; }
+    .dl-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* recorded data properties (datatype attributes) of the focused entity */
+    .attrs { margin-top: 30px; border-top: 1px solid var(--rule); }
+    .attrs-head { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--umber); padding: 16px 0 4px; }
+    .attrs-list { display: grid; grid-template-columns: 220px 1fr; gap: 0 28px; }
+    .attrs-row { display: contents; }
+    .attrs-row .k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--umber); padding: 11px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.4); }
+    .attrs-row .v { font-family: var(--display); font-size: 18px; color: var(--ink); padding: 11px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.4); word-break: break-word; }
+    @media (max-width: 760px) {
+      .attrs-list { grid-template-columns: 1fr; gap: 0; }
+      .attrs-row .k { padding-bottom: 0; border-bottom: none; }
+      .attrs-row .v { padding-top: 2px; }
+    }
+
+    /* the register itself */
+    .register { padding: 16px 0 64px; }
+    .reg-group { margin-top: 40px; }
+    .reg-group-head { display: flex; align-items: baseline; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+    .reg-group-head .swatch { width: 10px; height: 10px; border-radius: 50%; }
+    .reg-group-head .concept { font-family: var(--display); font-style: italic; font-size: 24px; color: var(--forest); }
+    .reg-group-head .tally { margin-left: auto; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--umber); }
+
+    .reg-row { display: grid; grid-template-columns: 200px 1fr auto; align-items: baseline; gap: 24px; padding: 14px 8px 14px 4px; border-bottom: 1px dotted rgba(138, 122, 74, 0.45); transition: background 120ms ease; }
+    .reg-row:hover { background: var(--parchment-light); }
+    .reg-row .pred { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--umber); padding-top: 4px; }
+    .reg-row .pred .arrow { opacity: 0.55; }
+    .reg-row .name { font-family: var(--display); font-size: 22px; color: var(--forest); line-height: 1.2; }
+    .reg-row .name .latin { font-style: italic; }
+    .reg-row .name .vern { font-size: 15px; color: var(--umber); margin-left: 10px; }
+    .reg-row .doi-link { display: inline-block; margin-top: 5px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--umber); border-bottom: 1px solid rgba(122, 90, 58, 0.4); padding-bottom: 1px; transition: color 150ms ease, border-color 150ms ease; }
+    .reg-row .doi-link:hover { color: var(--accent); border-color: var(--accent); }
+    .reg-row .doi-link .ext { opacity: 0.6; margin-left: 3px; }
+    /* inline multiomics tags (NCBI gene layer) under a target row */
+    .reg-row .gtags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+    .gtag { display: inline-flex; align-items: baseline; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; color: var(--ink); background: var(--parchment-deep); border: 1px solid rgba(138, 122, 74, 0.4); padding: 3px 8px; line-height: 1.4; text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
+    a.gtag:hover { background: var(--parchment); border-color: var(--accent); }
+    .gtag .gk { font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--umber); opacity: 0.85; }
+    .gtag.gtag-gene { color: var(--forest); font-weight: 600; }
+    .gtag .ext { opacity: 0.55; }
+    .reg-row .conn { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink); opacity: 0.6; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .reg-row .conn .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: 0.05em; }
+    .reg-row a.name-link { display: inline-block; border-bottom: 1px solid transparent; }
+    .reg-row:hover a.name-link { border-bottom-color: var(--rule-soft); }
+
+    .reg-empty { padding: 60px 0; text-align: center; color: var(--umber); font-style: italic; font-size: 20px; }
+
+    /* ─── footer (shared) ─── */
+    .footer { background: var(--forest-deep); color: var(--parchment); padding: 56px 48px 28px; margin-top: 20px; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+    .footer h3 { font-family: var(--display); font-size: 32px; font-style: italic; margin: 0; }
+    .footer .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
+    .footer .blurb { font-size: 15px; line-height: 1.55; opacity: 0.75; margin-top: 18px; max-width: 320px; }
+    .footer .col-h { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
+    .footer .col-link { display: block; font-size: 16px; padding: 4px 0; opacity: 0.85; color: inherit; }
+    .footer a.col-link:hover { color: var(--accent); opacity: 1; }
+    .footer .col-link.active { color: var(--accent); opacity: 1; }
+    .footer-bottom a.ft-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243, 233, 205, 0.4); transition: color 150ms ease, border-color 150ms ease; }
+    .footer-bottom a.ft-link:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-land { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 14px; line-height: 1.5; opacity: 0.7; padding: 0 0 20px; max-width: 680px; }
+    .footer-bottom { border-top: 1px solid rgba(243, 233, 205, 0.2); padding-top: 18px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 0 24px; }
+      .subject h1 { font-size: 42px; }
+      .reg-row { grid-template-columns: 1fr auto; }
+      .reg-row .pred { grid-column: 1 / -1; padding-top: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="wordmark">
+        <a href="Home.html"><img class="logo-img" src="assets/poppy-logo.png" alt="POPPy" style="height:38px;width:auto;display:block;"></a>
+        <div class="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div>
+      </div>
+      <div class="nav-links">
+        <a href="Home.html">Home</a>
+        <a href="Explore.html" class="active">Explore</a>
+        <a href="Download.html">Download</a>
+        <div class="nav-item">
+          <a href="About.html">About</a>
+          <div class="nav-menu">
+            <a href="About.html">Overview</a>
+            <a href="Method.html">Method</a>
+            <a href="Team.html">Team</a>
+            <a href="Citation.html">Citation</a>
+          </div>
+        </div>
+        <a href="Contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MASTHEAD -->
+  <header class="reg-head">
+    <div class="wrap">
+      <div class="mono-cap reg-kicker">Index Rerum · The Register of Connections</div>
+      <h1 class="reg-title">Explore the <em>connections</em>.</h1>
+      <p class="reg-lede">Search any plant, compound, target, therapeutic, or citation to trace everything it links to — then download what you find.</p>
+      <div class="reg-divider"><span class="rule"></span><span class="ornament">❦</span><span class="rule"></span></div>
+      <div class="reg-search">
+        <input id="reg-search" type="text" placeholder="Name a plant, compound, target, therapeutic, or citation…" autocomplete="off" />
+        <button id="reg-search-btn">Look up</button>
+      </div>
+      <p id="reg-msg" class="mono-cap reg-msg"></p>
+      <div class="reg-chips">
+        <span class="mono-cap" style="opacity:0.6">Try:</span>
+        <button class="chip" data-q="papaver-somniferum">Papaver somniferum</button>
+        <button class="chip" data-q="curcumin">Curcumin</button>
+        <button class="chip" data-q="cox2">COX-2</button>
+        <button class="chip" data-q="kumar2018">Kumar et al., 2018</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="register-root">
+    <!-- filled by script -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h3>POPPy</h3>
+          <div class="tag">Phyto-Ontology Platform<br/>for Pharmacology</div>
+          <p class="blurb">An open registry of medicinal plants, their compounds, targets, and citations — for the next generation of AI-assisted drug discovery.</p>
+        </div>
+        <div>
+          <div class="col-h">Explore</div>
+          <a class="col-link" href="Home.html">Home</a>
+          <a class="col-link active" href="Explore.html">Explore</a>
+          <a class="col-link" href="Download.html">Download</a>
+          <a class="col-link" href="About.html">About</a>
+          <a class="col-link" href="Contact.html">Contact</a>
+        </div>
+        <div>
+          <div class="col-h">About</div>
+          <a class="col-link" href="About.html">Overview</a>
+          <a class="col-link" href="Method.html">Method</a>
+          <a class="col-link" href="Team.html">Team</a>
+          <a class="col-link" href="Citation.html">Citation</a>
+        </div>
+        <div>
+          <div class="col-h">Legal</div>
+          <a class="col-link" href="Privacy.html">Privacy</a>
+          <a class="col-link" href="Terms.html">Terms</a>
+          <a class="col-link" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">License</a>
+        </div>
+      </div>
+      <div class="footer-land">This resource was developed on Lenapehoking, the traditional ancestral homeland of the Lenape people.</div>
+      <div class="footer-bottom">
+        <span>© MMXXVI · <a href="https://romanolab.org" target="_blank" rel="noopener" class="ft-link">ROMANO LAB</a> AT THE <a href="https://www.upenn.edu" target="_blank" rel="noopener" class="ft-link">UNIVERSITY OF PENNSYLVANIA</a></span>
+        <span>Editio Prima · v 0.1</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="ontology-data.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var P = window.POPPY;
+      var NODES = P.NODES, ROLE_COLOR = P.ROLE_COLOR, ROLE_LABEL = P.ROLE_LABEL, ROLE_ORDER = P.ROLE_ORDER;
+
+      var root = document.getElementById("register-root");
+      var msg = document.getElementById("reg-msg");
+      var input = document.getElementById("reg-search");
+      var currentId = null;
+
+      // ── CSV export — the focused entity's neighbourhood as a triple table.
+      //    (subject, predicate, object, object_type) keeps the connections
+      //    intact: each relationship is one row in true direction, and the
+      //    entity's own data properties are emitted as `literal` triples. ──
+      function csvCell(v) {
+        v = String(v == null ? "" : v);
+        return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+      }
+      function buildCSV(id) {
+        var subject = NODES[id];
+        if (!subject) return "";
+        var rows = [["subject", "predicate", "object", "object_type"]];
+        (subject.props || []).forEach(function (p) { rows.push([subject.label, p[0], p[1], "literal"]); });
+        if (subject.role === "Citation" && subject.doi) rows.push([subject.label, "hasDOI", subject.doi, "literal"]);
+        P.relationsOf(id).forEach(function (rel) {
+          var other = NODES[rel.id];
+          if (!other) return;
+          if (rel.dir === "out") rows.push([subject.label, rel.predicate, other.label, ROLE_LABEL[other.role] || other.role]);
+          else rows.push([other.label, rel.predicate, subject.label, ROLE_LABEL[subject.role] || subject.role]);
+        });
+        return rows.map(function (r) { return r.map(csvCell).join(","); }).join("\r\n");
+      }
+      function downloadCSV(id) {
+        var subject = NODES[id];
+        if (!subject) return;
+        var blob = new Blob([buildCSV(id)], { type: "text/csv;charset=utf-8;" });
+        var url = URL.createObjectURL(blob);
+        var slug = String(subject.label || "entity").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        var a = document.createElement("a");
+        a.href = url; a.download = "poppy-" + slug + ".csv";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+      // delegate (root persists across re-renders)
+      root.addEventListener("click", function (e) {
+        if (e.target.closest("#dl-csv") && currentId) downloadCSV(currentId);
+      });
+
+      function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+      // name cell: italic Latin binomial for plants, roman for everything else,
+      // with the vernacular name appended in umber when present.
+      function nameCell(n) {
+        var latin = n.role === "Plant"
+          ? '<span class="latin">' + esc(n.label) + '</span>'
+          : esc(n.label);
+        var vern = n.common ? '<span class="vern">' + esc(n.common) + '</span>' : "";
+        return latin + vern;
+      }
+
+      // DOI link (research/citation entities only) — resolves at doi.org
+      function doiLink(n) {
+        if (n.role !== "Citation" || !n.doi) return "";
+        return '<a class="doi-link" href="https://doi.org/' + esc(n.doi) + '" target="_blank" rel="noopener">doi:'
+             + esc(n.doi) + '<span class="ext">\u2197</span></a>';
+      }
+
+      // Inline multiomics tags — surfaces the NCBI gene-layer attributes
+      // (gene symbol, protein, UniProt) right in a target's register row, with
+      // the gene symbol linking out to its NCBI Gene record. Reads whatever the
+      // ontology recorded in props, so it lights up automatically per entity.
+      function propVal(n, key) {
+        if (!n.props) return null;
+        for (var i = 0; i < n.props.length; i++) {
+          if (String(n.props[i][0]).toLowerCase() === key.toLowerCase()) return n.props[i][1];
+        }
+        return null;
+      }
+      function geneTags(n) {
+        var gene = propVal(n, "hasGene");
+        var protein = propVal(n, "hasProtein");
+        var uniprot = propVal(n, "hasUniProt");
+        if (!gene && !protein && !uniprot) return "";
+        var tags = [];
+        if (gene) {
+          tags.push('<a class="gtag gtag-gene" href="https://www.ncbi.nlm.nih.gov/gene/?term='
+            + encodeURIComponent(gene) + '%5Bsym%5D" target="_blank" rel="noopener" title="NCBI Gene">'
+            + '<span class="gk">gene</span>' + esc(gene) + '<span class="ext">\u2197</span></a>');
+        }
+        if (protein) tags.push('<span class="gtag"><span class="gk">protein</span>' + esc(protein) + '</span>');
+        if (uniprot) {
+          tags.push('<a class="gtag" href="https://www.uniprot.org/uniprotkb/' + encodeURIComponent(uniprot)
+            + '/entry" target="_blank" rel="noopener" title="UniProt"><span class="gk">uniprot</span>' + esc(uniprot) + '<span class="ext">\u2197</span></a>');
+        }
+        return '<div class="gtags">' + tags.join("") + '</div>';
+      }
+
+      function setSubjectURL(id) {
+        try { history.replaceState(null, "", "Explore.html?q=" + encodeURIComponent(id)); } catch (e) {}
+      }
+
+      function render(id) {
+        var subject = NODES[id];
+        if (!subject) { renderEmpty(); return; }
+        currentId = id;
+        msg.textContent = "";
+        input.value = subject.label;
+        setSubjectURL(id);
+
+        var relations = P.relationsOf(id);
+        var totalConn = P.connectionCount(id);
+
+        // group related entities by concept type
+        var groups = {};
+        relations.forEach(function (rel) {
+          var n = NODES[rel.id];
+          if (!n) return;
+          (groups[n.role] = groups[n.role] || []).push(rel);
+        });
+
+        var subjColor = ROLE_COLOR[subject.role] || ROLE_COLOR.Other;
+        var html = "";
+
+        // ── subject block ──
+        html += '<section class="subject">';
+        html += '<div class="subject-top">';
+        html += '<div class="subject-text">';
+        html += '<span class="subject-type"><span class="swatch" style="background:' + subjColor + '"></span>'
+              + '<span class="mono-cap" style="opacity:0.85">' + esc(ROLE_LABEL[subject.role] || subject.role) + '</span></span>';
+        html += '<h1>' + esc(subject.label) + '</h1>';
+        if (subject.common) html += '<div class="common">' + esc(subject.common) + '</div>';
+        if (subject.role === "Citation" && subject.doi) {
+          html += '<div class="doi"><a href="https://doi.org/' + esc(subject.doi) + '" target="_blank" rel="noopener">doi:'
+                + esc(subject.doi) + '<span class="ext">\u2197</span></a></div>';
+        }
+        html += '<div class="meta">';
+        html += '<span class="count"><b>' + totalConn + '</b> direct connection' + (totalConn === 1 ? "" : "s") + ' across ' + Object.keys(groups).length + ' concept' + (Object.keys(groups).length === 1 ? "" : "s") + '</span>';
+        html += '<a class="graph-link" href="Home.html?q=' + encodeURIComponent(id) + '">View in connection graph →</a>';
+        html += '<button class="dl-link" id="dl-csv" type="button">Download as CSV ↓</button>';
+        html += '</div>';
+        html += '</div>'; // .subject-text
+
+        // specimen plate — Wikimedia photo (plants) or PubChem 2D structure (compounds)
+        if (subject.role === "Plant" || subject.role === "Compound") {
+          var capText = subject.role === "Plant" ? "Photograph · Wikimedia Commons" : "2D structure · PubChem";
+          var fallText = subject.role === "Plant" ? "No specimen photograph found" : "No structure diagram found";
+          html += '<figure class="subject-media is-loading" id="subject-media" data-kind="' + subject.role + '">'
+                + '<div class="plate"><span class="plate-fallback">' + fallText + '</span>'
+                + '<img alt="' + esc(subject.label) + '" referrerpolicy="no-referrer"></div>'
+                + '<figcaption class="src-cap">' + capText + '</figcaption>'
+                + '</figure>';
+        }
+        html += '</div>'; // .subject-top
+
+        // ── recorded data properties (datatype attributes) ──
+        if (subject.props && subject.props.length) {
+          html += '<div class="attrs">';
+          html += '<div class="attrs-head">Recorded attributes</div>';
+          html += '<div class="attrs-list">';
+          subject.props.forEach(function (pair) {
+            html += '<div class="attrs-row"><div class="k">' + esc(pair[0]) + '</div><div class="v">' + esc(pair[1]) + '</div></div>';
+          });
+          html += '</div>';
+          html += '</div>';
+        }
+        html += '</section>';
+
+        // ── register groups ──
+        html += '<section class="register">';
+        if (!relations.length) {
+          html += '<div class="reg-empty">No recorded connections for this entity yet.</div>';
+        } else {
+          ROLE_ORDER.forEach(function (role) {
+            var rows = groups[role];
+            if (!rows || !rows.length) return;
+            var color = ROLE_COLOR[role] || ROLE_COLOR.Other;
+            html += '<div class="reg-group">';
+            html += '<div class="reg-group-head">'
+                  + '<span class="swatch" style="background:' + color + '"></span>'
+                  + '<span class="concept">' + esc(ROLE_LABEL[role] || role) + '</span>'
+                  + '<span class="tally">' + rows.length + ' linked</span>'
+                  + '</div>';
+
+            // alphabetical within a concept for a true register feel
+            rows.sort(function (a, b) { return NODES[a.id].label.localeCompare(NODES[b.id].label); });
+
+            rows.forEach(function (rel) {
+              var n = NODES[rel.id];
+              var pred = P.prettyPredicate(rel.predicate);
+              var arrow = rel.dir === "out" ? "▸" : "◂";
+              var conn = P.connectionCount(rel.id);
+              html += '<div class="reg-row">';
+              html += '<div class="pred"><span class="arrow">' + arrow + '</span> ' + esc(pred) + '</div>';
+              html += '<div class="name"><a class="name-link" href="Explore.html?q=' + encodeURIComponent(rel.id) + '">' + nameCell(n) + '</a>' + (doiLink(n) ? '<br>' + doiLink(n) : '') + geneTags(n) + '</div>';
+              html += '<div class="conn"><span class="dot" style="background:' + color + '"></span>' + conn + ' connection' + (conn === 1 ? "" : "s") + '</div>';
+              html += '</div>';
+            });
+            html += '</div>';
+          });
+        }
+        html += '</section>';
+
+        root.innerHTML = html;
+        window.scrollTo({ top: 0, behavior: "auto" });
+        resolveMedia(subject);
+      }
+
+      // ── specimen plate imagery (Explore page only, hot-linked, nothing stored) ──
+      // Plants  → lead photograph via the MediaWiki pageimages API (Wikimedia Commons)
+      // Compounds → 2D skeletal structure via the PubChem PUG REST image endpoint
+      var IMG_CACHE_KEY = "poppy-explore-media";
+      function imgCache() { try { return JSON.parse(localStorage.getItem(IMG_CACHE_KEY) || "{}"); } catch (e) { return {}; } }
+      function saveImgCache(c) { try { localStorage.setItem(IMG_CACHE_KEY, JSON.stringify(c)); } catch (e) {} }
+
+      function setPlate(fig, src) {
+        if (!fig) return;
+        var img = fig.querySelector("img");
+        img.onload = function () { fig.classList.remove("is-loading"); fig.classList.add("has-img"); };
+        img.onerror = function () { fig.classList.remove("is-loading"); }; // leaves the fallback note
+        img.src = src;
+      }
+
+      function resolveMedia(subject) {
+        var fig = document.getElementById("subject-media");
+        if (!fig) return;
+
+        // Compounds: PubChem renders a structure by chemical name directly — no
+        // lookup round-trip needed, just point the <img> at the PUG REST endpoint.
+        if (subject.role === "Compound") {
+          var name = subject.pubchem || subject.label;
+          setPlate(fig, "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/"
+            + encodeURIComponent(name) + "/PNG");
+          return;
+        }
+
+        // Plants: resolve the Wikipedia lead image (cached per entity).
+        var cache = imgCache();
+        var key = subject.id || subject.label;
+        if (cache[key] === "none") { fig.classList.remove("is-loading"); return; }
+        if (cache[key]) { setPlate(fig, cache[key]); return; }
+
+        var title = subject.wiki || subject.label;
+        var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*"
+                + "&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=600&titles="
+                + encodeURIComponent(title);
+        fetch(url, { headers: { accept: "application/json" } })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) {
+            var src = null;
+            try { var pages = j.query.pages; var p = pages[Object.keys(pages)[0]]; src = p && p.thumbnail && p.thumbnail.source; } catch (e) {}
+            if (src) { cache[key] = src; saveImgCache(cache); setPlate(fig, src); }
+            else { cache[key] = "none"; saveImgCache(cache); fig.classList.remove("is-loading"); }
+          })
+          .catch(function () { fig.classList.remove("is-loading"); });
+      }
+
+      function renderEmpty() {
+        root.innerHTML = '<section class="register"><div class="reg-empty">'
+          + 'Look up an entity above to see its register of connections.</div></section>';
+      }
+
+      function lookup(q) {
+        var query = (q || input.value || "").trim();
+        if (!query) { msg.textContent = "Type a name to look up."; return; }
+        var id = P.findByLabel(query);
+        if (!id) { msg.textContent = 'No entry for "' + query + '". Try a suggestion below.'; return; }
+        render(id);
+      }
+
+      document.getElementById("reg-search-btn").addEventListener("click", function () { lookup(); });
+      input.addEventListener("keydown", function (e) { if (e.key === "Enter") lookup(); });
+      document.querySelectorAll(".reg-chips .chip").forEach(function (c) {
+        c.addEventListener("click", function () { lookup(c.dataset.q); });
+      });
+
+      // initial: ?q= from the Home "Explore further" button, else a sensible default
+      var q = null;
+      try { q = new URLSearchParams(window.location.search).get("q"); } catch (e) {}
+      var startId = (q && P.findByLabel(q)) || "papaver-somniferum";
+      render(startId);
+    })();
+  </script>
+  <script id="bm-inline">
+/* ============================================================
+   Botanical Margins — POPPy
+   A diagonal ladder of "specimen slots" anchored down the page,
+   alternating left / right. Each slot draws the NEXT species from
+   a rotating sequence every time it scrolls into view — so
+   scrolling down reveals fresh plants, and scrolling back up puts
+   DIFFERENT specimens where the old ones were. Hold the cursor on
+   one for ~1s and the full Köhler plate cross-fades in.
+
+   Cut-out images are deferred until after the page has painted, so
+   they never block initial load.
+
+   Assets:
+     assets/cutouts/<slug>.png   — transparent cut-out (rest)
+     assets/plates/<slug>.jpg    — full plate scan (1s hover)
+
+   Tunable via CSS variables on :root (set by the Tweaks panel):
+     --bm-rest-op   resting cut-out opacity   (default 0.3)
+     --bm-full-op   revealed plate opacity     (default 0.94)
+     --bm-scale     size multiplier            (default 1)
+   And body.bm-hidden hides every specimen.
+
+   Optional <body> attributes:
+     data-bm-exclude="papaver-somniferum,digitalis-purpurea"
+     data-bm-start="7"
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PLATES = [
+    { slug: "papaver-somniferum",    bin: "Papaver somniferum" },
+    { slug: "digitalis-purpurea",    bin: "Digitalis purpurea" },
+    { slug: "datura-stramonium",     bin: "Datura stramonium" },
+    { slug: "nicotiana-tabacum",     bin: "Nicotiana tabacum" },
+    { slug: "erythraea-centaurium",  bin: "Erythraea centaurium" },
+    { slug: "tussilago-farfara",     bin: "Tussilago farfara" },
+    { slug: "verbascum-phlomoides",  bin: "Verbascum phlomoides" },
+    { slug: "anacyclus-pyrethrum",   bin: "Anacyclus pyrethrum" },
+    { slug: "levisticum-officinale", bin: "Levisticum officinale" },
+    { slug: "ipomoea-purga",         bin: "Ipomoea purga" },
+    { slug: "croton-tiglium",        bin: "Croton tiglium" },
+    { slug: "cinnamomum-zeylanicum", bin: "Cinnamomum zeylanicum" },
+    { slug: "camellia-thea",         bin: "Camellia thea" },
+    { slug: "rosa-centifolia",       bin: "Rosa centifolia" },
+    { slug: "rubus-idaeus",          bin: "Rubus idaeus" },
+    { slug: "prunus-cerasus",        bin: "Prunus cerasus" },
+    { slug: "pirus-malus",           bin: "Pirus malus" },
+    { slug: "cydonia-vulgaris",      bin: "Cydonia vulgaris" },
+    { slug: "quercus-sessiliflora",  bin: "Quercus sessiliflora" },
+    { slug: "citrus-limonum",        bin: "Citrus limonum" },
+    { slug: "citrus-vulgaris",       bin: "Citrus vulgaris" },
+    { slug: "inula-helenium",        bin: "Inula helenium" },
+    { slug: "cnicus-benedictus",     bin: "Cnicus benedictus" },
+    { slug: "chrysanthemum-roseum",  bin: "Chrysanthemum roseum" }
+  ];
+
+  var CUT  = "assets/cutouts/";
+  var FULL = "assets/plates/";
+  var HOLD_MS = 1000;   // hover dwell before the full plate reveals
+  var GALLERY = "Herbarium.html";   // click a revealed plate → the gallery
+
+  var deck, rotation = 0, plants = [], imagesReady = false;
+
+  function init() {
+    var body = document.body;
+    if (!body) return;
+
+    var exclude = (body.getAttribute("data-bm-exclude") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
+    if (deck.length < 4) deck = PLATES.slice();
+    rotation = parseInt(body.getAttribute("data-bm-start") || "0", 10) || 0;
+
+    injectCSS();
+    layout();
+
+    var scanQueued = false;
+    window.addEventListener("scroll", function () {
+      if (scanQueued) return;
+      scanQueued = true;
+      requestAnimationFrame(function () { scanQueued = false; scan(); });
+    }, { passive: true });
+
+    // hover detection (specimens sit behind content, so track the pointer)
+    var moveQueued = false, lastEvt = null;
+    document.addEventListener("pointermove", function (e) {
+      lastEvt = e;
+      if (moveQueued) return;
+      moveQueued = true;
+      requestAnimationFrame(function () { moveQueued = false; hoverTest(lastEvt); });
+    }, { passive: true });
+
+    var relayoutTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(relayoutTimer);
+      relayoutTimer = setTimeout(function () { layout(); scan(); }, 200);
+    });
+
+    // Defer image loading until just after first paint — keeps the heavy
+    // cut-outs out of the critical load path (no white-on-reload) — but
+    // GUARANTEE they appear even if the load event is slow or never fires.
+    function enableImages() {
+      if (imagesReady) return;
+      imagesReady = true;
+      layout();   // doc height is final now
+      scan();
+    }
+    if (document.readyState === "complete") {
+      requestAnimationFrame(function () { setTimeout(enableImages, 150); });
+    } else {
+      window.addEventListener("load", function () { setTimeout(enableImages, 150); });
+    }
+    setTimeout(enableImages, 1500);   // hard fallback
+  }
+
+  // Build / rebuild the diagonal ladder of slots (no species yet — those are
+  // assigned on viewport entry).
+  function layout() {
+    if (window.innerWidth < 920) {              // too narrow — stand down
+      plants.forEach(function (p) { p.el.remove(); });
+      plants = [];
+      return;
+    }
+
+    var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    var startY = Math.round(window.innerHeight * 0.55);
+    var endPad = Math.round(window.innerHeight * 0.6);
+    var step   = Math.max(520, Math.round(window.innerHeight * 0.72));
+    var count  = Math.max(2, Math.floor((docH - startY - endPad) / step) + 1);
+
+    while (plants.length < count) plants.push(makePlant());
+    while (plants.length > count) { var ex = plants.pop(); ex.el.remove(); }
+
+    plants.forEach(function (p, i) {
+      var side = (i % 2 === 0) ? "left" : "right";
+      p.el.className = "bm-plant bm-" + side + (p.inView ? " bm-in" : "");
+      p.el.style.top = (startY + i * step) + "px";
+      if (!p.el.parentNode) document.body.appendChild(p.el);
+    });
+  }
+
+  function makePlant() {
+    var el = document.createElement("figure");
+    el.className = "bm-plant";
+
+    var stack = document.createElement("div");
+    stack.className = "bm-stack";
+
+    var cut = document.createElement("img");
+    cut.className = "bm-cut"; cut.alt = ""; cut.decoding = "async"; cut.loading = "lazy";
+    var full = document.createElement("img");
+    full.className = "bm-full"; full.alt = ""; full.decoding = "async"; full.loading = "lazy";
+    stack.appendChild(cut);
+    stack.appendChild(full);
+
+    var cap = document.createElement("figcaption");
+    cap.className = "bm-cap";
+
+    el.appendChild(stack);
+    el.appendChild(cap);
+
+    el.title = "Open the herbarium gallery";
+    el.addEventListener("click", function () {
+      if (el.classList.contains("bm-reveal")) window.location.href = GALLERY;
+    });
+
+    return { el: el, stack: stack, cut: cut, full: full, cap: cap,
+             slug: null, cutSrc: null, fullSrc: null, fullLoaded: false,
+             inView: false, hovering: false, timer: null, revealed: false };
+  }
+
+  // Give a slot the next species in the rotation and (lazily) load its cut-out.
+  function assignNext(p) {
+    var sp = deck[((rotation++) % deck.length + deck.length) % deck.length];
+    p.slug = sp.slug;
+    p.cutSrc = CUT + sp.slug + ".png";
+    p.fullSrc = FULL + sp.slug + ".jpg";
+    p.fullLoaded = false;
+    p.revealed = false;
+    p.el.classList.remove("bm-reveal");
+    p.full.removeAttribute("src");
+    p.cap.textContent = sp.bin;
+    if (imagesReady) p.cut.src = p.cutSrc;
+  }
+
+  // Reveal slots entering the viewport; fade out those leaving so they can be
+  // re-assigned a different species on their next entrance.
+  function scan() {
+    if (!imagesReady) return;
+    var vh = window.innerHeight;
+    plants.forEach(function (p) {
+      var r = p.el.getBoundingClientRect();
+      var h = p.el.offsetHeight || 1;
+      var isIn = r.top < vh * 0.9 && (r.top + h) > vh * 0.12;
+      if (isIn && !p.inView) {
+        p.inView = true;
+        assignNext(p);                 // fresh specimen each entrance
+        p.el.classList.add("bm-in");
+      } else if (!isIn && p.inView) {
+        p.inView = false;
+        p.el.classList.remove("bm-in"); // fade out; next entry brings a new plant
+      }
+    });
+  }
+
+  function hoverTest(e) {
+    if (!e) return;
+    plants.forEach(function (p) {
+      if (!p.inView) return;
+      var r = p.stack.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (inside && !p.hovering) {
+        p.hovering = true;
+        if (!p.fullLoaded && p.fullSrc) { p.full.src = p.fullSrc; p.fullLoaded = true; }
+        p.timer = setTimeout(function () { setReveal(p, true); }, HOLD_MS);
+      } else if (!inside && p.hovering) {
+        p.hovering = false;
+        clearTimeout(p.timer);
+        setReveal(p, false);
+      }
+    });
+  }
+
+  function setReveal(p, on) {
+    p.revealed = on;
+    p.el.classList.toggle("bm-reveal", on);
+    p.el.style.zIndex = on ? "55" : "";
+    p.el.style.pointerEvents = on ? "auto" : "";
+    p.el.style.cursor = on ? "pointer" : "";
+  }
+
+  function injectCSS() {
+    if (document.getElementById("bm-style")) return;
+    var css = [
+      ".bm-plant{",
+      "  position:absolute;margin:0;width:calc(var(--bm-w,300px) * var(--bm-scale,1));",
+      "  --bm-w:clamp(220px,23vw,330px);",
+      "  display:flex;flex-direction:column;align-items:center;gap:12px;",
+      "  z-index:-1;pointer-events:none;",
+      "  opacity:0;transform:translateY(22px);",
+      "  transition:opacity 1100ms ease,transform 1100ms cubic-bezier(.22,.61,.36,1);",
+      "}",
+      ".bm-plant.bm-in{opacity:1;transform:none;}",
+      "body.bm-hidden .bm-plant{display:none;}",
+      ".bm-left{left:clamp(4px,2vw,52px);}",
+      ".bm-right{right:clamp(4px,2vw,52px);}",
+      ".bm-stack{",
+      "  position:relative;width:100%;height:calc(var(--bm-h,440px) * var(--bm-scale,1));",
+      "  --bm-h:clamp(320px,46vh,500px);",
+      "}",
+      ".bm-stack img{",
+      "  position:absolute;inset:0;width:100%;height:100%;",
+      "  object-fit:contain;object-position:center;",
+      "  transition:opacity 700ms ease;",
+      "}",
+      ".bm-cut{opacity:var(--bm-rest-op,0.3);filter:saturate(.96) drop-shadow(0 3px 9px rgba(36,48,37,.08));}",
+      ".bm-full{",
+      "  opacity:0;background:#fbf5e3;padding:8px;box-sizing:border-box;",
+      "  box-shadow:0 16px 44px rgba(36,48,37,.3),0 0 0 1px rgba(122,90,58,.4);",
+      "}",
+      ".bm-plant.bm-reveal .bm-cut{opacity:0;}",
+      ".bm-plant.bm-reveal .bm-full{opacity:var(--bm-full-op,0.94);}",
+      ".bm-cap{",
+      "  font-family:'EB Garamond',Georgia,serif;font-style:italic;",
+      "  font-size:clamp(15px,1.1vw,18px);line-height:1.2;color:var(--forest,#243025);",
+      "  text-align:center;max-width:100%;text-wrap:balance;opacity:.5;",
+      "  transition:opacity 300ms ease;",
+      "}",
+      ".bm-plant.bm-reveal .bm-cap{opacity:0;}",
+      "@media (prefers-reduced-motion: reduce){",
+      "  .bm-plant{transition:opacity 400ms ease;transform:none;}",
+      "}",
+      "@media (max-width:920px){ .bm-plant{display:none;} }"
+    ].join("\n");
+    var s = document.createElement("style");
+    s.id = "bm-style";
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  var booted = false;
+  function boot() {
+    if (booted) return;
+    if (!document.body) return;
+    booted = true;
+    init();
+  }
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("load", boot);
+  boot();
+})();
+</script>
+</body>
+</html>

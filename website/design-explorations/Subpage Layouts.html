@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPPy — Subpage layout options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f3e9cd; --parchment-deep: #ead9b0; --parchment-light: #fdf8e9;
+      --ink: #1a1f17; --forest: #243025; --forest-deep: #19211b;
+      --accent: #3d5b3e; --umber: #7a5a3a; --rule: #8a7a4a; --rule-soft: #bca97a;
+      --display: "EB Garamond", "Cardo", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ============ shared page chrome ============ */
+    .pg { background: var(--parchment); color: var(--ink); font-family: var(--display); font-size: 18px; line-height: 1.55; width: 100%; }
+    .pg a { color: inherit; text-decoration: none; }
+    .mono-cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+
+    .nav { border-top: 3px double var(--rule); border-bottom: 1px solid rgba(138, 122, 74, 0.4); background: var(--parchment); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; max-width: 1180px; margin: 0 auto; }
+    .wordmark { display: flex; align-items: baseline; gap: 14px; }
+    .wordmark .name { font-family: var(--display); font-size: 32px; font-weight: 500; line-height: 1; }
+    .wordmark .name em { font-style: italic; }
+    .wordmark .tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-size: 15px; padding-bottom: 2px; border-bottom: 2px solid transparent; }
+    .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* sub-tabs */
+    .subtabs-wrap { border-bottom: 1px solid rgba(138, 122, 74, 0.4); }
+    .subtabs { display: flex; gap: 2px; max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+    .subtabs.center { justify-content: center; }
+    .subtabs a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.16em; font-size: 17px; padding: 15px 22px; color: var(--ink); opacity: 0.75; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .subtabs a.active { color: var(--accent); opacity: 1; border-bottom-color: var(--accent); }
+
+    /* ============ LAYOUT A — editorial column ============ */
+    .a-hero { padding: 52px 48px 22px; text-align: center; }
+    .a-hero .inner { max-width: 820px; margin: 0 auto; }
+    .a-hero h1 { font-family: var(--display); font-weight: 500; font-size: 52px; line-height: 1.05; letter-spacing: -0.015em; margin: 14px 0 18px; color: var(--forest); }
+    .a-hero h1 em { font-style: italic; }
+    .a-hero .lede { font-family: var(--display); font-style: italic; font-size: 21px; color: var(--umber); max-width: 700px; margin: 0 auto; line-height: 1.4; }
+
+    .a-body { position: relative; padding: 38px 48px 56px; }
+    .a-col { max-width: 760px; margin: 0 auto; }
+    .a-col > p { font-size: 21px; line-height: 1.65; margin: 0 0 26px; }
+    .a-h2 { font-family: var(--display); font-style: italic; font-size: 30px; color: var(--forest); margin: 40px 0 8px; }
+    .a-step { display: grid; grid-template-columns: 56px 1fr; gap: 22px; padding: 24px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.45); }
+    .a-step .num { font-family: var(--display); font-style: italic; font-size: 30px; color: var(--umber); line-height: 1; }
+    .a-step .name { font-family: var(--display); font-style: italic; font-size: 24px; color: var(--forest); margin: 0 0 7px; }
+    .a-step .body { font-size: 18px; line-height: 1.62; }
+    .a-step .detail { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--umber); margin-top: 10px; line-height: 1.7; text-transform: uppercase; opacity: 0.85; }
+
+    .a-margin { position: absolute; top: 150px; right: max(8px, calc((100% - 760px) / 2 - 240px)); width: 210px; text-align: center; opacity: 0.85; }
+    .a-margin img { width: 100%; height: 300px; object-fit: contain; opacity: 0.32; }
+    .a-margin .cap { font-style: italic; font-size: 15px; color: var(--forest); opacity: 0.55; margin-top: 6px; }
+
+    /* schema figure (shared) */
+    .schema-figure { background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.4); padding: 24px 24px 16px; margin: 26px 0 22px; }
+    .schema-figure .fig-cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--umber); text-align: center; margin-top: 10px; opacity: 0.7; }
+    .schema-row { padding: 12px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.45); display: flex; align-items: baseline; gap: 13px; font-size: 20px; flex-wrap: wrap; }
+    .schema-row:last-child { border-bottom: none; }
+    .schema-row b { color: var(--forest); font-weight: 600; }
+    .schema-row .verb { font-family: var(--mono); font-size: 12px; color: var(--umber); letter-spacing: 0.06em; }
+
+    /* ============ LAYOUT B — indexed two-column ============ */
+    .b-hero { padding: 48px 48px 18px; max-width: 1180px; margin: 0 auto; }
+    .b-hero h1 { font-family: var(--display); font-weight: 500; font-size: 50px; line-height: 1.04; letter-spacing: -0.015em; margin: 12px 0 14px; color: var(--forest); max-width: 760px; }
+    .b-hero h1 em { font-style: italic; }
+    .b-hero .lede { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--umber); max-width: 640px; line-height: 1.4; }
+
+    .b-body { max-width: 1180px; margin: 0 auto; padding: 30px 48px 56px; display: grid; grid-template-columns: 232px 1fr; gap: 56px; align-items: start; }
+    .b-rail { position: sticky; top: 20px; }
+    .b-rail .rail-h { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--umber); opacity: 0.7; margin-bottom: 16px; }
+    .b-rail ol { list-style: none; margin: 0; padding: 0; }
+    .b-rail li { display: flex; gap: 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.4); }
+    .b-rail li .rn { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--umber); width: 22px; }
+    .b-rail li .rt { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.08em; font-size: 18px; color: var(--ink); }
+    .b-rail li.on .rt { color: var(--accent); }
+    .b-rail li.on { border-bottom-color: var(--accent); }
+    .b-rail .rail-meta { margin-top: 26px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; line-height: 1.9; color: var(--umber); text-transform: uppercase; opacity: 0.8; }
+
+    .b-intro { font-size: 21px; line-height: 1.62; margin: 0 0 28px; max-width: 640px; }
+    .b-card { background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.4); border-left: 3px solid var(--accent); padding: 24px 28px; margin: 0 0 18px; }
+    .b-card .ch { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+    .b-card .ch .rn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; color: var(--umber); }
+    .b-card .ch .name { font-family: var(--display); font-style: italic; font-size: 25px; color: var(--forest); }
+    .b-card .body { font-size: 18px; line-height: 1.62; }
+    .b-card ul { margin: 12px 0 0; padding-left: 0; list-style: none; }
+    .b-card li { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--umber); padding: 4px 0 4px 16px; position: relative; }
+    .b-card li::before { content: "—"; position: absolute; left: 0; opacity: 0.6; }
+    .b-card.schema { border-left-color: var(--umber); }
+
+    /* slim footer for mockups */
+    .foot { background: var(--forest-deep); color: var(--parchment); padding: 22px 48px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.92; }
+    .foot span { opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="design-canvas.jsx"></script>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const SchemaSVG = () => (
+      <svg viewBox="0 0 600 280" width="100%" height="220" style={{ display: "block" }}>
+        <g stroke="rgba(26, 31, 23, 0.33)" strokeWidth="1" fill="none">
+          <path d="M 300 140 L 160 70" /><path d="M 300 140 L 470 60" />
+          <path d="M 300 140 L 90 170" /><path d="M 300 140 L 510 200" />
+          <path d="M 300 140 L 230 235" /><path d="M 300 140 L 400 230" />
+          <path d="M 160 70 L 90 170" /><path d="M 470 60 L 510 200" />
+        </g>
+        <circle cx="300" cy="140" r="22" fill="#009E73" opacity="0.95" />
+        <circle cx="160" cy="70" r="14" fill="#0072B2" opacity="0.95" />
+        <circle cx="470" cy="60" r="14" fill="#0072B2" opacity="0.95" />
+        <circle cx="90" cy="170" r="14" fill="#0072B2" opacity="0.95" />
+        <circle cx="510" cy="200" r="12" fill="#E69F00" opacity="0.95" />
+        <circle cx="230" cy="235" r="12" fill="#E69F00" opacity="0.95" />
+        <circle cx="400" cy="230" r="12" fill="#CC79A7" opacity="0.95" />
+      </svg>
+    );
+
+    const Nav = () => (
+      <nav className="nav">
+        <div className="nav-inner">
+          <div className="wordmark">
+            <div className="name">POPP<em>y</em></div>
+            <div className="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div>
+          </div>
+          <div className="nav-links">
+            <a>Home</a><a>Download</a><a className="active">About</a><a>Contact</a>
+          </div>
+        </div>
+      </nav>
+    );
+
+    const Tabs = ({ center }) => (
+      <div className="subtabs-wrap">
+        <div className={"subtabs" + (center ? " center" : "")}>
+          <a>About</a><a className="active">Method</a><a>Team</a><a>Citation</a>
+        </div>
+      </div>
+    );
+
+    const STEPS = [
+      { rn: "I", name: "Curate", body: "Plant taxa are reconciled against canonical botanical authorities, so every specimen resolves to a single accepted name with its synonymy preserved.",
+        detail: "Kew MPNS · GBIF · authority record per entry" },
+      { rn: "II", name: "Resolve", body: "Each phytochemical is mapped to a canonical structure and de-duplicated by structural fingerprint; uncertain or ambiguous structures are flagged rather than dropped.",
+        detail: "InChI / SMILES · PubChem · ChEBI" },
+      { rn: "III", name: "Annotate", body: "Molecular targets and therapeutic effects are linked through peer-reviewed literature — every assertion retaining a primary citation, DOI, and confidence note.",
+        detail: "DOI-anchored · confidence-scored" },
+    ];
+
+    // ---------- LAYOUT A ----------
+    const LayoutA = () => (
+      <div className="pg">
+        <Nav />
+        <div className="a-hero">
+          <div className="inner">
+            <div className="mono-cap" style={{ color: "var(--umber)" }}>Methodology</div>
+            <h1>How POPPy is <em>built</em>.</h1>
+            <p className="lede">From a tangle of region-specific records to a single, citation-anchored graph — in three deliberate passes.</p>
+          </div>
+        </div>
+        <Tabs center />
+        <div className="a-body">
+          <div className="a-margin">
+            <img src="assets/cutouts/digitalis-purpurea.png" alt="" />
+            <div className="cap">Digitalis purpurea</div>
+          </div>
+          <div className="a-col">
+            <p>POPPy is not a primary source. It is a secondary resource that harmonizes existing botanical, chemical, and pharmacological records into one machine-readable ontology — without ever severing a claim from the evidence behind it.</p>
+            <h2 className="a-h2">The pipeline</h2>
+            {STEPS.map((s) => (
+              <div className="a-step" key={s.rn}>
+                <div className="num">{s.rn}.</div>
+                <div>
+                  <div className="name">{s.name}</div>
+                  <div className="body">{s.body}</div>
+                  <div className="detail">{s.detail}</div>
+                </div>
+              </div>
+            ))}
+            <h2 className="a-h2">How entities relate</h2>
+            <div className="schema-figure">
+              <SchemaSVG />
+              <div className="fig-cap">Fig. — typed relationships, by example</div>
+            </div>
+            <div className="schema-row"><b>Plantum</b><span className="verb">—hasCompound→</span><b>Compositum</b></div>
+            <div className="schema-row"><b>Compositum</b><span className="verb">—targets→</span><b>Obiectivum</b></div>
+            <div className="schema-row"><b>Obiectivum</b><span className="verb">—associatedWith→</span><b>Effectum</b></div>
+            <div className="schema-row"><b>Entitas</b><span className="verb">—supportedBy→</span><b>Testimonium</b></div>
+          </div>
+        </div>
+        <div className="foot"><span>© MMXXVI · UNIVERSITY OF PENNSYLVANIA</span><span>EDITIO PRIMA · V 0.1</span></div>
+      </div>
+    );
+
+    // ---------- LAYOUT B ----------
+    const LayoutB = () => (
+      <div className="pg">
+        <Nav />
+        <Tabs />
+        <div className="b-hero">
+          <div className="mono-cap" style={{ color: "var(--umber)" }}>Methodology</div>
+          <h1>How POPPy is <em>built</em>.</h1>
+          <p className="lede">From a tangle of region-specific records to a single, citation-anchored graph — in three deliberate passes.</p>
+        </div>
+        <div className="b-body">
+          <aside className="b-rail">
+            <div className="rail-h">On this page</div>
+            <ol>
+              <li className="on"><span className="rn">I</span><span className="rt">Curate</span></li>
+              <li><span className="rn">II</span><span className="rt">Resolve</span></li>
+              <li><span className="rn">III</span><span className="rt">Annotate</span></li>
+              <li><span className="rn">IV</span><span className="rt">Schema</span></li>
+            </ol>
+            <div className="rail-meta">Version 0.1.0<br/>CC-BY 4.0<br/>Romano Lab · Penn</div>
+          </aside>
+          <div className="b-content">
+            <p className="b-intro">POPPy is not a primary source. It is a secondary resource that harmonizes existing botanical, chemical, and pharmacological records into one machine-readable ontology — without ever severing a claim from the evidence behind it.</p>
+            {STEPS.map((s) => (
+              <div className="b-card" key={s.rn}>
+                <div className="ch"><span className="rn">{s.rn}</span><span className="name">{s.name}</span></div>
+                <div className="body">{s.body}</div>
+                <ul>{s.detail.split(" · ").map((d, i) => <li key={i}>{d}</li>)}</ul>
+              </div>
+            ))}
+            <div className="b-card schema">
+              <div className="ch"><span className="rn">IV</span><span className="name">Schema</span></div>
+              <div className="schema-figure" style={{ marginTop: 14 }}>
+                <SchemaSVG />
+                <div className="fig-cap">Fig. — typed relationships, by example</div>
+              </div>
+              <div className="schema-row"><b>Plantum</b><span className="verb">—hasCompound→</span><b>Compositum</b></div>
+              <div className="schema-row"><b>Compositum</b><span className="verb">—targets→</span><b>Obiectivum</b></div>
+              <div className="schema-row"><b>Obiectivum</b><span className="verb">—associatedWith→</span><b>Effectum</b></div>
+            </div>
+          </div>
+        </div>
+        <div className="foot"><span>© MMXXVI · UNIVERSITY OF PENNSYLVANIA</span><span>EDITIO PRIMA · V 0.1</span></div>
+      </div>
+    );
+
+    function App() {
+      return (
+        <DesignCanvas>
+          <DCSection id="method" title="Method subpage — layout options" subtitle="Same content, two structures. Pick one and I'll build About · Method · Team · Citation to match.">
+            <DCArtboard id="a" label="A · Editorial column" width={1180} height={1640}><LayoutA /></DCArtboard>
+            <DCArtboard id="b" label="B · Indexed two-column" width={1180} height={1320}><LayoutB /></DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
