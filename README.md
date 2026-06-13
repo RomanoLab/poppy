@@ -39,3 +39,6 @@ make -C build all        # ontology + figures + web-data
 
 - [Recipes index](docs/recipes/README.md)
 - [Ontology data ingest guide](docs/recipes/ontology-data-ingest.md)
+## Download the ontology
+The full enriched POPPy ontology (RDF/XML) is hosted on Box:
+<https://upenn.box.com/v/poppyontology>

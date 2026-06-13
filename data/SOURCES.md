@@ -54,4 +54,4 @@ resumable — re-running skips work already done.
 | `phytotherapies_named_coconut.rdf` | above + COCONUT 2.0 occurrences (**canonical**) |
 | `website/poppy-ontology-real.js` | 24-species subset regenerated from the canonical RDF (committed; it's small) |
 
-> Box link: _add your share URL here_
+> Box link: https://upenn.box.com/v/poppyontology
