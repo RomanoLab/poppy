@@ -1,0 +1,2 @@
+# Shell scripts in this folder must stay LF so they run on Linux (EC2/CloudShell)
+*.sh text eol=lf
