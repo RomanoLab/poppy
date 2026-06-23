@@ -514,12 +514,12 @@
               <label class="check">
                 <input type="checkbox" name="entity" value="plants" checked>
                 <span class="box"></span>
-                <span class="label-name">Plants <span class="label-count">63,722</span></span>
+                <span class="label-name">Plants <span class="label-count">44,769</span></span>
               </label>
               <label class="check">
                 <input type="checkbox" name="entity" value="compounds" checked>
                 <span class="box"></span>
-                <span class="label-name">Compounds <span class="label-count">70,062</span></span>
+                <span class="label-name">Compounds <span class="label-count">185,041</span></span>
               </label>
               <label class="check">
                 <input type="checkbox" name="entity" value="targets" checked>
@@ -590,8 +590,8 @@
           <div class="summary-sub">As configured</div>
 
           <div class="summary-rows" id="summary-rows">
-            <div class="summary-row" data-row="plants">     <div class="k">Plants</div>     <div class="v" id="cnt-plants">63,722</div></div>
-            <div class="summary-row" data-row="compounds">  <div class="k">Compounds</div>  <div class="v" id="cnt-compounds">70,062</div></div>
+            <div class="summary-row" data-row="plants">     <div class="k">Plants</div>     <div class="v" id="cnt-plants">44,769</div></div>
+            <div class="summary-row" data-row="compounds">  <div class="k">Compounds</div>  <div class="v" id="cnt-compounds">185,041</div></div>
             <div class="summary-row" data-row="targets">    <div class="k">Targets</div>    <div class="v" id="cnt-targets">1,334</div></div>
             <div class="summary-row" data-row="effects">    <div class="k">Effects</div>    <div class="v" id="cnt-effects">2,418</div></div>
             <div class="summary-row disabled" data-row="citations"><div class="k">Citations</div><div class="v" id="cnt-citations">0</div></div>
@@ -720,8 +720,8 @@
         effects = Math.round(compounds * 0.18);
         citations = Math.round((compounds + targets + effects) * 2.4 * yearFraction);
       } else {
-        plants = 63722;
-        compounds = 70062;
+        plants = 44769;
+        compounds = 185041;
         targets = 1334;
         effects = 2418;
         citations = Math.round(184500 * yearFraction);
