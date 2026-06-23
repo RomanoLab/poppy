@@ -1,6 +1,7 @@
 {
- "plants": 59738,
- "compounds": 278433,
- "plant_compound_links": 1238279,
- "shard": "djb2(plantId)&255"
+ "plants": 44769,
+ "compounds": 185041,
+ "plant_compound_links": 938576,
+ "shard": "djb2(plantId)&255",
+ "scope": "Viridiplantae (NCBI taxonomy validated); non-plants filtered 2026-06-23"
 }
