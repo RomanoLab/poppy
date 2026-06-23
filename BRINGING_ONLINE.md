@@ -3,18 +3,21 @@
 The website is built and wired to the real ontology; it just needs to be published.
 Everything below happens in **RomanoLab/poppy** after the PR from `ohewryk:main` is merged.
 
-## Publish the website (GitHub Pages)
+## Publish the website (AWS EC2)
 
-1. **Review & merge** the open PR (`ohewryk:main → main`). The diff adds the static
-   site (`website/`), its data layer (`website/data/`), the build notebook
-   (`notebooks/`), a Pages workflow, and a Box download link; it removes the old
-   `web/` stub.
-2. In **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**.
-3. The workflow `.github/workflows/pages.yml` publishes the `website/` folder on every
-   push to `main`. The first run deploys it; the live URL appears at the top of
-   Settings → Pages (it will be `https://romanolab.github.io/poppy/`).
-4. **Verify:** open that URL → **Explore** → search a plant (e.g. *Panax ginseng*) →
-   confirm it loads and lists compounds. The homepage redirects from `index.html` to
+> **Historical note:** earlier drafts of this doc described a GitHub Pages deploy. **Pages is
+> no longer used** (the workflow was removed). The live site is hosted on **AWS EC2** at
+> **poppyontology.org**.
+
+1. Provision the server with `bash deploy/aws-setup.sh` (nginx + static host; see
+   `deploy/user-data.sh` for the cloud-init bootstrap). Point `poppyontology.org` DNS at the
+   instance's public IP.
+2. The instance clones the public repo to `/opt/poppy/repo` and serves `website/` from
+   `/var/www/poppy`.
+3. To deploy updates after pushing to `main`: SSH in and run `sudo poppy-deploy`
+   (git pull + rsync + nginx reload).
+4. **Verify:** open https://poppyontology.org → **Explore** → search a plant
+   (e.g. *Panax ginseng*) → confirm it loads and lists compounds. `index.html` redirects to
    `Home.html`.
 
 ## What lives where

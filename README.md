@@ -6,7 +6,6 @@ It ingests CMAUP/ChEMBL/SQL sources, validates plants (NCBI/POWO), enriches comp
 publishes build stats and downloads.
 
 [![CI](https://github.com/RomanoLab/poppy/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/RomanoLab/poppy/actions/workflows/ci.yml)
-[![Pages](https://github.com/RomanoLab/poppy/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/RomanoLab/poppy/actions/workflows/pages.yml)
 
 > See `INTEGRATION_NOTES.md` for a deeper tour of the structure and CSV/SQL mappings.
 

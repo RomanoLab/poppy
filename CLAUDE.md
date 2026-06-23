@@ -42,10 +42,12 @@ Issue**. Two requirements drive everything: (1) make it **scientifically impactf
 
 ## Data scale (`website/data/meta.json`)
 
-~59,700 organisms · ~278,000 compounds · ~1.24 M plant–compound links.
-**Caveat:** the organism set still includes non-plant organisms (bacteria, fungi, *Homo
-sapiens*) pulled in by the COCONUT 2.0 import, which skipped the NCBI/POWO plant
-validation. A taxonomy filter to restrict the browse to true plants is a planned follow-up.
+Raw data layer: ~59,700 organisms · ~278,000 compounds · ~1.24 M links — but this is
+**contaminated** with non-plant organisms (the COCONUT 2.0 import skipped NCBI/POWO validation).
+**Validated plant-only counts (DATA-COUNTS.md, 2026-06-23):** **~42,000 plant taxa (Viridiplantae)
+· ~182,000 plant-associated phytochemicals.** Use these. **Scope decision:** plants only for v1;
+medicinal fungi deferred to a kingdom-typed v2 module. Non-plants (bacteria/animals/human/archaea/
+algae + fungi-for-now) are being filtered from the browse.
 
 ## Hosting / deploy
 
@@ -53,8 +55,8 @@ validation. A taxonomy filter to restrict the browse to true plants is a planned
   provisioned by `deploy/aws-setup.sh`, bootstrapped by `deploy/user-data.sh`.
 - The instance clones the public repo to `/opt/poppy/repo` and serves `website/` from
   `/var/www/poppy`. Redeploy on the box with `sudo poppy-deploy` (git pull + rsync + nginx reload).
-- A **GitHub Pages** workflow (`.github/workflows/pages.yml`) also publishes `website/` on
-  push to `main` (`romanolab.github.io/poppy/`) — a secondary mirror.
+- **EC2 is the only deployment.** GitHub Pages is NOT used (the Pages workflow was removed —
+  it failed to run). Don't re-add a Pages workflow.
 - Full enriched ontology (RDF/XML, ~2 GB) lives on **Box**: https://upenn.box.com/v/poppyontology
   (too large for git; linked from the Download page).
 

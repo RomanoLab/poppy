@@ -4,5 +4,5 @@ Pipeline(s) for taking data from existing databases, sorting through it, and the
 - **Ontology data ingest (SQL → RDF)**  
   See: [ontology-data-ingest.md](ontology-data-ingest.md)
 - PubMed literature ingestion (plants ↔ compounds)
-- Web data export & GitHub Pages tips
+- Web data export tips (site is served from AWS EC2; GitHub Pages is not used)
 - Curation spreadsheet → TTL/RDF pipeline
