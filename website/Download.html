@@ -666,8 +666,12 @@
     const compShardCache = {};       // shard -> {compoundId: {name,formula,mw,inchikey,trials}}
     const plantEdges = {};           // plantId -> [compoundId,...] (loaded on demand)
 
-    fetch("data/plants_index.json").then(r=>r.ok?r.json():[]).then(a=>{ PLANTS = a; render(); });
-    fetch("data/meta.json").then(r=>r.ok?r.json():null).then(m=>{ if(m){ META.plants=m.plants; META.compounds=m.compounds; render(); } });
+    let plantsState = "loading";   // "loading" | "ready" | "error"
+    fetch("data/plants_index.json")
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(a => { PLANTS = a; plantsState = "ready"; render(); })
+      .catch(() => { plantsState = "error"; render(); });
+    fetch("data/meta.json").then(r=>r.ok?r.json():null).then(m=>{ if(m){ META.plants=m.plants; META.compounds=m.compounds; render(); } }).catch(()=>{});
 
     // ─── State ────────────────────────────────────────────────────────
     const state = {
@@ -771,6 +775,16 @@
     const dropdown = document.getElementById("entity-dropdown");
 
     function renderDropdown(q) {
+      // data not loaded yet → say why instead of silently showing nothing
+      if (!PLANTS.length) {
+        dropdown.innerHTML = `<div class="dropdown-empty">${
+          plantsState === "error"
+            ? "Couldn’t load the plant list. This page must be served over HTTP — open it through a web server, not as a file:// page."
+            : "Loading the plant list…"
+        }</div>`;
+        dropdown.classList.add("open");
+        return;
+      }
       const query = q.toLowerCase().trim();
       const selectedIds = new Set(state.selectedPlants.map((p) => p.id));
       const matches = PLANTS
