@@ -108,6 +108,17 @@
     .cite-box { margin-top: 56px; padding: 24px 30px; background: var(--parchment-light); border: 1px solid rgba(138, 122, 74, 0.4); border-left: 3px solid var(--accent); }
     .cite-box p.cite-line { font-family: var(--display); font-size: 17px; line-height: 1.6; color: var(--ink); margin: 10px 0 0; }
     .cite-box p.cite-line em { font-style: italic; color: var(--forest); }
+    .compare { width: 100%; border-collapse: collapse; margin: 10px 0 4px; font-family: var(--display); }
+    .compare th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--umber); font-weight: 400; text-align: center; vertical-align: bottom; padding: 0 8px 10px; border-bottom: 1px solid var(--rule); line-height: 1.35; }
+    .compare th:first-child { text-align: left; }
+    .compare td { font-size: 15px; color: var(--ink); text-align: center; padding: 13px 8px; border-bottom: 1px dotted rgba(138, 122, 74, 0.45); }
+    .compare td:first-child { text-align: left; font-style: italic; font-size: 17px; color: var(--umber); }
+    .compare .yes { color: var(--accent); font-weight: 600; }
+    .compare .no { color: rgba(26, 31, 23, 0.32); }
+    .compare .partial { font-size: 13px; color: var(--ink); opacity: 0.72; font-style: italic; }
+    .compare tr.poppy td { background: var(--parchment-light); border-bottom: 1px solid rgba(61, 91, 62, 0.3); }
+    .compare tr.poppy td:first-child { color: var(--forest); font-style: italic; font-weight: 600; }
+    .compare-note { font-family: var(--display); font-style: italic; font-size: 15px; line-height: 1.6; color: var(--ink); opacity: 0.82; margin-top: 14px; }
     .bibtex-toggle { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); background: none; border: none; padding: 0; margin-left: 8px; border-bottom: 1px dotted var(--accent); cursor: pointer; }
     .bibtex-wrap { position: relative; margin-top: 16px; display: none; }
     .bibtex-wrap.open { display: block; }
@@ -423,7 +434,7 @@
         <h2 class="essay-h2">Where the facts come from</h2>
         <p>POPPy is built from publicly-available datasets, each contributing a different slice of the picture.</p>
         <div class="method-list">
-          <div class="method-row"><div class="m-name">Chemistry backbone</div><div class="m-body"><strong>COCONUT</strong> contributes natural products with structures and source-organism information; <strong>CMAUP</strong> contributes systematic plant-to-ingredient-to-target mappings. Plant identity is validated against <strong>NCBI Taxonomy</strong>, with <strong>POWO</strong> (Kew) as a fallback — filtering out non-plant organisms and assigning each a stable taxonomic identifier.</div></div>
+          <div class="method-row"><div class="m-name">Chemistry backbone</div><div class="m-body"><strong>COCONUT</strong> contributes natural products with structures and source-organism information; <strong>CMAUP</strong> contributes systematic plant-to-ingredient-to-target mappings. Because COCONUT spans <em>all</em> organisms, POPPy validates every source organism against <strong>NCBI Taxonomy</strong> and keeps only <strong>Viridiplantae</strong> — filtering out the bacteria, fungi, and animals a general natural-product collection carries, and focusing the resource on medicinal plants. (Medicinal fungi are planned as a separate, explicitly-typed module.)</div></div>
           <div class="method-row"><div class="m-name">Mechanisms &amp; targets</div><div class="m-body"><strong>DrugCentral</strong> contributes therapeutic classifications, ATC codes, and target dictionaries; <strong>ChEMBL</strong> contributes broader drug-mechanism data. Both are matched in via canonical <code>SMILES</code> and <code>InChIKey</code>, making the joins robust to formatting differences.</div></div>
           <div class="method-row" style="font-size: 18px; font-weight: 400"><div class="m-name">Ethnobotany &amp; dosing</div><div class="m-body"><strong>Dr. Duke's Phytochemical and Ethnobotanical Database</strong> catalogs traditional uses, country of practice, and references. POPPy merges its activity, chemical, dosage, ethnobotany, and reference tables, then extracts <code>DOI</code>s from the bibliographic fields.</div></div>
           <div class="method-row"><div class="m-name">Clinical evidence</div><div class="m-body">CMAUP's plant–human–disease file records both plant-level and ingredient-level trials. <code>NCT</code> identifiers, where present, become the stable handle for each trial.</div></div>
@@ -443,6 +454,31 @@
           <div class="method-row"><div class="m-name">ResearchConcept</div><div class="m-body">Aligns to <strong>FaBiO</strong> and <strong>CITO</strong> (SPAR). <code>ScientificPaper</code> is <code>owl:equivalentClass</code> to <code>fabio:ResearchPaper</code>; <code>ClinicalTrial</code> aligns to NCIT; <code>hasPaper</code> is a sub-property of <code>cito:cites</code>.</div></div>
           <div class="method-row"><div class="m-name">Object properties</div><div class="m-body">Align to the <strong>Relation Ontology</strong> (RO): <code>isDerivedFrom ≡ RO:0002158</code>, <code>treatsDisease → RO:0002606</code>, <code>interactsWith → RO:0002434</code> — so reasoners and SPARQL federation reach POPPy without translation layers.</div></div>
         </div>
+      </section>
+
+      <section>
+        <div class="mono-cap" style="color: var(--umber)">How POPPy differs</div>
+        <h2 class="essay-h2">What sets POPPy apart from existing resources</h2>
+        <p>Many resources catalog natural products or plant chemistry. POPPy is distinguished less by any single feature than by combining them: a medicinal-plant scope, a formal ontology, the full pharmacological chain from compound to clinical evidence, and a citation behind every fact.</p>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Medicinal-<br>plant scope</th>
+              <th>Formal<br>ontology / KG</th>
+              <th>Compound → target<br>→ therapy → evidence</th>
+              <th>Per-fact<br>provenance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>COCONUT</td><td class="partial">all organisms</td><td class="no">—</td><td class="no">—</td><td class="partial">structures only</td></tr>
+            <tr><td>CMAUP · NPASS · IMPPAT</td><td class="yes">✓</td><td class="no">—</td><td class="partial">partial</td><td class="partial">partial</td></tr>
+            <tr><td>TCM graphs (HERB · TCMSP)</td><td class="partial">herbs only</td><td class="no">—</td><td class="partial">predicted</td><td class="no">—</td></tr>
+            <tr><td>ChEBI</td><td class="no">all chemicals</td><td class="yes">✓</td><td class="no">—</td><td class="partial">chemistry only</td></tr>
+            <tr class="poppy"><td>POPPy</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+        <p class="compare-note">No existing resource occupies the same intersection. Compound collections like COCONUT model structures and source organisms but not biological action; relational plant databases add targets but aren't formal, reasoning-ready graphs; chemical ontologies like ChEBI bring rigor but no pharmacology. POPPy is the first to bring all four together for medicinal plants — and ChEBI, LOTUS, and NPClassifier are resources it builds on, not competes with.</p>
       </section>
 
       <section data-show-plate="celandine">
