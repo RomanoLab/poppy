@@ -455,11 +455,11 @@
             <div class="rr-title">Schema</div>
             <p class="rr-blurb">The empty ontology — classes, properties, axioms. Plug in your own data or extend the schema.</p>
             <div class="rr-meta">
-              <span class="rr-size">1.2 MB</span>
-              <span class="rr-formats"><span>OWL</span><span>TTL</span><span>RDF</span></span>
+              <span class="rr-size">85 KB</span>
+              <span class="rr-formats"><span>RDF/XML</span></span>
             </div>
           </div>
-          <a class="btn-herb btn-outline rr-btn" href="/downloads/poppy-schema.ttl" download>Download</a>
+          <a class="btn-herb btn-outline rr-btn" href="downloads/poppy-schema.rdf" download>Download</a>
         </li>
         <li class="release-row">
           <div class="rr-num">II.</div>
@@ -467,12 +467,11 @@
             <div class="rr-title">Full ontology</div>
             <p class="rr-blurb">Everything: classes, instances, relationships, and the citation provenance for every edge.</p>
             <div class="rr-meta">
-              <span class="rr-size">48.2 MB</span>
-              <span class="rr-stats">70k+ compounds · 184k+ citations</span>
-              <span class="rr-formats"><span>OWL</span><span>TTL</span><span>RDF</span><span>JSON-LD</span></span>
+              <span class="rr-stats">44.8k plants · 185k+ compounds</span>
+              <span class="rr-formats"><span>RDF/XML</span></span>
             </div>
           </div>
-          <a class="btn-herb rr-btn" href="/downloads/poppy.ttl" download>Download</a>
+          <a class="btn-herb rr-btn" href="https://upenn.box.com/v/poppyontology" target="_blank" rel="noopener">Download (Box) ↗</a>
         </li>
         <li class="release-row">
           <div class="rr-num">III.</div>
@@ -484,7 +483,7 @@
               <span class="rr-formats"><span>ZIP</span></span>
             </div>
           </div>
-          <a class="btn-herb btn-outline rr-btn" href="/downloads/poppy-archive.zip" download>Download&nbsp;.zip</a>
+          <a class="btn-herb btn-outline rr-btn" href="https://upenn.box.com/v/poppyontology" target="_blank" rel="noopener">Open on Box ↗</a>
         </li>
       </ol>
     </div>
@@ -500,9 +499,15 @@
       </div>
 
       <div class="demo-note">
-        <strong>Preview note:</strong> the form below is fully interactive — counts and size update live. In production the <code>Download slice</code> button will POST to <code>/api/ontology/export</code> and stream back a file. The endpoint isn't wired yet.
+        <strong>How it works:</strong> pick one or more plants, choose CSV or JSON-LD, and the slice is generated <em>in your browser</em> from the open data — no server required. For the complete ontology (all entities, OWL/Turtle/RDF), use the Box download above.
       </div>
 
+      <style>
+        .check.is-disabled { opacity: 0.5; cursor: not-allowed; }
+        .check.is-disabled input { cursor: not-allowed; }
+        .format-chip.is-disabled { opacity: 0.4; cursor: not-allowed; }
+        .download-btn.is-disabled { opacity: 0.6; cursor: not-allowed; }
+      </style>
       <div class="slice-grid">
         <!-- FORM -->
         <form id="slice-form" class="slice-form">
@@ -521,20 +526,20 @@
                 <span class="box"></span>
                 <span class="label-name">Compounds <span class="label-count">185,041</span></span>
               </label>
-              <label class="check">
-                <input type="checkbox" name="entity" value="targets" checked>
+              <label class="check is-disabled" title="In the full ontology (Box) — coming to slices next">
+                <input type="checkbox" name="entity" value="targets" disabled>
                 <span class="box"></span>
-                <span class="label-name">Targets <span class="label-count">1,334</span></span>
+                <span class="label-name">Targets <span class="label-count">full ontology</span></span>
               </label>
-              <label class="check">
-                <input type="checkbox" name="entity" value="effects" checked>
+              <label class="check is-disabled" title="In the full ontology (Box) — coming to slices next">
+                <input type="checkbox" name="entity" value="effects" disabled>
                 <span class="box"></span>
-                <span class="label-name">Effects <span class="label-count">2,418</span></span>
+                <span class="label-name">Effects <span class="label-count">full ontology</span></span>
               </label>
-              <label class="check">
-                <input type="checkbox" name="entity" value="citations">
+              <label class="check is-disabled" title="In the full ontology (Box) — coming to slices next">
+                <input type="checkbox" name="entity" value="citations" disabled>
                 <span class="box"></span>
-                <span class="label-name">Citations <span class="label-count">184,500+</span></span>
+                <span class="label-name">Citations <span class="label-count">full ontology</span></span>
               </label>
             </div>
           </div>
@@ -550,35 +555,25 @@
             <div id="entity-chips-empty" class="chips-empty">No filter — including the full ontology.</div>
           </div>
 
-          <!-- year range -->
+          <!-- Phase 1 scope note -->
           <div class="slice-group">
-            <label class="slice-label">Citation year range</label>
-            <div class="year-range">
-              <span>From</span>
-              <input id="year-from" type="number" min="1700" max="2026" value="1700">
-              <span>to</span>
-              <input id="year-to" type="number" min="1700" max="2026" value="2026">
-            </div>
-          </div>
-
-          <!-- include neighbors -->
-          <div class="slice-group">
-            <label class="toggle">
-              <input id="include-neighbors" type="checkbox">
-              <span class="track"></span>
-              <span class="label-name">Include 1-hop neighbours <span class="mono-cap" style="display:inline-block;margin-left:6px;color:var(--umber);">(expand each entity by its directly-linked others)</span></span>
-            </label>
+            <p style="font-family:var(--display);font-style:italic;font-size:15px;line-height:1.6;color:var(--ink);opacity:0.8;margin:0;">
+              Slices currently cover plants, their phytochemicals, and the links between them —
+              generated in your browser as CSV or JSON-LD. Targets, therapeutic effects, clinical
+              evidence, and RDF/OWL/Turtle export live in the full ontology above and are coming to
+              the slice builder next.
+            </p>
           </div>
 
           <!-- format -->
           <div class="slice-group">
             <label class="slice-label">Format</label>
             <div class="formats" id="formats">
-              <button type="button" class="format-chip active" data-format="ttl">Turtle (.ttl)</button>
-              <button type="button" class="format-chip" data-format="owl">OWL (.owl)</button>
-              <button type="button" class="format-chip" data-format="rdf">RDF/XML (.rdf)</button>
+              <button type="button" class="format-chip active" data-format="csv">CSV</button>
               <button type="button" class="format-chip" data-format="jsonld">JSON-LD</button>
-              <button type="button" class="format-chip" data-format="csv">CSV (one table per entity)</button>
+              <button type="button" class="format-chip is-disabled" data-format="ttl" title="RDF formats are Phase 2 — use the Box full download for OWL/Turtle/RDF now">Turtle (.ttl)</button>
+              <button type="button" class="format-chip is-disabled" data-format="owl" title="RDF formats are Phase 2 — use the Box full download for OWL/Turtle/RDF now">OWL (.owl)</button>
+              <button type="button" class="format-chip is-disabled" data-format="rdf" title="RDF formats are Phase 2 — use the Box full download for OWL/Turtle/RDF now">RDF/XML (.rdf)</button>
             </div>
           </div>
 
@@ -592,9 +587,9 @@
           <div class="summary-rows" id="summary-rows">
             <div class="summary-row" data-row="plants">     <div class="k">Plants</div>     <div class="v" id="cnt-plants">44,769</div></div>
             <div class="summary-row" data-row="compounds">  <div class="k">Compounds</div>  <div class="v" id="cnt-compounds">185,041</div></div>
-            <div class="summary-row" data-row="targets">    <div class="k">Targets</div>    <div class="v" id="cnt-targets">1,334</div></div>
-            <div class="summary-row" data-row="effects">    <div class="k">Effects</div>    <div class="v" id="cnt-effects">2,418</div></div>
-            <div class="summary-row disabled" data-row="citations"><div class="k">Citations</div><div class="v" id="cnt-citations">0</div></div>
+            <div class="summary-row disabled" data-row="targets">    <div class="k">Targets</div>    <div class="v" id="cnt-targets">—</div></div>
+            <div class="summary-row disabled" data-row="effects">    <div class="k">Effects</div>    <div class="v" id="cnt-effects">—</div></div>
+            <div class="summary-row disabled" data-row="citations"><div class="k">Citations</div><div class="v" id="cnt-citations">—</div></div>
           </div>
 
           <div class="summary-size">
@@ -659,98 +654,71 @@
   </footer>
 
   <script>
-    // ─── Mock plant database ─────────────────────────────────────────
-    const PLANTS = [
-      { id: "papaver-rhoeas",        lat: "Papaver rhoeas",         com: "Corn poppy",         n: 412 },
-      { id: "papaver-somniferum",    lat: "Papaver somniferum",     com: "Opium poppy",        n: 489 },
-      { id: "digitalis-purpurea",    lat: "Digitalis purpurea",     com: "Foxglove",           n: 287 },
-      { id: "atropa-belladonna",     lat: "Atropa belladonna",      com: "Deadly nightshade",  n: 198 },
-      { id: "hypericum-perforatum",  lat: "Hypericum perforatum",   com: "St. John's wort",    n: 318 },
-      { id: "filipendula-ulmaria",   lat: "Filipendula ulmaria",    com: "Meadowsweet",        n: 156 },
-      { id: "valeriana-officinalis", lat: "Valeriana officinalis",  com: "Common valerian",    n: 142 },
-      { id: "achillea-millefolium",  lat: "Achillea millefolium",   com: "Yarrow",             n: 264 },
-      { id: "sambucus-nigra",        lat: "Sambucus nigra",         com: "Black elder",        n: 207 },
-      { id: "tanacetum-parthenium",  lat: "Tanacetum parthenium",   com: "Feverfew",           n: 89 },
-      { id: "verbascum-thapsus",     lat: "Verbascum thapsus",      com: "Great mullein",      n: 134 },
-      { id: "chelidonium-majus",     lat: "Chelidonium majus",      com: "Greater celandine",  n: 121 },
-      { id: "conium-maculatum",      lat: "Conium maculatum",       com: "Hemlock",            n: 47  },
-      { id: "urtica-dioica",         lat: "Urtica dioica",          com: "Stinging nettle",    n: 178 },
-      { id: "plantago-major",        lat: "Plantago major",         com: "Greater plantain",   n: 92  },
-      { id: "crataegus-monogyna",    lat: "Crataegus monogyna",     com: "Common hawthorn",    n: 215 },
-      { id: "glycyrrhiza-glabra",    lat: "Glycyrrhiza glabra",     com: "Liquorice",          n: 412 },
-      { id: "mentha-piperita",       lat: "Mentha piperita",        com: "Peppermint",         n: 234 },
-      { id: "echinacea-purpurea",    lat: "Echinacea purpurea",     com: "Purple coneflower",  n: 156 },
-      { id: "withania-somnifera",    lat: "Withania somnifera",     com: "Ashwagandha",        n: 203 },
-      { id: "curcuma-longa",         lat: "Curcuma longa",          com: "Turmeric",           n: 289 },
-      { id: "salvia-officinalis",    lat: "Salvia officinalis",     com: "Common sage",        n: 176 },
-    ];
+    // ─── Real data layer — client-side slice generation (Phase 1) ─────
+    // Slices are assembled in the browser from the sharded JSON in data/.
+    // Phase 1: plants + compounds (+ their links); CSV and JSON-LD output.
+    // No backend — the full graph (all formats) is the Box download above.
+    function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
+
+    let PLANTS = [];                 // [{id, name, nc, trials, papers}]
+    const META = { plants: 44769, compounds: 185041 };
+    const edgeShardCache = {};       // shard -> {plantId: [compoundId,...]}
+    const compShardCache = {};       // shard -> {compoundId: {name,formula,mw,inchikey,trials}}
+    const plantEdges = {};           // plantId -> [compoundId,...] (loaded on demand)
+
+    fetch("data/plants_index.json").then(r=>r.ok?r.json():[]).then(a=>{ PLANTS = a; render(); });
+    fetch("data/meta.json").then(r=>r.ok?r.json():null).then(m=>{ if(m){ META.plants=m.plants; META.compounds=m.compounds; render(); } });
 
     // ─── State ────────────────────────────────────────────────────────
     const state = {
-      entities: { plants: true, compounds: true, targets: true, effects: true, citations: false },
-      selectedPlants: [],
-      yearFrom: 1700, yearTo: 2026,
-      includeNeighbors: false,
-      format: "ttl",
+      entities: { plants: true, compounds: true },
+      selectedPlants: [],            // [{id, name, nc}]
+      format: "csv",
     };
 
-    const FORMAT_LABELS = {
-      ttl: "Turtle (.ttl)", owl: "OWL (.owl)", rdf: "RDF/XML (.rdf)",
-      jsonld: "JSON-LD", csv: "CSV (one table per entity)",
-    };
-    // bytes per record, by entity
-    const REC_BYTES = { plants: 220, compounds: 380, targets: 240, effects: 200, citations: 160 };
-    // format multiplier
-    const FMT_MULT = { ttl: 1.0, owl: 1.6, rdf: 1.8, jsonld: 1.4, csv: 0.75 };
+    const FORMAT_LABELS = { jsonld: "JSON-LD", csv: "CSV (plant–compound table)" };
 
-    // ─── Compute counts ───────────────────────────────────────────────
-    function compute() {
-      const selected = state.selectedPlants;
-      const hasPlantFilter = selected.length > 0;
-      const yearFraction =
-        Math.max(0, Math.min(1, (state.yearTo - state.yearFrom) / (2026 - 1700)));
-
-      let plants, compounds, targets, effects, citations;
-
-      if (hasPlantFilter) {
-        plants = selected.length;
-        compounds = selected.reduce((s, p) => s + p.n, 0);
-        // mock: each compound ~ 0.06 targets, scaled because of overlap
-        targets = Math.min(state.entities.targets ? Math.round(compounds * 0.08 + 12) : 0, 1334);
-        effects = Math.round(compounds * 0.18);
-        citations = Math.round((compounds + targets + effects) * 2.4 * yearFraction);
-      } else {
-        plants = 44769;
-        compounds = 185041;
-        targets = 1334;
-        effects = 2418;
-        citations = Math.round(184500 * yearFraction);
+    // fetch a plant's compound-id list (cached by shard)
+    async function getEdges(pid){
+      if (plantEdges[pid]) return plantEdges[pid];
+      const sh = djb2(pid);
+      if (!edgeShardCache[sh]) edgeShardCache[sh] = await fetch(`data/plant_edges/${sh}.json`).then(r=>r.ok?r.json():{});
+      return (plantEdges[pid] = edgeShardCache[sh][pid] || []);
+    }
+    // unique compound-id set across selected plants (edges must be preloaded)
+    function sliceCompoundIds(){
+      const set = new Set();
+      for (const p of state.selectedPlants) (plantEdges[p.id]||[]).forEach(c=>set.add(c));
+      return set;
+    }
+    // fetch compound records for a set of ids (cached by shard)
+    async function getCompounds(ids){
+      const byShard = {};
+      ids.forEach(c=>{ const s=djb2(c); (byShard[s]=byShard[s]||[]).push(c); });
+      const out = {};
+      for (const s of Object.keys(byShard)){
+        if (!compShardCache[s]) compShardCache[s] = await fetch(`data/compounds/${s}.json`).then(r=>r.ok?r.json():{});
+        for (const c of byShard[s]) if (compShardCache[s][c]) out[c] = compShardCache[s][c];
       }
+      return out;
+    }
 
-      // apply 1-hop expansion (mild bump)
-      if (state.includeNeighbors) {
-        compounds = Math.round(compounds * 1.25);
-        targets = Math.round(targets * 1.4);
-        effects = Math.round(effects * 1.3);
-        citations = Math.round(citations * 1.5);
+    // ─── Compute real slice counts ────────────────────────────────────
+    function computeCounts() {
+      if (state.selectedPlants.length === 0) {
+        return { plants: META.plants, compounds: META.compounds, full: true };
       }
-
-      // zero out anything not selected
-      if (!state.entities.plants)    plants    = 0;
-      if (!state.entities.compounds) compounds = 0;
-      if (!state.entities.targets)   targets   = 0;
-      if (!state.entities.effects)   effects   = 0;
-      if (!state.entities.citations) citations = 0;
-
-      const rawBytes =
-        plants    * REC_BYTES.plants +
-        compounds * REC_BYTES.compounds +
-        targets   * REC_BYTES.targets +
-        effects   * REC_BYTES.effects +
-        citations * REC_BYTES.citations;
-      const bytes = rawBytes * (FMT_MULT[state.format] || 1);
-
-      return { plants, compounds, targets, effects, citations, bytes };
+      const cids = sliceCompoundIds();
+      return {
+        plants: state.entities.plants ? state.selectedPlants.length : 0,
+        compounds: state.entities.compounds ? cids.size : 0,
+        full: false,
+      };
+    }
+    // rough byte estimate from real counts (exact size is the generated Blob)
+    function estBytes(r) {
+      const per = state.format === "jsonld" ? 240 : 130;
+      return (r.plants + r.compounds) * per;
     }
 
     function fmtBytes(b) {
@@ -764,16 +732,17 @@
 
     // ─── Render ───────────────────────────────────────────────────────
     function render() {
-      const r = compute();
-      for (const k of ["plants", "compounds", "targets", "effects", "citations"]) {
-        const row = document.querySelector(`.summary-row[data-row="${k}"]`);
-        const val = document.getElementById(`cnt-${k}`);
-        const active = state.entities[k];
-        row.classList.toggle("disabled", !active);
-        val.textContent = active ? fmtN(r[k]) : "0";
-      }
-      document.getElementById("cnt-size").textContent = fmtBytes(r.bytes);
-      document.getElementById("cnt-format").textContent = FORMAT_LABELS[state.format];
+      const r = computeCounts();
+      document.getElementById("cnt-plants").textContent = state.entities.plants ? fmtN(r.plants) : "0";
+      document.getElementById("cnt-compounds").textContent = state.entities.compounds ? fmtN(r.compounds) : "0";
+      document.querySelector('.summary-row[data-row="plants"]').classList.toggle("disabled", !state.entities.plants);
+      document.querySelector('.summary-row[data-row="compounds"]').classList.toggle("disabled", !state.entities.compounds);
+      document.getElementById("cnt-size").textContent = r.full ? "full → use Box ↑" : fmtBytes(estBytes(r));
+      document.getElementById("cnt-format").textContent = FORMAT_LABELS[state.format] || state.format;
+
+      const dl = document.getElementById("download-btn");
+      if (r.full) { dl.textContent = "Select plants to build a slice"; dl.classList.add("is-disabled"); }
+      else { dl.textContent = "Download slice"; dl.classList.remove("is-disabled"); }
 
       // chips
       const chipsHost = document.getElementById("entity-chips");
@@ -782,7 +751,7 @@
       for (const p of state.selectedPlants) {
         const chip = document.createElement("span");
         chip.className = "chip";
-        chip.innerHTML = `<em>${p.lat}</em><button data-remove="${p.id}" aria-label="remove">×</button>`;
+        chip.innerHTML = `<em>${p.name}</em><button data-remove="${p.id}" aria-label="remove">×</button>`;
         chipsHost.appendChild(chip);
       }
       chipsEmpty.style.display = state.selectedPlants.length ? "none" : "block";
@@ -806,16 +775,12 @@
       const selectedIds = new Set(state.selectedPlants.map((p) => p.id));
       const matches = PLANTS
         .filter((p) => !selectedIds.has(p.id))
-        .filter((p) =>
-          !query ||
-          p.lat.toLowerCase().includes(query) ||
-          p.com.toLowerCase().includes(query)
-        )
+        .filter((p) => !query || p.name.toLowerCase().includes(query))
         .slice(0, 8);
 
       dropdown.innerHTML = "";
       if (!matches.length) {
-        dropdown.innerHTML = `<div class="dropdown-empty">No more matches.</div>`;
+        dropdown.innerHTML = `<div class="dropdown-empty">${query ? "No matches." : "Type a plant name…"}</div>`;
       } else {
         for (const p of matches) {
           const it = document.createElement("div");
@@ -823,10 +788,9 @@
           it.dataset.id = p.id;
           it.innerHTML = `
             <div>
-              <div class="lat">${p.lat}</div>
-              <div class="com">${p.com}</div>
+              <div class="lat">${p.name}</div>
             </div>
-            <div class="cnt">${p.n} cmpds</div>`;
+            <div class="cnt">${(p.nc || 0).toLocaleString()} cmpds</div>`;
           dropdown.appendChild(it);
         }
       }
@@ -850,6 +814,7 @@
         searchEl.value = "";
         renderDropdown("");
         render();
+        getEdges(p.id).then(render);   // load this plant's compounds, then refresh counts
       }
     });
 
@@ -862,50 +827,78 @@
       render();
     });
 
-    // year inputs
-    document.getElementById("year-from").addEventListener("input", (e) => {
-      state.yearFrom = Math.max(1700, Math.min(2026, Number(e.target.value) || 1700));
-      render();
-    });
-    document.getElementById("year-to").addEventListener("input", (e) => {
-      state.yearTo = Math.max(1700, Math.min(2026, Number(e.target.value) || 2026));
-      render();
-    });
-
-    // include neighbors
-    document.getElementById("include-neighbors").addEventListener("change", (e) => {
-      state.includeNeighbors = e.target.checked;
-      render();
-    });
-
-    // format chips
+    // format chips (RDF formats are Phase 2 → marked .is-disabled, ignored)
     document.getElementById("formats").addEventListener("click", (e) => {
       const chip = e.target.closest(".format-chip");
-      if (!chip) return;
+      if (!chip || chip.classList.contains("is-disabled")) return;
       document.querySelectorAll(".format-chip").forEach((c) => c.classList.remove("active"));
       chip.classList.add("active");
       state.format = chip.dataset.format;
       render();
     });
 
-    // download
-    document.getElementById("download-btn").addEventListener("click", () => {
-      const r = compute();
-      const ext = { ttl: "ttl", owl: "owl", rdf: "rdf", jsonld: "jsonld", csv: "zip" }[state.format];
-      const total = r.plants + r.compounds + r.targets + r.effects + r.citations;
-      alert(
-        `(preview) Would download poppy-slice.${ext}\n\n` +
-        `Plants:    ${fmtN(r.plants)}\n` +
-        `Compounds: ${fmtN(r.compounds)}\n` +
-        `Targets:   ${fmtN(r.targets)}\n` +
-        `Effects:   ${fmtN(r.effects)}\n` +
-        `Citations: ${fmtN(r.citations)}\n` +
-        `Total:     ${fmtN(total)} entities\n` +
-        `Size:      ${fmtBytes(r.bytes)}\n` +
-        `Format:    ${FORMAT_LABELS[state.format]}\n\n` +
-        `In production this will hit POST /api/ontology/export.`
-      );
+    // ─── Download — client-side slice generation ──────────────────────
+    document.getElementById("download-btn").addEventListener("click", async () => {
+      const dl = document.getElementById("download-btn");
+      if (state.selectedPlants.length === 0) {
+        alert("Select one or more plants to build a slice — or use “Download full ontology (RDF · Box)” above for the complete graph.");
+        return;
+      }
+      const label = dl.textContent;
+      dl.textContent = "Building…";
+      dl.classList.add("is-disabled");
+      try {
+        for (const p of state.selectedPlants) await getEdges(p.id);
+        const cidSet = sliceCompoundIds();
+        const comps = state.entities.compounds ? await getCompounds(cidSet) : {};
+        const [blob, fname] = state.format === "jsonld" ? buildJSONLD(comps) : buildCSV(comps);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url; a.download = fname;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      } catch (err) {
+        alert("Sorry — slice generation failed: " + (err && err.message ? err.message : err));
+      } finally {
+        dl.textContent = label;
+        dl.classList.remove("is-disabled");
+      }
     });
+
+    function csvCell(v) { v = (v == null ? "" : String(v)); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+    function buildCSV(comps) {
+      const rows = [["plant_id", "plant_name", "compound_id", "compound_name", "formula", "molecular_weight", "inchikey", "compound_trials"].join(",")];
+      for (const p of state.selectedPlants) {
+        for (const cid of (plantEdges[p.id] || [])) {
+          const c = comps[cid] || {};
+          rows.push([p.id, p.name, cid, c.name, c.formula, c.mw, c.inchikey, c.trials].map(csvCell).join(","));
+        }
+      }
+      return [new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" }), "poppy-slice.csv"];
+    }
+    function buildJSONLD(comps) {
+      const graph = [];
+      for (const p of state.selectedPlants) {
+        graph.push({ "@id": "poppy:" + p.id, "@type": "Plant", "label": p.name,
+                     "producesCompound": (plantEdges[p.id] || []).map((c) => "poppy:" + c) });
+      }
+      const seen = new Set();
+      for (const p of state.selectedPlants) for (const cid of (plantEdges[p.id] || [])) {
+        if (seen.has(cid)) continue; seen.add(cid);
+        const c = comps[cid] || {};
+        graph.push({ "@id": "poppy:" + cid, "@type": "Chemical", "label": c.name,
+                     "formula": c.formula, "molecularWeight": c.mw, "inchikey": c.inchikey });
+      }
+      const doc = { "@context": {
+          "poppy": "https://poppyontology.org/id/",
+          "label": "http://www.w3.org/2000/01/rdf-schema#label",
+          "producesCompound": { "@id": "https://poppyontology.org/prop/producesCompound", "@type": "@id" },
+          "formula": "https://poppyontology.org/prop/formula",
+          "molecularWeight": "https://poppyontology.org/prop/molecularWeight",
+          "inchikey": "https://poppyontology.org/prop/inchikey"
+        }, "@graph": graph };
+      return [new Blob([JSON.stringify(doc, null, 2)], { type: "application/ld+json" }), "poppy-slice.jsonld"];
+    }
 
     render();
   </script>
