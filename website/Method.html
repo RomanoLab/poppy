@@ -39,7 +39,7 @@
     <div class="hero-inner">
       <div class="mono-cap" style="color: var(--umber)">Methodology</div>
       <h1>How POPPy is <em>built</em>.</h1>
-      <p class="lede">From fragmented public databases to a single, citation-anchored ontology — built in twelve deliberate stages, every fact traceable to its source.</p>
+      <p class="lede">From fragmented public databases to a single, citation-anchored ontology — built in a sequence of deliberate stages, every fact traceable to its source.</p>
     </div>
   </section>
 
@@ -177,7 +177,6 @@
               <text class="ont-attr" x="78" y="337">hasMolecularWeight</text>
               <text class="ont-attr" x="78" y="367">hasSmiles</text>
               <text class="ont-attr" x="78" y="397">hasMACCS</text>
-              <text class="ont-attr" x="78" y="427">hasECFP</text>
             </g>
             <!-- HumanConcept -->
             <g>
@@ -223,14 +222,14 @@
           <div class="method-row"><div class="m-name">Mechanisms &amp; targets</div><div class="m-body"><strong>DrugCentral</strong> contributes therapeutic classifications, ATC codes, and target dictionaries; <strong>ChEMBL</strong> contributes broader drug-mechanism data. Both are matched in via canonical <code>SMILES</code> and <code>InChIKey</code>, making the joins robust to formatting differences.</div></div>
           <div class="method-row" style="font-size: 18px; font-weight: 400"><div class="m-name">Ethnobotany &amp; dosing</div><div class="m-body"><strong>Dr. Duke's Phytochemical and Ethnobotanical Database</strong> catalogs traditional uses, country of practice, and references. POPPy merges its activity, chemical, dosage, ethnobotany, and reference tables, then extracts <code>DOI</code>s from the bibliographic fields.</div></div>
           <div class="method-row"><div class="m-name">Clinical evidence</div><div class="m-body">CMAUP's plant–human–disease file records both plant-level and ingredient-level trials. <code>NCT</code> identifiers, where present, become the stable handle for each trial.</div></div>
-          <div class="method-row"><div class="m-name">Multiomic layer</div><div class="m-body">Added last: gene targets resolve against <strong>NCBI Gene</strong> via Entrez E-utilities; ChEBI cross-references resolve against <strong>UniChem</strong> at EBI. Both are looked up lazily, cached, and written as stable identifier IRIs.</div></div>
+          <div class="method-row"><div class="m-name">Multiomic layer</div><div class="m-body">Cross-references resolve against <strong>UniChem</strong> at EBI — ChEBI, ChEMBL, DrugBank, KEGG, and HMDB identifiers — looked up lazily, cached, and written as stable IRIs. A multiomic gene-target layer, resolving targets against <strong>NCBI Gene</strong>, is being integrated for the v1 release.</div></div>
         </div>
       </section>
 
       <section>
         <div class="mono-cap" style="color: var(--umber)">Interoperability</div>
         <h2 class="essay-h2">Connecting to the wider ontology ecosystem</h2>
-        <p>POPPy bridges to the rest of the biomedical knowledge graph by aligning internal concepts and properties with their counterparts in established external ontologies.</p>
+        <p>POPPy is designed to bridge to the rest of the biomedical knowledge graph by aligning internal concepts and properties with their counterparts in established external ontologies. The alignment layer below describes that design; several of these mappings are being (re)integrated for the v1 release.</p>
         <div class="method-list">
           <div class="method-row"><div class="m-name">ChemicalConcept</div><div class="m-body">Aligns under <strong>ChEBI</strong>. Each phytochemical subclass maps to its ChEBI equivalent (<code>Polyphenol → CHEBI:26195</code>, <code>Carotenoid → CHEBI:23044</code>, …); relevant subtrees are pulled in as slim modules. Descriptors are declared <code>owl:equivalentProperty</code> to <strong>CHEMINF</strong>.</div></div>
           <div class="method-row"><div class="m-name">PlantConcept</div><div class="m-body">Aligns under <strong>NCBITaxon</strong> via Viridiplantae (<code>NCBITaxon:33090</code>), each plant linked to its NCBI Taxonomy id. <strong>Plant Ontology</strong> provides a <code>skos:relatedMatch</code> for anatomical structures.</div></div>
@@ -271,7 +270,7 @@
         <h2 class="essay-h2">Lazy resolution</h2>
         <p>The external ontologies are large. ChEBI alone has over 170,000 classes; NCBI Taxonomy runs to the millions. Pulling all of that in would inflate the file beyond practical use and submerge the actual phytotherapies data in noise. So POPPy imports only the parts of external ontologies its own data actually touches.</p>
         <p>For ChEBI, this is <em>subtree extraction</em>: POPPy lists the ChEBI roots matching its phytochemical subclasses and pulls each one's full descendant tree, plus a few shared ancestors to stay connected upward — typically one to two thousand classes that mirror the chemistry POPPy already knows.</p>
-        <p>For NCBI Gene, the same idea takes a <em>lazy resolver</em> form: every drug target is looked up via the Entrez API and cached on disk. New names trigger new lookups; old ones return instantly. Resolved genes become first-class individuals with stable IRIs, symbols, synonyms, and parallel <code>targetsGene</code> edges.</p>
+        <p>For NCBI Gene, the same idea is designed to take a <em>lazy resolver</em> form: each drug target looked up via the Entrez API and cached, becoming a first-class individual with a stable IRI, symbol, synonyms, and parallel <code>targetsGene</code> edges. This gene-resolution layer is being integrated for the v1 release.</p>
       </section>
 
       <section data-show-plate="yarrow">
@@ -281,7 +280,7 @@
         <div class="method-list">
           <div class="method-row"><div class="m-name">Browse</div><div class="m-body">Open directly in <strong>Protégé</strong> to browse the class hierarchy, inspect individuals, and run a reasoner over the structure.</div></div>
           <div class="method-row"><div class="m-name">Query</div><div class="m-body">Load into any triple store — <strong>Oxigraph</strong> runs locally; <strong>GraphDB</strong> or <strong>Stardog</strong> for a hosted graph; <strong>rdflib</strong> for Python scripting.</div></div>
-          <div class="method-row"><div class="m-name">This website</div><div class="m-body">A small REST API sits in front of the graph, exposing entity lookups, free-text search, and live external resolvers — rendering chemical, plant, and gene pages directly.</div></div>
+          <div class="method-row"><div class="m-name">This website</div><div class="m-body">The site is static: the data ships as sharded JSON that the browser loads on demand for entity lookups and free-text search, rendering chemical and plant pages client-side — no backend server required.</div></div>
           <div class="method-row"><div class="m-name">Machine learning</div><div class="m-body">Load the merged graph into <strong>PyKEEN</strong> or <strong>DGL-KE</strong> for knowledge-graph embedding. Stable external IRIs are natural join keys against feature tables — fingerprints from PubChem, sequences from UniProt, expression from GTEx — with no string matching required.</div></div>
         </div>
       </section>

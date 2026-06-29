@@ -85,7 +85,14 @@
       document.getElementById("cnt-compounds").textContent = state.entities.compounds ? fmtN(r.compounds) : "0";
       document.querySelector('.summary-row[data-row="plants"]').classList.toggle("disabled", !state.entities.plants);
       document.querySelector('.summary-row[data-row="compounds"]').classList.toggle("disabled", !state.entities.compounds);
-      document.getElementById("cnt-size").textContent = r.full ? "full → use Box ↑" : fmtBytes(estBytes(r));
+      // size is a real estimate only for the formats we actually generate in-browser
+      // (CSV / JSON-LD); RDF/OWL/Turtle route to the Box download, so don't fake a size.
+      const generatable = state.format === "csv" || state.format === "jsonld";
+      document.getElementById("cnt-size").textContent = r.full
+        ? "full → use Box ↑"
+        : generatable
+          ? fmtBytes(estBytes(r))
+          : "via Box ↑";
       document.getElementById("cnt-format").textContent = FORMAT_LABELS[state.format] || state.format;
 
       const dl = document.getElementById("download-btn");
