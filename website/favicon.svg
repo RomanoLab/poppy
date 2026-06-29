@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="POPPy">
+  <rect width="64" height="64" rx="14" fill="#243025"/>
+  <g fill="#f3e9cd">
+    <!-- stem + small foot -->
+    <rect x="30.4" y="38" width="3.2" height="16" rx="1.6"/>
+    <ellipse cx="32" cy="54" rx="5" ry="1.6"/>
+    <!-- seed-pod body (urn / capsule) -->
+    <path d="M32 21
+             c8 0 12 7 12 14
+             c0 7 -5 12 -12 12
+             c-7 0 -12 -5 -12 -12
+             c0 -7 4 -14 12 -14 z"/>
+    <!-- crown: stigmatic disc + radiating points -->
+    <ellipse cx="32" cy="19.5" rx="7.5" ry="2.4"/>
+    <g>
+      <path d="M32 18.5 l1.5 -6 l-1.5 1 l-1.5 -1 z"/>
+      <path d="M26 19 l-1 -5 l-1 1.5 l-1.6 -0.4 z"/>
+      <path d="M38 19 l1 -5 l1 1.5 l1.6 -0.4 z"/>
+      <path d="M22.5 20.5 l-4 -3.5 l0.2 1.8 l-1.6 0.8 z"/>
+      <path d="M41.5 20.5 l4 -3.5 l-0.2 1.8 l1.6 0.8 z"/>
+    </g>
+  </g>
+</svg>
