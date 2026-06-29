@@ -51,3 +51,16 @@
     .footer a { opacity: 0.6; }
     .footer a:hover { opacity: 1; color: var(--parchment); }
     @media (max-width: 640px) { .hero h1 { font-size: 42px; } }
+
+/* standardized navbar — shared nav-link + dropdown rules (copied from poppy.css) */
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-size: 16px; color: var(--ink); padding-bottom: 2px; border-bottom: 2px solid transparent; }
+.nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+.nav-links a:hover { color: var(--accent); }
+.nav-item { position: relative; display: flex; align-items: center; }
+.nav-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--parchment-light); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(36, 48, 37, 0.16); padding: 6px; min-width: 176px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; z-index: 40; }
+.nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+.nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-menu a { font-family: var(--display); font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 16px; padding: 9px 16px; color: var(--ink); border-bottom: none; white-space: nowrap; }
+.nav-menu a.active { color: var(--accent); }
+.nav-menu a:hover { background: var(--parchment-deep); color: var(--accent); }
