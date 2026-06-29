@@ -65,6 +65,12 @@
     var body = document.body;
     if (!body) return;
 
+    // Make <body> its own stacking context so the z-index:-1 specimens paint ABOVE the body's
+    // (opaque) background instead of behind it. Without this they're invisible at rest and only
+    // appear on hover (when z-index jumps positive). No positioning side effects (unlike
+    // position:relative), since isolation doesn't change the containing block.
+    body.style.isolation = "isolate";
+
     var exclude = (body.getAttribute("data-bm-exclude") || "")
       .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     deck = PLATES.filter(function (p) { return exclude.indexOf(p.slug) === -1; });
