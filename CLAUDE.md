@@ -29,7 +29,7 @@ Issue**. Two requirements drive everything: (1) make it **scientifically impactf
 
 | Path | What |
 |---|---|
-| `website/` | The live static site. **No build step, no framework** — each `.html` page is self-contained (markup + `<style>` + `<script>`). `Home.html` is the entry point. |
+| `website/` | The live static site. **No build step, no framework.** Pages are **content-only HTML** (refactored 2026-06-24); styles/scripts live in their own files: shared `poppy.css` + per-page `<Page>.css` + per-page `<Page>.js` (but `botanical-margins.js` stays inlined — external src breaks it). `Home.html` is the entry point. See `website/BUILD-NOTES.md`. |
 | `website/data/` | Sharded JSON the Explore page lazy-loads: `plants_index.json` (~5 MB search index), `plant_edges/` (~43 MB), `compounds/` (~65 MB). Shard key `djb2(plantId)&255`. |
 | `website/ontology-data.js` | Single source of truth for the in-page graph (`window.POPPY` with `NODES`/`EDGES`). |
 | `website/poppy-ontology-real.js` | 24-species curated subset regenerated from the canonical RDF (small, committed). |
@@ -62,9 +62,11 @@ algae + fungi-for-now) are being filtered from the browse.
 
 ## Conventions / gotchas
 
-- **No build step for the site.** Edit the `.html` directly. `botanical-margins.js` is the
-  editable source but is *inlined* into each page's `<script id="bm-inline">` block — see
-  `website/BUILD-NOTES.md` before changing it.
+- **No build step for the site.** Edit `.html` for content; styles are in `poppy.css` (shared) +
+  per-page `<Page>.css`, page logic in per-page `<Page>.js`. **Exception:** `botanical-margins.js`
+  stays **inlined** into each page's `<script id="bm-inline">` block — an external `<script src>`
+  for it breaks the margins (tried 2026-06-24; reverted). Edit the standalone file then re-inline.
+  See `website/BUILD-NOTES.md`.
 - External runtime APIs (degrade gracefully): Wikimedia Commons (plant photos), PubChem
   PUG-REST (structure images), NCBI Gene + UniProt (gene-chip links).
 - The big RDF is **not** committed; regenerate `website/data/` from the notebook and commit
