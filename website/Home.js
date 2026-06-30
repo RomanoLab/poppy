@@ -511,6 +511,20 @@
       else focusOn("papaver-somniferum", { example: true });   // show a live example graph on landing
     })();
 
+    // "What can you ask POPPy?" cards → run the question live on a concrete curated example
+    document.querySelectorAll(".ask-card[data-example]").forEach((card) => {
+      const go = () => {
+        const exId = card.getAttribute("data-example");
+        if (!exId) return;
+        focusOn(exId);
+        document.getElementById("graph-wrap").scrollIntoView({ behavior: "smooth", block: "center" });
+      };
+      card.addEventListener("click", go);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+      });
+    });
+
     // Re-render when the viewport changes so the graph keeps filling the container
     let resizeT;
     window.addEventListener("resize", () => {
