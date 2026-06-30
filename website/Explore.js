@@ -8,10 +8,11 @@
       var input = document.getElementById("reg-search");
       var currentId = null;
       // ---- full-ontology browse: search all plants, lazy-load shards ----
-      var FULL = [], FULL_BY_ID = {}, COMP_CACHE = {};
+      var FULL = [], FULL_BY_ID = {}, COMP_CACHE = {}, pendingQ = null;
       function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
       fetch("data/plants_index.json").then(function(r){return r.ok?r.json():[];}).then(function(a){
         FULL=a||[]; for(var i=0;i<FULL.length;i++){FULL_BY_ID[FULL[i].id]=FULL[i];}
+        if(pendingQ){var pid=fullFindPlant(pendingQ);pendingQ=null;if(pid)loadFullPlant(pid);}
       }).catch(function(){});
       function fullFindPlant(q){
         q=String(q||"").toLowerCase().trim(); if(!q)return null;
@@ -320,7 +321,12 @@
       // initial: ?q= from the Home "Explore further" button, else a sensible default
       var q = null;
       try { q = new URLSearchParams(window.location.search).get("q"); } catch (e) {}
-      var startId = (q && P.findByLabel(q)) || "papaver-somniferum";
-      render(startId);
+      var cur = q && P.findByLabel(q);
+      if (cur) { render(cur); }
+      else if (q) {
+        render("papaver-somniferum");                    // show something immediately
+        var fid = fullFindPlant(q);                       // non-curated plant by name/id
+        if (fid) loadFullPlant(fid); else pendingQ = q;   // else resolve once the index loads
+      } else { render("papaver-somniferum"); }
     })();
   

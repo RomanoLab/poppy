@@ -46,9 +46,10 @@
     </div>
     <div class="search-wrap">
       <div class="search">
-        <input id="search" type="text" placeholder="Search plant, compound, target, or citation…" autocomplete="off" />
+        <input id="search" type="text" placeholder="Search plant, compound, target, or citation…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list" />
         <button id="searchBtn" class="btn">Search</button>
       </div>
+      <ul id="suggest" class="suggest" role="listbox" aria-label="Search suggestions" hidden></ul>
       <p id="msg" class="mono-cap" style="min-height:1.4em;margin-top:14px;color:var(--umber)"></p>
       <div class="try-chips">
         <span class="mono-cap">Try:</span>

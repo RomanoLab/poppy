@@ -383,13 +383,101 @@
       focusOn(id);
     }
 
-    document.getElementById("searchBtn").addEventListener("click", () => runSearch());
-    document.getElementById("search").addEventListener("keydown", (e) => {
-      if (e.key === "Enter") runSearch();
-    });
-    document.querySelectorAll(".try-chips .chip").forEach((c) => {
-      c.addEventListener("click", () => runSearch(c.dataset.q));
-    });
+    // ─── Search + autosuggest ──────────────────────────────────────────
+    // Tier 1: all ~45k plants, lazy-loaded from plants_index.json on first focus.
+    // Tier 2: curated compounds / targets / citations already in memory (window.POPPY.NODES).
+    (function () {
+      const input = document.getElementById("search");
+      const box = document.getElementById("suggest");
+      const btn = document.getElementById("searchBtn");
+      if (!input || !box) return;
+
+      const CURATED = Object.keys(NODES).map((id) => ({
+        id, name: NODES[id].label, common: NODES[id].common || "", role: NODES[id].role || "", source: "curated",
+      }));
+      const curatedLabels = new Set(CURATED.map((e) => e.name.toLowerCase()));
+
+      let PLANTS = null, loading = false;
+      function loadPlants() {
+        if (PLANTS || loading) return;
+        loading = true;
+        fetch("data/plants_index.json")
+          .then((r) => (r.ok ? r.json() : []))
+          .then((a) => { PLANTS = a || []; if (document.activeElement === input && input.value.trim()) render(input.value); })
+          .catch(() => { PLANTS = []; });   // degrade gracefully → curated-only suggestions
+      }
+
+      let items = [], active = -1;
+      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const rank = (name, q) => { name = name.toLowerCase(); return name === q ? 0 : name.indexOf(q) === 0 ? 1 : 2; };
+
+      function build(q) {
+        q = q.toLowerCase();
+        const out = [];
+        CURATED.forEach((e) => {
+          if (e.name.toLowerCase().includes(q) || (e.common && e.common.toLowerCase().includes(q)))
+            out.push({ ...e, s: rank(e.name, q) - 0.5, nc: 1e9 });   // curated float to top within a tier
+        });
+        if (PLANTS) {
+          for (let i = 0; i < PLANTS.length && out.length < 600; i++) {
+            const p = PLANTS[i];
+            if (curatedLabels.has((p.name || "").toLowerCase())) continue;   // dedupe vs curated
+            if ((p.name || "").toLowerCase().includes(q))
+              out.push({ id: p.id, name: p.name, common: "", role: "Plant", source: "plant", s: rank(p.name, q), nc: p.nc || 0 });
+          }
+        }
+        out.sort((a, b) => (a.s - b.s) || (b.nc - a.nc) || a.name.localeCompare(b.name));
+        return out.slice(0, 10);
+      }
+
+      function render(val) {
+        const q = (val || "").trim();
+        if (q.length < 2) return close();
+        items = build(q); active = -1;
+        if (!items.length) return close();
+        box.innerHTML = items.map((it, i) => {
+          const color = (ROLE_COLOR && ROLE_COLOR[it.role]) || "var(--umber)";
+          const common = it.common ? `<span class="s-common">${esc(it.common)}</span>` : "";
+          return `<li role="option" data-i="${i}"><span class="s-dot" style="background:${color}"></span>`
+               + `<span class="s-name">${esc(it.name)}${common}</span><span class="s-type">${esc(it.role)}</span></li>`;
+        }).join("");
+        box.hidden = false; input.setAttribute("aria-expanded", "true");
+      }
+      function close() { box.hidden = true; box.innerHTML = ""; items = []; active = -1; input.setAttribute("aria-expanded", "false"); }
+      function setActive(i) {
+        const lis = box.querySelectorAll("li");
+        if (lis[active]) lis[active].classList.remove("active");
+        active = items.length ? (i + items.length) % items.length : -1;
+        if (lis[active]) { lis[active].classList.add("active"); lis[active].scrollIntoView({ block: "nearest" }); }
+      }
+      function choose(it) {
+        if (!it) return;
+        input.value = it.name; close();
+        if (it.source === "curated") focusOn(it.id);
+        else window.location.href = "Explore.html?q=" + encodeURIComponent(it.name);
+      }
+
+      input.addEventListener("focus", loadPlants);
+      let t;
+      input.addEventListener("input", () => { clearTimeout(t); t = setTimeout(() => render(input.value), 70); });
+      input.addEventListener("keydown", (e) => {
+        if (box.hidden) { if (e.key === "Enter") runSearch(); return; }
+        if (e.key === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+        else if (e.key === "Enter") { e.preventDefault(); active >= 0 ? choose(items[active]) : runSearch(); }
+        else if (e.key === "Escape") { close(); }
+      });
+      box.addEventListener("mousedown", (e) => {   // mousedown beats input blur
+        const li = e.target.closest("li"); if (!li) return;
+        e.preventDefault(); choose(items[+li.dataset.i]);
+      });
+      input.addEventListener("blur", () => setTimeout(close, 120));
+
+      btn.addEventListener("click", () => runSearch());
+      document.querySelectorAll(".try-chips .chip").forEach((c) => {
+        c.addEventListener("click", () => { input.value = c.dataset.q; runSearch(c.dataset.q); });
+      });
+    })();
 
     // Deep-link: Home.html?q=<id|label> opens the graph centered on that entity
     // (used by the Explore page rows to close the overview → focus loop).

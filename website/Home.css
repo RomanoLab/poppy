@@ -110,7 +110,7 @@
     }
 
     /* search */
-    .search-wrap { max-width: 720px; margin: 0 auto; }
+    .search-wrap { max-width: 720px; margin: 0 auto; position: relative; }
     .search {
       background: var(--parchment-light);
       border: 1px solid var(--rule);
@@ -129,6 +129,24 @@
       outline: none;
     }
     .search input::placeholder { color: rgba(26, 31, 23, 0.5); }
+    /* search autosuggest */
+    .suggest {
+      position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 60;
+      margin: 0; padding: 6px; list-style: none; text-align: left;
+      background: var(--parchment-light); border: 1px solid var(--rule);
+      box-shadow: 0 14px 34px rgba(36, 48, 37, 0.20);
+      max-height: 360px; overflow-y: auto;
+    }
+    .suggest[hidden] { display: none; }
+    .suggest li {
+      display: flex; align-items: baseline; gap: 11px; padding: 10px 14px; cursor: pointer;
+      font-family: var(--display); font-size: 17px; color: var(--ink);
+    }
+    .suggest li .s-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; align-self: center; }
+    .suggest li .s-name { flex: 1; }
+    .suggest li .s-name .s-common { color: var(--umber); font-style: italic; font-size: 14px; margin-left: 6px; }
+    .suggest li .s-type { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--umber); opacity: 0.75; }
+    .suggest li.active, .suggest li:hover { background: var(--parchment-deep); }
     .btn {
       display: inline-block;
       text-decoration: none;
