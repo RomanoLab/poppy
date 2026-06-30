@@ -182,7 +182,6 @@
         }
         html += '<div class="meta">';
         html += '<span class="count"><b>' + totalConn + '</b> direct connection' + (totalConn === 1 ? "" : "s") + ' across ' + Object.keys(groups).length + ' concept' + (Object.keys(groups).length === 1 ? "" : "s") + '</span>';
-        html += '<a class="graph-link" href="Home.html?q=' + encodeURIComponent(id) + '">View in connection graph →</a>';
         html += '<button class="dl-link" id="dl-csv" type="button">Download as CSV ↓</button>';
         html += '</div>';
         html += '</div>'; // .subject-text
@@ -211,6 +210,9 @@
           html += '</div>';
         }
         html += '</section>';
+
+        // ── knowledge-graph view of this entity (shared graph.js) ──
+        html += '<section class="reg-graph"><div class="reg-graph-cap" id="reg-graph-cap"></div><div class="reg-graph-canvas" id="reg-graph"></div></section>';
 
         // ── register groups ──
         html += '<section class="register">';
@@ -248,8 +250,35 @@
         html += '</section>';
 
         root.innerHTML = html;
+        renderGraph(id, subject);
         window.scrollTo({ top: 0, behavior: "auto" });
         resolveMedia(subject);
+      }
+
+      // ── interactive knowledge graph for the focused entity (shared graph.js) ──
+      function onGraphNode(nid) { if (NODES[nid]) render(nid); }   // refocus in-page
+      function trimSub(sub, max) {   // cap neighbours so high-degree plants stay readable
+        var c = sub.center, neigh = sub.nodes.filter(function (n) { return n.id !== c; });
+        if (neigh.length <= max) return 0;
+        neigh.sort(function (a, b) { return P.connectionCount(b.id) - P.connectionCount(a.id); });
+        var keep = {}; keep[c] = true;
+        neigh.slice(0, max).forEach(function (n) { keep[n.id] = true; });
+        sub.nodes = sub.nodes.filter(function (n) { return keep[n.id]; });
+        sub.edges = sub.edges.filter(function (e) { return keep[e.source] && keep[e.target]; });
+        return neigh.length - max;
+      }
+      function renderGraph(id, subject) {
+        var gc = document.getElementById("reg-graph"), cap = document.getElementById("reg-graph-cap");
+        if (!gc || !window.POPPY_GRAPH) return;
+        var sub = window.POPPY.neighborhood(id);
+        if (!sub) { gc.innerHTML = ""; if (cap) cap.innerHTML = "No connections to graph yet."; return; }
+        var total = sub.nodes.length - 1;
+        var omitted = trimSub(sub, 32);
+        window.POPPY_GRAPH.renderSubgraph(gc, sub, { onNodeClick: onGraphNode });
+        if (cap) cap.innerHTML = 'Centered on <em>' + esc(subject.label) + '</em> · '
+          + (omitted ? 'showing the ' + (total - omitted) + ' best-connected of ' + total + ' neighbours'
+                     : sub.edges.length + ' relationship' + (sub.edges.length === 1 ? '' : 's'))
+          + ' — click any circle to refocus.';
       }
 
       // ── specimen plate imagery (Explore page only, hot-linked, nothing stored) ──
@@ -320,6 +349,15 @@
       input.addEventListener("keydown", function (e) { if (e.key === "Enter") lookup(); });
       document.querySelectorAll(".reg-chips .chip").forEach(function (c) {
         c.addEventListener("click", function () { lookup(c.dataset.q); });
+      });
+
+      // keep the graph filling its container as the viewport changes
+      var _grT;
+      window.addEventListener("resize", function () {
+        clearTimeout(_grT);
+        _grT = setTimeout(function () {
+          if (currentId && NODES[currentId]) renderGraph(currentId, NODES[currentId]);
+        }, 200);
       });
 
       // initial: ?q= from the Home "Explore further" button, else a sensible default

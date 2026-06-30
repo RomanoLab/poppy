@@ -154,193 +154,15 @@
     // which is the single source to swap when the real ontology is wired in.
     const { NODES, EDGES, ROLE_COLOR, neighborhood, findByLabel, prettyPredicate } = window.POPPY;
 
-    // ─── SVG rendering ───
-    const SVG_NS = "http://www.w3.org/2000/svg";
-
-    const NODE_R = {
-      __center: 28,
-      Plant: 16, Compound: 14, Target: 12, Effect: 11, Citation: 8, Other: 12,
-    };
-    const RING_FRAC = {
-      Plant: 0.40, Compound: 0.62, Target: 0.78, Effect: 0.92, Citation: 1.00, Other: 1.00,
-    };
-    // per-ring start angle offset so first nodes don't stack along the top axis
-    const RING_OFFSET = {
-      Plant: 0.8, Compound: 0, Target: 0.6, Effect: 0.3, Citation: 1.1, Other: 0,
-    };
-
     let lastSub = null;
     let currentCenter = null;
 
+    // Home's graph is a landing teaser; clicking a node opens it in Explore's knowledge graph.
+    function onGraphNodeClick(id) { window.location.href = "Explore.html?q=" + encodeURIComponent(id); }
+
     function renderSubgraph(sub, opts) {
       lastSub = sub;
-      const container = document.getElementById("graph");
-      // wipe existing
-      while (container.firstChild) container.removeChild(container.firstChild);
-
-      const cw = container.clientWidth  || 1004;
-      const ch = container.clientHeight || 660;
-
-      const svg = document.createElementNS(SVG_NS, "svg");
-      svg.setAttribute("width", "100%");
-      svg.setAttribute("height", "100%");
-      svg.setAttribute("viewBox", `0 0 ${cw} ${ch}`);
-      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      svg.style.display = "block";
-
-      // arrowhead marker
-      const defs = document.createElementNS(SVG_NS, "defs");
-      defs.innerHTML =
-        `<marker id="poppy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-           <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a7a4a"/>
-         </marker>`;
-      svg.appendChild(defs);
-
-      const cx = cw / 2, cy = ch / 2;
-      // Use the full ellipse defined by the container, not min(w,h). This makes
-      // the graph fill wide canvases without horizontal stretch math.
-      const maxH = cw / 2 - 60;
-      const maxV = ch / 2 - 50;
-
-      // node lookup for sizing during edge drawing
-      const nodeLookup = {};
-      for (const n of sub.nodes) nodeLookup[n.id] = n;
-
-      // compute positions on per-ring ellipses (a = maxH * frac, b = maxV * frac)
-      const positions = { [sub.center]: { x: cx, y: cy } };
-      const buckets = { Plant: [], Compound: [], Target: [], Effect: [], Citation: [], Other: [] };
-      for (const n of sub.nodes) {
-        if (n.id === sub.center) continue;
-        (buckets[n.role] || buckets.Other).push(n);
-      }
-      for (const role of ["Plant", "Compound", "Target", "Effect", "Citation", "Other"]) {
-        const items = buckets[role];
-        if (!items.length) continue;
-        const a = maxH * RING_FRAC[role];
-        const b = maxV * RING_FRAC[role];
-        const start = -Math.PI / 2 + (RING_OFFSET[role] || 0);
-        items.forEach((item, i) => {
-          const angle = start + (2 * Math.PI * i) / items.length;
-          positions[item.id] = {
-            x: cx + a * Math.cos(angle),
-            y: cy + b * Math.sin(angle),
-          };
-        });
-      }
-
-      const radiusOf = (id) =>
-        id === sub.center ? NODE_R.__center : (NODE_R[nodeLookup[id]?.role] || 12);
-
-      // ─── edges ───
-      const edgesG = document.createElementNS(SVG_NS, "g");
-      edgesG.setAttribute("class", "edges");
-      for (const e of sub.edges) {
-        const p1 = positions[e.source];
-        const p2 = positions[e.target];
-        if (!p1 || !p2) continue;
-        const r1 = radiusOf(e.source);
-        const r2 = radiusOf(e.target);
-        const dx = p2.x - p1.x, dy = p2.y - p1.y;
-        const dist = Math.hypot(dx, dy) || 1;
-        const ux = dx / dist, uy = dy / dist;
-        const x1 = p1.x + ux * r1;
-        const y1 = p1.y + uy * r1;
-        const x2 = p2.x - ux * (r2 + 4);
-        const y2 = p2.y - uy * (r2 + 4);
-
-        const line = document.createElementNS(SVG_NS, "line");
-        line.setAttribute("x1", x1); line.setAttribute("y1", y1);
-        line.setAttribute("x2", x2); line.setAttribute("y2", y2);
-        line.setAttribute("stroke", "#8a7a4a");
-        line.setAttribute("stroke-width", "1");
-        line.setAttribute("marker-end", "url(#poppy-arrow)");
-        edgesG.appendChild(line);
-
-        // label at midpoint with parchment background (paint-order stroke trick)
-        const mx = (x1 + x2) / 2;
-        const my = (y1 + y2) / 2;
-        const label = prettyPredicate(e.predicate);
-
-        const text = document.createElementNS(SVG_NS, "text");
-        text.textContent = label;
-        text.setAttribute("x", mx);
-        text.setAttribute("y", my);
-        text.setAttribute("text-anchor", "middle");
-        text.setAttribute("dominant-baseline", "middle");
-        text.setAttribute("font-family", "IBM Plex Mono, ui-monospace, monospace");
-        text.setAttribute("font-size", "9");
-        text.setAttribute("letter-spacing", "1.2");
-        text.setAttribute("fill", "#7a5a3a");
-        text.setAttribute("stroke", "#fdf8e9");
-        text.setAttribute("stroke-width", "4");
-        text.setAttribute("paint-order", "stroke fill");
-        text.style.textTransform = "uppercase";
-        edgesG.appendChild(text);
-      }
-      svg.appendChild(edgesG);
-
-      // ─── nodes ───
-      const nodesG = document.createElementNS(SVG_NS, "g");
-      for (const n of sub.nodes) {
-        const p = positions[n.id];
-        const r = radiusOf(n.id);
-        const color = ROLE_COLOR[n.role] || ROLE_COLOR.Other;
-
-        const g = document.createElementNS(SVG_NS, "g");
-        g.style.cursor = "pointer";
-        g.setAttribute("data-id", n.id);
-
-        const circle = document.createElementNS(SVG_NS, "circle");
-        circle.setAttribute("cx", p.x);
-        circle.setAttribute("cy", p.y);
-        circle.setAttribute("r", r);
-        circle.setAttribute("fill", color);
-        if (n.id === sub.center) {
-          circle.setAttribute("stroke", "#243025");
-          circle.setAttribute("stroke-width", "3");
-        }
-        g.appendChild(circle);
-
-        // hover halo
-        const halo = document.createElementNS(SVG_NS, "circle");
-        halo.setAttribute("cx", p.x);
-        halo.setAttribute("cy", p.y);
-        halo.setAttribute("r", r + 6);
-        halo.setAttribute("fill", "transparent");
-        halo.setAttribute("stroke", color);
-        halo.setAttribute("stroke-width", "0");
-        halo.setAttribute("opacity", "0.4");
-        halo.style.transition = "stroke-width 150ms ease";
-        g.appendChild(halo);
-        g.addEventListener("mouseenter", () => halo.setAttribute("stroke-width", "2"));
-        g.addEventListener("mouseleave", () => halo.setAttribute("stroke-width", "0"));
-
-        // label below
-        const isCenter = n.id === sub.center;
-        const fontSize = isCenter ? 18 : n.role === "Citation" ? 12 : 14;
-        const italic = (n.role === "Plant" || n.role === "Compound" || n.role === "Citation");
-
-        const label = document.createElementNS(SVG_NS, "text");
-        label.textContent = n.label;
-        label.setAttribute("x", p.x);
-        label.setAttribute("y", p.y + r + fontSize + 4);
-        label.setAttribute("text-anchor", "middle");
-        label.setAttribute("font-family", "EB Garamond, Cardo, Georgia, serif");
-        label.setAttribute("font-size", fontSize);
-        label.setAttribute("fill", "#1a1f17");
-        if (italic) label.setAttribute("font-style", "italic");
-        // parchment outline so labels stay legible when an edge runs under them
-        label.setAttribute("stroke", "#fdf8e9");
-        label.setAttribute("stroke-width", "3");
-        label.setAttribute("paint-order", "stroke fill");
-        g.appendChild(label);
-
-        g.addEventListener("click", () => focusOn(n.id));
-        nodesG.appendChild(g);
-      }
-      svg.appendChild(nodesG);
-
-      container.appendChild(svg);
+      window.POPPY_GRAPH.renderSubgraph(document.getElementById("graph"), sub, { onNodeClick: onGraphNodeClick });
 
       // caption + status
       const role = sub.role || "";
@@ -382,11 +204,8 @@
 
     function runSearch(q) {
       const query = (q || document.getElementById("search").value || "").trim();
-      const msg = document.getElementById("msg");
-      if (!query) { msg.textContent = "Type a plant name, compound, or target."; return; }
-      const id = findByLabel(query);
-      if (!id) { msg.textContent = `No results for "${query}". Try one of the suggestions below.`; return; }
-      focusOn(id);
+      if (!query) { document.getElementById("msg").textContent = "Type a plant name, compound, or target."; return; }
+      window.location.href = "Explore.html?q=" + encodeURIComponent(query);   // explore lives on Explore
     }
 
     // ─── Search + autosuggest ──────────────────────────────────────────
@@ -465,8 +284,7 @@
       function choose(it) {
         if (!it) return;
         input.value = it.name; close();
-        if (it.source === "curated") focusOn(it.id);
-        else window.location.href = "Explore.html?q=" + encodeURIComponent(it.name);
+        window.location.href = "Explore.html?q=" + encodeURIComponent(it.source === "curated" ? it.id : it.name);
       }
 
       input.addEventListener("focus", loadPlants);
@@ -497,7 +315,7 @@
         if (!pool.length) return;
         let pick = pool[Math.floor(Math.random() * pool.length)];
         for (let i = 0; i < 6 && pick.id === currentCenter; i++) pick = pool[Math.floor(Math.random() * pool.length)];
-        close(); focusOn(pick.id);
+        close(); window.location.href = "Explore.html?q=" + encodeURIComponent(pick.id);
       });
     })();
 
@@ -516,8 +334,7 @@
       const go = () => {
         const exId = card.getAttribute("data-example");
         if (!exId) return;
-        focusOn(exId);
-        document.getElementById("graph-wrap").scrollIntoView({ behavior: "smooth", block: "center" });
+        window.location.href = "Explore.html?q=" + encodeURIComponent(exId);
       };
       card.addEventListener("click", go);
       card.addEventListener("keydown", (e) => {
