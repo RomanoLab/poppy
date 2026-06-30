@@ -67,6 +67,11 @@ algae + fungi-for-now) are being filtered from the browse.
   **inlined** into each page's `<script id="bm-inline">` block (edit the standalone file, then
   re-inline). It needs `body { isolation: isolate }` (set in its `init()`) so its `z-index:-1`
   specimens render above the body background — don't remove that. See `website/BUILD-NOTES.md`.
+- **Cache-busting (no build step):** local `<link>`/`<script>` refs carry a content-hash
+  `?v=<sha1>` so returning visitors don't get stale cached assets after a deploy. **After editing
+  any `website/*.css` or `*.js`, run `python3 scripts/cache_bust.py`** (idempotent) and commit the
+  rewritten HTML. The shared `graph.js` + `ontology-data.js` get one hash across all pages;
+  external refs (Google Fonts) are left alone. HTML files themselves rely on nginx revalidation.
 - External runtime APIs (degrade gracefully): Wikimedia Commons (plant photos), PubChem
   PUG-REST (structure images), NCBI Gene + UniProt (gene-chip links).
 - The big RDF is **not** committed; regenerate `website/data/` from the notebook and commit

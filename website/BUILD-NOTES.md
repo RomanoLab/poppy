@@ -44,3 +44,10 @@ step** — nginx serves the `.css`/`.js` directly):
 ## Source
 - `src/` is the user's local Astro repo (read-only mount). The HTML files here are the previewable
   build the user reviews. Can't write back to `src/`; provide integration notes if porting.
+
+## Cache-busting
+Local CSS/JS refs carry a content-hash `?v=<sha1>` (e.g. `Home.js?v=1e4d60a5`) so returning
+visitors fetch fresh assets after a deploy instead of stale cached copies. **After editing any
+`.css`/`.js`, run `python3 scripts/cache_bust.py`** (from repo root; idempotent) and commit the
+rewritten HTML. Shared `graph.js`/`ontology-data.js` get one hash across all pages; external refs
+(Google Fonts) are untouched. The HTML pages themselves rely on nginx revalidation, not `?v=`.
