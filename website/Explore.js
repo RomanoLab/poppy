@@ -12,8 +12,10 @@
       function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
       fetch("data/plants_index.json").then(function(r){return r.ok?r.json():[];}).then(function(a){
         FULL=a||[]; for(var i=0;i<FULL.length;i++){FULL_BY_ID[FULL[i].id]=FULL[i];}
-        if(pendingQ){var pid=fullFindPlant(pendingQ);pendingQ=null;if(pid)loadFullPlant(pid);}
-      }).catch(function(){});
+        if(pendingQ){var want=pendingQ;pendingQ=null;var pid=fullFindPlant(want);
+          if(pid){loadFullPlant(pid);}
+          else{msg.textContent='No entry for "'+want+'".';render("papaver-somniferum");}}
+      }).catch(function(){if(pendingQ){msg.textContent='Could not load the entity index.';pendingQ=null;}});
       function fullFindPlant(q){
         q=String(q||"").toLowerCase().trim(); if(!q)return null;
         if(FULL_BY_ID[q])return q;
@@ -30,6 +32,8 @@
       function loadFullPlant(pid){
         var meta=FULL_BY_ID[pid]||{name:pid};
         msg.textContent="Loading "+(meta.name||pid)+"...";
+        root.innerHTML='<section class="register"><div class="reg-empty">Loading…</div></section>';
+        currentId=null;   // don't let stale data linger while shards load
         fetch("data/plant_edges/"+djb2(pid)+".json").then(function(r){return r.ok?r.json():{};}).then(function(ed){
           var cids=ed[pid]||[], bk={}; cids.forEach(function(c){bk[djb2(c)]=true;});
           return Promise.all(Object.keys(bk).map(fetchCompShard)).then(function(){
@@ -324,9 +328,11 @@
       var cur = q && P.findByLabel(q);
       if (cur) { render(cur); }
       else if (q) {
-        render("papaver-somniferum");                    // show something immediately
-        var fid = fullFindPlant(q);                       // non-curated plant by name/id
-        if (fid) loadFullPlant(fid); else pendingQ = q;   // else resolve once the index loads
+        // non-curated plant: show a loading state — NOT the default — and resolve via the index
+        msg.textContent = "Loading " + q + "…";
+        root.innerHTML = '<section class="register"><div class="reg-empty">Loading…</div></section>';
+        var fid = fullFindPlant(q);                       // by name/id, once the index is ready
+        if (fid) loadFullPlant(fid); else pendingQ = q;   // else resolve when plants_index loads
       } else { render("papaver-somniferum"); }
     })();
   
