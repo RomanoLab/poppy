@@ -1,0 +1,15 @@
+/* Roadmap.css — feature-map page (loads on top of poppy.css) */
+.rm-legend { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--umber);
+  display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 4px 0 36px; }
+.feature-list { margin: 6px 0 8px; }
+.feature-row { display: grid; grid-template-columns: 1fr auto; gap: 10px 24px; align-items: start;
+  padding: 16px 0; border-top: 1px dotted rgba(138, 122, 74, 0.4); }
+.feature-row:first-child { border-top: none; }
+.feature-row .f-name { font-family: var(--display); font-size: 19px; font-weight: 600; color: var(--forest); }
+.feature-row .f-desc { font-size: 16px; line-height: 1.5; opacity: 0.82; margin-top: 3px; }
+.fstat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid; border-radius: 2px; white-space: nowrap; align-self: center; }
+.fstat.is-available { color: var(--accent); border-color: var(--accent); background: rgba(61, 91, 62, 0.07); }
+.fstat.is-progress  { color: var(--umber);  border-color: var(--umber);  background: rgba(122, 90, 58, 0.08); }
+.fstat.is-planned   { color: var(--umber);  border-color: var(--rule-soft); background: transparent; opacity: 0.75; }
+@media (max-width: 640px) { .feature-row { grid-template-columns: 1fr; } }

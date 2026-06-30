@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>POPPy — About</title>
+  <title>POPPy — Roadmap</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
@@ -12,8 +12,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="poppy.css" />
+  <link rel="stylesheet" href="Roadmap.css" />
 </head>
-<body>
+<body data-bm-start="5">
   <nav class="nav">
     <div class="nav-inner">
       <a class="wordmark" href="Home.html" style="text-decoration:none;color:inherit;" aria-label="POPPy — home"><img class="logo-img" src="assets/poppy-logo.png" alt="POPPy" style="height:38px;width:auto;display:block;"><div class="tag">PHYTO-ONTOLOGY PLATFORM FOR PHARMACOLOGY</div></a>
@@ -22,9 +23,9 @@
         <a href="Explore.html">Explore</a>
         <a href="Download.html">Download</a>
         <div class="nav-item">
-          <a href="About.html" class="active">About</a>
+          <a href="About.html">About</a>
           <div class="nav-menu">
-            <a href="About.html" class="active">Overview</a>
+            <a href="About.html">Overview</a>
             <a href="Method.html">Method</a>
             <a href="Team.html">Team</a>
             <a href="Citation.html">Citation</a>
@@ -35,69 +36,156 @@
     </div>
   </nav>
 
-  <section class="page-hero" data-screen-label="About hero" data-show-plate="hemlock">
+  <section class="page-hero" data-show-plate="feverfew">
     <div class="hero-inner">
-      <div class="mono-cap" style="color: var(--umber)">Overview</div>
-      <h1>Reuniting the <em>materia medica</em> with the molecule.</h1>
-      <p class="lede">For most of human history, medicine was made from plants. POPPy is a quiet attempt to render that knowledge legible to machines.</p>
+      <div class="mono-cap" style="color: var(--umber)">Roadmap</div>
+      <h1>What's here, and what's <em>coming</em>.</h1>
+      <p class="lede">A living map of POPPy — what you can use today, what we're building, and where we're headed. It doubles as our own tracker.</p>
+      <div class="herb-divider"><span class="rule"></span><span class="double"></span><span class="ornament">❦</span><span class="double"></span><span class="rule"></span></div>
     </div>
   </section>
 
-  <div class="subtabs-wrap">
-    <div class="subtabs">
-      <a href="About.html" class="active">About</a>
-      <a href="Method.html">Method</a>
-      <a href="Team.html">Team</a>
-      <a href="Citation.html">Citation</a>
-    </div>
-  </div>
-
   <article class="essay">
     <div class="essay-col">
-
-      <!-- WHO WE ARE -->
-      <section data-show-plate="mullein">
-        <p class="lead-para">
-          <span class="dropcap">P</span>OPPy — the <em>Phyto-Ontology Platform for Pharmacology</em> — is the first FAIR knowledge graph of medicinal-plant pharmacology: it links plants, their phytochemicals, the molecular targets those chemicals act on, and the therapeutic and clinical evidence behind them, in a form built to be read by machines as readily as by people. It is developed and maintained by the <a class="inline" href="https://romanolab.org/" target="_blank" rel="noopener">Romano Lab</a> at the University of Pennsylvania, with input from collaborators across ethnobotany, cheminformatics, and knowledge-graph engineering.
-        </p>
-        <p>Plants have been an essential part of medicine throughout human history. Willow bark, traditionally used to treat fever, headaches, and inflammation, was the blueprint for modern-day aspirin. Sweet wormwood was crucial in developing artemisinin, a malaria treatment that earned Tu Youyou the Nobel Prize in 2015.</p>
-        <p>Yet large-scale studies to discover new therapeutics have been hindered by an underdeveloped data infrastructure linking plant-derived compounds with known biological activities and current medicinal uses. Although there exist many medical plant databases, they are often region-specific, with disjoint features, and no standardization across sources. Other resources, like natural-product ontologies, don't distinguish between plant- and animal-derived compounds.</p>
-        <p>Through POPPy, we identify structured and unstructured sources of medicinal plants and harmonize them to include known active phytochemicals, phytochemical targets (if known), and sources and citations. This data is then mapped onto an ontology — a logic-based representation that structures concepts and their relationships into a FAIR, machine-readable knowledge graph in which every fact remains traceable to its source. POPPy itself is not a primary source, rather, it is a secondary resource that aims to guide phytotherapy research and drug discovery.</p>
-      </section>
-
-      <!-- LAND ACKNOWLEDGEMENT -->
-      <div class="land-ack" style="margin: 36px 0 8px; padding: 24px 0 4px; border-top: 1px solid rgba(138, 122, 74, 0.4);">
-        <div class="mono-cap" style="color: var(--umber); margin-bottom: 12px;">Land acknowledgement</div>
-        <p style="font-family: var(--display); font-style: italic; font-size: 20px; line-height: 1.55; color: var(--forest); margin: 0;">This resource was developed on Lenapehoking, the traditional ancestral homeland of the Lenape people.</p>
-      </div>
-
-      <!-- PULL QUOTE -->
-      <div class="pullquote">
-        <div class="pq-rule"><span class="line"></span><span class="orn">❦</span><span class="line"></span></div>
-        <blockquote>"Everything on the earth has a purpose, every disease an herb to cure it."</blockquote>
-        <cite style="display:block; font-family: var(--display); font-style: normal; font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 17px; color: var(--umber); margin: -8px 0 4px;">— Mourning Dove</cite>
-        <div class="pq-rule"><span class="line"></span><span class="orn">❦</span><span class="line"></span></div>
-      </div>
-
-      <!-- ONWARD -->
-      <nav class="essay-onward" aria-label="Continue reading">
-        <a class="onward-card" href="Method.html">
-          <span class="oc-k">Method</span>
-          <span class="oc-d">How the ontology is curated, resolved, and annotated — and how its entities relate.</span>
-          <span class="oc-go">Read the methodology <span class="arrow">→</span></span>
-        </a>
-        <a class="onward-card" href="Team.html">
-          <span class="oc-k">Team</span>
-          <span class="oc-d">The people who build and maintain POPPy at the Romano Lab, University of Pennsylvania.</span>
-          <span class="oc-go">Meet the team <span class="arrow">→</span></span>
-        </a>
-        <a class="onward-card" href="Citation.html">
-          <span class="oc-k">Citation</span>
-          <span class="oc-d">How to cite POPPy, with BibTeX and the references that underpin the resource.</span>
-          <span class="oc-go">How to cite <span class="arrow">→</span></span>
-        </a>
-      </nav>
-
+        <div class="rm-legend"><span class="fstat is-available">Available</span> today · <span class="fstat is-progress">In progress</span> being built · <span class="fstat is-planned">Planned</span> on the roadmap</div>
+        <section>
+          <div class="mono-cap" style="color: var(--umber)">Index Operum</div>
+          <h2 class="essay-h2">Browse & discovery</h2>
+          <div class="feature-list">
+          <div class="feature-row">
+            <div><div class="f-name">Plant browse</div><div class="f-desc">All ~45,000 medicinal-plant taxa, searchable and linkable.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Entity records</div><div class="f-desc">Each entity's register of connections, on the Explore page.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Interactive ontology graph</div><div class="f-desc">See how a plant connects to its compounds, targets, effects, and evidence.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Search autosuggest</div><div class="f-desc">Type-ahead over plants, plus curated compounds, targets, and citations.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Autosuggest across all compounds & targets</div><div class="f-desc">Extend type-ahead to every one of the ~185,000 compounds and all targets.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Herbarium</div><div class="f-desc">A gallery of antique Köhler specimen plates.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          </div>
+        </section>
+        <section>
+          <h2 class="essay-h2">Data & coverage</h2>
+          <div class="feature-list">
+          <div class="feature-row">
+            <div><div class="f-name">Medicinal plants</div><div class="f-desc">~45,000 taxa, validated against NCBI Taxonomy (Viridiplantae).</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Phytochemicals</div><div class="f-desc">~185,000 plant-associated compounds with structures and properties.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Protein targets</div><div class="f-desc">1,656 molecular targets, linked to the compounds that act on them.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Clinical-trial evidence</div><div class="f-desc">2,400+ plant- and ingredient-trial associations.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Literature evidence</div><div class="f-desc">Scientific papers linked by DOI to compounds and plants.</div></div>
+            <span class="fstat is-progress">In progress</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Medicinal fungi</div><div class="f-desc">A separate, kingdom-typed module for fungal natural products.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          </div>
+        </section>
+        <section>
+          <h2 class="essay-h2">Ontology & interoperability</h2>
+          <div class="feature-list">
+          <div class="feature-row">
+            <div><div class="f-name">FAIR knowledge graph</div><div class="f-desc">A reasoning-ready RDF/OWL ontology, not a flat table.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Per-fact provenance</div><div class="f-desc">Source and citation attached to facts, where available.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">NCBI Taxonomy alignment</div><div class="f-desc">Each plant linked to its NCBI taxon identifier.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">ChEBI alignment</div><div class="f-desc">Phytochemical classes mapped to ChEBI, with slim subtree modules.</div></div>
+            <span class="fstat is-progress">In progress</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Multiomic gene-target layer</div><div class="f-desc">Targets resolved to NCBI Gene, with parallel gene edges.</div></div>
+            <span class="fstat is-progress">In progress</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Standards alignment</div><div class="f-desc">Mappings to the Relation Ontology, SPAR, NCIT, and the Gene Ontology.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Persistent resolvable IRIs</div><div class="f-desc">Stable, dereferenceable identifiers for every entity.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          </div>
+        </section>
+        <section>
+          <h2 class="essay-h2">Download & access</h2>
+          <div class="feature-list">
+          <div class="feature-row">
+            <div><div class="f-name">Full ontology</div><div class="f-desc">The complete enriched graph as RDF/XML (hosted on Box).</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Schema</div><div class="f-desc">The empty TBox — classes, properties, and axioms.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Custom slices</div><div class="f-desc">Build filtered CSV / JSON-LD slices in your browser — no server.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">RDF / Turtle / OWL slices</div><div class="f-desc">Custom slices in the full set of RDF serializations.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Target, effect & citation slices</div><div class="f-desc">Extend the slice builder beyond plants and compounds.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Versioned Zenodo release</div><div class="f-desc">A citable, archived release with a DOI.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">SPARQL endpoint</div><div class="f-desc">Live query access, with documented example queries.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          </div>
+        </section>
+        <section>
+          <h2 class="essay-h2">AI & machine learning</h2>
+          <div class="feature-list">
+          <div class="feature-row">
+            <div><div class="f-name">ML-ready graph</div><div class="f-desc">Typed and fingerprint-bearing — ready for graph embedding.</div></div>
+            <span class="fstat is-available">Available</span>
+          </div>
+          <div class="feature-row">
+            <div><div class="f-name">Embedding & link-prediction recipes</div><div class="f-desc">Worked examples for target identification and repurposing.</div></div>
+            <span class="fstat is-planned">Planned</span>
+          </div>
+          </div>
+        </section>
     </div>
   </article>
 
@@ -140,7 +228,7 @@
     </div>
   </footer>
 
-    <script id="bm-inline">
+  <script id="bm-inline">
 /* ============================================================
    Botanical Margins — POPPy
    A diagonal ladder of "specimen slots" anchored down the page,
