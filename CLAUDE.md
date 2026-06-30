@@ -55,6 +55,11 @@ algae + fungi-for-now) are being filtered from the browse.
   provisioned by `deploy/aws-setup.sh`, bootstrapped by `deploy/user-data.sh`.
 - The instance clones the public repo to `/opt/poppy/repo` and serves `website/` from
   `/var/www/poppy`. Redeploy on the box with `sudo poppy-deploy` (git pull + rsync + nginx reload).
+- **TLS:** Let's Encrypt via certbot's nginx plugin. One-time after DNS is pointed: `sudo poppy-tls`
+  (obtains the cert, adds `listen 443` + an 80→443 redirect, installs the `certbot.timer`
+  auto-renewal). The cert lives in `/etc/letsencrypt` and survives `poppy-deploy` (which doesn't
+  rewrite the vhost). **Allocate an Elastic IP** and point DNS at it — a plain EC2 public IP
+  changes on stop/start, which would break DNS *and* cert renewal.
 - **EC2 is the only deployment.** GitHub Pages is NOT used (the Pages workflow was removed —
   it failed to run). Don't re-add a Pages workflow.
 - Full enriched ontology (RDF/XML, ~2 GB) lives on **Box**: https://upenn.box.com/v/poppyontology
