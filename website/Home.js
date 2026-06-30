@@ -172,7 +172,7 @@
     let lastSub = null;
     let currentCenter = null;
 
-    function renderSubgraph(sub) {
+    function renderSubgraph(sub, opts) {
       lastSub = sub;
       const container = document.getElementById("graph");
       // wipe existing
@@ -344,19 +344,23 @@
 
       // caption + status
       const role = sub.role || "";
+      const ex = opts && opts.example;
       document.getElementById("graph-caption").innerHTML =
+        (ex ? `<span style="color:var(--umber); font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; margin-right:10px;">An example ❦</span>` : "") +
         `Centered on <em>${sub.label}</em>` +
         (sub.common ? ` <span style="color:var(--umber)">· ${sub.common}</span>` : "") +
         ` <span style="color:var(--umber); font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; margin-left:8px;">${role}</span>`;
-      document.getElementById("msg").textContent =
-        `Showing ${sub.nodes.length} entities and ${sub.edges.length} relationships. Click any circle to refocus.`;
+      document.getElementById("msg").textContent = ex
+        ? `${sub.nodes.length} entities · ${sub.edges.length} relationships — search above, or click any circle, to explore your own.`
+        : `Showing ${sub.nodes.length} entities and ${sub.edges.length} relationships. Click any circle to refocus.`;
     }
 
-    function focusOn(id) {
+    function focusOn(id, opts) {
+      opts = opts || {};
       const sub = neighborhood(id);
       if (!sub) return;
       currentCenter = id;
-      document.getElementById("search").value = sub.label;
+      if (!opts.example) document.getElementById("search").value = sub.label;
       // point "Explore further" at this entity's register
       const ef = document.getElementById("explore-further");
       if (ef) ef.href = "Explore.html?q=" + encodeURIComponent(id);
@@ -366,10 +370,12 @@
       wrap.hidden = false;
       // give the browser one frame to lay out the now-visible container
       requestAnimationFrame(() => {
-        renderSubgraph(sub);
-        const rect = wrap.getBoundingClientRect();
-        if (rect.top > window.innerHeight * 0.6) {
-          window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: "smooth" });
+        renderSubgraph(sub, opts);
+        if (!opts.example) {   // an auto-example stays put in the hero; a real pick scrolls into view
+          const rect = wrap.getBoundingClientRect();
+          if (rect.top > window.innerHeight * 0.6) {
+            window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: "smooth" });
+          }
         }
       });
     }
@@ -419,28 +425,34 @@
             out.push({ ...e, s: rank(e.name, q) - 0.5, nc: 1e9 });   // curated float to top within a tier
         });
         if (PLANTS) {
-          for (let i = 0; i < PLANTS.length && out.length < 600; i++) {
+          for (let i = 0; i < PLANTS.length; i++) {
             const p = PLANTS[i];
             if (curatedLabels.has((p.name || "").toLowerCase())) continue;   // dedupe vs curated
             if ((p.name || "").toLowerCase().includes(q))
-              out.push({ id: p.id, name: p.name, common: "", role: "Plant", source: "plant", s: rank(p.name, q), nc: p.nc || 0 });
+              out.push({ id: p.id, name: p.name, common: "", role: "Plant", source: "plant", s: rank(p.name, q), nc: p.nc || 0, trials: p.trials || 0 });
           }
         }
         out.sort((a, b) => (a.s - b.s) || (b.nc - a.nc) || a.name.localeCompare(b.name));
-        return out.slice(0, 10);
+        return { list: out.slice(0, 10), total: out.length };
       }
 
       function render(val) {
         const q = (val || "").trim();
         if (q.length < 2) return close();
-        items = build(q); active = -1;
+        const r = build(q); items = r.list; active = -1;
         if (!items.length) return close();
-        box.innerHTML = items.map((it, i) => {
+        const rows = items.map((it, i) => {
           const color = (ROLE_COLOR && ROLE_COLOR[it.role]) || "var(--umber)";
           const common = it.common ? `<span class="s-common">${esc(it.common)}</span>` : "";
+          let meta = "";
+          if (it.source === "plant" && it.nc)
+            meta = `<span class="s-meta">${it.nc} link${it.nc === 1 ? "" : "s"}${it.trials ? ` · ${it.trials} trial${it.trials === 1 ? "" : "s"}` : ""}</span>`;
           return `<li role="option" data-i="${i}"><span class="s-dot" style="background:${color}"></span>`
-               + `<span class="s-name">${esc(it.name)}${common}</span><span class="s-type">${esc(it.role)}</span></li>`;
-        }).join("");
+               + `<span class="s-name">${esc(it.name)}${common}</span>${meta}<span class="s-type">${esc(it.role)}</span></li>`;
+        });
+        const more = r.total - items.length;
+        if (more > 0) rows.push(`<li class="s-more" aria-disabled="true">+${more.toLocaleString()} more — keep typing to narrow</li>`);
+        box.innerHTML = rows.join("");
         box.hidden = false; input.setAttribute("aria-expanded", "true");
       }
       function close() { box.hidden = true; box.innerHTML = ""; items = []; active = -1; input.setAttribute("aria-expanded", "false"); }
@@ -475,17 +487,28 @@
 
       btn.addEventListener("click", () => runSearch());
       document.querySelectorAll(".try-chips .chip").forEach((c) => {
+        if (c.id === "surprise") return;
         c.addEventListener("click", () => { input.value = c.dataset.q; runSearch(c.dataset.q); });
+      });
+      // "Surprise me" → a random curated species' graph, instantly (rich + no fetch)
+      const surpriseBtn = document.getElementById("surprise");
+      if (surpriseBtn) surpriseBtn.addEventListener("click", () => {
+        const pool = CURATED.filter((e) => e.role === "Plant");
+        if (!pool.length) return;
+        let pick = pool[Math.floor(Math.random() * pool.length)];
+        for (let i = 0; i < 6 && pick.id === currentCenter; i++) pick = pool[Math.floor(Math.random() * pool.length)];
+        close(); focusOn(pick.id);
       });
     })();
 
     // Deep-link: Home.html?q=<id|label> opens the graph centered on that entity
     // (used by the Explore page rows to close the overview → focus loop).
     (function () {
-      try {
-        const q = new URLSearchParams(window.location.search).get("q");
-        if (q) { const id = findByLabel(q); if (id) focusOn(id); }
-      } catch (e) {}
+      let q = null;
+      try { q = new URLSearchParams(window.location.search).get("q"); } catch (e) {}
+      const id = q && findByLabel(q);
+      if (id) focusOn(id);
+      else focusOn("papaver-somniferum", { example: true });   // show a live example graph on landing
     })();
 
     // Re-render when the viewport changes so the graph keeps filling the container
