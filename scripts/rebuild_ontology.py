@@ -207,6 +207,9 @@ class Ctx:
             or os.environ.get("NPCLASSIFIER_URL")
             or "https://npclassifier.gnps2.org/classify?smiles={}"
         )
+        # finalize the NPClassifier stage from the current cache without calling the API
+        # (escape hatch for a few stuck/pathological SMILES); leaves them uncached to retry later.
+        self.npclass_finalize = getattr(args, "npclass_finalize", False)
         self.pmacs_host = os.environ.get("PMACS_HOST", "romanodb1.pmacs.upenn.edu")
         self.pmacs_user = os.environ.get("PMACS_USER", "")
         self.pmacs_pass = os.environ.get("ROMANO_DB_PASSWORD")
@@ -1552,14 +1555,24 @@ def stage_enrich_npclass(ctx):
         if smi:
             todo.append((str(subj), smi))
     workers = ctx.workers if local else min(ctx.workers, 3)
-    log.info(
-        "  %s Unknown compounds to classify (workers=%s, %s)",
-        f"{len(todo):,}",
-        workers,
-        "LOCAL server" if local else "public GNPS2 — throttled; consider a local server",
-    )
-    # more passes against the public server: heavy throttling can starve a single pass
-    _parallel_fill(todo, fetch, npcache, npath, workers, "NPClassifier", passes=(3 if local else 6))
+    if ctx.npclass_finalize:
+        log.info(
+            "  --npclass-finalize: skipping the API. %s classified; %s left unclassified "
+            "(uncached, so a later/local run will retry them).",
+            f"{len(npcache):,}",
+            f"{len(todo):,}",
+        )
+    else:
+        log.info(
+            "  %s Unknown compounds to classify (workers=%s, %s)",
+            f"{len(todo):,}",
+            workers,
+            "LOCAL server" if local else "public GNPS2 — throttled; consider a local server",
+        )
+        # more passes against the public server: heavy throttling can starve a single pass
+        _parallel_fill(
+            todo, fetch, npcache, npath, workers, "NPClassifier", passes=(3 if local else 6)
+        )
     added = 0
     for subj in g.subjects(RDF.type, ctx.NS.Unknown):
         rec = npcache.get(str(subj))
@@ -2211,6 +2224,13 @@ def main():
         default=12,
         help="Concurrent workers for the parallel enrichment stages (UniChem/NPClassifier). "
         "Default 12. Lower it if a service starts erroring/throttling.",
+    )
+    ap.add_argument(
+        "--npclass-finalize",
+        action="store_true",
+        help="Finalize the NPClassifier stage from the current cache WITHOUT calling the API — "
+        "the escape hatch for a few stuck/pathological SMILES. Unclassified compounds stay "
+        "uncached, so a later run (e.g. against a local server) will retry just those.",
     )
     ap.add_argument(
         "--npclassifier-url",
