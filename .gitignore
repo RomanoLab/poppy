@@ -31,3 +31,4 @@ data/processed/literature/*.csv
 # Local backups
 pyproject.noruff.toml
 pyproject.toml.bak
+docs/nar-submission/
