@@ -2227,6 +2227,7 @@ def main():
     )
     ap.add_argument(
         "--npclass-finalize",
+        "--npclass_finalize",
         action="store_true",
         help="Finalize the NPClassifier stage from the current cache WITHOUT calling the API — "
         "the escape hatch for a few stuck/pathological SMILES. Unclassified compounds stay "
