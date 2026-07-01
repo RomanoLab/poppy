@@ -59,6 +59,7 @@ import hashlib
 import json
 import logging
 import os
+import random
 import re
 import sys
 import threading
@@ -199,6 +200,13 @@ class Ctx:
         self.keep_unmatched = args.keep_unmatched
         self.taxdump_dir = Path(args.taxdump_dir)
         self.workers = args.workers
+        # NPClassifier endpoint (template with one {} for the URL-encoded SMILES). Default is the
+        # public GNPS2 server (small/academic → throttles); override with a LOCAL server for scale.
+        self.npc_url = (
+            getattr(args, "npclassifier_url", None)
+            or os.environ.get("NPCLASSIFIER_URL")
+            or "https://npclassifier.gnps2.org/classify?smiles={}"
+        )
         self.pmacs_host = os.environ.get("PMACS_HOST", "romanodb1.pmacs.upenn.edu")
         self.pmacs_user = os.environ.get("PMACS_USER", "")
         self.pmacs_pass = os.environ.get("ROMANO_DB_PASSWORD")
@@ -1495,23 +1503,45 @@ def stage_enrich_xrefs(ctx):
 def stage_enrich_npclass(ctx):
     """NPClassifier super/class/pathway for compounds typed Unknown (parallel, resumable).
 
-    No batch endpoint; parallelized. GNPS2 is a small academic server, so concurrency is capped
-    lower than UniChem (min(--workers, 6)) to be polite.
+    No batch endpoint; parallelized. The public GNPS2 server is small/academic and THROTTLES, so:
+      * `fetch` honours 429/Retry-After with capped exponential backoff + jitter, and treats a
+        throttle as "retry later" (raises → left uncached), never as "no data" (empty cache).
+      * concurrency is capped low (min(--workers, 3)) against the public server.
+    For the full Unknown set this is still slow — run a LOCAL NPClassifier and point at it with
+    `--npclassifier-url "http://localhost:PORT/classify?smiles={}"` (or $NPCLASSIFIER_URL), then a
+    high --workers is safe and there's no throttling. See the NP-Classifier repo for the server.
     """
     import urllib.parse
 
     g = load_graph(ctx.ckpt("12_xrefs.rdf"))
-    NPC = "https://npclassifier.gnps2.org/classify?smiles={}"
+    NPC = ctx.npc_url
+    local = "localhost" in NPC or "127.0.0.1" in NPC
     for p in (ctx.hasNPSuper, ctx.hasNPClass, ctx.hasNPPath):
         g.add((p, RDF.type, OWL.DatatypeProperty))
 
     def fetch(smi):
-        j = _tls_session().get(NPC.format(urllib.parse.quote(smi)), timeout=60).json()
-        return {
-            "super": "; ".join(j.get("superclass_results", []) or []),
-            "cls": "; ".join(j.get("class_results", []) or []),
-            "path": "; ".join(j.get("pathway_results", []) or []),
-        }
+        url = NPC.format(urllib.parse.quote(smi))
+        s = _tls_session()
+        delay = 2.0
+        for _ in range(6):
+            r = s.get(url, timeout=60)
+            if r.status_code == 200:
+                j = r.json()
+                return {
+                    "super": "; ".join(j.get("superclass_results", []) or []),
+                    "cls": "; ".join(j.get("class_results", []) or []),
+                    "path": "; ".join(j.get("pathway_results", []) or []),
+                }
+            if r.status_code in (429, 500, 502, 503, 504):  # throttled/transient → back off
+                try:
+                    wait = float(r.headers.get("Retry-After", delay))
+                except ValueError:
+                    wait = delay
+                time.sleep(min(wait, 30) + random.uniform(0, 1.0))
+                delay = min(delay * 2, 30)
+                continue
+            r.raise_for_status()  # genuine 4xx → raise (left uncached, retried next pass/run)
+        raise RuntimeError("npclassifier throttled (backoff exhausted)")  # retry later
 
     npath, npcache = _jcache(ctx, "npclassifier.json")
     todo = []
@@ -1521,9 +1551,15 @@ def stage_enrich_npclass(ctx):
         smi = next((str(o) for _, _, o in g.triples((subj, ctx.hasSMILES, None))), "")
         if smi:
             todo.append((str(subj), smi))
-    workers = min(ctx.workers, 6)
-    log.info("  %s Unknown compounds to classify (workers=%s)", f"{len(todo):,}", workers)
-    _parallel_fill(todo, fetch, npcache, npath, workers, "NPClassifier")
+    workers = ctx.workers if local else min(ctx.workers, 3)
+    log.info(
+        "  %s Unknown compounds to classify (workers=%s, %s)",
+        f"{len(todo):,}",
+        workers,
+        "LOCAL server" if local else "public GNPS2 — throttled; consider a local server",
+    )
+    # more passes against the public server: heavy throttling can starve a single pass
+    _parallel_fill(todo, fetch, npcache, npath, workers, "NPClassifier", passes=(3 if local else 6))
     added = 0
     for subj in g.subjects(RDF.type, ctx.NS.Unknown):
         rec = npcache.get(str(subj))
@@ -2175,6 +2211,14 @@ def main():
         default=12,
         help="Concurrent workers for the parallel enrichment stages (UniChem/NPClassifier). "
         "Default 12. Lower it if a service starts erroring/throttling.",
+    )
+    ap.add_argument(
+        "--npclassifier-url",
+        default=None,
+        help="NPClassifier endpoint template, one {} for the URL-encoded SMILES (or set "
+        '$NPCLASSIFIER_URL). Default is the public GNPS2 server (throttles). Point at a LOCAL '
+        'server for the full run, e.g. "http://localhost:6541/classify?smiles={}", then raise '
+        "--workers — localhost is detected and the concurrency cap is lifted.",
     )
     ap.add_argument("--list", action="store_true", help="List stages + status and exit.")
     ap.add_argument("--check", action="store_true", help="Preflight env/inputs and exit.")
