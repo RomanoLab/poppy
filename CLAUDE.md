@@ -1,8 +1,8 @@
 # CLAUDE.md — POPPy project guide
 
 > Auto-loaded by Claude Code in any session, on any machine. Keep it current: it is
-> the hand-off that survives `git push`/`pull`. For the active work plan and session
-> log, see **`docs/nar-submission/ROADMAP.md`** and **`docs/nar-submission/PROGRESS.md`**.
+> the hand-off that survives `git push`/`pull`. The active work plan and session log are
+> kept in local, gitignored working notes (not committed to the repo).
 
 ## What POPPy is
 
@@ -20,10 +20,10 @@ It links five top-level concepts and the named relationships between them:
 
 ## Current goal
 
-Get the resource (website + ontology/KG/DB) ready for submission to the **NAR Database
-Issue**. Two requirements drive everything: (1) make it **scientifically impactful** and
-(2) make it **clearly distinguishable** from existing phytotherapy resources — especially
-**COCONUT** (COlleCtion of Open NatUral producTs), which has been published in NAR.
+Get the resource (website + ontology/KG/DB) ready for **publication**. Two requirements
+drive everything: (1) make it **scientifically impactful** and (2) make it **clearly
+distinguishable** from existing phytotherapy resources — especially **COCONUT**
+(COlleCtion of Open NatUral producTs).
 
 ## Repository map
 
@@ -38,7 +38,6 @@ Issue**. Two requirements drive everything: (1) make it **scientifically impactf
 | `notebooks/Ontology_Work_clean.ipynb` | End-to-end build pipeline — authoritative record of how the ontology was produced. |
 | `src/poppy/`, `scripts/`, `configs/` | Python package + CLI + YAML configs for the (modularized) build. |
 | `deploy/` | AWS EC2 provisioning (`aws-setup.sh`) + cloud-init bootstrap (`user-data.sh`). |
-| `docs/nar-submission/` | **Our working plan + progress log for the NAR push.** |
 
 ## Data scale (`website/data/meta.json`)
 
@@ -85,6 +84,7 @@ algae + fungi-for-now) are being filtered from the browse.
 
 ## Persisting work across machines
 
-This repo is the only thing that syncs. When you finish a working session, append a dated
-entry to `docs/nar-submission/PROGRESS.md` and update the checklist in `ROADMAP.md`, then
-commit. The next session (on any machine) starts by reading those two files.
+The public repo is what syncs across machines. The plan + session log are kept in local,
+gitignored working notes (not committed) — append a dated entry to the progress log and
+update the roadmap there each session. Because they aren't committed, keep your own backup
+to carry them between machines.
