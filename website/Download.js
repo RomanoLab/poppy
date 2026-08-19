@@ -5,7 +5,7 @@
     function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
 
     let PLANTS = [];                 // [{id, name, nc, trials, papers}]
-    const META = { plants: 44769, compounds: 185041 };
+    const META = { plants: 43543, compounds: 185041 };
     const edgeShardCache = {};       // shard -> {plantId: [compoundId,...]}
     const compShardCache = {};       // shard -> {compoundId: {name,formula,mw,inchikey,trials}}
     const plantEdges = {};           // plantId -> [compoundId,...] (loaded on demand)

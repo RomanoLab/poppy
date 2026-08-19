@@ -15,6 +15,7 @@ RUN THIS AFTER EDITING ANY .css/.js IN website/ (and before deploying):
 
 External refs (https://…, e.g. Google Fonts) and non-css/js assets are left alone.
 """
+
 import hashlib
 import pathlib
 import re
@@ -34,8 +35,8 @@ def file_hash(name):
 # Only inside <link …> / <script …> tags; only local *.css / *.js; tolerate an existing ?v=.
 PAT = re.compile(
     r'(?P<pre><(?:link|script)\b[^>]*?\b(?:href|src)=")'
-    r'(?P<name>[A-Za-z0-9_./-]+\.(?:css|js))'
-    r'(?:\?v=[0-9a-f]+)?'
+    r"(?P<name>[A-Za-z0-9_./-]+\.(?:css|js))"
+    r"(?:\?v=[0-9a-f]+)?"
     r'(?P<post>")'
 )
 
