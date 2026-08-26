@@ -32,3 +32,9 @@ data/processed/literature/*.csv
 pyproject.noruff.toml
 pyproject.toml.bak
 docs/nar-submission/
+
+data/enrichment/*_cache.json
+website/data/*.bak
+data/raw/taxdump/
+data/raw/FNFTAX.csv
+data/raw/COMMON_NAMES.csv

@@ -1,0 +1,938 @@
+# tiers: junk (structural non-taxon markers) | possible_plant (kept for review)
+organism_id	scientific_name	tier	reason
+Plant_liquorice	liquorice	possible_plant	
+Plant_common_myrtle	common myrtle	possible_plant	
+Plant_Jugo	Jugo	possible_plant	
+Plant_Kumquat	Kumquat	possible_plant	
+Organism_43742	Cinamomum cassia	possible_plant	
+Plant_Aguacate	Aguacate	possible_plant	
+Plant_Alexandrian_laurel	Alexandrian laurel	possible_plant	
+Plant_candyleaf	candyleaf	possible_plant	
+Plant_West_African_Pepper	West African Pepper	possible_plant	
+Plant_Bitter_bush	Bitter bush	possible_plant	
+Plant_Great_yellow_gentian	Great yellow gentian	possible_plant	
+Plant_lettuce	lettuce	possible_plant	
+Plant_snap_bean	snap bean	possible_plant	
+Plant_Ashitaba	Ashitaba	possible_plant	
+Plant_Phyfnnvik_eyyfn	Phyfnnvik eyyfn	possible_plant	
+Plant_common_dandelion	common dandelion	possible_plant	
+Plant_Exodermis_poria	Exodermis poria	possible_plant	
+Plant_polyangium_brachysporum	[polyangium] brachysporum	junk	contains brackets/parens (strain designation)
+Plant_Barbados_nut	Barbados nut	possible_plant	
+Plant_Sraitia_grosvenorii	Sraitia grosvenorii	possible_plant	
+Plant_star_fruit	star fruit	possible_plant	
+Plant_Philadelphia_fleabane	Philadelphia fleabane	possible_plant	
+Plant_Pericarpium_citri	Pericarpium citri	junk	pharmacognosy part-name ('pericarpium')
+Plant_Semen_astragali_complanati	Semen astragali complanati	junk	pharmacognosy part-name ('semen')
+Plant_Aca_sellowiana	Aca sellowiana	possible_plant	
+Organism_1851	Marine	possible_plant	
+Organism_45828	Brazilian Red Propolis	junk	non-plant common-name token
+Plant_Herba_ecliptae_prostratae	Herba ecliptae prostratae	junk	pharmacognosy part-name ('herba')
+Plant_Kothala_himbutu	Kothala himbutu	possible_plant	
+Plant_chia	chia	possible_plant	
+Plant_Caulis_millettiae	Caulis millettiae	junk	pharmacognosy part-name ('caulis')
+Plant_Caulis_spatholobi	Caulis spatholobi	junk	pharmacognosy part-name ('caulis')
+Plant_Herba_meconpsis_integrifoliae	Herba meconpsis integrifoliae	junk	pharmacognosy part-name ('herba')
+Plant_marjoram	marjoram	possible_plant	
+Plant_Cytotoxic_spiromamakone	Cytotoxic spiromamakone	possible_plant	
+Plant_Mexican_propolis	Mexican propolis	junk	non-plant common-name token
+Plant_Herba_artemisiae_scopariae	Herba artemisiae scopariae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_cichorii	Herba cichorii	junk	pharmacognosy part-name ('herba')
+Plant_Herba_cirsii_japonici	Herba cirsii japonici	junk	pharmacognosy part-name ('herba')
+Plant_Herba_seu_radix_cirsii_japonici	Herba seu radix cirsii japonici	junk	Latin drug phrase (seu/et)
+Plant_Herba_acalyphae	Herba acalyphae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_glechomae	Herba glechomae	junk	pharmacognosy part-name ('herba')
+Plant_Alkaloid_lycorine	Alkaloid lycorine	possible_plant	
+Plant_Caulis_perillae	Caulis perillae	junk	pharmacognosy part-name ('caulis')
+Plant_Forking_Larkspur	Forking Larkspur	possible_plant	
+Plant_Santol	Santol	possible_plant	
+Plant_Herba_dendrobii	Herba dendrobii	junk	pharmacognosy part-name ('herba')
+Organism_52271	Vinegar	possible_plant	
+Plant_Yan_Hu_Suo	Yan Hu Suo	possible_plant	
+Plant_actinomycete_sp.	actinomycete sp.	possible_plant	
+Plant_blue_water-speedwell	blue water-speedwell	possible_plant	
+Plant_borage	borage	possible_plant	
+Plant_Burmese_Lacquer_Tree	Burmese Lacquer Tree	possible_plant	
+Plant_Cherry_Orange	Cherry Orange	possible_plant	
+Plant_Reniera_sp.	Reniera sp.	possible_plant	
+Plant_eDNA_sp.	eDNA sp.	possible_plant	
+Plant_Eddoe	Eddoe	possible_plant	
+Plant_Grataegus_pinnatifida	Grataegus pinnatifida	possible_plant	
+Plant_Herba_sedi_sarmentosi	Herba sedi sarmentosi	junk	pharmacognosy part-name ('herba')
+Plant_Semen_juglandis	Semen juglandis	junk	pharmacognosy part-name ('semen')
+Plant_Anderson_s_larkspur	Anderson's larkspur	possible_plant	
+Plant_Frilled_nudibranch	Frilled nudibranch	junk	non-plant common-name token
+Plant_Dollar_spot	Dollar spot	possible_plant	
+Plant_Jeweled_distaff_thistle	Jeweled distaff thistle	possible_plant	
+Plant_Spanish_dancer	Spanish dancer	possible_plant	
+Plant_Succinus	Succinus	possible_plant	
+Plant_Brazilian_propolis	Brazilian propolis	junk	non-plant common-name token
+Plant_Pericarpium_arecae	Pericarpium arecae	junk	pharmacognosy part-name ('pericarpium')
+Plant_Polysaccharidum_versicolor	Polysaccharidum versicolor	possible_plant	
+Plant_Semen_sojae_praeparata	Semen sojae praeparata	junk	pharmacognosy part-name ('semen')
+Plant_Herba_patriniae	Herba patriniae	junk	pharmacognosy part-name ('herba')
+Plant_meadow_clary	meadow clary	possible_plant	
+Plant_Eastern_groundsel	Eastern groundsel	possible_plant	
+Plant_Hedgehog-shaped_lip_Bulbophyllum	Hedgehog-shaped lip Bulbophyllum	possible_plant	
+Plant_Water_net	Water net	possible_plant	
+Organism_1857	Widely distributed in plant	possible_plant	
+Plant_cicely	cicely	possible_plant	
+Plant_Cacumen_tamaricis	Cacumen tamaricis	junk	pharmacognosy part-name ('cacumen')
+Plant_Organ_pipe_coral	Organ pipe coral	possible_plant	
+Plant_Warty_dorid	Warty dorid	possible_plant	
+Plant_channelled_wrack	channelled wrack	possible_plant	
+Plant_crumb-of-bread_sponge	crumb-of-bread sponge	junk	non-plant common-name token
+Plant_denseflower_mullein	denseflower mullein	possible_plant	
+Plant_straw_mushroom	straw mushroom	junk	non-plant/unknown marker ('mushroom')
+Plant_Dendronephtya_sp.	Dendronephtya sp.	possible_plant	
+Plant_Malagasy_connaraceous	Malagasy connaraceous	possible_plant	
+Plant_African_blue_basil	African blue basil	possible_plant	
+Plant_Herba_selaginellae_doederleinii	Herba selaginellae doederleinii	junk	pharmacognosy part-name ('herba')
+Plant_Resina_liquidambaris	Resina liquidambaris	junk	pharmacognosy part-name ('resina')
+Plant_Smooth_hawksbeard	Smooth hawksbeard	possible_plant	
+Plant_Azaridachta_indica	Azaridachta indica	possible_plant	
+Plant_Lndigofera_tinctoria	Lndigofera tinctoria	possible_plant	
+Plant_endophytic_aspergillus	endophytic aspergillus	junk	microbial strain / unknown marker
+Plant_lineariifolia_turcz	lineariifolia turcz	possible_plant	
+Plant_mountain_clover	mountain clover	possible_plant	
+Plant_spotted_tricholoma	spotted tricholoma	possible_plant	
+Plant_rnica	árnica	possible_plant	
+Plant_Aioliomyces_pyridodomos	Aioliomyces pyridodomos	possible_plant	
+Plant_Cephalanceropsis_gracilis	Cephalanceropsis gracilis	possible_plant	
+Plant_Cortex_magnoliae_officinalis	Cortex magnoliae officinalis	junk	pharmacognosy part-name ('cortex')
+Plant_Dark_Mullein	Dark Mullein	possible_plant	
+Plant_Herba_nerviliae	Herba nerviliae	junk	pharmacognosy part-name ('herba')
+Plant_Nepalese_propolis	Nepalese propolis	junk	non-plant common-name token
+Plant_Sweet_Woodruff	Sweet Woodruff	possible_plant	
+Plant_clostridium_cellulolyticum	[clostridium] cellulolyticum	junk	contains brackets/parens (strain designation)
+Plant_Gama_farinosum	Gama farinosum	possible_plant	
+Plant_Massa_fermentata	Massa fermentata	possible_plant	
+Plant_Plastrum_testudinis	Plastrum testudinis	possible_plant	
+Organism_46198	brazilian green propolis	junk	non-plant common-name token
+Plant_chinese_propolis	chinese propolis	junk	non-plant common-name token
+Plant_zedoariae_rhizoma	zedoariae rhizoma	possible_plant	
+Plant_Cortex_lycii_radicis	Cortex lycii radicis	junk	pharmacognosy part-name ('cortex')
+Plant_Oleum_ocimi_gratissimi	Oleum ocimi gratissimi	junk	pharmacognosy part-name ('oleum')
+Plant_Pericarpium_zanthoxyli	Pericarpium zanthoxyli	junk	pharmacognosy part-name ('pericarpium')
+Plant_Portuguese_Squill	Portuguese Squill	possible_plant	
+Plant_Reniera	Reniera	possible_plant	
+Plant_candida_zeylanoides	[candida] zeylanoides	junk	contains brackets/parens (strain designation)
+Plant_Dens_draconis_preparata	Dens draconis preparata	possible_plant	
+Plant_Herreania_sp.	Herreania sp.	possible_plant	
+Plant_Hijikia_fusiforme	Hijikia fusiforme	possible_plant	
+Plant_Horsehair_crab	Horsehair crab	junk	non-plant common-name token
+Plant_Natural_safrole_producing_species_Unclassified	Natural safrole producing species (Unclassified)	junk	non-plant/unknown marker ('unclassified')
+Plant_Rhamuron_balansae	Rhamuron balansae	possible_plant	
+Plant_Timothy-grass	Timothy-grass	possible_plant	
+Organism_54832	burman diospyros burmanica	possible_plant	
+Plant_common_bugloss	common bugloss	possible_plant	
+Plant_hijiki	hijiki	possible_plant	
+Plant_latrunculid_sponges	latrunculid sponges	possible_plant	
+Plant_sponge_sp.	sponge sp.	junk	non-plant common-name token
+Plant_Common_rose	Common rose	possible_plant	
+Plant_Escinops_ellenbeckii	Escinops ellenbeckii	possible_plant	
+Plant_Marine_isolate	Marine isolate	junk	microbial strain / unknown marker
+Plant_Oleum_pogostemonis	Oleum pogostemonis	junk	pharmacognosy part-name ('oleum')
+Plant_Semen_artemisiae	Semen artemisiae	junk	pharmacognosy part-name ('semen')
+Plant_druinella_sp.	druinella sp.	possible_plant	
+Plant_hydrangeae_dulcis_folium	hydrangeae dulcis folium	possible_plant	
+Organism_47558	Cameroonian entandrophragma	possible_plant	
+Plant_Carapax_trionycis	Carapax trionycis	possible_plant	
+Plant_Endophytic_fungi	Endophytic fungi	junk	non-plant/unknown marker ('fungi')
+Plant_Sanguis_draconis	Sanguis draconis	possible_plant	
+Plant_Sword-tail_newt	Sword-tail newt	possible_plant	
+Plant_Thermal_degraded_product	Thermal degraded product	possible_plant	
+Plant_chinese_eaglewood	chinese eaglewood	possible_plant	
+Plant_gabonese_sp.	gabonese sp.	possible_plant	
+Organism_49632	green tea	possible_plant	
+Plant_korean_propolis	korean propolis	junk	non-plant common-name token
+Plant_os-f68576	os-f68576	junk	contains digits (strain/catalog id)
+Plant_umbellate_wintergreen	umbellate wintergreen	possible_plant	
+Plant_zigzag_clover	zigzag clover	possible_plant	
+Plant_Actinomycete_strain_R516-16	Actinomycete strain R516-16	junk	contains digits (strain/catalog id)
+Organism_548	Arbuscular mycorrhizal	possible_plant	
+Plant_Azadiractica_indica	Azadiractica indica	possible_plant	
+Plant_Bas_taurus	Bas taurus	possible_plant	
+Plant_Candidatus-Endobryopsis_kahalalidefaciens	Candidatus-Endobryopsis kahalalidefaciens	possible_plant	
+Plant_Cortex_dictamni	Cortex dictamni	junk	pharmacognosy part-name ('cortex')
+Plant_Gambier	Gambier	possible_plant	
+Plant_George_lily_Scarborough_lily	George lily, Scarborough lily	possible_plant	
+Plant_Giant_leaf_frog	Giant leaf frog	possible_plant	
+Plant_Herba_plantaginis_minutae	Herba plantaginis minutae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_serissae	Herba serissae	junk	pharmacognosy part-name ('herba')
+Plant_Mexican_Brown_Propolis	Mexican Brown Propolis	junk	non-plant common-name token
+Plant_New_England_Tree_Frog	New England Tree Frog	possible_plant	
+Plant_Penis_cervi	Penis cervi	possible_plant	
+Plant_Periostracum_cicadae	Periostracum cicadae	possible_plant	
+Plant_Savoy_cabbage	Savoy cabbage	possible_plant	
+Plant_Scutellariae_radix	Scutellariae radix	possible_plant	
+Plant_Semen_sesami	Semen sesami	junk	pharmacognosy part-name ('semen')
+Plant_kabosu	kabosu	possible_plant	
+Organism_53783	nepalese zanthoxylum armatum	possible_plant	
+Plant_Archangelicia_flava	Archangelicia flava	possible_plant	
+Plant_Balsamum_tolutanum	Balsamum tolutanum	possible_plant	
+Plant_Concha_meretricis_seu_cyclinae	Concha meretricis seu cyclinae	junk	Latin drug phrase (seu/et)
+Plant_Exocarpium_citri_grandis	Exocarpium citri grandis	junk	pharmacognosy part-name ('exocarpium')
+Plant_Family_asteriidae	Family asteriidae	possible_plant	
+Plant_Firebug	Firebug	possible_plant	
+Plant_Herba_dracocephali_tangutici	Herba dracocephali tangutici	junk	pharmacognosy part-name ('herba')
+Plant_Herba_fragariae	Herba fragariae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_lagotidis	Herba lagotidis	junk	pharmacognosy part-name ('herba')
+Plant_Lsodon_japonica	Lsodon japonica	possible_plant	
+Plant_Peruvian_amazonian	Peruvian amazonian	possible_plant	
+Plant_Satsuki_azalea	Satsuki azalea	possible_plant	
+Plant_Stiff_silkworm	Stiff silkworm	possible_plant	
+Plant_cartwtereementas_de_mitas	cartwtereementas de mitas	possible_plant	
+Organism_8493	family Asteraceae spp.	possible_plant	
+Plant_garden_chervil	garden chervil	possible_plant	
+Plant_gorgonian_astrogorgia_sp.	gorgonian astrogorgia sp.	junk	non-plant common-name token
+Plant_pulmonate_mollusks	pulmonate mollusks	possible_plant	
+Plant_strongylophora	strongylophora	possible_plant	
+Plant_ymf_1.01029	ymf 1.01029	junk	contains digits (strain/catalog id)
+Plant_Arousa_sp.	Arousa sp.	possible_plant	
+Plant_Broad_sea_fan	Broad sea fan	possible_plant	
+Plant_Burmese_grape	Burmese grape	possible_plant	
+Plant_Cape_dorid	Cape dorid	possible_plant	
+Plant_Dwarf_sea_hare	Dwarf sea hare	possible_plant	
+Plant_Freshwater_algal_bloom	Freshwater algal bloom	possible_plant	
+Plant_Gorgonian_pseudopterogorgia	Gorgonian pseudopterogorgia	junk	non-plant common-name token
+Plant_Halophilic_actinomycete	Halophilic actinomycete	possible_plant	
+Plant_Indo-Pacific_sponge_Unclassified	Indo-Pacific sponge (Unclassified)	junk	non-plant/unknown marker ('unclassified')
+Plant_Jnula_britannica	Jnula britannica	possible_plant	
+Plant_Liquor_jiu	Liquor jiu	possible_plant	
+Organism_54611	Lsodon oresbia	possible_plant	
+Plant_Marine_bacillus	Marine bacillus	possible_plant	
+Plant_Mashua	Mashua	possible_plant	
+Plant_Mmaesa_laxiflora	Mmaesa laxiflora	possible_plant	
+Plant_Pericarpium_trichosanthis	Pericarpium trichosanthis	junk	pharmacognosy part-name ('pericarpium')
+Plant_Phodymenia_palmata	Phodymenia palmata	possible_plant	
+Plant_Semen_trichosanthis	Semen trichosanthis	junk	pharmacognosy part-name ('semen')
+Plant_Vinum	Vinum	junk	pharmacognosy part-name ('vinum')
+Plant_aaglaia_argentea	aaglaia argentea	possible_plant	
+Plant_beadlet_anemone	beadlet anemone	junk	non-plant common-name token
+Plant_bermuda_buttercup	bermuda buttercup	possible_plant	
+Plant_hominaxella_sp.	hominaxella sp.	possible_plant	
+Plant_spongosorite	spongosorite	possible_plant	
+Plant_Andaliman	Andaliman	possible_plant	
+Plant_Asidosperma_subincanum_Mart	Asidosperma subincanum Mart	possible_plant	
+Plant_Bladder_senna	Bladder senna	possible_plant	
+Plant_Butler_s_Garter_Snake	Butler's Garter Snake	possible_plant	
+Organism_1281	Cape aloe	possible_plant	
+Plant_Concha_mauritiae_arabicae	Concha mauritiae arabicae	junk	pharmacognosy part-name ('concha')
+Plant_Cortex_berberidis	Cortex berberidis	junk	pharmacognosy part-name ('cortex')
+Organism_914	Curya pecan	possible_plant	
+Plant_Fructusgleditsia	Fructusgleditsia	possible_plant	
+Plant_Golden_mandarin_fish	Golden mandarin fish	junk	non-plant common-name token
+Plant_Herba_coriandri	Herba coriandri	junk	pharmacognosy part-name ('herba')
+Plant_Hymeneae_palustris	Hymeneae palustris	possible_plant	
+Plant_Katmon	Katmon	possible_plant	
+Plant_Octea_macrophylla	Octea macrophylla	possible_plant	
+Plant_Oleum_cinnamomi	Oleum cinnamomi	junk	pharmacognosy part-name ('oleum')
+Plant_Orytes_rinojaponyes	Orytes rinojaponyes	possible_plant	
+Plant_Pedicellus_melo	Pedicellus melo	possible_plant	
+Plant_Red_Mexican_Propolis	Red Mexican Propolis	junk	non-plant common-name token
+Plant_Smooth-fronted_caiman	Smooth-fronted caiman	possible_plant	
+Plant_Stelmatocrypton_khasianum	Stelmatocrypton khasianum	possible_plant	
+Plant_Strain_SANK_17397	Strain SANK 17397	junk	contains digits (strain/catalog id)
+Plant_Streptomycete	Streptomycete	possible_plant	
+Plant_aged_korean_fermented_soybean_paste	aged korean fermented soybean paste	possible_plant	
+Organism_45702	antarctic peninsula	possible_plant	
+Plant_basking_shark	basking shark	junk	non-plant common-name token
+Plant_epichlo_festucae	epichlo√É¬É√Ç¬´ festucae	possible_plant	
+Plant_lethal_webcaps	lethal webcaps	possible_plant	
+Plant_octocorals	octocorals	possible_plant	
+Plant_pseuhxandra_sclerocarpa	pseuhxandra sclerocarpa	possible_plant	
+Plant_sarcuapnos_crassfolia	sarcuapnos crassfolia	possible_plant	
+Plant_sunflower_pollen	sunflower pollen	possible_plant	
+Plant_terrestrial_streptomycete	terrestrial streptomycete	possible_plant	
+Plant_AB_1246E-26_NRRL_18371	AB 1246E-26 (NRRL 18371)	junk	contains digits (strain/catalog id)
+Plant_Auto_oxidation_products_of_astaxanthin_with_hydroxy_radicals_superoxide_anion_radicals_and_singlet_oxygen.	Auto oxidation products of astaxanthin with hydroxy radicals, superoxide anion radicals, and singlet oxygen.	possible_plant	
+Plant_Bolinea_lutea_Sacc.	Bolinea lutea Sacc.	possible_plant	
+Plant_Carapax_et_plastrum_testudinis	Carapax et plastrum testudinis	junk	Latin drug phrase (seu/et)
+Plant_Clycyrrhiza_glabra	Clycyrrhiza glabra	possible_plant	
+Plant_Cortex_mori_radicis_praeparata	Cortex mori radicis praeparata	junk	pharmacognosy part-name ('cortex')
+Plant_Cossypium_herbaceum	Cossypium herbaceum	possible_plant	
+Plant_Diffenbachia_sp._ATCC_46314	Diffenbachia sp. ATCC 46314	junk	contains digits (strain/catalog id)
+Plant_Fornes_officinalis	Fornes officinalis	possible_plant	
+Plant_G._lindblomi	G. lindblomi	possible_plant	
+Plant_Grass-of-Parnassus	Grass-of-Parnassus	possible_plant	
+Plant_Hilanthus_annuus	Hilanthus annuus	possible_plant	
+Plant_Intermediate_wintergreen	Intermediate wintergreen	possible_plant	
+Plant_MEXU_27095	MEXU 27095	junk	contains digits (strain/catalog id)
+Plant_Marine_fungi	Marine fungi	junk	non-plant/unknown marker ('fungi')
+Plant_Melanoselenium_decipiens	Melanoselenium decipiens	possible_plant	
+Plant_Oleum_curcumae	Oleum curcumae	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_linderae	Oleum linderae	junk	pharmacognosy part-name ('oleum')
+Plant_Pentemon_gentianoides_HBK	Pentemon gentianoides HBK	possible_plant	
+Plant_Pericarpium_pyri	Pericarpium pyri	junk	pharmacognosy part-name ('pericarpium')
+Plant_Phantasmal_poison_frog	Phantasmal poison frog	possible_plant	
+Plant_Purple_soft_coral	Purple soft coral	possible_plant	
+Plant_Red-lined_Carrion_Beetle	Red-lined Carrion Beetle	possible_plant	
+Plant_Semen_arecae	Semen arecae	junk	pharmacognosy part-name ('semen')
+Plant_Semen_benincasae	Semen benincasae	junk	pharmacognosy part-name ('semen')
+Plant_Semen_phaseoli	Semen phaseoli	junk	pharmacognosy part-name ('semen')
+Plant_Umbrella_slug	Umbrella slug	junk	non-plant common-name token
+Plant_Yam_vegetable	Yam (vegetable)	junk	contains brackets/parens (strain designation)
+Plant_dragon_s_teeth	dragon's teeth	possible_plant	
+Plant_gai_lan	gai lan	possible_plant	
+Plant_macroalgae	macroalgae	possible_plant	
+Plant_madagascan_frogs	madagascan frogs	possible_plant	
+Plant_northern_prawn	northern prawn	possible_plant	
+Plant_occurs_in_many_fungi	occurs in many fungi	junk	non-plant/unknown marker ('fungi')
+Plant_Acangelisia_gusanlung	Acangelisia gusanlung	possible_plant	
+Plant_Amphimelon_sp._SS955	Amphimelon sp. SS955	junk	contains digits (strain/catalog id)
+Plant_Animal_Venoms	Animal Venoms	possible_plant	
+Plant_CR1488E	CR1488E	junk	contains digits (strain/catalog id)
+Plant_Camaecytisus_absinthioides	Camaecytisus absinthioides	possible_plant	
+Organism_53665	Catechu	possible_plant	
+Plant_Caulis_rubi_idaei	Caulis rubi idaei	junk	pharmacognosy part-name ('caulis')
+Plant_Common_Blackbird	Common Blackbird	possible_plant	
+Plant_Cortex_fraxini	Cortex fraxini	junk	pharmacognosy part-name ('cortex')
+Plant_Cortex_phellodendri	Cortex phellodendri	junk	pharmacognosy part-name ('cortex')
+Plant_Cucurbitacea_sp.	Cucurbitacea sp.	possible_plant	
+Organism_7909	Curcurbita pepo L.	possible_plant	
+Plant_Damson	Damson	possible_plant	
+Plant_Delea_versicolor	Delea versicolor	possible_plant	
+Plant_Dendronephythya_sp.	Dendronephythya sp.	possible_plant	
+Organism_51244	Endophytic fungal NRRL 50135	junk	non-plant/unknown marker ('fungal')
+Plant_Family_plakiniidae	Family plakiniidae	possible_plant	
+Plant_Gymnostemma_pentaphyllum	Gymnostemma pentaphyllum	possible_plant	
+Plant_Herba_alternantherae	Herba alternantherae	junk	pharmacognosy part-name ('herba')
+Plant_Himalayan_honeysuckle	Himalayan honeysuckle	possible_plant	
+Plant_Leptospeciesaeria	Leptospeciesaeria	possible_plant	
+Plant_Little_black_ant	Little black ant	possible_plant	
+Plant_Marimo	Marimo	possible_plant	
+Plant_Mosaic_pleurobranch	Mosaic pleurobranch	possible_plant	
+Plant_Natrii_sulfas	Natrii sulfas	possible_plant	
+Plant_Oleum_corticis_cinnamomi	Oleum corticis cinnamomi	junk	pharmacognosy part-name ('oleum')
+Plant_Panacis_majoris	Panacis majoris	possible_plant	
+Plant_Paralimyxa_miuraensis	Paralimyxa miuraensis	possible_plant	
+Plant_Parazoanhus_sp.	Parazoanhus sp.	possible_plant	
+Plant_Plakoris_sp.	Plakoris sp.	possible_plant	
+Plant_Plerula_sp.	Plerula sp.	possible_plant	
+Plant_Plumula_nelumbensis	Plumula nelumbensis	junk	pharmacognosy part-name ('plumula')
+Plant_Pseudoaxinissa_digitata	Pseudoaxinissa digitata	possible_plant	
+Plant_Pufferfish_takifugu	Pufferfish takifugu	possible_plant	
+Plant_Ramuius_wallichii	Ramuius wallichii	possible_plant	
+Plant_Sacococca_vagans	Sacococca vagans	possible_plant	
+Plant_Semen_armeniacae_amarum	Semen armeniacae amarum	junk	pharmacognosy part-name ('semen')
+Plant_Semen_torreyae	Semen torreyae	junk	pharmacognosy part-name ('semen')
+Plant_Siphonoglossa_S._mexicana	Siphonoglossa S. mexicana	possible_plant	
+Plant_Sphaeropsidales	Sphaeropsidales	possible_plant	
+Plant_Stemphilium_sp._No._644	Stemphilium sp. No. 644	junk	contains digits (strain/catalog id)
+Plant_Sunflower_seastar	Sunflower seastar	possible_plant	
+Plant_Testa_arachidis_hypogaeae	Testa arachidis hypogaeae	possible_plant	
+Plant_Unum_usitatissimum	Unum usitatissimum	possible_plant	
+Plant_Veticillium_lecanii	Veticillium lecanii	possible_plant	
+Plant_Xinea_florida	Xinea florida	possible_plant	
+Plant_Zonariu_toumefortii	Zonariu toumefortii	possible_plant	
+Plant_clostridium_stercorarium_subsp._leptospartum	[clostridium] stercorarium subsp. leptospartum	junk	contains brackets/parens (strain designation)
+Plant_green_bristle-grass	green bristle-grass	possible_plant	
+Plant_madagascan_sponges	madagascan sponges	possible_plant	
+Plant_mitosporic_dothideomycete_sp._lrub20	mitosporic dothideomycete sp. lrub20	junk	contains digits (strain/catalog id)
+Plant_msx_47445	msx 47445	junk	contains digits (strain/catalog id)
+Plant_Almeidia_coerulea	Almeidia coerulea	possible_plant	
+Plant_Amarilidaceae	Amarilidaceae	possible_plant	
+Plant_Amelaria_mellea	Amelaria mellea	possible_plant	
+Plant_Amicolatopsis_sp._MJ950-89F4	Amicolatopsis sp. MJ950-89F4	junk	contains digits (strain/catalog id)
+Organism_54310	Arillus longan	junk	pharmacognosy part-name ('arillus')
+Plant_Atlantic_deep-sea_scallop	Atlantic deep-sea scallop	junk	non-plant common-name token
+Plant_Australian_green_tree_frog	Australian green tree frog	possible_plant	
+Plant_Bakabsua_obtecta_B249	Bakabsua obtecta B249	junk	contains digits (strain/catalog id)
+Plant_Bilis_porci	Bilis porci	possible_plant	
+Plant_Camoensis_maxima	Camoensis maxima	possible_plant	
+Plant_Carallococcus_caralloides_Cc_c127	Carallococcus caralloides Cc c127	junk	contains digits (strain/catalog id)
+Plant_Caulis_sargentodoxae	Caulis sargentodoxae	junk	pharmacognosy part-name ('caulis')
+Plant_Comus_officinalis	Comus officinalis	possible_plant	
+Plant_Concha_haliotidis	Concha haliotidis	junk	pharmacognosy part-name ('concha')
+Plant_Cortex_zingiberis	Cortex zingiberis	junk	pharmacognosy part-name ('cortex')
+Plant_Cylindrospormum_sp.	Cylindrospormum sp.	possible_plant	
+Plant_Endicheria_aff.	Endicheria aff.	possible_plant	
+Plant_Eupatortum_urticaefolium	Eupatortum urticaefolium	possible_plant	
+Plant_Herba_clinopodii	Herba clinopodii	junk	pharmacognosy part-name ('herba')
+Plant_Herba_desmodii_styracifolii	Herba desmodii styracifolii	junk	pharmacognosy part-name ('herba')
+Plant_Herba_gynurae_bicoloris	Herba gynurae bicoloris	junk	pharmacognosy part-name ('herba')
+Plant_Herba_lysimachiae	Herba lysimachiae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_sophorae_alopecuroidis	Herba sophorae alopecuroidis	junk	pharmacognosy part-name ('herba')
+Plant_Honophymia_conferta	Honophymia conferta	possible_plant	
+Plant_James_s_Flamingo	James's Flamingo	possible_plant	
+Plant_Kuji_amber	Kuji amber	possible_plant	
+Plant_Kurosawa_E	Kurosawa E	possible_plant	
+Plant_Lanurocerasus_officinalis	Lanurocerasus officinalis	possible_plant	
+Plant_Large_milkweed_bug	Large milkweed bug	possible_plant	
+Plant_Llex_chinensis	Llex chinensis	possible_plant	
+Plant_Madagascan_mantella	Madagascan mantella	possible_plant	
+Plant_Manchurian_wild_rice	Manchurian wild rice	possible_plant	
+Plant_Massa_hanshi_fermentata	Massa hanshi fermentata	possible_plant	
+Organism_57058	Natural products	possible_plant	
+Plant_Neamatoloma_fasciculare	Neamatoloma fasciculare	possible_plant	
+Plant_Ochrocapus_odoratus	Ochrocapus odoratus	possible_plant	
+Plant_Oioscorea_parviflora	Oioscorea parviflora	possible_plant	
+Plant_Oleum_sesami	Oleum sesami	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_terebinthinae	Oleum terebinthinae	junk	pharmacognosy part-name ('oleum')
+Plant_Onionis_viscosa_ssp._breviflora	Onionis viscosa ssp. breviflora	possible_plant	
+Plant_Perganum_harmala	Perganum harmala	possible_plant	
+Plant_Plains_Lubber_Grasshopper	Plains Lubber Grasshopper	possible_plant	
+Plant_Priestleya	Priestleya	possible_plant	
+Plant_Proclema_pendula	Proclema pendula	possible_plant	
+Plant_Pulvis_coris_bovis_seu_bubali	Pulvis coris bovis seu bubali	junk	Latin drug phrase (seu/et)
+Plant_Resina_olibani	Resina olibani	junk	pharmacognosy part-name ('resina')
+Plant_Scaphyglotti_Livida	Scaphyglotti Livida	possible_plant	
+Plant_Semen_alpiniae_katsumadai	Semen alpiniae katsumadai	junk	pharmacognosy part-name ('semen')
+Plant_Semen_chaulmoograe	Semen chaulmoograe	junk	pharmacognosy part-name ('semen')
+Plant_Semen_holarrhenae	Semen holarrhenae	junk	pharmacognosy part-name ('semen')
+Plant_Semen_sterculiae_lychnophorae	Semen sterculiae lychnophorae	junk	pharmacognosy part-name ('semen')
+Organism_55332	Siberian larch	possible_plant	
+Plant_Smearwort	Smearwort	possible_plant	
+Plant_Spanish_Navelinas	Spanish Navelinas	possible_plant	
+Plant_Sparuna_pauciflora	Sparuna pauciflora	possible_plant	
+Plant_Sphaeropsidales_sp.strain_F-24_707	Sphaeropsidales sp.strain F-24'707	junk	contains digits (strain/catalog id)
+Plant_Verrucarol_diacetoxyscirpenol	Verrucarol diacetoxyscirpenol	possible_plant	
+Plant_araguaney	araguaney	possible_plant	
+Plant_bcc_8616	bcc 8616	junk	contains digits (strain/catalog id)
+Plant_black_cardamom	black cardamom	possible_plant	
+Plant_black_garden_ant	black garden ant	possible_plant	
+Plant_japanese_brown_alga	japanese brown alga	possible_plant	
+Plant_korean_fermented_soypaste	korean fermented soypaste	possible_plant	
+Plant_mahi-mahi	mahi-mahi	possible_plant	
+Plant_mangrove_fungi_strain_No._K38_mangrove_fungi_strain_No._E33	mangrove fungi strain No. K38 + mangrove fungi strain No. E33	junk	non-plant/unknown marker ('fungi')
+Organism_54708	red ginseng	possible_plant	
+Plant_sarcuajmos_saetavensis	sarcuajmos saetavensis	possible_plant	
+Plant_smooth_rupturewort	smooth rupturewort	possible_plant	
+Plant_taiwanese_propolis	taiwanese propolis	junk	non-plant common-name token
+Plant_Acidum_thymici	Acidum thymici	possible_plant	
+Plant_Actinomycete_ATCC_39366	Actinomycete ATCC 39366	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_SANK_60684	Actinomycete SANK 60684	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_isolate_HKI_129-L	Actinomycete isolate HKI 129-L	junk	contains digits (strain/catalog id)
+Organism_14577	Artemisis anna	possible_plant	
+Plant_Atlantic_Spanish_mackerel	Atlantic Spanish mackerel	junk	non-plant common-name token
+Plant_Avila_garcini	Avila  garcini	possible_plant	
+Plant_Babreum_coscluea	Babreum coscluea	possible_plant	
+Plant_Black-and-crimson_Oriole	Black-and-crimson Oriole	possible_plant	
+Plant_Caparis_sp.	Caparis sp.	possible_plant	
+Plant_Caraupa_densiflora	Caraupa densiflora	possible_plant	
+Plant_Caro_caprae_seu_ovis	Caro caprae seu ovis	junk	Latin drug phrase (seu/et)
+Plant_Castanosperma_australe	Castanosperma australe	possible_plant	
+Plant_Caulis_mahoniae	Caulis mahoniae	junk	pharmacognosy part-name ('caulis')
+Plant_Caulis_polygoni_multiflori	Caulis polygoni multiflori	junk	pharmacognosy part-name ('caulis')
+Plant_Cephalis_ipecacuanha	Cephalis ipecacuanha	possible_plant	
+Plant_Chomdsomyces_robustus	Chomdsomyces robustus	possible_plant	
+Plant_Concha_cyclinae	Concha cyclinae	junk	pharmacognosy part-name ('concha')
+Plant_Concha_margaritifera_usta	Concha margaritifera usta	junk	pharmacognosy part-name ('concha')
+Plant_Concretio_silicea_bambusae	Concretio silicea bambusae	possible_plant	
+Plant_Cortex_acanthopanacis_radicis	Cortex acanthopanacis radicis	junk	pharmacognosy part-name ('cortex')
+Plant_Cortex_eucommiae	Cortex eucommiae	junk	pharmacognosy part-name ('cortex')
+Plant_Crassum_intestinum_porci	Crassum intestinum porci	possible_plant	
+Plant_Curcurbita_maxima	Curcurbita maxima	possible_plant	
+Plant_Dakaira_subovoidea	Dakaira subovoidea	possible_plant	
+Plant_Deathstalker_scorpion	Deathstalker scorpion	possible_plant	
+Plant_Dehassia_tetrandra	Dehassia tetrandra	possible_plant	
+Plant_Dinoflagellate_amphidinium	Dinoflagellate amphidinium	possible_plant	
+Plant_Echinoderm_comanthus	Echinoderm comanthus	possible_plant	
+Plant_Endophytic_MEXU_26343	Endophytic MEXU 26343	junk	contains digits (strain/catalog id)
+Plant_Eopleuria_simplicissima	Eopleuria simplicissima	possible_plant	
+Plant_Eschscholtzia	Eschscholtzia	possible_plant	
+Organism_21334	Eschscholtzia california	possible_plant	
+Plant_Essentia	Essentia	possible_plant	
+Plant_Feathered_doto	Feathered doto	possible_plant	
+Plant_Glomospora_sp._BAUA_2825	Glomospora sp. BAUA 2825	junk	contains digits (strain/catalog id)
+Plant_Glypsophila_patrinii	Glypsophila patrinii	possible_plant	
+Plant_Gorgoniae_suberogorgia	Gorgoniae suberogorgia	possible_plant	
+Plant_Gynostemon_pentaphyllum	Gynostemon pentaphyllum	possible_plant	
+Plant_HAM-240	HAM-240	junk	contains digits (strain/catalog id)
+Plant_Herba_aconiti_navicularis	Herba aconiti navicularis	junk	pharmacognosy part-name ('herba')
+Plant_Herba_belladonnae	Herba belladonnae	junk	pharmacognosy part-name ('herba')
+Plant_Herba_sarcatidrae	Herba sarcatidrae	junk	pharmacognosy part-name ('herba')
+Plant_Heterodendron_oleaefolium	Heterodendron oleaefolium	possible_plant	
+Plant_Heterotropha_nipponca	Heterotropha nipponca	possible_plant	
+Plant_Hoffmanosseggia_intricata	Hoffmanosseggia intricata	possible_plant	
+Plant_Humboldt_squid	Humboldt squid	junk	non-plant common-name token
+Plant_Hygroscopicus_sp._LP-93	Hygroscopicus sp. LP-93	junk	contains digits (strain/catalog id)
+Plant_Lanthella_flabelliformis	Lanthella flabelliformis	possible_plant	
+Plant_Leoniopadium_alpinum	Leoniopadium alpinum	possible_plant	
+Plant_Leptoshaeria_sp.OUPS-4	Leptoshaeria sp.OUPS-4	junk	contains digits (strain/catalog id)
+Plant_Lingzhi_mushroom	Lingzhi (mushroom)	junk	non-plant/unknown marker ('mushroom')
+Plant_Manila_elemi	Manila elemi	possible_plant	
+Organism_56543	Margarita	possible_plant	
+Plant_Marginosporum_aberrans	Marginosporum aberrans	possible_plant	
+Plant_Massa_medicata_fermentata	Massa medicata fermentata	possible_plant	
+Plant_Mochinea_polymorpha	Mochinea polymorpha	possible_plant	
+Plant_Mycales_sp.	Mycales sp.	possible_plant	
+Plant_Neosartaria_fischeri	Neosartaria fischeri	possible_plant	
+Plant_Nux_prinsepiae	Nux prinsepiae	possible_plant	
+Plant_Oleum_aurantii	Oleum aurantii	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_viticis_negundo	Oleum viticis negundo	junk	pharmacognosy part-name ('oleum')
+Plant_Ophiosphate_gigaes	Ophiosphate gigaes	possible_plant	
+Plant_Os_sepiae_seu_sepiellaezoological_name	Os sepiae seu sepiellaezoological name	junk	Latin drug phrase (seu/et)
+Plant_Oscillataria_sp.	Oscillataria sp.	possible_plant	
+Plant_Oscillatoriacean_sp.	Oscillatoriacean sp.	possible_plant	
+Plant_Oxidation_of_lycopene_with_m-chloroperbenzoic_acid	Oxidation of lycopene with m-chloroperbenzoic acid	possible_plant	
+Plant_Paracel_islands_agelas_Unclassified	Paracel islands agelas (Unclassified)	junk	non-plant/unknown marker ('unclassified')
+Plant_Pericarpium_papaveris	Pericarpium papaveris	junk	pharmacognosy part-name ('pericarpium')
+Plant_Physispornus_sanguinolentus	Physispornus sanguinolentus	possible_plant	
+Plant_Pig_s_spinal_cord	Pig's spinal cord	possible_plant	
+Plant_Planta_venenosa	Planta venenosa	possible_plant	
+Plant_Plegmariurus_P._Taxifolius	Plegmariurus P. Taxifolius	possible_plant	
+Plant_Puterula_sp._82168	Puterula sp. 82168	junk	contains digits (strain/catalog id)
+Plant_Rhei_rhizoma	Rhei rhizoma	possible_plant	
+Plant_Sanguisorbae_radix	Sanguisorbae radix	possible_plant	
+Plant_Schizandra_sp.	Schizandra sp.	possible_plant	
+Plant_Semen_euryales	Semen euryales	junk	pharmacognosy part-name ('semen')
+Organism_53365	Semen lablab album	junk	pharmacognosy part-name ('semen')
+Plant_Siete_cueros	Siete cueros	possible_plant	
+Plant_Slanum_betacea	Slanum betacea	possible_plant	
+Plant_Southern_blue-ringed_octopus	Southern blue-ringed octopus	junk	non-plant common-name token
+Plant_Sparuna_apiosyce	Sparuna apiosyce	possible_plant	
+Plant_Spongosprites_sp.	Spongosprites sp.	possible_plant	
+Plant_Stelliosphaera_formicum	Stelliosphaera formicum	possible_plant	
+Plant_Steptomyces_hygroscopicus	Steptomyces hygroscopicus	possible_plant	
+Plant_Strachybotrys_alternans	Strachybotrys alternans	possible_plant	
+Plant_Taxanes_producing_species_Unclassified	Taxanes producing species (Unclassified)	junk	non-plant/unknown marker ('unclassified')
+Plant_Testis_et_penis_canis_familiaris	Testis et penis canis familiaris	junk	Latin drug phrase (seu/et)
+Plant_Tevenotica_persica	Tevenotica persica	possible_plant	
+Plant_Thalictri_herba	Thalictri herba	possible_plant	
+Plant_Thoerectandra_sp._Kelly	Thoerectandra sp. (Kelly)	junk	contains brackets/parens (strain designation)
+Plant_Thyreoid_sus_domestica	Thyreoid sus domestica	possible_plant	
+Plant_West_Indian_Ocean_coelacanth	West Indian Ocean coelacanth	possible_plant	
+Plant_Wonderboom_fig	Wonderboom fig	possible_plant	
+Plant_YL-03713F	YL-03713F	junk	contains digits (strain/catalog id)
+Plant_Yellow_striped_flounder	Yellow striped flounder	possible_plant	
+Plant_actinomycete_saccharothrix_sp.	actinomycete saccharothrix sp.	possible_plant	
+Organism_26363	assa-foetida	possible_plant	
+Plant_basidiomycete_deconica_sp._471	basidiomycete deconica sp. 471	junk	contains digits (strain/catalog id)
+Plant_bazzanianovae-zelandiae	bazzanianovae-zelandiae	possible_plant	
+Plant_common_wintergreen	common wintergreen	possible_plant	
+Plant_eDNA_clone_RM57	eDNA clone RM57	junk	contains digits (strain/catalog id)
+Plant_f7524	f7524	junk	contains digits (strain/catalog id)
+Organism_11686	family Thymelaeaceae spp.	possible_plant	
+Plant_gleophyllum_lucidum	gleophyllum lucidum	possible_plant	
+Plant_horse-chestnut_leaf_miner	horse-chestnut leaf miner	possible_plant	
+Plant_laffaariella_variabilis	laffaariella variabilis	possible_plant	
+Plant_madagascan_tunicate	madagascan tunicate	junk	non-plant common-name token
+Plant_mangrove_endophytic_fungi_strain_Nos.3893_mangrove_endophytic_fungi_strain_Nos.1924	mangrove endophytic fungi strain Nos.3893 + mangrove endophytic fungi strain Nos.1924	junk	non-plant/unknown marker ('fungi')
+Plant_micronesian_sponges	micronesian sponges	possible_plant	
+Plant_penicillia_sp.	penicillia sp.	possible_plant	
+Plant_pertrosia_sp.	pertrosia sp.	possible_plant	
+Plant_red_eyelet_silk	red eyelet silk	possible_plant	
+Plant_small-spotted_catshark	small-spotted catshark	possible_plant	
+Plant_swollen_river_mussel	swollen river mussel	junk	non-plant common-name token
+Plant_tricothecium_sp.	tricothecium sp.	possible_plant	
+Organism_57323	tropical trees.	possible_plant	
+Plant_two_Aspergillus_sp._strains	two Aspergillus sp. strains	possible_plant	
+Plant_zh6-b1	zh6-b1	junk	contains digits (strain/catalog id)
+Plant_ADS	ADS	possible_plant	
+Plant_ARH1	ARH1]	junk	contains digits (strain/catalog id)
+Plant_Ababaena_flos-aquae	Ababaena flos-aquae	possible_plant	
+Plant_Abrosia_confertiflora	Abrosia confertiflora	possible_plant	
+Plant_Abrusprecatorius	Abrusprecatorius	possible_plant	
+Plant_Acinidia_rubricaulis_var.coriacea	Acinidia rubricaulis var.coriacea	possible_plant	
+Plant_Acotinum_carmichaeli	Acotinum carmichaeli	possible_plant	
+Plant_Acrophularia_lepidota	Acrophularia lepidota	possible_plant	
+Plant_Actinida_polygana	Actinida polygana	possible_plant	
+Plant_Actinomycete_KM-6054	Actinomycete KM-6054	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_MF931-A2	Actinomycete MF931-A2	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_MG848-hF6	Actinomycete MG848-hF6	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_MST-MA190	Actinomycete MST-MA190	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_TI-1	Actinomycete TI-1	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_UC_5762_NRRL_11111	Actinomycete UC 5762 NRRL 11111	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_WP_3688	Actinomycete WP 3688	junk	contains digits (strain/catalog id)
+Plant_Actinomycete_X-14881	Actinomycete X-14881	junk	contains digits (strain/catalog id)
+Plant_Actotis_artotoides	Actotis artotoides	possible_plant	
+Plant_Agloonema_treubii	Agloonema treubii	possible_plant	
+Plant_Airbreathing_catfish	Airbreathing catfish	possible_plant	
+Plant_Alatus_striatus	Alatus striatus	possible_plant	
+Plant_Allangium_lamarckii	Allangium lamarckii	possible_plant	
+Plant_Amburama_sp.	Amburama sp.	possible_plant	
+Plant_Aminopyrinum	Aminopyrinum	possible_plant	
+Plant_Amitake_mushroom	Amitake mushroom	junk	non-plant/unknown marker ('mushroom')
+Plant_Amona_bullata	Amona bullata	possible_plant	
+Plant_Amona_squamosa	Amona squamosa	possible_plant	
+Plant_Ampelosis_brevipedanculata	Ampelosis brevipedanculata	possible_plant	
+Plant_Amsinkia_hispida	Amsinkia hispida	possible_plant	
+Plant_Analginum	Analginum	possible_plant	
+Organism_1854	Animal	possible_plant	
+Plant_Animal_Propolis	Animal/Propolis	possible_plant	
+Plant_Anthanasia_spp.	Anthanasia spp.	possible_plant	
+Plant_Anthrophopleura_japonica	Anthrophopleura japonica	possible_plant	
+Plant_Apocynumcannabinum	Apocynumcannabinum	possible_plant	
+Plant_Arachioides_standsii	Arachioides standsii	possible_plant	
+Plant_Archangelisia_spp.	Archangelisia spp.	possible_plant	
+Plant_Asafetida_sp.	Asafetida sp.	possible_plant	
+Plant_Ascidian_iic-197	Ascidian (iic-197)	junk	contains digits (strain/catalog id)
+Plant_Atemisia_annua	Atemisia annua	possible_plant	
+Organism_18920	Athamantha oreoselinum	possible_plant	
+Plant_Avrainvillia_spp.	Avrainvillia spp.	possible_plant	
+Plant_Azadiractia_indica	Azadiractia indica	possible_plant	
+Plant_Balameanda_chinensis	Balameanda chinensis	possible_plant	
+Plant_Baleria_lupulina	Baleria lupulina	possible_plant	
+Plant_Bearded_fireworm	Bearded fireworm	possible_plant	
+Plant_Berberisaristata	Berberisaristata	possible_plant	
+Plant_Bilvospiralis_sp._nov._strain_AB634D-177	Bilvospiralis sp. nov. strain AB634D-177	junk	contains digits (strain/catalog id)
+Plant_Binapsis_arvense	Binapsis arvense	possible_plant	
+Plant_Biodata_orientalis	Biodata orientalis	possible_plant	
+Plant_Bitter_milkwort	Bitter milkwort	possible_plant	
+Plant_Blue-legged_mantella	Blue-legged mantella	possible_plant	
+Plant_Bonnettia_spp.	Bonnettia spp.	possible_plant	
+Plant_Brasilia_serjana	Brasilia serjana	possible_plant	
+Plant_Brettanomuces_sp.	Brettanomuces sp.	possible_plant	
+Plant_Brown_mantella	Brown mantella	possible_plant	
+Plant_C-1027_overproducing_recombinant_strains_SgcR	C-1027 overproducing recombinant strains [SgcR	junk	contains digits (strain/catalog id)
+Plant_CL47745	CL47745	junk	contains digits (strain/catalog id)
+Plant_CYP81Q1	CYP81Q1]	junk	contains digits (strain/catalog id)
+Plant_Calcitum	Calcitum	possible_plant	
+Plant_Camaecytisus_pygmaeus	Camaecytisus pygmaeus	possible_plant	
+Organism_1795	Camelliasinensis	possible_plant	
+Plant_Camylotropis_sp.	Camylotropis sp.	possible_plant	
+Plant_Candidatus_Entomycale_ignis	Candidatus Entomycale ignis	possible_plant	
+Plant_Carapia_inophyllum	Carapia inophyllum	possible_plant	
+Plant_Caro_verci	Caro verci	possible_plant	
+Plant_Carthamustinctorius	Carthamustinctorius	possible_plant	
+Plant_Carydalis_ochroleuca	Carydalis ochroleuca	possible_plant	
+Plant_Caryoteris_sp.	Caryoteris sp.	possible_plant	
+Plant_Cathartic_principle	Cathartic principle	possible_plant	
+Plant_Centiana_bavarica	Centiana bavarica	possible_plant	
+Plant_Centipedaminima	Centipedaminima	possible_plant	
+Plant_Centraria_nivalis	Centraria nivalis	possible_plant	
+Plant_Cephalosporum_crotigenum	Cephalosporum crotigenum	possible_plant	
+Plant_Cerberta_dilatata	Cerberta dilatata	possible_plant	
+Plant_CfRFE	CfRFE]	junk	contains brackets/parens (strain designation)
+Plant_Chemotaxonomic_unclassified	Chemotaxonomic unclassified	junk	non-plant/unknown marker ('unclassified')
+Plant_Chicorum_endiva	Chicorum endiva	possible_plant	
+Plant_Chicorum_intybus	Chicorum intybus	possible_plant	
+Plant_Chinese_sage	Chinese sage	possible_plant	
+Plant_Chlomydomonas_spp.	Chlomydomonas spp.	possible_plant	
+Plant_Chlorpheniramini_maleas	Chlorpheniramini maleas	possible_plant	
+Plant_Chondramides_crocatus	Chondramides crocatus	possible_plant	
+Plant_Chryasanthemum_sp.	Chryasanthemum sp.	possible_plant	
+Plant_Ciazona_chinensis	Ciazona chinensis	possible_plant	
+Plant_Cinicus_benedictu	Cinicus benedictu	possible_plant	
+Plant_Citr	Citr	possible_plant	
+Plant_Clabicepitaceae	Clabicepitaceae	possible_plant	
+Plant_Clarisa_spp.	Clarisa spp.	possible_plant	
+Plant_Cleistanthuscollinus	Cleistanthuscollinus	possible_plant	
+Plant_Coast_Douglas-fir	Coast Douglas-fir	possible_plant	
+Plant_Coccifera_plurota	Coccifera plurota	possible_plant	
+Plant_Colladonium_triquestra	Colladonium triquestra	possible_plant	
+Plant_Concha_arcae	Concha arcae	junk	pharmacognosy part-name ('concha')
+Plant_Cones_liquidamber_styraciflua	Cones liquidamber styraciflua	possible_plant	
+Plant_Coprimus_rotundus	Coprimus rotundus	possible_plant	
+Plant_Coronnilla_sp.	Coronnilla sp.	possible_plant	
+Plant_Crategus_sp.	Crategus sp.	possible_plant	
+Plant_Crinan_oliganthum	Crinan oliganthum	possible_plant	
+Plant_CrtB	CrtB	possible_plant	
+Plant_CrtI	CrtI]	junk	contains brackets/parens (strain designation)
+Plant_Crydalis_solida_L_Swartz	Crydalis solida (L) Swartz	junk	contains brackets/parens (strain designation)
+Plant_Cuajacum_officinale	Cuajacum officinale	possible_plant	
+Plant_Curcurbitaceae	Curcurbitaceae	possible_plant	
+Plant_Cycliomorpha_solmsii	Cycliomorpha solmsii	possible_plant	
+Plant_Cyrodalis_sp.	Cyrodalis sp.	possible_plant	
+Plant_Cytomium_spp.	Cytomium spp.	possible_plant	
+Plant_Dactynosporangium_matsuzakiense_SF-2052	Dactynosporangium matsuzakiense SF-2052	junk	contains digits (strain/catalog id)
+Plant_Dendrostillbella_sp.	Dendrostillbella sp.	possible_plant	
+Plant_Desert_truffle	Desert truffle	possible_plant	
+Plant_DhRFE	DhRFE	possible_plant	
+Plant_Dihelerispora_chlamycosporia	Dihelerispora chlamycosporia	possible_plant	
+Plant_Diophus_okamurae	Diophus okamurae	possible_plant	
+Plant_Dioscora_parviflora	Dioscora parviflora	possible_plant	
+Plant_Dridmaria_diandra	Dridmaria diandra	possible_plant	
+Plant_Dryanobulanops	Dryanobulanops	possible_plant	
+Plant_Dryanobulanops_spp.	Dryanobulanops spp.	possible_plant	
+Plant_Drypteris_spp.	Drypteris spp.	possible_plant	
+Plant_EAS	EAS]	junk	contains brackets/parens (strain designation)
+Plant_Ecliptaalba	Ecliptaalba	possible_plant	
+Plant_Edulisin_III	Edulisin III	possible_plant	
+Plant_Elephanthus_nudatus	Elephanthus nudatus	possible_plant	
+Plant_Emblicaofficinalis	Emblicaofficinalis	possible_plant	
+Plant_Ericostemma_litorale	Ericostemma litorale	possible_plant	
+Plant_Eryus_sp.	Eryus sp.	possible_plant	
+Organism_22838	European cranberry	possible_plant	
+Plant_FPS	FPS]	junk	contains brackets/parens (strain designation)
+Plant_Fel_gallus	Fel gallus	possible_plant	
+Plant_Fel_serpentis	Fel serpentis	possible_plant	
+Organism_19117	First Ruta graveolens	possible_plant	
+Plant_Flatycapnos_saxicola	Flatycapnos saxicola	possible_plant	
+Organism_22685	Flavouring ingredient	possible_plant	
+Plant_Fransera_ambrosioides	Fransera ambrosioides	possible_plant	
+Plant_Fuschia_spp.	Fuschia spp.	possible_plant	
+Plant_G._battiscombei	G. battiscombei	possible_plant	
+Plant_GPS	GPS]	junk	contains brackets/parens (strain designation)
+Plant_Gabneria_fulgens	Gabneria fulgens	possible_plant	
+Plant_Gardeniae_fructus	Gardeniae fructus	possible_plant	
+Plant_Geaea_viscida	Geaea viscida	possible_plant	
+Plant_Gelsium_elegans	Gelsium elegans	possible_plant	
+Plant_Genera_protomyces	Genera protomyces	possible_plant	
+Plant_Giant_banjo_frog	Giant banjo frog	possible_plant	
+Plant_Glomospora	Glomospora	possible_plant	
+Plant_Glucosum	Glucosum	possible_plant	
+Plant_Glypsophila_pacifica	Glypsophila pacifica	possible_plant	
+Plant_Gossypiumarboreum	Gossypiumarboreum	possible_plant	
+Plant_Grifolia_confluens	Grifolia confluens	possible_plant	
+Plant_Guavaberry	Guavaberry	possible_plant	
+Plant_Gurjun_balsam	Gurjun balsam	possible_plant	
+Plant_Gymandenia_albida	Gymandenia albida	possible_plant	
+Plant_Gymnostroma_missouriensis	Gymnostroma missouriensis	possible_plant	
+Plant_Haemotoxylum_sp.	Haemotoxylum sp.	possible_plant	
+Plant_Halitum	Halitum	possible_plant	
+Plant_Halophilic_coccus_strain_SE20-4	Halophilic coccus strain SE20-4	junk	contains digits (strain/catalog id)
+Plant_Haplochlatra_leiantha	Haplochlatra leiantha	possible_plant	
+Plant_Hawaiian_marine_mollusk	Hawaiian marine mollusk	junk	non-plant common-name token
+Plant_Helieta_parviflora	Helieta parviflora	possible_plant	
+Plant_Hemerocailis_sp	Hemerocailis sp	possible_plant	
+Plant_Hemiaria_glabra	Hemiaria glabra	possible_plant	
+Plant_Herba_chrysosplenii	Herba chrysosplenii	junk	pharmacognosy part-name ('herba')
+Plant_Herba_elephantopi_scaberis	Herba elephantopi scaberis	junk	pharmacognosy part-name ('herba')
+Plant_Herba_gnaphalii_affinis	Herba gnaphalii affinis	junk	pharmacognosy part-name ('herba')
+Plant_Herba_inulae	Herba inulae	junk	pharmacognosy part-name ('herba')
+Plant_Hetarrhizium_anisopliae	Hetarrhizium anisopliae	possible_plant	
+Plant_Hijikia_fusiformis	Hijikia fusiformis	possible_plant	
+Plant_Hollandica_tuberous	Hollandica tuberous	possible_plant	
+Plant_Horsfilidea_superba	Horsfilidea superba	possible_plant	
+Plant_Hymeniocidon_sp.	Hymeniocidon sp.	possible_plant	
+Plant_Hytios_reticulatus	Hytios reticulatus	possible_plant	
+Plant_Impatiensbalsamina	Impatiensbalsamina	possible_plant	
+Plant_Japanese_fire_belly_newt	Japanese fire belly newt	possible_plant	
+Plant_Jasmine_secco	Jasmine secco	possible_plant	
+Plant_Joannisea_sp.	Joannisea sp.	possible_plant	
+Organism_6535	Juniper	possible_plant	
+Plant_K169B-91	K169B-91	junk	contains digits (strain/catalog id)
+Plant_KC84-AG_13	KC84-AG 13	junk	contains digits (strain/catalog id)
+Plant_Kaponia_glutinosa	Kaponia glutinosa	possible_plant	
+Organism_1693	Kenya aloe	possible_plant	
+Plant_Keucascandra_caveolata	Keucascandra caveolata	possible_plant	
+Plant_LMS	LMS	possible_plant	
+Plant_LS	LS]	junk	contains brackets/parens (strain designation)
+Plant_Lactucarium_germanicum	Lactucarium germanicum	possible_plant	
+Organism_25136	Laetrea thelypteris	possible_plant	
+Plant_Lamii_albi	Lamii albi	possible_plant	
+Plant_Lanicera_Alpigena	Lanicera Alpigena	possible_plant	
+Plant_Lanthella_sp.	Lanthella sp.	possible_plant	
+Plant_Lathrism_latifolius	Lathrism latifolius	possible_plant	
+Plant_Lathrism_sylvestris	Lathrism sylvestris	possible_plant	
+Plant_Ligum_cinnamomi_camphorae	Ligum cinnamomi camphorae	possible_plant	
+Plant_Linder_strychnifolia	Linder strychnifolia	possible_plant	
+Organism_8843	Lnema globularia	possible_plant	
+Plant_Lopatherum_sp.	Lopatherum sp.	possible_plant	
+Plant_Lopophora_sp.	Lopophora sp.	possible_plant	
+Plant_Lovandin_abrialis	Lovandin abrialis	possible_plant	
+Plant_Lsatis_indigotica	Lsatis indigotica	possible_plant	
+Plant_Lumbriconeis_heteropoda	Lumbriconeis heteropoda	possible_plant	
+Plant_Lycogola_epidendron	Lycogola epidendron	possible_plant	
+Plant_MP	MP]	junk	contains brackets/parens (strain designation)
+Plant_Maguey_canasto	Maguey canasto	possible_plant	
+Plant_Maguey_canon_de_abra	Maguey canon de abra	possible_plant	
+Plant_Maguey_cenisto	Maguey cenisto	possible_plant	
+Plant_Maguey_cimmaron	Maguey cimmaron	possible_plant	
+Plant_Maguey_cochabamba	Maguey cochabamba	possible_plant	
+Plant_Maguey_el_ojital	Maguey el ojital	possible_plant	
+Plant_Maguey_espadin	Maguey espadin	possible_plant	
+Plant_Maguey_tequilla_manso	Maguey tequilla manso	possible_plant	
+Plant_Mandrogora_offinarum	Mandrogora offinarum	possible_plant	
+Plant_Marine_crinoi	Marine crinoi	possible_plant	
+Plant_Marismius_conigenus	Marismius conigenus	possible_plant	
+Plant_Maroon_oriole	Maroon oriole	possible_plant	
+Organism_12149	Marsh grapefruit	possible_plant	
+Plant_Mentholum	Mentholum	possible_plant	
+Plant_Micheliachampaca	Micheliachampaca	possible_plant	
+Plant_Microchazete_loktakensis	Microchazete loktakensis	possible_plant	
+Plant_Micromonospeciesra	Micromonospeciesra	possible_plant	
+Plant_Microporous_flabelliformis	Microporous flabelliformis	possible_plant	
+Plant_Mochia_velutina	Mochia velutina	possible_plant	
+Plant_Monodoro_sp.	Monodoro sp.	possible_plant	
+Plant_Montanao_sp.	Montanao sp.	possible_plant	
+Plant_Morindacitrifolia	Morindacitrifolia	possible_plant	
+Plant_Moroxydini_hydrochloridum	Moroxydini hydrochloridum	possible_plant	
+Plant_Mutant_strains_of_Streptomyces_sp._U121_genome_shuffling_of_Streptomyces_sp._U121	Mutant strains of Streptomyces sp. U121 [genome shuffling of Streptomyces sp. U121]	junk	contains digits (strain/catalog id)
+Plant_Nelumbinis_rhizomatis	Nelumbinis rhizomatis	possible_plant	
+Plant_Nephteis_fasicularis	Nephteis fasicularis	possible_plant	
+Plant_Nerolaena_spp.	Nerolaena spp.	possible_plant	
+Plant_Northern_Banjo_Frog	Northern Banjo Frog	possible_plant	
+Plant_Ochrocarpus_spp.	Ochrocarpus spp.	possible_plant	
+Organism_48601	Officinal magnolia	possible_plant	
+Plant_Oleum_camelliae	Oleum camelliae	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_caryophylli	Oleum caryophylli	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_dalbergiae_odoriferae	Oleum dalbergiae odoriferae	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_eucalypti	Oleum eucalypti	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_folii	Oleum folii	junk	pharmacognosy part-name ('oleum')
+Plant_Oleum_rhododendri_daurici	Oleum rhododendri daurici	junk	pharmacognosy part-name ('oleum')
+Organism_55442	Oleum storax	junk	pharmacognosy part-name ('oleum')
+Plant_Ophicalcitum	Ophicalcitum	possible_plant	
+Plant_Opiorrhiza_sp.	Opiorrhiza sp.	possible_plant	
+Plant_Orsellinic_acid	Orsellinic acid	possible_plant	
+Plant_Os_corallii	Os corallii	possible_plant	
+Plant_Os_draconis	Os draconis	possible_plant	
+Plant_Paeoniae_radix	Paeoniae radix	possible_plant	
+Plant_Papularia_sp._M-204036	Papularia sp. M-204036	junk	contains digits (strain/catalog id)
+Plant_Patriniae_scabiosaefoliae	Patriniae scabiosaefoliae	possible_plant	
+Plant_Peaenia_albiflora	Peaenia albiflora	possible_plant	
+Plant_Pekilocerus_bufonius	Pekilocerus bufonius	possible_plant	
+Plant_Peruraria_lobata	Peruraria lobata	possible_plant	
+Plant_Pestaloriopsis_spp.	Pestaloriopsis spp.	possible_plant	
+Plant_Phacellis_fusca	Phacellis fusca	possible_plant	
+Plant_Phalhinhaea_cernua	Phalhinhaea cernua	possible_plant	
+Plant_Phelinus_sp.	Phelinus sp.	possible_plant	
+Plant_Pherethima_aspergillum	Pherethima aspergillum	possible_plant	
+Plant_Pheum_palmatum	Pheum palmatum	possible_plant	
+Plant_Phizobium	Phizobium	possible_plant	
+Plant_Phlebalium_nudum	Phlebalium nudum	possible_plant	
+Plant_Phomu_sp.	Phomu sp.	possible_plant	
+Plant_Phytolocca_esculenta	Phytolocca esculenta	possible_plant	
+Plant_Picrorrhiza_scrophulariaeflora	Picrorrhiza scrophulariaeflora	possible_plant	
+Plant_Pierriera_madagascariensis	Pierriera madagascariensis	possible_plant	
+Plant_Pine_Processionary	Pine Processionary	possible_plant	
+Plant_Pipotrix_areolare	Pipotrix areolare	possible_plant	
+Plant_Piquiera_trinerva	Piquiera trinerva	possible_plant	
+Plant_Pirola_sp.	Pirola sp.	possible_plant	
+Plant_Plantitenia_absinthifolia	Plantitenia absinthifolia	possible_plant	
+Plant_Pletasites_laevigatus	Pletasites laevigatus	possible_plant	
+Plant_Pollen_typhae	Pollen typhae	junk	pharmacognosy part-name ('pollen')
+Plant_Pond_loach_Misgurnus_anguillicaudatus	Pond loach (Misgurnus anguillicaudatus)	junk	contains brackets/parens (strain designation)
+Plant_Pondranea_ricasoliana	Pondranea ricasoliana	possible_plant	
+Plant_Possible_product_of_ozonolysis	Possible product of ozonolysis	possible_plant	
+Organism_24883	Postegmon patchouli	possible_plant	
+Plant_Potential_nutraceutical	Potential nutraceutical	possible_plant	
+Plant_Pricramnia_P._Antidesma	Pricramnia P. Antidesma	possible_plant	
+Plant_Priestleya_spp.	Priestleya spp.	possible_plant	
+Plant_Protinium_brasilliensis	Protinium brasilliensis	possible_plant	
+Plant_Pseudoaxinyssa_sp.	Pseudoaxinyssa sp.	possible_plant	
+Plant_Pseudoconidiaphora_coerulescens	Pseudoconidiaphora coerulescens	possible_plant	
+Plant_Pseudozuga_sp.	Pseudozuga sp.	possible_plant	
+Plant_Psoraleacorylifolia	Psoraleacorylifolia	possible_plant	
+Plant_Pulvis_cornu_cervi	Pulvis cornu cervi	possible_plant	
+Plant_Punicagranatum	Punicagranatum	possible_plant	
+Plant_Puraia_thunbergiana	Puraia thunbergiana	possible_plant	
+Plant_Puta_graveolens	Puta graveolens	possible_plant	
+Plant_RIB1	RIB1	junk	contains digits (strain/catalog id)
+Organism_23966	Rapifera	possible_plant	
+Plant_Receptaculum_nelumbinis	Receptaculum nelumbinis	junk	pharmacognosy part-name ('receptaculum')
+Plant_Red_forest_duiker	Red forest duiker	possible_plant	
+Plant_Remeria_maritima	Remeria maritima	possible_plant	
+Plant_Rgeum_emodi	Rgeum emodi	possible_plant	
+Plant_Rodiola_algida	Rodiola algida	possible_plant	
+Plant_Rodiola_coccinea	Rodiola coccinea	possible_plant	
+Plant_Rodiola_crenulata	Rodiola crenulata	possible_plant	
+Plant_Rodiola_himalansis	Rodiola himalansis	possible_plant	
+Plant_Rodiola_kirilowii	Rodiola kirilowii	possible_plant	
+Plant_Rodiola_quadrifida	Rodiola quadrifida	possible_plant	
+Plant_Rodiola_sacra	Rodiola sacra	possible_plant	
+Plant_Rodiola_subopposita	Rodiola subopposita	possible_plant	
+Plant_Roseoformes_subflexibilis	Roseoformes subflexibilis	possible_plant	
+Plant_Routaceae	Routaceae	possible_plant	
+Plant_SIPI-2985	SIPI-2985	junk	contains digits (strain/catalog id)
+Plant_SP9440	SP9440	junk	contains digits (strain/catalog id)
+Plant_Sabina_spp.	Sabina spp.	possible_plant	
+Plant_Saccarothrix_sp.	Saccarothrix sp.	possible_plant	
+Plant_Saccharothrixide_sp._CF24	Saccharothrixide sp. CF24	junk	contains digits (strain/catalog id)
+Organism_57074	Sal	possible_plant	
+Plant_Salviaplebeia	Salviaplebeia	possible_plant	
+Plant_Sanbaria_stellipila	Sanbaria stellipila	possible_plant	
+Plant_Scadiopitys_verticillata	Scadiopitys verticillata	possible_plant	
+Plant_Scaveola_namaquense	Scaveola namaquense	possible_plant	
+Plant_Schkuhia_spp.	Schkuhia spp.	possible_plant	
+Plant_Schlegel_s_Japanese_gecko	Schlegel's Japanese gecko	possible_plant	
+Plant_Schlerochiton_ilicifolius	Schlerochiton ilicifolius	possible_plant	
+Plant_Scientific_name	Scientific name	possible_plant	
+Plant_Sclerotina_fruticola	Sclerotina fruticola	possible_plant	
+Plant_Semen_celosiae	Semen celosiae	junk	pharmacognosy part-name ('semen')
+Plant_Semen_entadae	Semen entadae	junk	pharmacognosy part-name ('semen')
+Plant_Semen_hyoscyami	Semen hyoscyami	junk	pharmacognosy part-name ('semen')
+Plant_Semen_nelumbinis	Semen nelumbinis	junk	pharmacognosy part-name ('semen')
+Plant_Semen_zanthoxyli_bungeani	Semen zanthoxyli bungeani	junk	pharmacognosy part-name ('semen')
+Plant_Seselllndicum	Seselllndicum	possible_plant	
+Plant_Setaceous_Hebrew_character	Setaceous Hebrew character	possible_plant	
+Plant_SgcR1	SgcR1]	junk	contains digits (strain/catalog id)
+Plant_Shefflera_venulosa	Shefflera venulosa	possible_plant	
+Plant_Snecio_squalidus	Snecio squalidus	possible_plant	
+Plant_Sohaghnum_palustre	Sohaghnum palustre	possible_plant	
+Organism_674	Some marine animals	possible_plant	
+Plant_Spatholobi_sp.	Spatholobi sp.	possible_plant	
+Plant_Sphaeropsidales_spp.	Sphaeropsidales spp.	possible_plant	
+Plant_Spotted_lady_beetle	Spotted lady beetle	possible_plant	
+Plant_Stamen_nelumbinis	Stamen nelumbinis	junk	pharmacognosy part-name ('stamen')
+Plant_Stomanthes_africanus	Stomanthes africanus	possible_plant	
+Plant_Strachybotrys_atra	Strachybotrys atra	possible_plant	
+Plant_Strain_I-11	Strain I-11	junk	contains digits (strain/catalog id)
+Plant_Strain_TC_1630	Strain TC 1630	junk	contains digits (strain/catalog id)
+Plant_Streptmoces_sp.	Streptmoces sp.	possible_plant	
+Plant_Streptomycete_S_300	Streptomycete S 300	junk	contains digits (strain/catalog id)
+Plant_Striped_bark_scorpion	Striped bark scorpion	possible_plant	
+Plant_Strypopodium_zonale	Strypopodium zonale	possible_plant	
+Plant_Succus_rhizoma	Succus rhizoma	junk	pharmacognosy part-name ('succus')
+Plant_Swailnsonia_canescens	Swailnsonia canescens	possible_plant	
+Plant_Swailnsonia_galegifolia	Swailnsonia galegifolia	possible_plant	
+Plant_Symphythum_sp.	Symphythum sp.	possible_plant	
+Plant_Symphytine	Symphytine	possible_plant	
+Plant_Syphopappus_polystachyus	Syphopappus polystachyus	possible_plant	
+Plant_Syzygiumaromaticum	Syzygiumaromaticum	possible_plant	
+Plant_Teragonotheca_repanda	Teragonotheca repanda	possible_plant	
+Plant_Thyrsanospermum_diffusum	Thyrsanospermum diffusum	possible_plant	
+Plant_Traxacum_officinale	Traxacum officinale	possible_plant	
+Plant_Trithonia_rotundifolia	Trithonia rotundifolia	possible_plant	
+Plant_Tuemoya_sp.	Tuemoya sp.	possible_plant	
+Plant_Two_marine-derived_mangrove_epiphytic_Aspergillus_sp._Fungi	Two marine-derived mangrove epiphytic Aspergillus sp. Fungi	junk	non-plant/unknown marker ('fungi')
+Plant_UCE6	UCE6	junk	contains digits (strain/catalog id)
+Plant_Umbelliferaen	Umbelliferaen,	possible_plant	
+Plant_Unsteadiness_mould_s_metabolite	Unsteadiness mould's metabolite	possible_plant	
+Plant_VTC2-Ketogulonigenium_vulgare_vtc2	VTC2-Ketogulonigenium vulgare [vtc2]	junk	contains digits (strain/catalog id)
+Plant_Vascanella_hastata	Vascanella hastata	possible_plant	
+Plant_Verrucisispora_sp.	Verrucisispora sp.	possible_plant	
+Plant_Vigua_spiralis	Vigua spiralis	possible_plant	
+Organism_12916	Wallastonia bifora	possible_plant	
+Plant_Walpurgia_stuhlmannii	Walpurgia stuhlmannii	possible_plant	
+Plant_Wasabi_sp.	Wasabi sp.	possible_plant	
+Plant_Xanthophylum_rubescens	Xanthophylum rubescens	possible_plant	
+Plant_Yathea_podophylla	Yathea podophylla	possible_plant	
+Plant_Yellow_mantella	Yellow mantella	possible_plant	
+Plant_Zadirachta_excelsa	Zadirachta excelsa	possible_plant	
+Plant_Zanthium_chasei	Zanthium chasei	possible_plant	
+Plant_Zanthoxy_ailanthoides	Zanthoxy ailanthoides	possible_plant	
+Plant_ampanula_medium	ampanula medium	possible_plant	
+Plant_aristolorbia_gigantea	aristolorbia gigantea	possible_plant	
+Plant_aro8_tyr1_aro3	aro8√É¬¢√Ç¬à√Ç¬Ü tyr1√É¬¢√Ç¬à√Ç¬Ü aro3√É¬¢√Ç¬à√Ç¬Ü]	junk	contains digits (strain/catalog id)
+Plant_aschochyta_salcorniae	aschochyta salcorniae	possible_plant	
+Plant_blackbelly_rosefish	blackbelly rosefish	possible_plant	
+Plant_bts1	bts1	junk	contains digits (strain/catalog id)
+Plant_chuuk_archipelago	chuuk archipelago	possible_plant	
+Plant_crtE	crtE	possible_plant	
+Plant_crtYB	crtYB]	junk	contains brackets/parens (strain designation)
+Plant_dpp1	dpp1	junk	contains digits (strain/catalog id)
+Plant_eDNA_dNA	eDNA dNA	possible_plant	
+Plant_erg9	erg9	junk	contains digits (strain/catalog id)
+Organism_57442	fairchild tangerine	possible_plant	
+Plant_family_Apocinaceae_spp.	family Apocinaceae spp.	possible_plant	
+Organism_25855	family Apocynaceae spp.	possible_plant	
+Organism_17121	family Euphorbiaceae spp.	possible_plant	
+Organism_21837	family Fabaceae spp.	possible_plant	
+Organism_20907	family Hydrophyllaceae spp.	possible_plant	
+Organism_25454	family Meliaceae spp.	possible_plant	
+Organism_25039	family Menispermaceae spp.	possible_plant	
+Organism_22202	family Rutaceae spp.	possible_plant	
+Plant_field_scabious	field scabious	possible_plant	
+Plant_golden_mantella	golden mantella	possible_plant	
+Plant_hypericumatomarium_ssp._degenii	hypericumatomarium ssp. degenii	possible_plant	
+Plant_hypstis_H._mutabilis	hypstis H. mutabilis	possible_plant	
+Plant_ichia_kudriazevii_YS201_Bacillus_subtilis_BS38	ichia kudriazevii YS201 + Bacillus subtilis BS38	junk	contains digits (strain/catalog id)
+Plant_laffaariella_sp.	laffaariella sp.	possible_plant	
+Organism_24959	legumes	possible_plant	
+Plant_lpp1	lpp1]	junk	contains digits (strain/catalog id)
+Plant_marine_sp.	marine sp.	possible_plant	
+Plant_northern_red_anemone	northern red anemone	junk	non-plant common-name token
+Plant_phelinus_spp.	phelinus spp.	possible_plant	
+Plant_pntAB	pntAB]	junk	contains brackets/parens (strain designation)
+Plant_pseudo-runes	pseudo-runes	possible_plant	
+Plant_rox1	rox1	junk	contains digits (strain/catalog id)
+Plant_sabinene_synthase_genes	sabinene synthase genes]	junk	contains brackets/parens (strain designation)
+Plant_salmon_spp.	salmon spp.	possible_plant	
+Plant_short-nosed_bandicoot	short-nosed bandicoot	possible_plant	
+Plant_spergillus_carbonarius	spergillus carbonarius	possible_plant	
+Plant_spotted_jelly	spotted jelly	possible_plant	
+Plant_tart_cherries	tart cherries	possible_plant	
+Plant_tufted_milkwort	tufted milkwort	possible_plant	
+Plant_two_fungal_morphs_of_the_marine_algal-derived_Aspergillus_alliaceus	two fungal morphs of the marine algal-derived Aspergillus alliaceus	junk	non-plant/unknown marker ('fungal')
+Plant_var.Allium_spp.	var.Allium spp.	possible_plant	
+Plant_var.Citrus_spp.	var.Citrus spp.	possible_plant	
+Plant_velvet_belly_lanternshark	velvet belly lanternshark	junk	non-plant common-name token
+Plant_victory_flower	victory flower	possible_plant	
+Plant_wood_hedgehog	wood hedgehog	possible_plant	
+Plant_feaB	√É¬¢√Ç¬à√Ç¬ÜfeaB]	junk	contains brackets/parens (strain designation)
+Organism_1782	Morusalba	possible_plant	
+Organism_57363	New Zealand ascidian (Unclassified)	junk	non-plant/unknown marker ('unclassified')

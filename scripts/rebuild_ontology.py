@@ -2237,7 +2237,7 @@ def main():
         "--npclassifier-url",
         default=None,
         help="NPClassifier endpoint template, one {} for the URL-encoded SMILES (or set "
-        '$NPCLASSIFIER_URL). Default is the public GNPS2 server (throttles). Point at a LOCAL '
+        "$NPCLASSIFIER_URL). Default is the public GNPS2 server (throttles). Point at a LOCAL "
         'server for the full run, e.g. "http://localhost:6541/classify?smiles={}", then raise '
         "--workers — localhost is detected and the concurrency cap is lifted.",
     )
