@@ -38,3 +38,9 @@ website/data/*.bak
 data/raw/taxdump/
 data/raw/FNFTAX.csv
 data/raw/COMMON_NAMES.csv
+
+# generated molecular-layer modules (reproducible from scripts/ingest_*.py)
+data/enrichment/*.ttl
+data/enrichment/powo_gaps.txt
+data/enrichment/unnamed_plants.csv
+data/enrichment/_to_delete/
