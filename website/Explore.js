@@ -12,17 +12,75 @@
       function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
       fetch("data/plants_index.json").then(function(r){return r.ok?r.json():[];}).then(function(a){
         FULL=a||[]; for(var i=0;i<FULL.length;i++){FULL_BY_ID[FULL[i].id]=FULL[i];}
-        if(pendingQ){var want=pendingQ;pendingQ=null;var pid=fullFindPlant(want);
-          if(pid){loadFullPlant(pid);}
+        if(pendingQ){var want=pendingQ;pendingQ=null;var pm=fullFindAll(want);
+          if(pm.length===1){loadFullPlant(pm[0].r.id);}
+          else if(pm.length>1){msg.textContent="";renderDisambig(pm,want);}
           else{msg.textContent='No entry for "'+want+'".';render("papaver-somniferum");}}
       }).catch(function(){if(pendingQ){msg.textContent='Could not load the entity index.';pendingQ=null;}});
+      // split a "a; b [lang]; c" string into clean lowercased names (drops [lang] tags)
+      function splitNames(s){
+        if(!s) return [];
+        return String(s).split(";").map(function(x){
+          return x.replace(/\s*\[[a-z?]+\]\s*$/i,"").trim();
+        }).filter(Boolean);
+      }
+      // every searchable name for a record: scientific + common(s) + synonym(s)
+      function allNames(r){
+        var out=[(r.name||"")];
+        return out.concat(splitNames(r.common)).concat(splitNames(r.syn)).filter(Boolean);
+      }
       function fullFindPlant(q){
         q=String(q||"").toLowerCase().trim(); if(!q)return null;
         if(FULL_BY_ID[q])return q;
         var partial=null;
-        for(var i=0;i<FULL.length;i++){var nm=(FULL[i].name||"").toLowerCase();
-          if(nm===q)return FULL[i].id; if(!partial&&nm.indexOf(q)!==-1)partial=FULL[i].id;}
+        for(var i=0;i<FULL.length;i++){
+          var arr=allNames(FULL[i]);
+          for(var k=0;k<arr.length;k++){
+            var nm=arr[k].toLowerCase();
+            if(nm===q)return FULL[i].id;
+            if(!partial&&nm.indexOf(q)!==-1)partial=FULL[i].id;
+          }
+        }
         return partial;
+      }
+      // all matching plants for a query: exact matches (on any name) first, then partial.
+      function fullFindAll(q){
+        q=String(q||"").toLowerCase().trim(); if(!q) return [];
+        if(FULL_BY_ID[q]) return [{r:FULL_BY_ID[q], via:FULL_BY_ID[q].name||q}];
+        var exact=[], partial=[], seen={};
+        for(var i=0;i<FULL.length;i++){
+          var r=FULL[i], arr=allNames(r), ex=null, pa=null;
+          for(var k=0;k<arr.length;k++){
+            var nm=arr[k].toLowerCase();
+            if(nm===q){ex=arr[k];break;}
+            if(!pa && nm.indexOf(q)!==-1) pa=arr[k];
+          }
+          if(ex){ if(!seen[r.id]){seen[r.id]=1; exact.push({r:r,via:ex});} }
+          else if(pa){ if(!seen[r.id]){seen[r.id]=1; partial.push({r:r,via:pa});} }
+        }
+        return exact.concat(partial);
+      }
+      // clickable list when a query (often a shared common name) matches several plants.
+      function renderDisambig(matches, query){
+        var cap=60, shown=matches.slice(0,cap);
+        var h='<section class="register"><div class="reg-disambig">'
+             +'<div class="reg-disambig-head"><b>'+matches.length+'</b> plants match “'+esc(query)+'”'
+             +(matches.length>cap?' (showing first '+cap+')':'')+'</div><ul class="reg-hits">';
+        shown.forEach(function(m){
+          var r=m.r, commons=splitNames(r.common).slice(0,4).map(esc).join(" · ");
+          var via=(m.via && m.via.toLowerCase()!==String(r.name||"").toLowerCase())
+                  ? '<span class="hit-via">matched “'+esc(m.via)+'”</span>' : '';
+          h+='<li class="reg-hit" data-id="'+esc(r.id)+'" tabindex="0">'
+             +'<span class="hit-latin">'+esc(r.name||r.id)+'</span>'
+             +(commons?'<span class="hit-common">'+commons+'</span>':'')+via+'</li>';
+        });
+        h+='</ul></div></section>';
+        root.innerHTML=h;
+        function go(li){ msg.textContent=""; loadFullPlant(li.dataset.id); }
+        root.querySelectorAll(".reg-hit").forEach(function(li){
+          li.addEventListener("click", function(){ go(li); });
+          li.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(li); } });
+        });
       }
       function fetchCompShard(b){
         if(COMP_CACHE[b])return Promise.resolve(COMP_CACHE[b]);
@@ -38,7 +96,7 @@
           var cids=ed[pid]||[], bk={}; cids.forEach(function(c){bk[djb2(c)]=true;});
           return Promise.all(Object.keys(bk).map(fetchCompShard)).then(function(){
             var N=window.POPPY.NODES, E=window.POPPY.EDGES;
-            N[pid]={label:meta.name||pid, role:"Plant",
+            N[pid]={label:meta.name||pid, role:"Plant", common:meta.common||"", syn:meta.syn||"",
               props:[["clinicalTrialCount",String(meta.trials||0)],["compoundCount",String(cids.length)]]};
             cids.forEach(function(c){
               var rec=(COMP_CACHE[djb2(c)]||{})[c];
@@ -95,13 +153,31 @@
 
       function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
+      // "Also known as" / "Scientific synonyms" block: each common name and synonym
+      // rendered as its own searchable-looking entry rather than one semicolon blob.
+      function otherNamesHtml(n) {
+        var html = "";
+        var commons = splitNames(n.common);
+        if (commons.length) {
+          html += '<div class="common"><span class="lbl">Also known as:</span> '
+                + commons.map(esc).join(" &middot; ") + '</div>';
+        }
+        var syns = splitNames(n.syn);
+        if (syns.length) {
+          html += '<div class="common syn"><span class="lbl">Scientific synonyms:</span> <em>'
+                + syns.map(esc).join('</em> &middot; <em>') + '</em></div>';
+        }
+        return html;
+      }
+
       // name cell: italic Latin binomial for plants, roman for everything else,
-      // with the vernacular name appended in umber when present.
+      // with the first vernacular name appended in umber when present.
       function nameCell(n) {
         var latin = n.role === "Plant"
           ? '<span class="latin">' + esc(n.label) + '</span>'
           : esc(n.label);
-        var vern = n.common ? '<span class="vern">' + esc(n.common) + '</span>' : "";
+        var first = splitNames(n.common)[0];
+        var vern = first ? '<span class="vern">' + esc(first) + '</span>' : "";
         return latin + vern;
       }
 
@@ -175,7 +251,7 @@
         html += '<span class="subject-type"><span class="swatch" style="background:' + subjColor + '"></span>'
               + '<span class="mono-cap" style="opacity:0.85">' + esc(ROLE_LABEL[subject.role] || subject.role) + '</span></span>';
         html += '<h1>' + esc(subject.label) + '</h1>';
-        if (subject.common) html += '<div class="common">' + esc(subject.common) + '</div>';
+        html += otherNamesHtml(subject);
         if (subject.role === "Citation" && subject.doi) {
           html += '<div class="doi"><a href="https://doi.org/' + esc(subject.doi) + '" target="_blank" rel="noopener">doi:'
                 + esc(subject.doi) + '<span class="ext">\u2197</span></a></div>';
@@ -340,9 +416,11 @@
         if (!query) { msg.textContent = "Type a name to look up."; return; }
         var id = P.findByLabel(query);
         if (id) { render(id); return; }
-        var fid = fullFindPlant(query);
-        if (fid) { loadFullPlant(fid); return; }
-        msg.textContent = 'No entry for "' + query + '".';
+        var matches = fullFindAll(query);
+        if (matches.length === 0) { msg.textContent = 'No entry for "' + query + '".'; return; }
+        if (matches.length === 1) { msg.textContent = ""; loadFullPlant(matches[0].r.id); return; }
+        msg.textContent = "";
+        renderDisambig(matches, query);
       }
 
       document.getElementById("reg-search-btn").addEventListener("click", function () { lookup(); });
