@@ -54,3 +54,6 @@ data/enrichment/*.cache.json
 fold_mol.log
 *.bak
 *.bak2
+data/enrichment/compound_descriptors.fragment.xml
+*.bak
+*.bak2
