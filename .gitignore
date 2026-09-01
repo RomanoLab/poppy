@@ -44,3 +44,13 @@ data/enrichment/*.ttl
 data/enrichment/powo_gaps.txt
 data/enrichment/unnamed_plants.csv
 data/enrichment/_to_delete/
+data/enrichment/cn_fragment.xml
+data/enrichment/*.cache.json
+*.bak
+*.bak2
+data/enrichment/cn_fragment.xml
+data/enrichment/*.cache.json
+*.orig
+fold_mol.log
+*.bak
+*.bak2
