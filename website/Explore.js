@@ -12,8 +12,9 @@
       function djb2(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))&0xFFFFFFFF;}return h&255;}
       fetch("data/plants_index.json").then(function(r){return r.ok?r.json():[];}).then(function(a){
         FULL=a||[]; for(var i=0;i<FULL.length;i++){FULL_BY_ID[FULL[i].id]=FULL[i];}
-        if(pendingQ){var want=pendingQ;pendingQ=null;var pid=fullFindPlant(want);
-          if(pid){loadFullPlant(pid);}
+        if(pendingQ){var want=pendingQ;pendingQ=null;var pm=fullFindAll(want);
+          if(pm.length===1){loadFullPlant(pm[0].r.id);}
+          else if(pm.length>1){msg.textContent="";renderDisambig(pm,want);}
           else{msg.textContent='No entry for "'+want+'".';render("papaver-somniferum");}}
       }).catch(function(){if(pendingQ){msg.textContent='Could not load the entity index.';pendingQ=null;}});
       // split a "a; b [lang]; c" string into clean lowercased names (drops [lang] tags)
@@ -41,6 +42,45 @@
           }
         }
         return partial;
+      }
+      // all matching plants for a query: exact matches (on any name) first, then partial.
+      function fullFindAll(q){
+        q=String(q||"").toLowerCase().trim(); if(!q) return [];
+        if(FULL_BY_ID[q]) return [{r:FULL_BY_ID[q], via:FULL_BY_ID[q].name||q}];
+        var exact=[], partial=[], seen={};
+        for(var i=0;i<FULL.length;i++){
+          var r=FULL[i], arr=allNames(r), ex=null, pa=null;
+          for(var k=0;k<arr.length;k++){
+            var nm=arr[k].toLowerCase();
+            if(nm===q){ex=arr[k];break;}
+            if(!pa && nm.indexOf(q)!==-1) pa=arr[k];
+          }
+          if(ex){ if(!seen[r.id]){seen[r.id]=1; exact.push({r:r,via:ex});} }
+          else if(pa){ if(!seen[r.id]){seen[r.id]=1; partial.push({r:r,via:pa});} }
+        }
+        return exact.concat(partial);
+      }
+      // clickable list when a query (often a shared common name) matches several plants.
+      function renderDisambig(matches, query){
+        var cap=60, shown=matches.slice(0,cap);
+        var h='<section class="register"><div class="reg-disambig">'
+             +'<div class="reg-disambig-head"><b>'+matches.length+'</b> plants match “'+esc(query)+'”'
+             +(matches.length>cap?' (showing first '+cap+')':'')+'</div><ul class="reg-hits">';
+        shown.forEach(function(m){
+          var r=m.r, commons=splitNames(r.common).slice(0,4).map(esc).join(" · ");
+          var via=(m.via && m.via.toLowerCase()!==String(r.name||"").toLowerCase())
+                  ? '<span class="hit-via">matched “'+esc(m.via)+'”</span>' : '';
+          h+='<li class="reg-hit" data-id="'+esc(r.id)+'" tabindex="0">'
+             +'<span class="hit-latin">'+esc(r.name||r.id)+'</span>'
+             +(commons?'<span class="hit-common">'+commons+'</span>':'')+via+'</li>';
+        });
+        h+='</ul></div></section>';
+        root.innerHTML=h;
+        function go(li){ msg.textContent=""; loadFullPlant(li.dataset.id); }
+        root.querySelectorAll(".reg-hit").forEach(function(li){
+          li.addEventListener("click", function(){ go(li); });
+          li.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(li); } });
+        });
       }
       function fetchCompShard(b){
         if(COMP_CACHE[b])return Promise.resolve(COMP_CACHE[b]);
@@ -376,9 +416,11 @@
         if (!query) { msg.textContent = "Type a name to look up."; return; }
         var id = P.findByLabel(query);
         if (id) { render(id); return; }
-        var fid = fullFindPlant(query);
-        if (fid) { loadFullPlant(fid); return; }
-        msg.textContent = 'No entry for "' + query + '".';
+        var matches = fullFindAll(query);
+        if (matches.length === 0) { msg.textContent = 'No entry for "' + query + '".'; return; }
+        if (matches.length === 1) { msg.textContent = ""; loadFullPlant(matches[0].r.id); return; }
+        msg.textContent = "";
+        renderDisambig(matches, query);
       }
 
       document.getElementById("reg-search-btn").addEventListener("click", function () { lookup(); });

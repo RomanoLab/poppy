@@ -178,3 +178,19 @@
       .reg-row .pred { grid-column: 1 / -1; padding-top: 0; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
     }
+
+    /* common names / synonyms as labelled "other names" */
+    .subject .common .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rule); margin-right: 8px; opacity: 0.85; }
+    .subject .common.syn { font-size: 18px; }
+    .subject .common.syn em { font-style: italic; }
+
+    /* multi-match disambiguation list */
+    .reg-disambig { padding: 32px 0 12px; }
+    .reg-disambig-head { font-family: var(--display); font-size: 20px; color: var(--umber); margin-bottom: 16px; border-bottom: 1px solid rgba(138,122,74,0.4); padding-bottom: 10px; }
+    .reg-disambig-head b { color: var(--forest); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .reg-hits { list-style: none; margin: 0; padding: 0; }
+    .reg-hit { padding: 12px 14px; border-bottom: 1px solid rgba(138,122,74,0.25); cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; transition: background 120ms ease; }
+    .reg-hit:hover, .reg-hit:focus { background: var(--parchment-deep); outline: none; }
+    .reg-hit .hit-latin { font-style: italic; font-size: 20px; color: var(--forest); }
+    .reg-hit .hit-common { font-size: 15px; color: var(--umber); }
+    .reg-hit .hit-via { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rule); margin-left: auto; }
