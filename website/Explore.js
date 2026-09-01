@@ -16,12 +16,30 @@
           if(pid){loadFullPlant(pid);}
           else{msg.textContent='No entry for "'+want+'".';render("papaver-somniferum");}}
       }).catch(function(){if(pendingQ){msg.textContent='Could not load the entity index.';pendingQ=null;}});
+      // split a "a; b [lang]; c" string into clean lowercased names (drops [lang] tags)
+      function splitNames(s){
+        if(!s) return [];
+        return String(s).split(";").map(function(x){
+          return x.replace(/\s*\[[a-z?]+\]\s*$/i,"").trim();
+        }).filter(Boolean);
+      }
+      // every searchable name for a record: scientific + common(s) + synonym(s)
+      function allNames(r){
+        var out=[(r.name||"")];
+        return out.concat(splitNames(r.common)).concat(splitNames(r.syn)).filter(Boolean);
+      }
       function fullFindPlant(q){
         q=String(q||"").toLowerCase().trim(); if(!q)return null;
         if(FULL_BY_ID[q])return q;
         var partial=null;
-        for(var i=0;i<FULL.length;i++){var nm=(FULL[i].name||"").toLowerCase();
-          if(nm===q)return FULL[i].id; if(!partial&&nm.indexOf(q)!==-1)partial=FULL[i].id;}
+        for(var i=0;i<FULL.length;i++){
+          var arr=allNames(FULL[i]);
+          for(var k=0;k<arr.length;k++){
+            var nm=arr[k].toLowerCase();
+            if(nm===q)return FULL[i].id;
+            if(!partial&&nm.indexOf(q)!==-1)partial=FULL[i].id;
+          }
+        }
         return partial;
       }
       function fetchCompShard(b){
@@ -38,7 +56,7 @@
           var cids=ed[pid]||[], bk={}; cids.forEach(function(c){bk[djb2(c)]=true;});
           return Promise.all(Object.keys(bk).map(fetchCompShard)).then(function(){
             var N=window.POPPY.NODES, E=window.POPPY.EDGES;
-            N[pid]={label:meta.name||pid, role:"Plant",
+            N[pid]={label:meta.name||pid, role:"Plant", common:meta.common||"", syn:meta.syn||"",
               props:[["clinicalTrialCount",String(meta.trials||0)],["compoundCount",String(cids.length)]]};
             cids.forEach(function(c){
               var rec=(COMP_CACHE[djb2(c)]||{})[c];
@@ -95,13 +113,31 @@
 
       function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
+      // "Also known as" / "Scientific synonyms" block: each common name and synonym
+      // rendered as its own searchable-looking entry rather than one semicolon blob.
+      function otherNamesHtml(n) {
+        var html = "";
+        var commons = splitNames(n.common);
+        if (commons.length) {
+          html += '<div class="common"><span class="lbl">Also known as:</span> '
+                + commons.map(esc).join(" &middot; ") + '</div>';
+        }
+        var syns = splitNames(n.syn);
+        if (syns.length) {
+          html += '<div class="common syn"><span class="lbl">Scientific synonyms:</span> <em>'
+                + syns.map(esc).join('</em> &middot; <em>') + '</em></div>';
+        }
+        return html;
+      }
+
       // name cell: italic Latin binomial for plants, roman for everything else,
-      // with the vernacular name appended in umber when present.
+      // with the first vernacular name appended in umber when present.
       function nameCell(n) {
         var latin = n.role === "Plant"
           ? '<span class="latin">' + esc(n.label) + '</span>'
           : esc(n.label);
-        var vern = n.common ? '<span class="vern">' + esc(n.common) + '</span>' : "";
+        var first = splitNames(n.common)[0];
+        var vern = first ? '<span class="vern">' + esc(first) + '</span>' : "";
         return latin + vern;
       }
 
@@ -175,7 +211,7 @@
         html += '<span class="subject-type"><span class="swatch" style="background:' + subjColor + '"></span>'
               + '<span class="mono-cap" style="opacity:0.85">' + esc(ROLE_LABEL[subject.role] || subject.role) + '</span></span>';
         html += '<h1>' + esc(subject.label) + '</h1>';
-        if (subject.common) html += '<div class="common">' + esc(subject.common) + '</div>';
+        html += otherNamesHtml(subject);
         if (subject.role === "Citation" && subject.doi) {
           html += '<div class="doi"><a href="https://doi.org/' + esc(subject.doi) + '" target="_blank" rel="noopener">doi:'
                 + esc(subject.doi) + '<span class="ext">\u2197</span></a></div>';
