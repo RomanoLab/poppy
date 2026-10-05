@@ -1,0 +1,144 @@
+{
+ "plant_family_resolved": 41508,
+ "plant_taxid_added_by_name": 3468,
+ "plant_no_taxid": 3076,
+ "occurrences_total": 1024359,
+ "coconut_only_occurrences": 533705,
+ "occurrences_flagged_low_support": 94972,
+ "disease_mapped_to_DOID": 138,
+ "phda_rows_plant_unresolved": 658,
+ "disease_nodes": 1351,
+ "edges_associatedWithDiseaseByPlantTrial": 758,
+ "edges_associatedWithDiseaseByIngredientTrial": 152509,
+ "edges_associatedWithDisease": 747962,
+ "edges_associatedWithDiseaseByTarget": 424725,
+ "edges_associatedWithDiseaseByTranscriptomeReversion": 219641,
+ "only_ingredient_trial": 115489,
+ "top_flagged_compound_in_family": [
+  [
+   "Betanidin",
+   "Basellaceae",
+   3
+  ],
+  [
+   "Grandisin",
+   "Meliaceae",
+   2
+  ],
+  [
+   "Grandisin",
+   "Asteraceae",
+   2
+  ],
+  [
+   "Grandisin",
+   "Araceae",
+   2
+  ],
+  [
+   "Grandisin",
+   "Magnoliaceae",
+   2
+  ],
+  [
+   "Grandisin",
+   "Myristicaceae",
+   2
+  ],
+  [
+   "Imbricatolic Acid",
+   "Araucariaceae",
+   2
+  ],
+  [
+   "Bicyclogermacrene",
+   "Caprifoliaceae",
+   2
+  ],
+  [
+   "Bicyclogermacrene",
+   "Conocephalaceae",
+   2
+  ],
+  [
+   "Isoeugenol",
+   "Pinaceae",
+   2
+  ],
+  [
+   "Reynoutrin",
+   "Cunoniaceae",
+   2
+  ],
+  [
+   "Reynoutrin",
+   "Geraniaceae",
+   2
+  ],
+  [
+   "Cauloside D",
+   "Boraginaceae",
+   2
+  ],
+  [
+   "Corilagin",
+   "Cunoniaceae",
+   2
+  ],
+  [
+   "Asimilobine",
+   "Aristolochiaceae",
+   2
+  ],
+  [
+   "Globularin",
+   "Orchidaceae",
+   2
+  ],
+  [
+   "Globularin",
+   "Asteraceae",
+   2
+  ],
+  [
+   "Globularin",
+   "Fabaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Didiereaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Campanulaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Dilleniaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Rosaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Apocynaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Rubiaceae",
+   2
+  ],
+  [
+   "No Data",
+   "Nyctaginaceae",
+   2
+  ]
+ ]
+}
