@@ -99,3 +99,24 @@ Result: 1,315 plants rescued (1,199 NCBI genus match, 1 NCBI species, 115 genus-
 into existing plants); 595 rejected (316 genus not an NCBI plant genus, 236 sp./spp./cf., 40 pharmacognosy drug names,
 3 other). 7,426 occurrence links and 730 compounds restored. RDKit descriptors added for 124,719 compounds
 (32 SMILES unparseable). v2.3: 11,866,566 triples; 40,109 plants with compounds; 208,939 compounds (183,868 with descriptors).
+
+## v2.4 (2026-10-05) — literature evidence + website evidence panel
+```bash
+# COCONUT per-compound DOIs: {InChIKey: [doi,...]} extracted from the COCONUT 2.0 SDF `dois` field
+python3 scripts/rebuild_papers.py poppy_v23.nt coconut_dois.json data/raw add2.nt.drop.pkl base.nt add.nt
+LC_ALL=C sort -u add.nt -o add.nt && LC_ALL=C sort -m -u base.nt add.nt > v24.nt
+python3 scripts/finalize_nt.py v24.nt poppy_v24.nt poppy_v2.4.rdf
+python3 scripts/build_website_data.py poppy_v24.nt website/data --keep-names <merged plants_index>
+python3 scripts/build_evidence_data.py poppy_v24.nt website/data     # data/evidence/{plants,compounds}/<djb2>.json
+python3 scripts/cache_bust.py
+```
+- v1 hasPaper links removed (116,782; untraceable, e.g. one 1968 paper on 2,389 compounds).
+- Compound literature: 433,588 links to 73,549 DOIs from COCONUT 2.0 (hasPaperPerCOCONUT).
+- Dr. Duke's citations: 714 references with full citation text, linked to plant and compound only when the FARMACY
+  occurrence is in the ontology (hasPaperPerDrDuke). Codes not in the local REFERENCES.csv (most of them) and
+  non-citations ("personal files", "see species file", bare journal names) are skipped.
+- CMAUP bioactivity references: only IDs >= 5,000,000 are treated as PubMed IDs (3,962). 21,677 smaller IDs, labelled
+  "PMID" by CMAUP but behaving like ChEMBL assay IDs, are kept as hasReferenceText without a PubMed link.
+- Explore page: Evidence panel (clinical trials -> clinicaltrials.gov, bioactivity -> PubMed, literature -> doi.org /
+  citation text), first 10 per block with "Show all"; compound rows now open in place.
+v2.4: 12,849,926 triples.

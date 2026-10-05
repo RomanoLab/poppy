@@ -469,7 +469,13 @@ def build(a):
         if not isna(r["Activity_Unit"]):
             W(act, P("activityUnit"), lit(r["Activity_Unit"]))
         W(act, P("assertedBy"), lit("CMAUP v2.0"))
-        if r["Reference_ID_Type"] == "PMID" and r["Reference_ID"].isdigit():
+        # CMAUP labels many ChEMBL assay IDs as "PMID" (values < 5M, one per measurement);
+        # only treat >= 5,000,000 as PubMed IDs
+        if (
+            r["Reference_ID_Type"] == "PMID"
+            and r["Reference_ID"].isdigit()
+            and int(r["Reference_ID"]) >= 5_000_000
+        ):
             W(act, P("hasReference"), I(IDO + "pubmed/" + r["Reference_ID"]))
         elif not isna(r["Reference_ID"]):
             W(act, P("hasReferenceText"), lit(r["Reference_ID_Type"] + ":" + r["Reference_ID"]))

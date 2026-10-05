@@ -194,3 +194,22 @@
     .reg-hit .hit-latin { font-style: italic; font-size: 20px; color: var(--forest); }
     .reg-hit .hit-common { font-size: 15px; color: var(--umber); }
     .reg-hit .hit-via { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rule); margin-left: auto; }
+
+    /* ── Evidence panel (trials, bioactivity, literature) ── */
+    .evidence { margin: 28px 0 10px; }
+    .evidence:empty { display: none; }
+    .ev-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--umber); padding: 0 0 10px; border-bottom: 3px double var(--rule); }
+    .ev-block { margin-top: 18px; }
+    .ev-head { display: flex; align-items: baseline; gap: 14px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+    .ev-head .concept { font-family: var(--display); font-size: 20px; color: var(--ink); }
+    .ev-head .tally { font-family: var(--mono); font-size: 12px; color: var(--umber); }
+    .ev-list { list-style: none; margin: 0; padding: 0; }
+    .ev-list li { padding: 9px 0; border-bottom: 1px dotted rgba(138, 122, 74, 0.4); font-family: var(--display); font-size: 16px; line-height: 1.4; color: var(--ink); overflow-wrap: anywhere; }
+    .ev-list a { font-family: var(--mono); font-size: 13px; color: var(--umber); border-bottom: 1px solid rgba(122, 90, 58, 0.5); }
+    .ev-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--umber); border: 1px solid var(--rule-soft); padding: 1px 6px; margin-left: 4px; white-space: nowrap; }
+    .ev-gene { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink); }
+    .ev-more { font-family: var(--mono); font-size: 11px; color: var(--umber); padding-top: 8px; }
+    .ev-list .ext { opacity: 0.6; margin-left: 3px; }
+    .ev-list li.ev-hidden { display: none; }
+    .ev-toggle { margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--umber); background: transparent; border: 1px solid var(--rule-soft); padding: 5px 12px; cursor: pointer; }
+    .ev-toggle:hover { border-color: var(--rule); color: var(--ink); }
