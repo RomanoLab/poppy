@@ -82,3 +82,20 @@ Remaining: 5,243 "<formula> (CNP…)" placeholder labels (not in PubChem), 923 I
 Large lists are gzipped: `phase1_iri_map.tsv.gz` (old->new IRIs), `phase2_orphan_compounds_removed.tsv.gz`,
 `pubchem_fill.tsv.gz` (gunzip before passing to apply_pubchem_names.py). `compounds_needing_names.tsv` is the
 PubChem worklist. Reports: phase1/phase2/v21 audit + stats JSON, v21_duke_noncompounds.tsv.
+
+## v2.3 (2026-10-05) — plant rescue + descriptors for all compounds
+```bash
+# candidates = plants in the pre-v2.2 website index missing from v2.2 (by id and binomial), classified as
+# rescue_ncbi_species / rescue_ncbi_genus / rescue_typo_corrected / reject_* (see data/patches/v23_rescue_decisions.tsv)
+python3 scripts/rescue_plants.py poppy_v22.nt dropped_classified.json up_web idx2.pkl data/raw/taxdump/nodes.dmp \
+    add_rescue.nt new_compounds.nt v23_rescue_decisions.tsv     # up_web = plant_edges/compounds shards of commit c84101f
+python3 scripts/fill_from_coconut.py new_compounds.nt ~/Downloads/coconut_sdf_2d-10-2026.zip add_newc_coconut.nt /dev/null
+python3 scripts/compute_missing_descriptors.py desc_input.tsv add_desc.nt   # IRI<TAB>SMILES for compounds lacking phyto:mw
+cat add_rescue.nt new_compounds.nt add_newc_coconut.nt add_desc.nt | LC_ALL=C sort -u > adds.nt
+LC_ALL=C sort -m -u poppy_v22.nt adds.nt > v23.nt && python3 scripts/finalize_nt.py v23.nt poppy_v23.nt poppy_v2.3.rdf
+python3 scripts/build_website_data.py poppy_v23.nt website/data --keep-names <current + previous plants_index merged>
+```
+Result: 1,315 plants rescued (1,199 NCBI genus match, 1 NCBI species, 115 genus-typo corrections of which 111 merged
+into existing plants); 595 rejected (316 genus not an NCBI plant genus, 236 sp./spp./cf., 40 pharmacognosy drug names,
+3 other). 7,426 occurrence links and 730 compounds restored. RDKit descriptors added for 124,719 compounds
+(32 SMILES unparseable). v2.3: 11,866,566 triples; 40,109 plants with compounds; 208,939 compounds (183,868 with descriptors).

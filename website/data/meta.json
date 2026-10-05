@@ -1,8 +1,8 @@
 {
- "version": "POPPy v2.2",
- "plants": 38897,
- "compounds": 205039,
- "plant_compound_links": 1012081,
+ "version": "POPPy v2.3",
+ "plants": 40109,
+ "compounds": 205769,
+ "plant_compound_links": 1019280,
  "shard": "djb2(plantId)&255",
- "scope": "Viridiplantae (NCBI taxonomy validated). v2.2 (2026-10-04): occurrences rebuilt from CMAUP v2.0, COCONUT and Dr. Duke's FARMACY with provenance; activity-joined Dr. Duke links removed; names/SMILES from COCONUT 2.0 (10-2026) and PubChem. See docs/recipes/ontology-v2-rebuild.md."
+ "scope": "Viridiplantae (NCBI taxonomy validated). v2.3 (2026-10-05): v2.2 + 1,315 real plants re-admitted (NCBI species/genus match or genus typo correction; 595 non-plant/junk names rejected) with their COCONUT occurrences; RDKit descriptors for all compounds with SMILES. See docs/recipes/ontology-v2-rebuild.md."
 }
