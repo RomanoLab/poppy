@@ -1,0 +1,3490 @@
+{
+ "elements": 10333828,
+ "subjects": 387027,
+ "node_elems_toplevel_vs_nested": {
+  "True": 387027
+ },
+ "type_counts": [
+  [
+   "owl:NamedIndividual",
+   328664
+  ],
+  [
+   "phyto:ChemicalConcept",
+   208209
+  ],
+  [
+   "cmptx:Gene",
+   62407
+  ],
+  [
+   "phyto:Plant",
+   44604
+  ],
+  [
+   "phyto:BioactivityMeasurement",
+   25756
+  ],
+  [
+   "phyto:ScientificPaper",
+   21407
+  ],
+  [
+   "phyto:ClinicalTrial",
+   15155
+  ],
+  [
+   "cmptx:Pathway",
+   4569
+  ],
+  [
+   "phyto:PlantConcept",
+   3157
+  ],
+  [
+   "cmptx:Disease",
+   1583
+  ],
+  [
+   "phyto:DiseaseConcept",
+   1351
+  ],
+  [
+   "phyto:ProteinTarget",
+   1334
+  ],
+  [
+   "phyto:NonCompoundConstituent",
+   318
+  ],
+  [
+   "phyto:TherapeuticEffect",
+   150
+  ],
+  [
+   "owl:DatatypeProperty",
+   72
+  ],
+  [
+   "owl:ObjectProperty",
+   40
+  ],
+  [
+   "owl:Class",
+   34
+  ],
+  [
+   "phyto:MechanismOfAction",
+   18
+  ],
+  [
+   "owl:AnnotationProperty",
+   2
+  ],
+  [
+   "owl:DataRange",
+   2
+  ],
+  [
+   "owl:Ontology",
+   1
+  ]
+ ],
+ "type_combos": [
+  [
+   "phyto:ChemicalConcept",
+   208209
+  ],
+  [
+   "cmptx:Gene",
+   62407
+  ],
+  [
+   "phyto:Plant",
+   41447
+  ],
+  [
+   "phyto:BioactivityMeasurement",
+   25756
+  ],
+  [
+   "phyto:ScientificPaper",
+   21407
+  ],
+  [
+   "phyto:ClinicalTrial",
+   15155
+  ],
+  [
+   "cmptx:Pathway",
+   4569
+  ],
+  [
+   "phyto:Plant|phyto:PlantConcept",
+   3157
+  ],
+  [
+   "cmptx:Disease",
+   1583
+  ],
+  [
+   "phyto:DiseaseConcept",
+   1351
+  ],
+  [
+   "phyto:ProteinTarget",
+   1334
+  ],
+  [
+   "phyto:NonCompoundConstituent",
+   318
+  ],
+  [
+   "phyto:TherapeuticEffect",
+   150
+  ],
+  [
+   "owl:DatatypeProperty",
+   70
+  ],
+  [
+   "owl:ObjectProperty",
+   40
+  ],
+  [
+   "owl:Class",
+   34
+  ],
+  [
+   "phyto:MechanismOfAction",
+   18
+  ],
+  [
+   "(untyped/undeclared)",
+   17
+  ],
+  [
+   "owl:AnnotationProperty|owl:DatatypeProperty",
+   2
+  ],
+  [
+   "owl:DataRange",
+   2
+  ],
+  [
+   "owl:Ontology",
+   1
+  ]
+ ],
+ "pred_triples": [
+  [
+   "phyto:hasCompound",
+   1012081
+  ],
+  [
+   "phyto:hasCompoundPerCOCONUT",
+   912057
+  ],
+  [
+   "phyto:associatedWithDisease",
+   747962
+  ],
+  [
+   "rdf:type",
+   718833
+  ],
+  [
+   "phyto:associatedWithDiseaseByTarget",
+   424725
+  ],
+  [
+   "phyto:hasCompoundPerCMAUP",
+   411530
+  ],
+  [
+   "rdfs:label",
+   361035
+  ],
+  [
+   "skos:exactMatch",
+   332583
+  ],
+  [
+   "phyto:associatedWithDiseaseByTranscriptomeReversion",
+   219641
+  ],
+  [
+   "phyto:hasSMILES",
+   183329
+  ],
+  [
+   "phyto:hasInChIKey",
+   183172
+  ],
+  [
+   "phyto:hasMolecularFormula",
+   181455
+  ],
+  [
+   "cmptx:geneInPathway",
+   177694
+  ],
+  [
+   "phyto:coconutId",
+   173237
+  ],
+  [
+   "phyto:npClassifierPathway",
+   168569
+  ],
+  [
+   "phyto:npClassifierSuperclass",
+   160433
+  ],
+  [
+   "phyto:npClassifierClass",
+   156208
+  ],
+  [
+   "phyto:hasIUPACName",
+   153468
+  ],
+  [
+   "phyto:associatedWithDiseaseByIngredientTrial",
+   152509
+  ],
+  [
+   "phyto:classyfireSubclass",
+   147491
+  ],
+  [
+   "phyto:classyfireSuperclass",
+   147491
+  ],
+  [
+   "cmptx:geneInteractsWithGene",
+   147008
+  ],
+  [
+   "phyto:classyfireClass",
+   146505
+  ],
+  [
+   "phyto:hasPaper",
+   116782
+  ],
+  [
+   "phyto:heuristicPhytochemicalClass",
+   110966
+  ],
+  [
+   "phyto:hasCompoundFamilyUnreplicated",
+   94972
+  ],
+  [
+   "phyto:hasCompoundPerDrDuke",
+   72472
+  ],
+  [
+   "skos:altLabel",
+   66761
+  ],
+  [
+   "cmptx:geneSymbol",
+   62425
+  ],
+  [
+   "cmptx:typeOfGene",
+   62413
+  ],
+  [
+   "cmptx:xrefNcbiGene",
+   62407
+  ],
+  [
+   "phyto:logp",
+   59156
+  ],
+  [
+   "phyto:hasCanonicalSMILES",
+   59154
+  ],
+  [
+   "phyto:hasMACCs",
+   59154
+  ],
+  [
+   "phyto:qed",
+   59153
+  ],
+  [
+   "phyto:tpsa",
+   59153
+  ],
+  [
+   "phyto:hba",
+   59151
+  ],
+  [
+   "phyto:hbd",
+   59151
+  ],
+  [
+   "phyto:ro5_violations",
+   59150
+  ],
+  [
+   "phyto:aromatic_rings",
+   59149
+  ],
+  [
+   "phyto:exact_mw",
+   59149
+  ],
+  [
+   "phyto:formal_charge",
+   59149
+  ],
+  [
+   "phyto:fraction_csp3",
+   59149
+  ],
+  [
+   "phyto:heavy_atoms",
+   59149
+  ],
+  [
+   "phyto:heteroatoms",
+   59149
+  ],
+  [
+   "phyto:mw",
+   59149
+  ],
+  [
+   "phyto:ring_count",
+   59149
+  ],
+  [
+   "phyto:rotatable_bonds",
+   59149
+  ],
+  [
+   "phyto:commonName",
+   54306
+  ],
+  [
+   "phyto:taxonomyStatus",
+   44604
+  ],
+  [
+   "cmptx:xrefHGNC",
+   42519
+  ],
+  [
+   "cmptx:commonName",
+   42483
+  ],
+  [
+   "phyto:hasTaxon",
+   41528
+  ],
+  [
+   "phyto:taxonomicFamily",
+   41508
+  ],
+  [
+   "phyto:taxonomicGenus",
+   41393
+  ],
+  [
+   "phyto:hasCommonName",
+   39583
+  ],
+  [
+   "cmptx:geneAssociatedWithDisease",
+   38350
+  ],
+  [
+   "phyto:hasGenus",
+   36769
+  ],
+  [
+   "phyto:hasSpecies",
+   35972
+  ],
+  [
+   "cmptx:xrefEnsembl",
+   35136
+  ],
+  [
+   "phyto:activityCompound",
+   25756
+  ],
+  [
+   "phyto:activityRelation",
+   25756
+  ],
+  [
+   "phyto:activityTarget",
+   25756
+  ],
+  [
+   "phyto:activityType",
+   25756
+  ],
+  [
+   "phyto:activityUnit",
+   25756
+  ],
+  [
+   "phyto:activityValue",
+   25756
+  ],
+  [
+   "phyto:assertedBy",
+   25756
+  ],
+  [
+   "phyto:hasReference",
+   25639
+  ],
+  [
+   "phyto:labelIsPlaceholder",
+   18942
+  ],
+  [
+   "cmptx:xrefOMIM",
+   17810
+  ],
+  [
+   "phyto:hasDOI",
+   17720
+  ],
+  [
+   "phyto:hasClinicalStudy",
+   17150
+  ],
+  [
+   "phyto:trialCondition",
+   15330
+  ],
+  [
+   "phyto:hasNCTId",
+   15155
+  ],
+  [
+   "phyto:trialPhase",
+   15155
+  ],
+  [
+   "phyto:compoundTargetsGene",
+   12495
+  ],
+  [
+   "phyto:hasReportedConstituent",
+   12278
+  ],
+  [
+   "rdfs:comment",
+   6195
+  ],
+  [
+   "cmptx:sourceDatabase",
+   4865
+  ],
+  [
+   "cmptx:pathwayId",
+   4569
+  ],
+  [
+   "phyto:targetsProtein",
+   3208
+  ],
+  [
+   "cmptx:diseaseSubtypeOf",
+   2290
+  ],
+  [
+   "cmptx:xrefDiseaseOntology",
+   1583
+  ],
+  [
+   "phyto:hasValue",
+   1352
+  ],
+  [
+   "phyto:icd11Code",
+   1351
+  ],
+  [
+   "phyto:diseaseCategory",
+   1349
+  ],
+  [
+   "phyto:targetClass",
+   758
+  ],
+  [
+   "phyto:associatedWithDiseaseByPlantTrial",
+   758
+  ],
+  [
+   "phyto:interventionDescription",
+   747
+  ],
+  [
+   "phyto:hasATC",
+   745
+  ],
+  [
+   "phyto:constituentKind",
+   318
+  ],
+  [
+   "phyto:hasMechanismOfAction",
+   307
+  ],
+  [
+   "skos:closeMatch",
+   138
+  ],
+  [
+   "phyto:hasReferenceText",
+   117
+  ],
+  [
+   "rdfs:range",
+   74
+  ],
+  [
+   "rdfs:domain",
+   73
+  ],
+  [
+   "rdfs:subClassOf",
+   23
+  ],
+  [
+   "phyto:scientificSynonym",
+   19
+  ],
+  [
+   "rdf:first",
+   16
+  ],
+  [
+   "rdf:rest",
+   16
+  ],
+  [
+   "owl:deprecated",
+   9
+  ],
+  [
+   "rdfs:subPropertyOf",
+   8
+  ],
+  [
+   "owl:inverseOf",
+   8
+  ],
+  [
+   "owl:unionOf",
+   7
+  ],
+  [
+   "owl:equivalentClass",
+   1
+  ],
+  [
+   "owl:propertyChainAxiom",
+   1
+  ],
+  [
+   "owl:versionInfo",
+   1
+  ]
+ ],
+ "lit_stats": {
+  "cmptx:geneSymbol": {},
+  "cmptx:typeOfGene": {},
+  "cmptx:xrefNcbiGene": {},
+  "rdfs:label": {
+   "inchikey_like": 1967,
+   "na_or_empty_or_dash": 1
+  },
+  "skos:altLabel": {},
+  "cmptx:pathwayId": {},
+  "cmptx:sourceDatabase": {},
+  "rdfs:comment": {},
+  "cmptx:xrefDiseaseOntology": {},
+  "cmptx:commonName": {},
+  "cmptx:xrefEnsembl": {},
+  "cmptx:xrefHGNC": {},
+  "cmptx:xrefOMIM": {},
+  "phyto:targetClass": {},
+  "phyto:activityRelation": {},
+  "phyto:activityType": {},
+  "phyto:activityUnit": {},
+  "phyto:activityValue": {},
+  "phyto:assertedBy": {},
+  "phyto:hasReferenceText": {},
+  "owl:deprecated": {},
+  "phyto:hasCommonName": {},
+  "phyto:heuristicPhytochemicalClass": {},
+  "phyto:constituentKind": {},
+  "phyto:aromatic_rings": {},
+  "phyto:classyfireClass": {},
+  "phyto:classyfireSubclass": {},
+  "phyto:classyfireSuperclass": {},
+  "phyto:coconutId": {},
+  "phyto:exact_mw": {},
+  "phyto:formal_charge": {},
+  "phyto:fraction_csp3": {},
+  "phyto:hasCanonicalSMILES": {},
+  "phyto:hasIUPACName": {},
+  "phyto:hasInChIKey": {
+   "inchikey_like": 183172
+  },
+  "phyto:hasMACCs": {},
+  "phyto:hasMolecularFormula": {
+   "na_or_empty_or_dash": 1
+  },
+  "phyto:hasSMILES": {},
+  "phyto:hba": {},
+  "phyto:hbd": {},
+  "phyto:heavy_atoms": {},
+  "phyto:heteroatoms": {},
+  "phyto:logp": {},
+  "phyto:mw": {},
+  "phyto:npClassifierClass": {},
+  "phyto:npClassifierPathway": {},
+  "phyto:npClassifierSuperclass": {},
+  "phyto:qed": {},
+  "phyto:ring_count": {},
+  "phyto:ro5_violations": {},
+  "phyto:rotatable_bonds": {},
+  "phyto:tpsa": {},
+  "phyto:labelIsPlaceholder": {},
+  "phyto:hasATC": {},
+  "phyto:hasNCTId": {},
+  "phyto:trialCondition": {},
+  "phyto:trialPhase": {},
+  "phyto:interventionDescription": {},
+  "phyto:diseaseCategory": {},
+  "phyto:icd11Code": {
+   "na_or_empty_or_dash": 1
+  },
+  "phyto:hasValue": {},
+  "phyto:commonName": {},
+  "phyto:hasGenus": {},
+  "phyto:hasSpecies": {},
+  "phyto:hasTaxon": {},
+  "phyto:taxonomicFamily": {},
+  "phyto:taxonomicGenus": {},
+  "phyto:taxonomyStatus": {},
+  "phyto:scientificSynonym": {},
+  "phyto:hasDOI": {},
+  "owl:versionInfo": {}
+ },
+ "datatypes": {
+  "cmptx:geneSymbol": {
+   "plain": 62425
+  },
+  "cmptx:typeOfGene": {
+   "plain": 62413
+  },
+  "cmptx:xrefNcbiGene": {
+   "plain": 62407
+  },
+  "rdfs:label": {
+   "plain": 361034
+  },
+  "skos:altLabel": {
+   "plain": 66761
+  },
+  "cmptx:pathwayId": {
+   "plain": 4569
+  },
+  "cmptx:sourceDatabase": {
+   "plain": 4865
+  },
+  "rdfs:comment": {
+   "plain": 6195
+  },
+  "cmptx:xrefDiseaseOntology": {
+   "plain": 1583
+  },
+  "cmptx:commonName": {
+   "plain": 42483
+  },
+  "cmptx:xrefEnsembl": {
+   "plain": 35136
+  },
+  "cmptx:xrefHGNC": {
+   "plain": 42519
+  },
+  "cmptx:xrefOMIM": {
+   "plain": 17810
+  },
+  "phyto:targetClass": {
+   "plain": 758
+  },
+  "phyto:activityRelation": {
+   "plain": 25756
+  },
+  "phyto:activityType": {
+   "plain": 25756
+  },
+  "phyto:activityUnit": {
+   "plain": 25756
+  },
+  "phyto:activityValue": {
+   "xsd:double": 25756
+  },
+  "phyto:assertedBy": {
+   "plain": 25756
+  },
+  "phyto:hasReferenceText": {
+   "plain": 117
+  },
+  "owl:deprecated": {
+   "xsd:boolean": 9
+  },
+  "phyto:hasCommonName": {
+   "plain": 39583
+  },
+  "phyto:heuristicPhytochemicalClass": {
+   "plain": 110966
+  },
+  "phyto:constituentKind": {
+   "plain": 318
+  },
+  "phyto:aromatic_rings": {
+   "xsd:integer": 59149
+  },
+  "phyto:classyfireClass": {
+   "plain": 146505
+  },
+  "phyto:classyfireSubclass": {
+   "plain": 147491
+  },
+  "phyto:classyfireSuperclass": {
+   "plain": 147491
+  },
+  "phyto:coconutId": {
+   "plain": 173237
+  },
+  "phyto:exact_mw": {
+   "xsd:double": 59149
+  },
+  "phyto:formal_charge": {
+   "xsd:integer": 59149
+  },
+  "phyto:fraction_csp3": {
+   "xsd:double": 59149
+  },
+  "phyto:hasCanonicalSMILES": {
+   "plain": 59154
+  },
+  "phyto:hasIUPACName": {
+   "plain": 153468
+  },
+  "phyto:hasInChIKey": {
+   "plain": 183172
+  },
+  "phyto:hasMACCs": {
+   "plain": 59154
+  },
+  "phyto:hasMolecularFormula": {
+   "plain": 181455
+  },
+  "phyto:hasSMILES": {
+   "plain": 183329
+  },
+  "phyto:hba": {
+   "xsd:integer": 59151
+  },
+  "phyto:hbd": {
+   "xsd:integer": 59151
+  },
+  "phyto:heavy_atoms": {
+   "xsd:integer": 59149
+  },
+  "phyto:heteroatoms": {
+   "xsd:integer": 59149
+  },
+  "phyto:logp": {
+   "xsd:double": 59156
+  },
+  "phyto:mw": {
+   "xsd:double": 59149
+  },
+  "phyto:npClassifierClass": {
+   "plain": 156208
+  },
+  "phyto:npClassifierPathway": {
+   "plain": 168569
+  },
+  "phyto:npClassifierSuperclass": {
+   "plain": 160433
+  },
+  "phyto:qed": {
+   "xsd:double": 59153
+  },
+  "phyto:ring_count": {
+   "xsd:integer": 59149
+  },
+  "phyto:ro5_violations": {
+   "xsd:integer": 59150
+  },
+  "phyto:rotatable_bonds": {
+   "xsd:integer": 59149
+  },
+  "phyto:tpsa": {
+   "xsd:double": 59153
+  },
+  "phyto:labelIsPlaceholder": {
+   "xsd:boolean": 18942
+  },
+  "phyto:hasATC": {
+   "plain": 745
+  },
+  "phyto:hasNCTId": {
+   "plain": 15155
+  },
+  "phyto:trialCondition": {
+   "plain": 15330
+  },
+  "phyto:trialPhase": {
+   "plain": 15155
+  },
+  "phyto:interventionDescription": {
+   "plain": 747
+  },
+  "phyto:diseaseCategory": {
+   "plain": 1349
+  },
+  "phyto:icd11Code": {
+   "plain": 1351
+  },
+  "phyto:hasValue": {
+   "xsd:string": 1243,
+   "plain": 109
+  },
+  "phyto:commonName": {
+   "plain": 54306
+  },
+  "phyto:hasGenus": {
+   "plain": 36769
+  },
+  "phyto:hasSpecies": {
+   "plain": 35972
+  },
+  "phyto:hasTaxon": {
+   "plain": 41528
+  },
+  "phyto:taxonomicFamily": {
+   "plain": 41508
+  },
+  "phyto:taxonomicGenus": {
+   "plain": 41393
+  },
+  "phyto:taxonomyStatus": {
+   "plain": 44604
+  },
+  "phyto:scientificSynonym": {
+   "plain": 19
+  },
+  "phyto:hasDOI": {
+   "plain": 17720
+  },
+  "owl:versionInfo": {
+   "plain": 1
+  }
+ },
+ "subj_types_by_pred": {
+  "skos:altLabel": [
+   [
+    "cmptx:Gene",
+    62407
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3076
+   ],
+   [
+    "phyto:Plant",
+    904
+   ],
+   [
+    "owl:DatatypeProperty",
+    5
+   ]
+  ],
+  "cmptx:typeOfGene": [
+   [
+    "cmptx:Gene",
+    62407
+   ]
+  ],
+  "rdf:type": [
+   [
+    "phyto:ChemicalConcept",
+    208209
+   ],
+   [
+    "cmptx:Gene",
+    62407
+   ],
+   [
+    "phyto:Plant",
+    41447
+   ],
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ],
+   [
+    "phyto:ScientificPaper",
+    21407
+   ]
+  ],
+  "cmptx:geneSymbol": [
+   [
+    "cmptx:Gene",
+    62407
+   ]
+  ],
+  "cmptx:xrefNcbiGene": [
+   [
+    "cmptx:Gene",
+    62407
+   ]
+  ],
+  "rdfs:label": [
+   [
+    "phyto:ChemicalConcept",
+    208209
+   ],
+   [
+    "cmptx:Gene",
+    62407
+   ],
+   [
+    "phyto:Plant",
+    41447
+   ],
+   [
+    "phyto:ScientificPaper",
+    21383
+   ],
+   [
+    "phyto:ClinicalTrial",
+    15155
+   ]
+  ],
+  "rdfs:comment": [
+   [
+    "cmptx:Pathway",
+    4569
+   ],
+   [
+    "cmptx:Disease",
+    1583
+   ],
+   [
+    "owl:ObjectProperty",
+    23
+   ],
+   [
+    "owl:Class",
+    8
+   ],
+   [
+    "owl:DatatypeProperty",
+    8
+   ]
+  ],
+  "cmptx:sourceDatabase": [
+   [
+    "cmptx:Pathway",
+    4569
+   ]
+  ],
+  "cmptx:pathwayId": [
+   [
+    "cmptx:Pathway",
+    4569
+   ]
+  ],
+  "cmptx:diseaseSubtypeOf": [
+   [
+    "cmptx:Disease",
+    1577
+   ]
+  ],
+  "cmptx:xrefDiseaseOntology": [
+   [
+    "cmptx:Disease",
+    1583
+   ]
+  ],
+  "rdfs:subClassOf": [
+   [
+    "owl:Class",
+    23
+   ]
+  ],
+  "cmptx:xrefEnsembl": [
+   [
+    "cmptx:Gene",
+    35136
+   ]
+  ],
+  "cmptx:xrefHGNC": [
+   [
+    "cmptx:Gene",
+    42517
+   ]
+  ],
+  "cmptx:commonName": [
+   [
+    "cmptx:Gene",
+    42483
+   ]
+  ],
+  "cmptx:geneInteractsWithGene": [
+   [
+    "cmptx:Gene",
+    9511
+   ]
+  ],
+  "cmptx:geneInPathway": [
+   [
+    "cmptx:Gene",
+    12940
+   ]
+  ],
+  "cmptx:xrefOMIM": [
+   [
+    "cmptx:Gene",
+    17803
+   ]
+  ],
+  "cmptx:geneAssociatedWithDisease": [
+   [
+    "cmptx:Gene",
+    3810
+   ]
+  ],
+  "skos:exactMatch": [
+   [
+    "phyto:ChemicalConcept",
+    181024
+   ],
+   [
+    "phyto:Plant",
+    38379
+   ],
+   [
+    "phyto:ClinicalTrial",
+    15155
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3149
+   ],
+   [
+    "cmptx:Gene",
+    758
+   ]
+  ],
+  "phyto:targetClass": [
+   [
+    "cmptx:Gene",
+    758
+   ]
+  ],
+  "rdfs:domain": [
+   [
+    "owl:DatatypeProperty",
+    45
+   ],
+   [
+    "owl:ObjectProperty",
+    25
+   ],
+   [
+    "owl:AnnotationProperty|owl:DatatypeProperty",
+    2
+   ]
+  ],
+  "rdfs:range": [
+   [
+    "owl:DatatypeProperty",
+    47
+   ],
+   [
+    "owl:ObjectProperty",
+    24
+   ],
+   [
+    "owl:AnnotationProperty|owl:DatatypeProperty",
+    2
+   ]
+  ],
+  "phyto:activityCompound": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:activityUnit": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:assertedBy": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:activityType": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:activityRelation": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:hasReference": [
+   [
+    "phyto:BioactivityMeasurement",
+    25639
+   ]
+  ],
+  "phyto:activityTarget": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:activityValue": [
+   [
+    "phyto:BioactivityMeasurement",
+    25756
+   ]
+  ],
+  "phyto:hasReferenceText": [
+   [
+    "phyto:BioactivityMeasurement",
+    117
+   ]
+  ],
+  "owl:deprecated": [
+   [
+    "owl:Class",
+    9
+   ]
+  ],
+  "phyto:heuristicPhytochemicalClass": [
+   [
+    "phyto:ChemicalConcept",
+    64516
+   ],
+   [
+    "phyto:NonCompoundConstituent",
+    46
+   ]
+  ],
+  "phyto:hasPaper": [
+   [
+    "phyto:ChemicalConcept",
+    8354
+   ],
+   [
+    "phyto:Plant",
+    3397
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    1326
+   ],
+   [
+    "phyto:NonCompoundConstituent",
+    44
+   ]
+  ],
+  "phyto:hasCommonName": [
+   [
+    "phyto:ChemicalConcept",
+    39259
+   ],
+   [
+    "phyto:NonCompoundConstituent",
+    318
+   ]
+  ],
+  "phyto:constituentKind": [
+   [
+    "phyto:NonCompoundConstituent",
+    318
+   ]
+  ],
+  "phyto:logp": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:heavy_atoms": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:hasMolecularFormula": [
+   [
+    "phyto:ChemicalConcept",
+    181455
+   ]
+  ],
+  "phyto:npClassifierClass": [
+   [
+    "phyto:ChemicalConcept",
+    156208
+   ]
+  ],
+  "phyto:hba": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:coconutId": [
+   [
+    "phyto:ChemicalConcept",
+    173237
+   ]
+  ],
+  "phyto:ring_count": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:hasSMILES": [
+   [
+    "phyto:ChemicalConcept",
+    183170
+   ]
+  ],
+  "phyto:aromatic_rings": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:heteroatoms": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:classyfireClass": [
+   [
+    "phyto:ChemicalConcept",
+    146505
+   ]
+  ],
+  "phyto:hasIUPACName": [
+   [
+    "phyto:ChemicalConcept",
+    153464
+   ]
+  ],
+  "phyto:mw": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:hasCanonicalSMILES": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:exact_mw": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:hasMACCs": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:fraction_csp3": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:tpsa": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:classyfireSubclass": [
+   [
+    "phyto:ChemicalConcept",
+    147491
+   ]
+  ],
+  "phyto:hbd": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:formal_charge": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:classyfireSuperclass": [
+   [
+    "phyto:ChemicalConcept",
+    147491
+   ]
+  ],
+  "phyto:ro5_violations": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:hasInChIKey": [
+   [
+    "phyto:ChemicalConcept",
+    183172
+   ]
+  ],
+  "phyto:qed": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:npClassifierSuperclass": [
+   [
+    "phyto:ChemicalConcept",
+    160433
+   ]
+  ],
+  "phyto:rotatable_bonds": [
+   [
+    "phyto:ChemicalConcept",
+    59149
+   ]
+  ],
+  "phyto:npClassifierPathway": [
+   [
+    "phyto:ChemicalConcept",
+    168569
+   ]
+  ],
+  "phyto:labelIsPlaceholder": [
+   [
+    "phyto:ChemicalConcept",
+    18942
+   ]
+  ],
+  "phyto:compoundTargetsGene": [
+   [
+    "phyto:ChemicalConcept",
+    3256
+   ]
+  ],
+  "phyto:hasATC": [
+   [
+    "phyto:ChemicalConcept",
+    268
+   ]
+  ],
+  "phyto:targetsProtein": [
+   [
+    "phyto:ChemicalConcept",
+    366
+   ]
+  ],
+  "phyto:hasMechanismOfAction": [
+   [
+    "phyto:ChemicalConcept",
+    245
+   ]
+  ],
+  "phyto:hasClinicalStudy": [
+   [
+    "phyto:ChemicalConcept",
+    380
+   ],
+   [
+    "phyto:Plant",
+    153
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    76
+   ]
+  ],
+  "phyto:trialCondition": [
+   [
+    "phyto:ClinicalTrial",
+    15155
+   ]
+  ],
+  "phyto:hasNCTId": [
+   [
+    "phyto:ClinicalTrial",
+    15155
+   ]
+  ],
+  "phyto:trialPhase": [
+   [
+    "phyto:ClinicalTrial",
+    15155
+   ]
+  ],
+  "phyto:interventionDescription": [
+   [
+    "phyto:ClinicalTrial",
+    691
+   ]
+  ],
+  "phyto:diseaseCategory": [
+   [
+    "phyto:DiseaseConcept",
+    1349
+   ]
+  ],
+  "phyto:icd11Code": [
+   [
+    "phyto:DiseaseConcept",
+    1351
+   ]
+  ],
+  "skos:closeMatch": [
+   [
+    "phyto:DiseaseConcept",
+    138
+   ]
+  ],
+  "owl:equivalentClass": [
+   [
+    "owl:Class",
+    1
+   ]
+  ],
+  "phyto:hasValue": [
+   [
+    "phyto:ProteinTarget",
+    1334
+   ],
+   [
+    "phyto:MechanismOfAction",
+    18
+   ]
+  ],
+  "phyto:hasCompoundPerCOCONUT": [
+   [
+    "phyto:Plant",
+    36053
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2395
+   ]
+  ],
+  "phyto:taxonomyStatus": [
+   [
+    "phyto:Plant",
+    41447
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3157
+   ]
+  ],
+  "phyto:taxonomicFamily": [
+   [
+    "phyto:Plant",
+    38359
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3149
+   ]
+  ],
+  "phyto:hasSpecies": [
+   [
+    "phyto:Plant",
+    32818
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3154
+   ]
+  ],
+  "phyto:hasCompound": [
+   [
+    "phyto:Plant",
+    36489
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2408
+   ]
+  ],
+  "phyto:hasGenus": [
+   [
+    "phyto:Plant",
+    33612
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3157
+   ]
+  ],
+  "phyto:hasTaxon": [
+   [
+    "phyto:Plant",
+    38379
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3149
+   ]
+  ],
+  "phyto:taxonomicGenus": [
+   [
+    "phyto:Plant",
+    38246
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    3147
+   ]
+  ],
+  "phyto:commonName": [
+   [
+    "phyto:Plant",
+    30538
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2800
+   ]
+  ],
+  "phyto:hasCompoundFamilyUnreplicated": [
+   [
+    "phyto:Plant",
+    12149
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    1506
+   ]
+  ],
+  "phyto:associatedWithDiseaseByTranscriptomeReversion": [
+   [
+    "phyto:Plant",
+    4035
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2326
+   ]
+  ],
+  "phyto:hasCompoundPerCMAUP": [
+   [
+    "phyto:Plant",
+    5258
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2382
+   ]
+  ],
+  "phyto:associatedWithDisease": [
+   [
+    "phyto:Plant",
+    4104
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2382
+   ]
+  ],
+  "phyto:associatedWithDiseaseByTarget": [
+   [
+    "phyto:Plant",
+    3867
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    2197
+   ]
+  ],
+  "phyto:hasReportedConstituent": [
+   [
+    "phyto:Plant",
+    1030
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    219
+   ]
+  ],
+  "phyto:hasCompoundPerDrDuke": [
+   [
+    "phyto:Plant",
+    1794
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    315
+   ]
+  ],
+  "phyto:associatedWithDiseaseByIngredientTrial": [
+   [
+    "phyto:Plant",
+    3053
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    1668
+   ]
+  ],
+  "phyto:associatedWithDiseaseByPlantTrial": [
+   [
+    "phyto:Plant",
+    136
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    72
+   ]
+  ],
+  "phyto:scientificSynonym": [
+   [
+    "phyto:Plant",
+    17
+   ],
+   [
+    "phyto:Plant|phyto:PlantConcept",
+    1
+   ]
+  ],
+  "phyto:hasDOI": [
+   [
+    "phyto:ScientificPaper",
+    17720
+   ]
+  ],
+  "rdfs:subPropertyOf": [
+   [
+    "owl:ObjectProperty",
+    8
+   ]
+  ],
+  "owl:inverseOf": [
+   [
+    "owl:ObjectProperty",
+    8
+   ]
+  ],
+  "owl:propertyChainAxiom": [
+   [
+    "owl:ObjectProperty",
+    1
+   ]
+  ],
+  "owl:versionInfo": [
+   [
+    "owl:Ontology",
+    1
+   ]
+  ],
+  "owl:unionOf": [
+   [
+    "owl:Class",
+    5
+   ],
+   [
+    "owl:DataRange",
+    2
+   ]
+  ],
+  "rdf:first": [
+   [
+    "(untyped/undeclared)",
+    16
+   ]
+  ],
+  "rdf:rest": [
+   [
+    "(untyped/undeclared)",
+    16
+   ]
+  ]
+ },
+ "obj_types_by_pred_sample50k": {
+  "cmptx:diseaseSubtypeOf": [
+   [
+    "cmptx:Disease",
+    2290
+   ]
+  ],
+  "rdfs:subClassOf": [
+   [
+    "owl:Class",
+    23
+   ]
+  ],
+  "cmptx:geneInPathway": [
+   [
+    "cmptx:Pathway",
+    50000
+   ]
+  ],
+  "cmptx:geneInteractsWithGene": [
+   [
+    "cmptx:Gene",
+    50000
+   ]
+  ],
+  "cmptx:geneAssociatedWithDisease": [
+   [
+    "cmptx:Disease",
+    38350
+   ]
+  ],
+  "skos:exactMatch": [
+   [
+    "(untyped/undeclared)",
+    50000
+   ]
+  ],
+  "rdfs:domain": [
+   [
+    "owl:Class",
+    73
+   ]
+  ],
+  "rdfs:range": [
+   [
+    "(untyped/undeclared)",
+    49
+   ],
+   [
+    "owl:Class",
+    25
+   ]
+  ],
+  "phyto:activityCompound": [
+   [
+    "phyto:ChemicalConcept",
+    25756
+   ]
+  ],
+  "phyto:activityTarget": [
+   [
+    "cmptx:Gene",
+    25756
+   ]
+  ],
+  "phyto:hasReference": [
+   [
+    "(untyped/undeclared)",
+    25639
+   ]
+  ],
+  "phyto:hasPaper": [
+   [
+    "phyto:ScientificPaper",
+    50000
+   ]
+  ],
+  "phyto:compoundTargetsGene": [
+   [
+    "cmptx:Gene",
+    12495
+   ]
+  ],
+  "phyto:hasClinicalStudy": [
+   [
+    "phyto:ClinicalTrial",
+    17150
+   ]
+  ],
+  "phyto:hasMechanismOfAction": [
+   [
+    "phyto:MechanismOfAction",
+    307
+   ]
+  ],
+  "phyto:targetsProtein": [
+   [
+    "phyto:ProteinTarget",
+    3208
+   ]
+  ],
+  "skos:closeMatch": [
+   [
+    "cmptx:Disease",
+    138
+   ]
+  ],
+  "owl:equivalentClass": [
+   [
+    "owl:Class",
+    1
+   ]
+  ],
+  "phyto:hasCompound": [
+   [
+    "phyto:ChemicalConcept",
+    50000
+   ]
+  ],
+  "phyto:hasCompoundFamilyUnreplicated": [
+   [
+    "phyto:ChemicalConcept",
+    50000
+   ]
+  ],
+  "phyto:hasCompoundPerCOCONUT": [
+   [
+    "phyto:ChemicalConcept",
+    50000
+   ]
+  ],
+  "phyto:associatedWithDisease": [
+   [
+    "phyto:DiseaseConcept",
+    50000
+   ]
+  ],
+  "phyto:associatedWithDiseaseByIngredientTrial": [
+   [
+    "phyto:DiseaseConcept",
+    50000
+   ]
+  ],
+  "phyto:associatedWithDiseaseByTarget": [
+   [
+    "phyto:DiseaseConcept",
+    50000
+   ]
+  ],
+  "phyto:associatedWithDiseaseByTranscriptomeReversion": [
+   [
+    "phyto:DiseaseConcept",
+    50000
+   ]
+  ],
+  "phyto:hasCompoundPerCMAUP": [
+   [
+    "phyto:ChemicalConcept",
+    50000
+   ]
+  ],
+  "phyto:hasCompoundPerDrDuke": [
+   [
+    "phyto:ChemicalConcept",
+    50000
+   ]
+  ],
+  "phyto:hasReportedConstituent": [
+   [
+    "phyto:NonCompoundConstituent",
+    12278
+   ]
+  ],
+  "phyto:associatedWithDiseaseByPlantTrial": [
+   [
+    "phyto:DiseaseConcept",
+    758
+   ]
+  ],
+  "rdfs:label": [
+   [
+    "(untyped/undeclared)",
+    1
+   ]
+  ],
+  "rdfs:subPropertyOf": [
+   [
+    "owl:ObjectProperty",
+    8
+   ]
+  ],
+  "owl:inverseOf": [
+   [
+    "owl:ObjectProperty",
+    8
+   ]
+  ],
+  "owl:propertyChainAxiom": [
+   [
+    "(untyped/undeclared)",
+    1
+   ]
+  ],
+  "owl:unionOf": [
+   [
+    "(untyped/undeclared)",
+    7
+   ]
+  ],
+  "rdf:first": [
+   [
+    "owl:Class",
+    10
+   ],
+   [
+    "(untyped/undeclared)",
+    4
+   ],
+   [
+    "owl:ObjectProperty",
+    2
+   ]
+  ],
+  "rdf:rest": [
+   [
+    "(untyped/undeclared)",
+    16
+   ]
+  ]
+ },
+ "undeclared_obj_examples": {
+  "cmptx:diseaseSubtypeOf": [],
+  "rdfs:subClassOf": [],
+  "cmptx:geneInPathway": [],
+  "cmptx:geneInteractsWithGene": [],
+  "cmptx:geneAssociatedWithDisease": [],
+  "skos:exactMatch": [
+   "idorg:chembl.target/CHEMBL6020",
+   "idorg:uniprot/O95342",
+   "idorg:chembl.target/CHEMBL4302",
+   "idorg:uniprot/P08183",
+   "idorg:chembl.target/CHEMBL3004"
+  ],
+  "rdfs:domain": [],
+  "rdfs:range": [
+   "xsd:string",
+   "xsd:string",
+   "xsd:string",
+   "xsd:double",
+   "xsd:string"
+  ],
+  "phyto:activityCompound": [],
+  "phyto:activityTarget": [],
+  "phyto:hasReference": [
+   "idorg:pubmed/473096",
+   "idorg:pubmed/27692996",
+   "idorg:pubmed/481263",
+   "idorg:pubmed/537984",
+   "idorg:pubmed/564373"
+  ],
+  "phyto:hasPaper": [],
+  "phyto:compoundTargetsGene": [],
+  "phyto:hasClinicalStudy": [],
+  "phyto:hasMechanismOfAction": [],
+  "phyto:targetsProtein": [],
+  "skos:closeMatch": [],
+  "owl:equivalentClass": [],
+  "phyto:hasCompound": [],
+  "phyto:hasCompoundFamilyUnreplicated": [],
+  "phyto:hasCompoundPerCOCONUT": [],
+  "phyto:associatedWithDisease": [],
+  "phyto:associatedWithDiseaseByIngredientTrial": [],
+  "phyto:associatedWithDiseaseByTarget": [],
+  "phyto:associatedWithDiseaseByTranscriptomeReversion": [],
+  "phyto:hasCompoundPerCMAUP": [],
+  "phyto:hasCompoundPerDrDuke": [],
+  "phyto:hasReportedConstituent": [],
+  "phyto:associatedWithDiseaseByPlantTrial": [],
+  "rdfs:label": [
+   "_:N8852e73740e14518b16014cdf6b063be"
+  ],
+  "rdfs:subPropertyOf": [],
+  "owl:inverseOf": [],
+  "owl:propertyChainAxiom": [
+   "_:tg1"
+  ],
+  "owl:unionOf": [
+   "_:N8a61b5c57d3446c3b287d6b4c22ad3a7",
+   "_:Nd124f305dc514c429ae1cc1af91f0a6d",
+   "_:hcs1",
+   "_:u1l0",
+   "_:u2l0"
+  ],
+  "rdf:first": [
+   "xsd:double",
+   "xsd:float",
+   "xsd:float",
+   "xsd:double"
+  ],
+  "rdf:rest": [
+   "rdf:nil",
+   "_:Nfbc9b90265464fa8aeb91d22a5dce9ac",
+   "_:N79478442c5e04b11aa2e5b0ffaaa7e2e",
+   "rdf:nil",
+   "_:hcs2"
+  ]
+ },
+ "tracked": {
+  "cmptx:diseaseSubtypeOf": {
+   "subjects": 1577,
+   "triples": 2290,
+   "max": 4,
+   "top": [
+    [
+     "cmptx:DOID_0050638",
+     4,
+     null
+    ],
+    [
+     "cmptx:DOID_12132",
+     4,
+     null
+    ],
+    [
+     "cmptx:DOID_7147",
+     4,
+     null
+    ],
+    [
+     "cmptx:DOID_9266",
+     4,
+     null
+    ],
+    [
+     "cmptx:DOID_0050540",
+     3,
+     null
+    ],
+    [
+     "cmptx:DOID_0050553",
+     3,
+     null
+    ]
+   ]
+  },
+  "cmptx:geneInPathway": {
+   "subjects": 12940,
+   "triples": 177694,
+   "max": 458,
+   "top": [
+    [
+     "cmptx:mapk1",
+     458,
+     null
+    ],
+    [
+     "cmptx:mapk3",
+     441,
+     null
+    ],
+    [
+     "cmptx:akt1",
+     385,
+     null
+    ],
+    [
+     "cmptx:pik3r1",
+     380,
+     null
+    ],
+    [
+     "cmptx:pik3ca",
+     356,
+     null
+    ],
+    [
+     "cmptx:hras",
+     341,
+     null
+    ]
+   ]
+  },
+  "cmptx:geneInteractsWithGene": {
+   "subjects": 9511,
+   "triples": 147008,
+   "max": 5951,
+   "top": [
+    [
+     "cmptx:ubc",
+     5951,
+     null
+    ],
+    [
+     "cmptx:app",
+     1867,
+     null
+    ],
+    [
+     "cmptx:sumo2",
+     761,
+     null
+    ],
+    [
+     "cmptx:esr1",
+     697,
+     null
+    ],
+    [
+     "cmptx:grb2",
+     697,
+     null
+    ],
+    [
+     "cmptx:cul3",
+     561,
+     null
+    ]
+   ]
+  },
+  "cmptx:geneAssociatedWithDisease": {
+   "subjects": 3810,
+   "triples": 38350,
+   "max": 79,
+   "top": [
+    [
+     "cmptx:saa1",
+     79,
+     null
+    ],
+    [
+     "cmptx:saa2",
+     79,
+     null
+    ],
+    [
+     "cmptx:apoe",
+     68,
+     null
+    ],
+    [
+     "cmptx:actb",
+     57,
+     null
+    ],
+    [
+     "cmptx:hla-drb1",
+     56,
+     null
+    ],
+    [
+     "cmptx:braf",
+     55,
+     null
+    ]
+   ]
+  },
+  "phyto:activityCompound": {
+   "subjects": 25756,
+   "triples": 25756,
+   "max": 1,
+   "top": [
+    [
+     "phyto:Bioactivity_0002504aeda2000a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00057b68a6c52195",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0005b3895146d50a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00088b0e6eba0507",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0008b9272edc4e5c",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_000a215a611ea567",
+     1,
+     null
+    ]
+   ]
+  },
+  "phyto:activityTarget": {
+   "subjects": 25756,
+   "triples": 25756,
+   "max": 1,
+   "top": [
+    [
+     "phyto:Bioactivity_0002504aeda2000a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00057b68a6c52195",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0005b3895146d50a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00088b0e6eba0507",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0008b9272edc4e5c",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_000a215a611ea567",
+     1,
+     null
+    ]
+   ]
+  },
+  "phyto:hasReference": {
+   "subjects": 25639,
+   "triples": 25639,
+   "max": 1,
+   "top": [
+    [
+     "phyto:Bioactivity_0002504aeda2000a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00057b68a6c52195",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0005b3895146d50a",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_00088b0e6eba0507",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_0008b9272edc4e5c",
+     1,
+     null
+    ],
+    [
+     "phyto:Bioactivity_000a215a611ea567",
+     1,
+     null
+    ]
+   ]
+  },
+  "phyto:hasPaper": {
+   "subjects": 13121,
+   "triples": 116782,
+   "max": 1045,
+   "top": [
+    [
+     "phyto:Chemical_ik_OKKJLVBELUTLKV_UHFFFAOYSA_N",
+     1045,
+     null
+    ],
+    [
+     "phyto:Plant_Arabidopsis_Thaliana",
+     685,
+     "Arabidopsis thaliana"
+    ],
+    [
+     "phyto:Chemical_ik_RWSXRVCMGQZWBV_WDSKDSINSA_N",
+     631,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_REFJWTPEDVJJIY_UHFFFAOYSA_N",
+     606,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_XBZYWSMVVKYHQN_MYPRUECHSA_N",
+     493,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_AXNVHPCVMSNXNP_ZELRDNAQSA_N",
+     477,
+     null
+    ]
+   ]
+  },
+  "phyto:compoundTargetsGene": {
+   "subjects": 3256,
+   "triples": 12495,
+   "max": 308,
+   "top": [
+    [
+     "phyto:Chemical_ik_HKSZLNNOFSGOKW_FYTWVXJKSA_N",
+     308,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_REFJWTPEDVJJIY_UHFFFAOYSA_N",
+     108,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_KRIUNPBAQZGFQA_UHFFFAOYSA_N",
+     102,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_AFSDNFLWKVMVRB_UHFFFAOYSA_N",
+     69,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_LUKBXSAWLPMMSZ_OWOJBTEDSA_N",
+     65,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_IQPNAANSBPBGFQ_UHFFFAOYSA_N",
+     62,
+     null
+    ]
+   ]
+  },
+  "phyto:hasClinicalStudy": {
+   "subjects": 609,
+   "triples": 17150,
+   "max": 2061,
+   "top": [
+    [
+     "phyto:Chemical_ik_RCINICONZNJXQF_MZXODVADSA_N",
+     2061,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_GHASVSINZRGABV_UHFFFAOYSA_N",
+     1215,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_VJJPUSNTGOMMGY_MRVIYFEKSA_N",
+     978,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_AOJJSUZBOXZQNB_TZSSRYMLSA_N",
+     885,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_XZWYZXLIPXDOLR_UHFFFAOYSA_N",
+     565,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_OGWKCGZFUXNPDA_XQKSVPLYSA_N",
+     378,
+     null
+    ]
+   ]
+  },
+  "phyto:hasMechanismOfAction": {
+   "subjects": 245,
+   "triples": 307,
+   "max": 5,
+   "top": [
+    [
+     "phyto:Chemical_ik_QHMBSVQNZZTUGM_ZWKOTPCHSA_N",
+     5,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_HYIMSNHJOBLJNT_UHFFFAOYSA_N",
+     4,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_AAOVKJBEBIDNHE_UHFFFAOYSA_N",
+     3,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_CYQFCXCEBYINGO_IAGOWNOFSA_N",
+     3,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_DCOPUUMXTXDBNB_UHFFFAOYSA_N",
+     3,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_PMATZTZNYRCHOR_CGLBZJNRSA_N",
+     3,
+     null
+    ]
+   ]
+  },
+  "phyto:targetsProtein": {
+   "subjects": 366,
+   "triples": 3208,
+   "max": 141,
+   "top": [
+    [
+     "phyto:Chemical_ik_REFJWTPEDVJJIY_UHFFFAOYSA_N",
+     141,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_MLDQJTXFUGDVEO_UHFFFAOYSA_N",
+     129,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_XGALLCVXEZPNRQ_UHFFFAOYSA_N",
+     86,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_VNFPBHJOKIVQEB_UHFFFAOYSA_N",
+     76,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_XMAYWYJOQHXEEK_UHFFFAOYSA_N",
+     45,
+     null
+    ],
+    [
+     "phyto:Chemical_ik_GZUITABIAKMVPG_UHFFFAOYSA_N",
+     44,
+     null
+    ]
+   ]
+  },
+  "phyto:hasCompound": {
+   "subjects": 38897,
+   "triples": 1012081,
+   "max": 1726,
+   "top": [
+    [
+     "phyto:Organism_3172",
+     1726,
+     "Panax ginseng C.A.Meyer"
+    ],
+    [
+     "phyto:Organism_23775",
+     1465,
+     "Zingiber officinale ROSCOE"
+    ],
+    [
+     "phyto:Organism_19606",
+     1424,
+     "Camellia sinensis var.assamica"
+    ],
+    [
+     "phyto:Organism_15356",
+     1325,
+     "Capsicum annuum var.grossum"
+    ],
+    [
+     "phyto:Organism_10976",
+     1265,
+     "Vitis vinifera var.sultana"
+    ],
+    [
+     "phyto:Organism_11653",
+     1258,
+     "Arabidopsis thaliana cv.Columbia"
+    ]
+   ]
+  },
+  "phyto:hasCompoundFamilyUnreplicated": {
+   "subjects": 13655,
+   "triples": 94972,
+   "max": 370,
+   "top": [
+    [
+     "phyto:Organism_4265",
+     370,
+     "Mangifera indica L."
+    ],
+    [
+     "phyto:Organism_11653",
+     278,
+     "Arabidopsis thaliana cv.Columbia"
+    ],
+    [
+     "phyto:Organism_19606",
+     250,
+     "Camellia sinensis var.assamica"
+    ],
+    [
+     "phyto:Plant_Carica_Papaya",
+     167,
+     "Carica papaya"
+    ],
+    [
+     "phyto:Organism_11656",
+     155,
+     "Nicotiana tabacum cv.Samson"
+    ],
+    [
+     "phyto:Organism_18048",
+     155,
+     "Hamamelis virginiana"
+    ]
+   ]
+  },
+  "phyto:hasCompoundPerCOCONUT": {
+   "subjects": 38448,
+   "triples": 912057,
+   "max": 1224,
+   "top": [
+    [
+     "phyto:Organism_11653",
+     1224,
+     "Arabidopsis thaliana cv.Columbia"
+    ],
+    [
+     "phyto:Organism_3172",
+     1186,
+     "Panax ginseng C.A.Meyer"
+    ],
+    [
+     "phyto:Organism_23775",
+     1004,
+     "Zingiber officinale ROSCOE"
+    ],
+    [
+     "phyto:Organism_15356",
+     1000,
+     "Capsicum annuum var.grossum"
+    ],
+    [
+     "phyto:Organism_10976",
+     906,
+     "Vitis vinifera var.sultana"
+    ],
+    [
+     "phyto:Organism_4265",
+     896,
+     "Mangifera indica L."
+    ]
+   ]
+  },
+  "phyto:associatedWithDisease": {
+   "subjects": 6486,
+   "triples": 747962,
+   "max": 552,
+   "top": [
+    [
+     "phyto:Organism_4265",
+     552,
+     "Mangifera indica L."
+    ],
+    [
+     "phyto:Organism_7395",
+     547,
+     "Juglans regia L."
+    ],
+    [
+     "phyto:Organism_15356",
+     545,
+     "Capsicum annuum var.grossum"
+    ],
+    [
+     "phyto:Organism_12302",
+     539,
+     "Brassica oleracea L. var. botrytis subvar. Cauliflora DC"
+    ],
+    [
+     "phyto:Organism_15725",
+     539,
+     "Allium sativum var.sativum"
+    ],
+    [
+     "phyto:Organism_2343",
+     525,
+     "Phaseolus vulgaris L."
+    ]
+   ]
+  },
+  "phyto:associatedWithDiseaseByIngredientTrial": {
+   "subjects": 4721,
+   "triples": 152509,
+   "max": 350,
+   "top": [
+    [
+     "phyto:Organism_4265",
+     350,
+     "Mangifera indica L."
+    ],
+    [
+     "phyto:Organism_7395",
+     331,
+     "Juglans regia L."
+    ],
+    [
+     "phyto:Organism_31630",
+     324,
+     "Phytolacca americana L."
+    ],
+    [
+     "phyto:Organism_15725",
+     319,
+     "Allium sativum var.sativum"
+    ],
+    [
+     "phyto:Organism_15356",
+     317,
+     "Capsicum annuum var.grossum"
+    ],
+    [
+     "phyto:Organism_12302",
+     312,
+     "Brassica oleracea L. var. botrytis subvar. Cauliflora DC"
+    ]
+   ]
+  },
+  "phyto:associatedWithDiseaseByTarget": {
+   "subjects": 6064,
+   "triples": 424725,
+   "max": 289,
+   "top": [
+    [
+     "phyto:Organism_32145",
+     289,
+     "Thymus vulgaris L."
+    ],
+    [
+     "phyto:Organism_7395",
+     285,
+     "Juglans regia L."
+    ],
+    [
+     "phyto:Organism_15356",
+     282,
+     "Capsicum annuum var.grossum"
+    ],
+    [
+     "phyto:Organism_2343",
+     280,
+     "Phaseolus vulgaris L."
+    ],
+    [
+     "phyto:Organism_12302",
+     271,
+     "Brassica oleracea L. var. botrytis subvar. Cauliflora DC"
+    ],
+    [
+     "phyto:Organism_19606",
+     269,
+     "Camellia sinensis var.assamica"
+    ]
+   ]
+  },
+  "phyto:associatedWithDiseaseByTranscriptomeReversion": {
+   "subjects": 6361,
+   "triples": 219641,
+   "max": 67,
+   "top": [
+    [
+     "phyto:Plant_Streptocaulon_Juventas",
+     67,
+     "Streptocaulon juventas"
+    ],
+    [
+     "phyto:Organism_18049",
+     66,
+     "Morus alba LINNE"
+    ],
+    [
+     "phyto:Organism_3454",
+     66,
+     "Forsythia suspensa (Thunb.) Vahl."
+    ],
+    [
+     "phyto:Plant_Elsholtzia_Ciliata",
+     66,
+     "Elsholtzia ciliata"
+    ],
+    [
+     "phyto:Plant_Mosla_Chinensis",
+     66,
+     "Mosla chinensis"
+    ],
+    [
+     "phyto:Plant_Pogostemon_Cablin",
+     66,
+     "Pogostemon cablin"
+    ]
+   ]
+  },
+  "phyto:hasCompoundPerCMAUP": {
+   "subjects": 7640,
+   "triples": 411530,
+   "max": 797,
+   "top": [
+    [
+     "phyto:Organism_23775",
+     797,
+     "Zingiber officinale ROSCOE"
+    ],
+    [
+     "phyto:Organism_3172",
+     784,
+     "Panax ginseng C.A.Meyer"
+    ],
+    [
+     "phyto:Plant_Angelica_Sinensis",
+     779,
+     "Angelica sinensis"
+    ],
+    [
+     "phyto:Organism_21798",
+     686,
+     "Citrus reticulata tangerine"
+    ],
+    [
+     "phyto:Organism_10976",
+     660,
+     "Vitis vinifera var.sultana"
+    ],
+    [
+     "phyto:Organism_17726",
+     624,
+     "Angelica acutiloba var.sugiyamae"
+    ]
+   ]
+  },
+  "phyto:hasCompoundPerDrDuke": {
+   "subjects": 2109,
+   "triples": 72472,
+   "max": 660,
+   "top": [
+    [
+     "phyto:Organism_19606",
+     660,
+     "Camellia sinensis var.assamica"
+    ],
+    [
+     "phyto:Organism_3172",
+     562,
+     "Panax ginseng C.A.Meyer"
+    ],
+    [
+     "phyto:Organism_6503",
+     538,
+     "Zea mays L."
+    ],
+    [
+     "phyto:Organism_31950",
+     513,
+     "Glycine max (L.) Merr."
+    ],
+    [
+     "phyto:Organism_6041",
+     438,
+     "Apium graveolens L."
+    ],
+    [
+     "phyto:Organism_23775",
+     428,
+     "Zingiber officinale ROSCOE"
+    ]
+   ]
+  },
+  "phyto:hasReportedConstituent": {
+   "subjects": 1249,
+   "triples": 12278,
+   "max": 71,
+   "top": [
+    [
+     "phyto:Organism_31950",
+     71,
+     "Glycine max (L.) Merr."
+    ],
+    [
+     "phyto:Organism_21994",
+     61,
+     "Triticum aestivum L."
+    ],
+    [
+     "phyto:Organism_6503",
+     60,
+     "Zea mays L."
+    ],
+    [
+     "phyto:Organism_16122",
+     58,
+     "Daucus carota L."
+    ],
+    [
+     "phyto:Organism_18780",
+     56,
+     "Solanum tuberosum L."
+    ],
+    [
+     "phyto:Organism_10976",
+     52,
+     "Vitis vinifera var.sultana"
+    ]
+   ]
+  },
+  "phyto:associatedWithDiseaseByPlantTrial": {
+   "subjects": 208,
+   "triples": 758,
+   "max": 46,
+   "top": [
+    [
+     "phyto:Organism_21907",
+     46,
+     "Cannabis sativa L."
+    ],
+    [
+     "phyto:Organism_25534",
+     38,
+     "Curcuma longa L."
+    ],
+    [
+     "phyto:Organism_19606",
+     30,
+     "Camellia sinensis var.assamica"
+    ],
+    [
+     "phyto:Organism_21808",
+     26,
+     "Linum usitatissimum L."
+    ],
+    [
+     "phyto:Organism_15778",
+     19,
+     "Ginkgo biloba L."
+    ],
+    [
+     "phyto:Organism_3172",
+     18,
+     "Panax ginseng C.A.Meyer"
+    ]
+   ]
+  }
+ },
+ "mw": {
+  "subjects_with_mw": 0,
+  "conflicting_mw": 0,
+  "formula_subjects": 181455,
+  "conflicting_formula": 0,
+  "checked": 0,
+  "mw_vs_formula_gt2Da": 0,
+  "examples": []
+ },
+ "inchikey": {
+  "subjects": 183172,
+  "conflicting": 0,
+  "distinct_values": 183172
+ },
+ "plant_label_dups": 1,
+ "plant_like_subjects": 44604,
+ "schema": {
+  "cmptx:Disease rdfs:subClassOf": [
+   "phyto:DiseaseConcept"
+  ],
+  "cmptx:Gene rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "cmptx:Pathway rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "cmptx:diseaseSubtypeOf rdfs:domain": [
+   "cmptx:Disease"
+  ],
+  "cmptx:diseaseSubtypeOf rdfs:range": [
+   "cmptx:Disease"
+  ],
+  "cmptx:geneAssociatedWithDisease rdfs:domain": [
+   "cmptx:Gene"
+  ],
+  "cmptx:geneAssociatedWithDisease rdfs:range": [
+   "cmptx:Disease"
+  ],
+  "cmptx:geneInPathway rdfs:domain": [
+   "cmptx:Gene"
+  ],
+  "cmptx:geneInPathway rdfs:range": [
+   "cmptx:Pathway"
+  ],
+  "cmptx:geneInteractsWithGene rdfs:domain": [
+   "cmptx:Gene"
+  ],
+  "cmptx:geneInteractsWithGene rdfs:range": [
+   "cmptx:Gene"
+  ],
+  "phyto:AdverseEffect rdfs:subClassOf": [
+   "phyto:TherapeuticConcept"
+  ],
+  "phyto:BioactivityMeasurement rdfs:subClassOf": [
+   "phyto:ResearchConcept"
+  ],
+  "phyto:Carotenoid rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:ClinicalTrial rdfs:subClassOf": [
+   "phyto:ResearchConcept"
+  ],
+  "phyto:DietaryFiber rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:DiseaseConcept rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "phyto:DrugDrugInteractions rdfs:subClassOf": [
+   "phyto:TherapeuticConcept"
+  ],
+  "phyto:Gene rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "phyto:Gene owl:equivalentClass": [
+   "cmptx:Gene"
+  ],
+  "phyto:Isoprenoid rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:MechanismOfAction rdfs:subClassOf": [
+   "phyto:TherapeuticConcept"
+  ],
+  "phyto:Pathway rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "phyto:Phytosterol rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:Plant rdfs:subClassOf": [
+   "phyto:PlantConcept"
+  ],
+  "phyto:Polyphenol rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:Polysaccharide rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:ProteinTarget rdfs:subClassOf": [
+   "phyto:HumanConcept"
+  ],
+  "phyto:Saponin rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:ScientificPaper rdfs:subClassOf": [
+   "phyto:ResearchConcept"
+  ],
+  "phyto:TherapeuticEffect rdfs:subClassOf": [
+   "phyto:TherapeuticConcept"
+  ],
+  "phyto:Unknown rdfs:subClassOf": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:activityCompound rdfs:domain": [
+   "phyto:BioactivityMeasurement"
+  ],
+  "phyto:activityCompound rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:activityRelation rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:activityTarget rdfs:domain": [
+   "phyto:BioactivityMeasurement"
+  ],
+  "phyto:activityTarget rdfs:range": [
+   "cmptx:Gene"
+  ],
+  "phyto:activityType rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:activityUnit rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:activityValue rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:activityValueText rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:aromatic_rings rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:aromatic_rings rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:assertedBy rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:associatedWithDisease rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:associatedWithDisease rdfs:range": [
+   "phyto:DiseaseConcept"
+  ],
+  "phyto:associatedWithDiseaseByIngredientTrial rdfs:subPropertyOf": [
+   "phyto:associatedWithDisease"
+  ],
+  "phyto:associatedWithDiseaseByPlantTrial rdfs:subPropertyOf": [
+   "phyto:associatedWithDisease"
+  ],
+  "phyto:associatedWithDiseaseByTarget rdfs:subPropertyOf": [
+   "phyto:associatedWithDisease"
+  ],
+  "phyto:associatedWithDiseaseByTranscriptomeReversion rdfs:subPropertyOf": [
+   "phyto:associatedWithDisease"
+  ],
+  "phyto:classyfireClass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:classyfireSubclass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:classyfireSuperclass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:coconutId rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:commonName rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:commonName rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:compoundTargetsGene rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:compoundTargetsGene rdfs:range": [
+   "cmptx:Gene"
+  ],
+  "phyto:diseaseCategory rdfs:domain": [
+   "phyto:DiseaseConcept"
+  ],
+  "phyto:diseaseTreatedBy owl:inverseOf": [
+   "phyto:treatsDisease"
+  ],
+  "phyto:exact_mw rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:exact_mw rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:formal_charge rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:formal_charge rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:fraction_csp3 rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:fraction_csp3 rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:geneTargetedBy owl:inverseOf": [
+   "phyto:targetsGene"
+  ],
+  "phyto:hasATC rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasATC rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasAdverseEffect rdfs:domain": [
+   "_:u3"
+  ],
+  "phyto:hasAdverseEffect rdfs:range": [
+   "phyto:AdverseEffect"
+  ],
+  "phyto:hasBeenContributedTo rdfs:domain": [
+   "phyto:TherapeuticEffect"
+  ],
+  "phyto:hasBeenContributedTo rdfs:range": [
+   "phyto:PlantConcept"
+  ],
+  "phyto:hasBeenContributedTo owl:inverseOf": [
+   "phyto:isAssociatedWith"
+  ],
+  "phyto:hasCanonicalSMILES rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCanonicalSMILES rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasClinicalStudy rdfs:domain": [
+   "_:hcsU"
+  ],
+  "phyto:hasClinicalStudy rdfs:range": [
+   "phyto:ClinicalTrial"
+  ],
+  "phyto:hasCommonName rdfs:domain": [
+   "_:u4"
+  ],
+  "phyto:hasCommonName rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasCompound rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasCompound rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCompoundFamilyUnreplicated rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasCompoundFamilyUnreplicated rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCompoundFamilyUnreplicated rdfs:subPropertyOf": [
+   "phyto:hasCompound"
+  ],
+  "phyto:hasCompoundPerCMAUP rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasCompoundPerCMAUP rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCompoundPerCMAUP rdfs:subPropertyOf": [
+   "phyto:hasCompound"
+  ],
+  "phyto:hasCompoundPerCOCONUT rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasCompoundPerCOCONUT rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCompoundPerCOCONUT rdfs:subPropertyOf": [
+   "phyto:hasCompound"
+  ],
+  "phyto:hasCompoundPerDrDuke rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasCompoundPerDrDuke rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasCompoundPerDrDuke rdfs:subPropertyOf": [
+   "phyto:hasCompound"
+  ],
+  "phyto:hasDOI rdfs:domain": [
+   "phyto:ScientificPaper"
+  ],
+  "phyto:hasDOI rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasDosage rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasEvidenceText rdfs:domain": [
+   "phyto:ClinicalTrial"
+  ],
+  "phyto:hasEvidenceText rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasGenus rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasGenus rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasIUPACName rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasIUPACName rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasInChIKey rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasInChIKey rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasInteractionsWith rdfs:domain": [
+   "phyto:ChemicalConcept",
+   "phyto:TherapeuticEffect"
+  ],
+  "phyto:hasInteractionsWith rdfs:range": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasInteractionsWith owl:inverseOf": [
+   "phyto:interactsWith"
+  ],
+  "phyto:hasMACCs rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasMACCs rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasMechanismOfAction rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasMechanismOfAction rdfs:range": [
+   "phyto:MechanismOfAction"
+  ],
+  "phyto:hasMolecularFormula rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasMolecularFormula rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasNCTId rdfs:domain": [
+   "phyto:ClinicalTrial"
+  ],
+  "phyto:hasNCTId rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasPaper rdfs:domain": [
+   "_:u1"
+  ],
+  "phyto:hasPaper rdfs:range": [
+   "phyto:ScientificPaper"
+  ],
+  "phyto:hasReference rdfs:domain": [
+   "phyto:BioactivityMeasurement"
+  ],
+  "phyto:hasReferenceText rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasSMILES rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasSMILES rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasSpecies rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasSpecies rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasTaxon rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:hasTaxon rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasTherapeuticClass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hasTherapeuticClass rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hasValue rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:hba rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hba rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:hbd rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:hbd rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:heavy_atoms rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:heavy_atoms rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:heteroatoms rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:heteroatoms rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:heuristicPhytochemicalClass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:heuristicPhytochemicalClass rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:icd11Code rdfs:domain": [
+   "phyto:DiseaseConcept"
+  ],
+  "phyto:interactsWith rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:interactsWith rdfs:range": [
+   "phyto:ChemicalConcept",
+   "phyto:TherapeuticEffect"
+  ],
+  "phyto:interventionDescription rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:isAdverseEffectFor owl:inverseOf": [
+   "phyto:hasAdverseEffect"
+  ],
+  "phyto:isAssociatedWith rdfs:domain": [
+   "phyto:PlantConcept"
+  ],
+  "phyto:isAssociatedWith rdfs:range": [
+   "phyto:TherapeuticEffect"
+  ],
+  "phyto:isClinicalStudyFor owl:inverseOf": [
+   "phyto:hasClinicalStudy"
+  ],
+  "phyto:isDerivedFrom owl:inverseOf": [
+   "phyto:hasCompound"
+  ],
+  "phyto:isPaperFor owl:inverseOf": [
+   "phyto:hasPaper"
+  ],
+  "phyto:logp rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:logp rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:mw rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:mw rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:npClassifierClass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:npClassifierPathway rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:npClassifierSuperclass rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:qed rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:qed rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:ring_count rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:ring_count rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:ro5_violations rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:ro5_violations rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:rotatable_bonds rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:rotatable_bonds rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:scientificSynonym rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:scientificSynonym rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:sourceColumn rdfs:domain": [
+   "phyto:ClinicalTrial"
+  ],
+  "phyto:sourceColumn rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:targetClass rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:targetsGene rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:targetsGene rdfs:range": [
+   "cmptx:Gene"
+  ],
+  "phyto:targetsProtein rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:targetsProtein rdfs:range": [
+   "phyto:ProteinTarget"
+  ],
+  "phyto:taxonomicFamily rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:taxonomicFamily rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:taxonomicGenus rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:taxonomicGenus rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:taxonomyStatus rdfs:domain": [
+   "phyto:Plant"
+  ],
+  "phyto:taxonomyStatus rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:tpsa rdfs:domain": [
+   "phyto:ChemicalConcept"
+  ],
+  "phyto:tpsa rdfs:range": [
+   "xsd:double"
+  ],
+  "phyto:treatsDisease rdfs:domain": [
+   "_:u2"
+  ],
+  "phyto:treatsDisease rdfs:range": [
+   "cmptx:Disease"
+  ],
+  "phyto:trialCondition rdfs:range": [
+   "xsd:string"
+  ],
+  "phyto:trialPhase rdfs:range": [
+   "xsd:string"
+  ]
+ }
+}

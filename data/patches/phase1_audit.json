@@ -1,0 +1,570 @@
+{
+ "triples": 4922518,
+ "predicates": {
+  "phyto:hasCompound": 954585,
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": 407235,
+  "phyto:targetsGene": 382401,
+  "phyto:hasIngredientClinicalStudy": 329899,
+  "http://www.w3.org/2000/01/rdf-schema#label": 219264,
+  "cmptx:geneInPathway": 177694,
+  "cmptx:geneInteractsWithGene": 147008,
+  "http://www.w3.org/2004/02/skos/core#exactMatch": 131506,
+  "phyto:hasPaper": 116782,
+  "phyto:heuristicPhytochemicalClass": 112542,
+  "cmptx:geneSymbol": 62425,
+  "cmptx:typeOfGene": 62413,
+  "cmptx:xrefNcbiGene": 62407,
+  "http://www.w3.org/2004/02/skos/core#altLabel": 62407,
+  "phyto:hasSMILES": 59362,
+  "phyto:hasInChIKey": 59194,
+  "phyto:logp": 59178,
+  "phyto:hasCanonicalSMILES": 59176,
+  "phyto:hasMACCs": 59176,
+  "phyto:qed": 59175,
+  "phyto:tpsa": 59175,
+  "phyto:hba": 59173,
+  "phyto:hbd": 59173,
+  "phyto:ro5_violations": 59172,
+  "phyto:aromatic_rings": 59171,
+  "phyto:exact_mw": 59171,
+  "phyto:formal_charge": 59171,
+  "phyto:fraction_csp3": 59171,
+  "phyto:hasMolecularFormula": 59171,
+  "phyto:heavy_atoms": 59171,
+  "phyto:heteroatoms": 59171,
+  "phyto:mw": 59171,
+  "phyto:ring_count": 59171,
+  "phyto:rotatable_bonds": 59171,
+  "phyto:commonName": 54306,
+  "cmptx:xrefHGNC": 42519,
+  "cmptx:commonName": 42483,
+  "phyto:taxonomyStatus": 41888,
+  "cmptx:geneAssociatedWithDisease": 38350,
+  "phyto:hasGenus": 36769,
+  "phyto:hasSpecies": 35972,
+  "phyto:hasTaxon": 35344,
+  "cmptx:xrefEnsembl": 35136,
+  "phyto:hasCommonName": 21765,
+  "phyto:sourceColumn": 18131,
+  "cmptx:xrefOMIM": 17810,
+  "phyto:hasDOI": 17720,
+  "phyto:hasEvidenceText": 14944,
+  "phyto:hasNCTId": 14944,
+  "phyto:hasIUPACName": 12098,
+  "http://www.w3.org/2000/01/rdf-schema#comment": 6186,
+  "cmptx:sourceDatabase": 4865,
+  "cmptx:pathwayId": 4569,
+  "phyto:hasClinicalStudy": 3708,
+  "phyto:targetsProtein": 3208,
+  "cmptx:diseaseSubtypeOf": 2290,
+  "cmptx:xrefDiseaseOntology": 1583,
+  "phyto:hasValue": 1352,
+  "phyto:compoundTargetsGene": 1094,
+  "phyto:hasATC": 745,
+  "phyto:hasMechanismOfAction": 307,
+  "http://www.w3.org/2000/01/rdf-schema#domain": 55,
+  "http://www.w3.org/2000/01/rdf-schema#range": 55,
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf": 22,
+  "phyto:scientificSynonym": 19,
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": 12,
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": 12,
+  "http://www.w3.org/2002/07/owl#deprecated": 9,
+  "http://www.w3.org/2002/07/owl#inverseOf": 8,
+  "http://www.w3.org/2002/07/owl#unionOf": 6,
+  "http://www.w3.org/2002/07/owl#equivalentClass": 1,
+  "http://www.w3.org/2002/07/owl#versionInfo": 1
+ },
+ "types": [
+  [
+   "http://www.w3.org/2002/07/owl#NamedIndividual",
+   185762
+  ],
+  [
+   "phyto:ChemicalConcept",
+   66716
+  ],
+  [
+   "cmptx:Gene",
+   62407
+  ],
+  [
+   "phyto:Plant",
+   41888
+  ],
+  [
+   "phyto:ScientificPaper",
+   21407
+  ],
+  [
+   "phyto:ClinicalTrial",
+   18131
+  ],
+  [
+   "cmptx:Pathway",
+   4569
+  ],
+  [
+   "phyto:PlantConcept",
+   3157
+  ],
+  [
+   "cmptx:Disease",
+   1583
+  ],
+  [
+   "phyto:ProteinTarget",
+   1334
+  ],
+  [
+   "phyto:TherapeuticEffect",
+   150
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#DatatypeProperty",
+   49
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#Class",
+   31
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#ObjectProperty",
+   28
+  ],
+  [
+   "phyto:MechanismOfAction",
+   18
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#AnnotationProperty",
+   2
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#DataRange",
+   2
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#Ontology",
+   1
+  ]
+ ],
+ "type_combos": [
+  [
+   "phyto:ChemicalConcept",
+   66716
+  ],
+  [
+   "cmptx:Gene",
+   62407
+  ],
+  [
+   "phyto:Plant",
+   38731
+  ],
+  [
+   "phyto:ScientificPaper",
+   21407
+  ],
+  [
+   "phyto:ClinicalTrial",
+   18131
+  ],
+  [
+   "cmptx:Pathway",
+   4569
+  ],
+  [
+   "phyto:Plant|phyto:PlantConcept",
+   3157
+  ],
+  [
+   "cmptx:Disease",
+   1583
+  ],
+  [
+   "phyto:ProteinTarget",
+   1334
+  ],
+  [
+   "phyto:TherapeuticEffect",
+   150
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#DatatypeProperty",
+   47
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#Class",
+   31
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#ObjectProperty",
+   28
+  ],
+  [
+   "phyto:MechanismOfAction",
+   18
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#AnnotationProperty|http://www.w3.org/2002/07/owl#DatatypeProperty",
+   2
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#DataRange",
+   2
+  ],
+  [
+   "http://www.w3.org/2002/07/owl#Ontology",
+   1
+  ]
+ ],
+ "subjects_with_multiple_labels": 3985,
+ "tracked": {
+  "phyto:hasPaper": {
+   "subjects": 13738,
+   "triples": 116782,
+   "max_per_subject": 1045,
+   "top_subjects": [
+    [
+     "phyto:Chemical_ik_OKKJLVBELUTLKV_UHFFFAOYSA_N",
+     1045
+    ],
+    [
+     "phyto:Plant_Arabidopsis_Thaliana",
+     685
+    ],
+    [
+     "phyto:Chemical_ik_RWSXRVCMGQZWBV_WDSKDSINSA_N",
+     623
+    ],
+    [
+     "phyto:Chemical_ik_REFJWTPEDVJJIY_UHFFFAOYSA_N",
+     530
+    ],
+    [
+     "phyto:Chemical_ik_XBZYWSMVVKYHQN_MYPRUECHSA_N",
+     493
+    ]
+   ],
+   "top_objects": [
+    [
+     "phyto:Paper_10.1126_science.162.3856.890",
+     2389
+    ],
+    [
+     "phyto:Paper_10.1007_bf02862958",
+     1968
+    ],
+    [
+     "phyto:Paper_10.1007_bf02858287",
+     1489
+    ],
+    [
+     "phyto:Paper_10.1007_bf02904426",
+     1456
+    ],
+    [
+     "phyto:Paper_10.4159_harvard.9780674729209",
+     1446
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Chemical",
+     9015
+    ],
+    [
+     "Organism",
+     2704
+    ],
+    [
+     "Plant",
+     2019
+    ]
+   ]
+  },
+  "phyto:targetsProtein": {
+   "subjects": 366,
+   "triples": 3208,
+   "max_per_subject": 141,
+   "top_subjects": [
+    [
+     "phyto:Chemical_ik_REFJWTPEDVJJIY_UHFFFAOYSA_N",
+     141
+    ],
+    [
+     "phyto:Chemical_ik_MLDQJTXFUGDVEO_UHFFFAOYSA_N",
+     129
+    ],
+    [
+     "phyto:Chemical_ik_XGALLCVXEZPNRQ_UHFFFAOYSA_N",
+     86
+    ],
+    [
+     "phyto:Chemical_ik_VNFPBHJOKIVQEB_UHFFFAOYSA_N",
+     76
+    ],
+    [
+     "phyto:Chemical_ik_XMAYWYJOQHXEEK_UHFFFAOYSA_N",
+     45
+    ]
+   ],
+   "top_objects": [
+    [
+     "phyto:ProteinTarget_Acetylcholinesterase",
+     28
+    ],
+    [
+     "phyto:ProteinTarget_Multidrug_resistance_protein_1",
+     24
+    ],
+    [
+     "phyto:ProteinTarget_Potassium_voltage_gated_channel_subfamily_H_member_2",
+     23
+    ],
+    [
+     "phyto:ProteinTarget_Alpha_2A_adrenergic_receptor",
+     22
+    ],
+    [
+     "phyto:ProteinTarget_Mu_type_opioid_receptor",
+     20
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Chemical",
+     366
+    ]
+   ]
+  },
+  "phyto:compoundTargetsGene": {
+   "subjects": 500,
+   "triples": 1094,
+   "max_per_subject": 49,
+   "top_subjects": [
+    [
+     "phyto:Chemical_ik_MLDQJTXFUGDVEO_UHFFFAOYSA_N",
+     49
+    ],
+    [
+     "phyto:Chemical_ik_CGIGDMFJXJATDK_UHFFFAOYSA_N",
+     20
+    ],
+    [
+     "phyto:Chemical_ik_RZUHGAKUNBFQJS_UHFFFAOYSA_N",
+     19
+    ],
+    [
+     "phyto:Chemical_ik_VNFPBHJOKIVQEB_UHFFFAOYSA_N",
+     18
+    ],
+    [
+     "phyto:Chemical_ik_JNHSRGXMKPJTEV_UHFFFAOYSA_N",
+     15
+    ]
+   ],
+   "top_objects": [
+    [
+     "cmptx:ptpn1",
+     87
+    ],
+    [
+     "cmptx:ache",
+     45
+    ],
+    [
+     "cmptx:cyp3a4",
+     25
+    ],
+    [
+     "cmptx:kdm4e",
+     19
+    ],
+    [
+     "cmptx:abcb11",
+     19
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Chemical",
+     500
+    ]
+   ]
+  },
+  "phyto:hasCompound": {
+   "subjects": 9636,
+   "triples": 954585,
+   "max_per_subject": 1512,
+   "top_subjects": [
+    [
+     "phyto:Plant_Allium_Sativum",
+     1512
+    ],
+    [
+     "phyto:Plant_Zingiber_Officinale",
+     1493
+    ],
+    [
+     "phyto:Organism_26523",
+     1443
+    ],
+    [
+     "phyto:Plant_Tanacetum_Vulgare",
+     1404
+    ],
+    [
+     "phyto:Organism_56528",
+     1396
+    ]
+   ],
+   "top_objects": [
+    [
+     "phyto:Chemical_BERBERASTINE",
+     3970
+    ],
+    [
+     "phyto:Chemical_BERBERINE",
+     3970
+    ],
+    [
+     "phyto:Chemical_ALANTOLACTONE",
+     2552
+    ],
+    [
+     "phyto:Chemical_OLEANOLICACID",
+     2487
+    ],
+    [
+     "phyto:Chemical_LOBELINE",
+     2395
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Organism",
+     5387
+    ],
+    [
+     "Plant",
+     4249
+    ]
+   ]
+  },
+  "phyto:targetsGene": {
+   "subjects": 6807,
+   "triples": 382401,
+   "max_per_subject": 357,
+   "top_subjects": [
+    [
+     "phyto:Plant_Streptocaulon_Juventas",
+     357
+    ],
+    [
+     "phyto:Plant_Thymus_Vulgaris",
+     251
+    ],
+    [
+     "phyto:Plant_Vitis_Vinifera",
+     245
+    ],
+    [
+     "phyto:Plant_Brassica_Oleracea",
+     243
+    ],
+    [
+     "phyto:Plant_Camellia_Sinensis",
+     238
+    ]
+   ],
+   "top_objects": [
+    [
+     "cmptx:aldh1a1",
+     4803
+    ],
+    [
+     "cmptx:mapt",
+     4634
+    ],
+    [
+     "cmptx:polb",
+     4633
+    ],
+    [
+     "cmptx:kdm4e",
+     4626
+    ],
+    [
+     "cmptx:lmna",
+     4366
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Organism",
+     3412
+    ],
+    [
+     "Plant",
+     3395
+    ]
+   ]
+  },
+  "phyto:hasClinicalStudy": {
+   "subjects": 3157,
+   "triples": 3708,
+   "max_per_subject": 41,
+   "top_subjects": [
+    [
+     "phyto:Plant_Cannabis_Sativa",
+     41
+    ],
+    [
+     "phyto:Plant_Curcuma_Longa",
+     31
+    ],
+    [
+     "phyto:Plant_Camellia_Sinensis",
+     24
+    ],
+    [
+     "phyto:Plant_Linum_Usitatissimum",
+     23
+    ],
+    [
+     "phyto:Plant_Ginkgo_Biloba",
+     18
+    ]
+   ],
+   "top_objects": [
+    [
+     "phyto:ClinicalTrial_CT_NCT00099710",
+     12
+    ],
+    [
+     "phyto:ClinicalTrial_CT_NCT00969085",
+     12
+    ],
+    [
+     "phyto:ClinicalTrial_CT_NCT01383161",
+     12
+    ],
+    [
+     "phyto:ClinicalTrial_CT_NCT01831193",
+     12
+    ],
+    [
+     "phyto:ClinicalTrial_CT_NCT01859858",
+     12
+    ]
+   ],
+   "subject_kinds": [
+    [
+     "Plant",
+     3157
+    ]
+   ]
+  }
+ }
+}

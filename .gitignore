@@ -57,3 +57,6 @@ fold_mol.log
 data/enrichment/compound_descriptors.fragment.xml
 *.bak
 *.bak2
+
+# local working files
+Claude outputs/

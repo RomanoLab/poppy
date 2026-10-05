@@ -1,0 +1,30 @@
+{
+ "F6_renamed_triples": 1526620,
+ "kept": 4615022,
+ "F3_heuristic_type": 112787,
+ "F2_compound_plant_type": 60535,
+ "F5_old_compound_label": 59362,
+ "F4_hasMolecularWeight": 53474,
+ "F5_na_literal": 59557,
+ "F5_inchikey_in_commonname": 39222,
+ "F1_compound_trial": 12176772,
+ "F2_plant_chem_type": 3187,
+ "F1_plant_trial_to_ingredient_trial": 330515,
+ "F8_nonplant_triples": 8824,
+ "F11_target_retyped": 1334,
+ "F12_old_domain_range": 56,
+ "F10_moa_retyped": 54,
+ "F5_dash_literal": 39848,
+ "F7_none_pathway": 1777,
+ "F5_compound_label_added": 66716,
+ "F5_gene_label_from_symbol": 19924,
+ "F9_ncbitaxon_iri": 35344,
+ "plant_label_added": 14703,
+ "organisms_removed": 353,
+ "why_removed": {
+  "junk_name": 135,
+  "unverified_kept": 827,
+  "ncbi_lineage_not_viridiplantae": 210,
+  "classification_nonplant": 8
+ }
+}
