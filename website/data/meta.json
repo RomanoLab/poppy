@@ -1,8 +1,8 @@
 {
- "version": "POPPy v2.3",
+ "version": "POPPy v2.4",
  "plants": 40109,
  "compounds": 205769,
  "plant_compound_links": 1019280,
  "shard": "djb2(plantId)&255",
- "scope": "Viridiplantae (NCBI taxonomy validated). v2.3 (2026-10-05): v2.2 + 1,315 real plants re-admitted (NCBI species/genus match or genus typo correction; 595 non-plant/junk names rejected) with their COCONUT occurrences; RDKit descriptors for all compounds with SMILES. See docs/recipes/ontology-v2-rebuild.md."
+ "scope": "Viridiplantae (NCBI taxonomy validated). v2.4 (2026-10-05): v2.3 + literature rebuilt (COCONUT 2.0 DOIs for compounds; Dr. Duke's citations backing plant\u2013compound occurrences); evidence shards in data/evidence/. See docs/recipes/ontology-v2-rebuild.md."
 }

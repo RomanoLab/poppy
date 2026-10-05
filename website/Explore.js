@@ -150,6 +150,25 @@
       root.addEventListener("click", function (e) {
         if (e.target.closest("#dl-csv") && currentId) downloadCSV(currentId);
       });
+      root.addEventListener("click", function (e) {
+        var t = e.target.closest(".ev-toggle");
+        if (!t) return;
+        var block = t.closest(".ev-block");
+        block.querySelectorAll(".ev-hidden").forEach(function (li) { li.classList.remove("ev-hidden"); });
+        t.remove();
+      });
+      // open loaded entities (e.g. a plant's compounds) in place; a full reload would lose
+      // browse-only nodes that exist only after their plant's shards were fetched
+      root.addEventListener("click", function (e) {
+        var a = e.target.closest("a.name-link");
+        if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        var m = (a.getAttribute("href") || "").match(/[?&]q=([^&]+)/);
+        if (!m) return;
+        var nid = decodeURIComponent(m[1]);
+        if (!NODES[nid]) return;
+        e.preventDefault();
+        render(nid);
+      });
 
       function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -216,6 +235,74 @@
             + '/entry" target="_blank" rel="noopener" title="UniProt"><span class="gk">uniprot</span>' + esc(uniprot) + '<span class="ext">\u2197</span></a>');
         }
         return '<div class="gtags">' + tags.join("") + '</div>';
+      }
+
+      // ── Evidence panel: per-entity shards in data/evidence/{plants|compounds}/<djb2>.json ──
+      //    trials -> clinicaltrials.gov, dois -> doi.org, refs -> citation text,
+      //    bio -> [gene, type, relation, value, unit, pmid] with PubMed links.
+      var EV_CACHE = {};
+      function fetchEvidence(kind, id) {
+        var key = kind + "/" + djb2(id);
+        if (EV_CACHE[key]) return Promise.resolve(EV_CACHE[key][id]);
+        return fetch("data/evidence/" + key + ".json")
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .catch(function () { return {}; })
+          .then(function (j) { EV_CACHE[key] = j; return j[id]; });
+      }
+      function evMore(shown, total) {
+        return total > shown ? '<div class="ev-more">Showing ' + shown + ' of ' + total.toLocaleString() + '</div>' : "";
+      }
+      var EV_FOLD = 10;   // items shown per block before "Show all"
+      function evBlock(title, count, body, more) {
+        return '<div class="ev-block"><div class="ev-head"><span class="concept">' + esc(title) + '</span>'
+             + '<span class="tally">' + count.toLocaleString() + '</span></div>' + body + (more || "") + '</div>';
+      }
+      function evList(items) {
+        var html = '<ul class="ev-list">' + items.map(function (li, i) {
+          return i < EV_FOLD ? li : li.replace("<li>", '<li class="ev-hidden">');
+        }).join("") + '</ul>';
+        if (items.length > EV_FOLD) {
+          html += '<button type="button" class="ev-toggle">Show all ' + items.length + '</button>';
+        }
+        return html;
+      }
+      function loadEvidence(id, role) {
+        var box = document.getElementById("evidence");
+        if (!box) return;
+        fetchEvidence(role === "Plant" ? "plants" : "compounds", id).then(function (ev) {
+          if (currentId !== id) return;            // user moved on
+          box = document.getElementById("evidence");
+          if (!box) return;
+          if (!ev) { box.innerHTML = ""; return; }
+          var n = ev.n || {}, html = '<div class="ev-title">Evidence</div>';
+          if (ev.trials && ev.trials.length) {
+            var tt = n.trials || ev.trials.length;
+            html += evBlock("Clinical trials", tt, evList(ev.trials.map(function (t) {
+              return '<li><a href="https://clinicaltrials.gov/study/' + encodeURIComponent(t[0]) + '" target="_blank" rel="noopener">'
+                   + esc(t[0]) + '<span class="ext">↗</span></a> <span class="ev-text">' + esc(t[1]) + '</span>'
+                   + (t[2] ? ' <span class="ev-tag">' + esc(t[2]) + '</span>' : '') + '</li>';
+            })), evMore(ev.trials.length, tt));
+          }
+          if (ev.bio && ev.bio.length) {
+            var tb = n.bio || ev.bio.length;
+            html += evBlock("Bioactivity measurements", tb, evList(ev.bio.map(function (b) {
+              var v = [b[1], b[2], b[3], b[4]].filter(Boolean).join(" ");
+              return '<li><span class="ev-gene">' + esc(b[0]) + '</span> <span class="ev-text">' + esc(v) + '</span>'
+                   + (b[5] ? ' <a href="https://pubmed.ncbi.nlm.nih.gov/' + encodeURIComponent(b[5]) + '/" target="_blank" rel="noopener">PMID '
+                   + esc(b[5]) + '<span class="ext">↗</span></a>' : '') + '</li>';
+            })), evMore(ev.bio.length, tb));
+          }
+          var lit = [];
+          (ev.dois || []).forEach(function (d) {
+            lit.push('<li><a href="https://doi.org/' + encodeURI(d) + '" target="_blank" rel="noopener">doi:' + esc(d) + '<span class="ext">↗</span></a></li>');
+          });
+          (ev.refs || []).forEach(function (r) { lit.push('<li><span class="ev-text">' + esc(r) + '</span></li>'); });
+          if (lit.length) {
+            var tl = (n.dois || (ev.dois || []).length) + (n.refs || (ev.refs || []).length);
+            html += evBlock("Literature", tl, evList(lit), evMore(lit.length, tl));
+          }
+          box.innerHTML = html;
+        });
       }
 
       function setSubjectURL(id) {
@@ -325,8 +412,14 @@
         }
         html += '</section>';
 
+        // ── evidence: clinical trials, literature, bioactivity (lazy-loaded shard) ──
+        if (subject.role === "Plant" || subject.role === "Compound") {
+          html += '<section class="evidence" id="evidence"></section>';
+        }
+
         root.innerHTML = html;
         renderGraph(id, subject);
+        if (subject.role === "Plant" || subject.role === "Compound") loadEvidence(id, subject.role);
         window.scrollTo({ top: 0, behavior: "auto" });
         resolveMedia(subject);
       }
