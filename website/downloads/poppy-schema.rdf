@@ -1,1736 +1,965 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#"
-     xml:base="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#diseaseTreatedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#diseaseTreatedBy">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#treatsDisease"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#geneTargetedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#geneTargetedBy">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsGene"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gene"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasAdverseEffect -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasAdverseEffect">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAdverseEffectFor"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasBeenContributedTo -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasBeenContributedTo">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAssociatedWith"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasClinicalStudy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasClinicalStudy">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isClinicalStudyFor"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
-        <rdfs:comment>Links therapies to clinical study results</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isDerivedFrom"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:comment>Links a plant to its active compound(s)</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasInteractionsWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasInteractionsWith">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#interactsWith"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isPaperFor"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticEffect -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticEffect">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#therapeuticDueTo"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#interactsWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#interactsWith">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-        <rdfs:comment>Describes interactions between compounds or drugs</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAdverseEffectFor -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAdverseEffectFor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAssociatedWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAssociatedWith">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-        <rdfs:comment>Links plants or compounds to geographic regions</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isClinicalStudyFor -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isClinicalStudyFor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isDerivedFrom -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isDerivedFrom">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
-        <rdfs:comment>Indicates the source plant for a compound</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isPaperFor -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isPaperFor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#pathwayTargetedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#pathwayTargetedBy">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsPathway"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pathway"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsGene -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsGene">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gene"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsPathway -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsPathway">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pathway"/>
-        <rdfs:comment>Links a compound to the biological pathway it affects</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#therapeuticDueTo -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#therapeuticDueTo">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#treatsDisease -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#treatsDisease">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasATC -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasATC">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:comment>ATC code of a chemical</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCommonName -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCommonName">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>The common name of a plant</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasDosage -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasDosage">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:comment>Dosage information for a therapy</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasIUPACName -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasIUPACName">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:comment>A compound&apos;s IUPAC name</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularFormula -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularFormula">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularWeight -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularWeight">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-        <rdfs:comment>The molecular weight of a compound</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSMILES -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSMILES">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>The SMILES representation of a compound&apos;s structure</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSource -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSource">
-        <rdfs:comment>Paper or database from which information originated</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticClass -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticClass">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>The therapeutic class (e.g., anti-inflammatory)</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Carotenoid -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Carotenoid">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DietaryFiber -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DietaryFiber">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DrugDrugInteractions -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DrugDrugInteractions">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gene -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gene">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Isoprenoid -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Isoprenoid">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pathway -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pathway">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Phytosterol -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Phytosterol">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polyphenol -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polyphenol">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polysaccharide -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polysaccharide">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Saponin -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Saponin">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
-        <rdfs:label>
-            <rdf:Description/>
-        </rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Unknown -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Unknown">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
-    </owl:Class>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Abortive -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Abortive">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alkylating_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alkylating_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alpha-adrenergic_Agonists -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alpha-adrenergic_Agonists">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alpha-adrenergic_Blocking_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Alpha-adrenergic_Blocking_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aminoglycosides -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aminoglycosides">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Analgesics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Analgesics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anesthetics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anesthetics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anthelmintics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anthelmintics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-influenza_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-influenza_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiangiogenic_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiangiogenic_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiarrhythmics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiarrhythmics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antibacterials -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antibacterials">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticoagulants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticoagulants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticonvulsants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticonvulsants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntidementiaAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntidementiaAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidiabetic_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidiabetic_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidotes -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidotes">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiemetics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiemetics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antifungals -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antifungals">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntigoutAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntigoutAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antihepatitis_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antihepatitis_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiherpetic_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiherpetic_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antihistamines -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antihistamines">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntiinflammatoryAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntiinflammatoryAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antileukotrienes -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antileukotrienes">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimetabolites -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimetabolites">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntimigraineAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntimigraineAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntimyasthenicAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntimyasthenicAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimycobacterials -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimycobacterials">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antineoplastics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antineoplastics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiparasitics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiparasitics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntiparkinsonAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntiparkinsonAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiprotozoals -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiprotozoals">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antipsychotics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antipsychotics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntispasticityAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AntispasticityAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antituberculars -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antituberculars">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antivirals -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antivirals">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anxiolytics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anxiolytics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aromatase_Inhibitors_3rd_Generation -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aromatase_Inhibitors_3rd_Generation">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aspirin -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Aspirin">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Atypicals -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Atypicals">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Benign_Prostatic_Hypertrophy_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Benign_Prostatic_Hypertrophy_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-adrenergic_Blocking_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-adrenergic_Blocking_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BipolarAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BipolarAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BloodGlucoseRegulators -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BloodGlucoseRegulators">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BloodProductsModifiersVolumeExpanders -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BloodProductsModifiersVolumeExpanders">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Blood_Formation_Products -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Blood_Formation_Products">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Calcium_Channel_Blocking_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Calcium_Channel_Blocking_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Calcium_Channel_Modifying_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Calcium_Channel_Modifying_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#CardiovascularAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#CardiovascularAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#CentralNervousSystemAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#CentralNervousSystemAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Cholinesterase_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Cholinesterase_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Coagulants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Coagulants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Conventional -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Conventional">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DentalOralAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DentalOralAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DermatologicalAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DermatologicalAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Deterrents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Deterrents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Diuretics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Diuretics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Dyslipidemics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Dyslipidemics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#EnzymeReplacementModifiers -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#EnzymeReplacementModifiers">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GABA_Augmenting_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GABA_Augmenting_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GastrointestinalAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GastrointestinalAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GenitourinaryAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#GenitourinaryAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glucocorticoids -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glucocorticoids">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glutamate_Pathway_Modifiers -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glutamate_Pathway_Modifiers">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glutamate_Reducing_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glutamate_Reducing_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glycemic_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Glycemic_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Histamine2_Blocking_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Histamine2_Blocking_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immune_Stimulants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immune_Stimulants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immune_Suppressants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immune_Suppressants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ImmunologicalAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ImmunologicalAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immunomodulators -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immunomodulators">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#InflammatoryBowelDiseaseAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#InflammatoryBowelDiseaseAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Insulins -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Insulins">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Irritable_Bowel_Syndrome_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Irritable_Bowel_Syndrome_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Local_Anesthetics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Local_Anesthetics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Macrolides -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Macrolides">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Mast_Cell_Stabilizers -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Mast_Cell_Stabilizers">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#MetabolicBoneDiseaseAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#MetabolicBoneDiseaseAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Molecular_Target_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Molecular_Target_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Monoamine_Oxidase_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Monoamine_Oxidase_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Monoclonal_Antibodies -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Monoclonal_Antibodies">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-opioid_Analgesics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-opioid_Analgesics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Nonsteroidal_Anti-inflammatory_Drugs -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Nonsteroidal_Anti-inflammatory_Drugs">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#OphthalmicAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#OphthalmicAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Anti-allergy_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Anti-allergy_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Anti-inflammatories -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Anti-inflammatories">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Antiglaucoma_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Antiglaucoma_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Opioid_Analgesics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Opioid_Analgesics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#OticAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#OticAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Parasympathomimetics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Parasympathomimetics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Phosphate_Binders -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Phosphate_Binders">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Platelet_Aggregation_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Platelet_Aggregation_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Prophylactic -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Prophylactic">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Protectants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Protectants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Proton_Pump_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Proton_Pump_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pulmonary_Antihypertensives -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pulmonary_Antihypertensives">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Quinolones -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Quinolones">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Renin-angiotensin-aldosterone_System_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Renin-angiotensin-aldosterone_System_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#RespiratoryTrackAgents_Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#RespiratoryTrackAgents_Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#RespiratoryTractAgents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#RespiratoryTractAgents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Retinoids -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Retinoids">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Salicylates -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Salicylates">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SedativesHypnotics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SedativesHypnotics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SideEffect -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SideEffect">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SkeletalMuscleRelaxants -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#SkeletalMuscleRelaxants">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Sodium_Channel_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Sodium_Channel_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Sulfonamides -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Sulfonamides">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Tetracyclines -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Tetracyclines">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticNutrients -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticNutrients">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Toxicologic_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Toxicologic_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Tricyclics -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Tricyclics">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Vasodilators -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Vasodilators">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Vitamins -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Vitamins">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Amphetamines,ADHD -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Amphetamines,ADHD">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Non-nucleoside_Reverse_Transcriptase_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Non-nucleoside_Reverse_Transcriptase_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Nucleoside_and_Nucleotide_Reverse_Transcriptase_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Nucleoside_and_Nucleotide_Reverse_Transcriptase_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Protease_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-HIV_Agents,Protease_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-cytomegalovirus_(CMV)_Agents -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-cytomegalovirus_(CMV)_Agents">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-human_Immunodeficiency_Virus_(HIV)_Agents,Fusion_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-human_Immunodeficiency_Virus_(HIV)_Agents,Fusion_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-inflammatories/Inhaled_Corticosteroids -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anti-inflammatories/Inhaled_Corticosteroids">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antibacterials,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antibacterials,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticonvulsants,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anticonvulsants,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidementia_Agents,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidementia_Agents,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressants,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antidepressants,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiestrogens/Modifiers -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antiestrogens/Modifiers">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimycobacterials,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antimycobacterials,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antineoplastics,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antineoplastics,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antispasmodics,Gastrointestinal -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antispasmodics,Gastrointestinal">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antispasmodics,Urinary -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Antispasmodics,Urinary">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anxiolytics,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Anxiolytics,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Cephalosporins -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Cephalosporins">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Penicillins -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Beta-lactam,Penicillins">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Anticholinergic -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Anticholinergic">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Sympathomimetic -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Sympathomimetic">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Phosphodiesterase_Inhibitors_(Xanthines) -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Bronchodilators/Phosphodiesterase_Inhibitors_(Xanthines)">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Cardiovascular_Agents,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Cardiovascular_Agents,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Electrolytes/Minerals -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Electrolytes/Minerals">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gastrointestinal_Agents,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gastrointestinal_Agents,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Genitourinary_Agents,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Genitourinary_Agents,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immunizing_Agents(Passive) -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Immunizing_Agents(Passive)">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-amphetamines,ADHD -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-amphetamines,ADHD">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-amphetamines,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Non-amphetamines,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Agents,Other -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Agents,Other">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Prostaglandin/Prostamide_Analogs -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Ophthalmic_Prostaglandin/Prostamide_Analogs">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pediculicides/Scabicides -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pediculicides/Scabicides">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Serotonin/Norepinephrine_Reuptake_Inhibitors -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Serotonin/Norepinephrine_Reuptake_Inhibitors">
-        <rdf:type rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotations
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topDataProperty">
-        <rdfs:comment>Absorption rate of the compound in the human body</rdfs:comment>
-        <rdfs:comment>hasAbsorptionRate</rdfs:comment>
-    </rdf:Description>
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:phyto="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#" xmlns:cmptx="http://jdr.bio/ontologies/comptox.owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#Disease">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Disease (Disease Ontology via DISEASES)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#Gene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Gene (ComptoxAI)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#Pathway">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Pathway (ComptoxAI)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#commonName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>commonName</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#diseaseSubtypeOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://jdr.bio/ontologies/comptox.owl#Disease"/>
+    <rdfs:label>disease subtype of</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Disease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#geneAssociatedWithDisease">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <rdfs:label>gene associated with disease</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Disease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#geneInPathway">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <rdfs:label>gene in pathway</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Pathway"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#geneInteractsWithGene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <rdfs:label>gene interacts with gene</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#geneSymbol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>geneSymbol</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#pathwayId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>pathwayId</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#sourceDatabase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>sourceDatabase</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#typeOfGene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>typeOfGene</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#xrefDiseaseOntology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>xrefDiseaseOntology</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#xrefEnsembl">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>xrefEnsembl</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#xrefHGNC">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>xrefHGNC</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#xrefNcbiGene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>xrefNcbiGene</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jdr.bio/ontologies/comptox.owl#xrefOMIM">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>xrefOMIM</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0100001">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>term replaced by</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/description">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>description</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/license">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>license</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/relation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/title">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>title</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>adverse effect</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BioactivityMeasurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Bioactivity measurement</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Carotenoid">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>clinical trial</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DietaryFiber">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>disease concept</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DrugDrugInteractions">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>drug-drug interactions</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Gene">
+    <ns0:IAO_0100001 xmlns:ns0="http://purl.obolibrary.org/obo/" rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Isoprenoid">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#MechanismOfAction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Mechanism of action</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#NonCompoundConstituent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Non-compound constituent (enzyme, element, nutrient class)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Pathway">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>pathway</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Phytosterol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>plant</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polyphenol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Polysaccharide">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ProteinTarget">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Protein target (name only)</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Saponin">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>scientific paper</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>therapeutic effect</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Unknown">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Deprecated: assigned by an unvalidated SMILES heuristic; see phyto:heuristicPhytochemicalClass.</rdfs:comment>
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityCompound">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BioactivityMeasurement"/>
+    <rdfs:label>activityCompound</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityRelation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>activityRelation</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityTarget">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BioactivityMeasurement"/>
+    <rdfs:label>activityTarget</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>activityType</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityUnit">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>activityUnit</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>activityValue</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#activityValueText">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>activityValueText</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#aromatic_rings">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>aromatic rings (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#assertedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>assertedBy</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDisease">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>CMAUP v2.0 plant–human disease association. An association, NOT a treatment claim; see the evidence sub-properties.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>associated with disease</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDiseaseByIngredientTrial">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>CMAUP column Association_by_Clinical_Trials_of_Plant_Ingredients; weak: inherited from trials of constituent compounds</rdfs:comment>
+    <rdfs:label>associatedWithDiseaseByIngredientTrial</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDisease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDiseaseByPlantTrial">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>CMAUP column Association_by_Clinical_Trials_of_Plant</rdfs:comment>
+    <rdfs:label>associatedWithDiseaseByPlantTrial</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDisease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDiseaseByTarget">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>CMAUP column Association_by_Therapeutic_Target</rdfs:comment>
+    <rdfs:label>associatedWithDiseaseByTarget</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDisease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDiseaseByTranscriptomeReversion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>CMAUP column Association_by_Disease_Transcriptiome_Reversion</rdfs:comment>
+    <rdfs:label>associatedWithDiseaseByTranscriptomeReversion</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#associatedWithDisease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#classyfireClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ClassyFire class (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#classyfireSubclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ClassyFire subclass (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#classyfireSuperclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ClassyFire superclass (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#coconutId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>COCONUT identifier</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#commonName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>vernacular name (plant)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#compoundTargetsGene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Compound has a measured target association with this gene (CMAUP).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>compound targets gene</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#constituentKind">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#diseaseCategory">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
+    <rdfs:label>diseaseCategory</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#diseaseTreatedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#treatsDisease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#dukeReferenceCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#exact_mw">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>exact_mw (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#formal_charge">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>formal charge (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#fraction_csp3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>fraction_csp3 (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#geneTargetedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsGene"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasATC">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>ATC code of a chemical</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ATC code</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasAdverseEffect">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Not yet populated.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="u3"/>
+    <rdfs:label>has adverse effect</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#AdverseEffect"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasBeenContributedTo">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
+    <rdfs:label>has been contributed to</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAssociatedWith"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCanonicalSMILES">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>hasCanonicalSMILES</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel>canonical SMILES (RDKit)</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasClinicalStudy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Plant: CMAUP trial associated with the plant itself. Compound: the compound is the trial intervention (CMAUP 'compound' association). A plant is NOT linked to trials of its constituent compounds; follow hasCompound/hasClinicalStudy for that.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="hcsU"/>
+    <rdfs:label>has clinical study</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCommonName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>The common name of a plant</rdfs:comment>
+    <rdfs:domain rdf:nodeID="u4"/>
+    <rdfs:label>common name</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Links a plant to its active compound(s)</rdfs:comment>
+    <rdfs:comment>Plant contains this natural-product compound (occurrence).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has compound</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompoundFamilyUnreplicated">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Flag on a COCONUT-only occurrence that no other plant of the same NCBI family shares (any source), while the compound is reported from &gt;=3 plants in other families. Weak heuristic: marks reports that are unreplicated at family level; many are real. Does not catch clustered mis-annotations (e.g. paclitaxel in 3 Garcinia species).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has compound (unreplicated in family)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompoundPerCMAUP">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Occurrence reported by CMAUP v2.0 Plant_Ingredient_Associations_allIngredients.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has compound (CMAUP v2.0)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompoundPerCOCONUT">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Occurrence from the POPPy v1 build: COCONUT database + COCONUT 2.0 SDF organism links (may include a small number of v1 CMAUP links).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has compound (COCONUT)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompoundPerDrDuke">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Occurrence reported in Dr. Duke's Phytochemical and Ethnobotanical Databases FARMACY tables.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has compound (Dr. Duke's)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasDOI">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper"/>
+    <rdfs:label>DOI</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasDosage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>Dosage information for a therapy</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>dosage</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasEvidenceText">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
+    <rdfs:label>evidence text</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel>hasEvidenceText</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasGenus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>genus</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasIUPACName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>A compound's IUPAC name</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>IUPAC name</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasInChIKey">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>InChIKey</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel>hasInChIKey</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMACCs">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>MACCS key bit string</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMechanismOfAction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>DrugCentral/ChEMBL action type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>has mechanism of action</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#MechanismOfAction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularFormula">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>molecular formula</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasMolecularWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>The molecular weight of a compound</rdfs:comment>
+    <rdfs:label>has molecular weight</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasNCTId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
+    <rdfs:label>ClinicalTrials.gov identifier</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel>hasNCTId</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Literature reference for the plant or compound.</rdfs:comment>
+    <rdfs:comment>v2.4: COCONUT 2.0 DOIs for compounds; Dr. Duke's citations for plants/compounds backed by a FARMACY occurrence. v1 links removed.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="u1"/>
+    <rdfs:label>has paper</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaperPerCOCONUT">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label>has paper (COCONUT 2.0 literature)</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaperPerDrDuke">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label>has reference (Dr. Duke's FARMACY occurrence citation)</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasReference">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BioactivityMeasurement"/>
+    <rdfs:label>hasReference</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasReferenceText">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>Reference given as text where it could not be resolved to a PubMed/DOI identifier.</rdfs:comment>
+    <rdfs:label>hasReferenceText</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasReportedConstituent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Dr. Duke's FARMACY entry that is an enzyme, element, nutrient or compound class rather than a defined compound.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>has reported constituent (non-compound)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#NonCompoundConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSMILES">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>The SMILES representation of a compound's structure</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>SMILES</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>Paper or database from which information originated</rdfs:comment>
+    <rdfs:label>source</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasSpecies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>specific epithet</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTaxon">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>NCBI Taxonomy ID</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>The therapeutic class (e.g., anti-inflammatory)</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>therapeutic class</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasTherapeuticEffect">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>value</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel>hasValue</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hba">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>hba (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hbd">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>hbd (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#heavy_atoms">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>heavy atoms (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#heteroatoms">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>heteroatoms (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#heuristicPhytochemicalClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>heuristic phytochemical class (unvalidated)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#icd11Code">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
+    <rdfs:label>icd11Code</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#interventionDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>interventionDescription</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAdverseEffectFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasAdverseEffect"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isAssociatedWith">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Links plants or compounds to geographic regions</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
+    <rdfs:label>is associated with</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticEffect"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isClinicalStudyFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasClinicalStudy"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isDerivedFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Indicates the source plant for a compound</rdfs:comment>
+    <rdfs:label>is derived from</rdfs:label>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#isPaperFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasPaper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#labelIsPlaceholder">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment>true when the compound's rdfs:label is a generated placeholder (no trade, common or IUPAC name found).</rdfs:comment>
+    <rdfs:label>label is placeholder</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#logp">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>logp (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#mw">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>mw (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#npClassifierClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>NPClassifier class (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#npClassifierPathway">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>NPClassifier pathway (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#npClassifierSuperclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>NPClassifier superclass (COCONUT 2.0)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#pathwayTargetedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#qed">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>qed (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#rescuedInVersion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>rescued in POPPy version</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ring_count">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ring count (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ro5_violations">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>ro5 violations (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#rotatable_bonds">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>rotatable bonds (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#scientificSynonym">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>scientific synonym</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#sourceColumn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
+    <rdfs:label>CMAUP source column</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>targetClass</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsGene">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>At least one compound of the plant targets this gene (CMAUP); mediating compound not recorded.</rdfs:comment>
+    <rdfs:comment>Inferred only: plant hasCompound C and C compoundTargetsGene G. Not materialized.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>plant targets gene</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <owl:propertyChainAxiom rdf:nodeID="tg1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsPathway">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Links a compound to the biological pathway it affects</rdfs:comment>
+    <rdfs:label>targets pathway</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#targetsProtein">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Compound targets this protein, named as in DrugCentral/ChEMBL; not yet mapped to a gene.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>targets protein</rdfs:label>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ProteinTarget"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#taxonomicFamily">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>NCBI family</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#taxonomicGenus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>NCBI genus</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#taxonomyStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdfs:label>taxonomy validation status</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#therapeuticDueTo">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#tpsa">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdfs:label>tpsa (RDKit)</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#treatsDisease">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment>Asserted therapeutic use (not yet populated).</rdfs:comment>
+    <rdfs:domain rdf:nodeID="u2"/>
+    <rdfs:label>treats disease</rdfs:label>
+    <rdfs:range rdf:resource="http://jdr.bio/ontologies/comptox.owl#Disease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#trialCondition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>trialCondition</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#trialPhase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label>trialPhase</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies">
+    <ns0:description xmlns:ns0="http://purl.org/dc/terms/">OWL ontology and knowledge graph linking medicinal plants to their chemical constituents, gene and protein targets, pathways, diseases, clinical trials, bioactivity measurements and literature, integrated from CMAUP 2.0, COCONUT 2.0, Dr. Duke's Phytochemical and Ethnobotanical Databases, ComptoxAI, the DISEASES resource (Disease Ontology), NCBI Taxonomy and ClinicalTrials.gov. Plant-disease links are associations, not treatment claims.</ns0:description>
+    <ns0:license xmlns:ns0="http://purl.org/dc/terms/" rdf:resource="https://creativecommons.org/licenses/by-nc/4.0/"/>
+    <ns0:relation xmlns:ns0="http://purl.org/dc/terms/" rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies/module/drugcentral-chembl"/>
+    <ns0:title xmlns:ns0="http://purl.org/dc/terms/">POPPy — Phyto-Ontology Platform for Pharmacology</ns0:title>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdfs:comment>v2.5: plant nodes with the same species name merged (map in data/patches/v25_plant_merge_map.tsv.gz); DrugCentral/ChEMBL-derived protein targets, mechanisms of action and ATC codes moved to the separately licensed module poppy_v2.5_drugcentral_chembl (CC BY-SA 4.0); UniChem cross-references added for compounds that had none.</rdfs:comment>
+    <owl:versionInfo>POPPy v2.5 (2026-10-06)</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#altLabel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>alternative label</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#closeMatch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>close match</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#exactMatch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label>exact match</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+    <owl:members rdf:nodeID="dj0l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#PlantConcept"/>
+    <rdf:rest rdf:nodeID="dj0l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:nodeID="dj0l2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#NonCompoundConstituent"/>
+    <rdf:rest rdf:nodeID="dj0l3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l3">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#HumanConcept"/>
+    <rdf:rest rdf:nodeID="dj0l4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l4">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ResearchConcept"/>
+    <rdf:rest rdf:nodeID="dj0l5"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj0l5">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#TherapeuticConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+    <owl:members rdf:nodeID="dj1l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj1l0">
+    <rdf:first rdf:resource="http://jdr.bio/ontologies/comptox.owl#Gene"/>
+    <rdf:rest rdf:nodeID="dj1l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj1l1">
+    <rdf:first rdf:resource="http://jdr.bio/ontologies/comptox.owl#Pathway"/>
+    <rdf:rest rdf:nodeID="dj1l2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj1l2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ProteinTarget"/>
+    <rdf:rest rdf:nodeID="dj1l3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj1l3">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#DiseaseConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+    <owl:members rdf:nodeID="dj2l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj2l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ClinicalTrial"/>
+    <rdf:rest rdf:nodeID="dj2l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj2l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ScientificPaper"/>
+    <rdf:rest rdf:nodeID="dj2l2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="dj2l2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#BioactivityMeasurement"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="hcs1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdf:rest rdf:nodeID="hcs2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="hcs2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="hcsU">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="hcs1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="tg1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#hasCompound"/>
+    <rdf:rest rdf:nodeID="tg2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="tg2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#compoundTargetsGene"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="u1l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u1l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdf:rest rdf:nodeID="u1l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u1l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="u2l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u2l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdf:rest rdf:nodeID="u2l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u2l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="u3l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u3l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdf:rest rdf:nodeID="u3l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u3l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u4">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="u4l0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u4l0">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#Plant"/>
+    <rdf:rest rdf:nodeID="u4l1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u4l1">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#ChemicalConcept"/>
+    <rdf:rest rdf:nodeID="u4l2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="u4l2">
+    <rdf:first rdf:resource="http://www.semanticweb.org/orestah/ontologies/2024/9/phytotherapies#NonCompoundConstituent"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
 </rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
-

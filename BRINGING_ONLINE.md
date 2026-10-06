@@ -26,7 +26,7 @@ Everything below happens in **RomanoLab/poppy** after the PR from `ohewryk:main`
   `Explore.html` are wired to real ontology data.
 - **`website/data/`** — sharded JSON the Explore page loads at runtime: `plants_index.json`
   (search), `plant_edges/` and `compounds/` (lazy-loaded per plant). ~50 MB, committed.
-- **Full ontology (RDF/XML, ~2 GB)** — on **Box**: https://upenn.box.com/v/poppyontology
+- **Full ontology (POPPy v2.5: RDF/XML 1.5 GB + N-Triples .nt.gz 136 MB, plus the CC BY-SA DrugCentral/ChEMBL module)** — on **Box**: https://upenn.box.com/v/poppyontology
   (linked from the Download page). Too large for Git, intentionally not committed.
 - **`notebooks/Ontology_Work_clean.ipynb`** — the end-to-end build pipeline; the
   authoritative record of how the ontology was produced.

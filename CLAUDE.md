@@ -39,14 +39,15 @@ distinguishable** from existing phytotherapy resources — especially **COCONUT*
 | `src/poppy/`, `scripts/`, `configs/` | Python package + CLI + YAML configs for the (modularized) build. |
 | `deploy/` | AWS EC2 provisioning (`aws-setup.sh`) + cloud-init bootstrap (`user-data.sh`). |
 
-## Data scale (`website/data/meta.json`)
+## Data scale (POPPy v2.5, 2026-10-06)
 
-Raw data layer: ~59,700 organisms · ~278,000 compounds · ~1.24 M links — but this is
-**contaminated** with non-plant organisms (the COCONUT 2.0 import skipped NCBI/POWO validation).
-**Validated plant-only counts (DATA-COUNTS.md, 2026-06-23):** **~42,000 plant taxa (Viridiplantae)
-· ~182,000 plant-associated phytochemicals.** Use these. **Scope decision:** plants only for v1;
-medicinal fungi deferred to a kingdom-typed v2 module. Non-plants (bacteria/animals/human/archaea/
-algae + fungi-for-now) are being filtered from the browse.
+Core (CC BY-NC 4.0): 12,933,298 triples; 43,828 plant nodes (39,941 with >=1 compound; same-species duplicates merged, map in
+data/patches/v25_plant_merge_map.tsv.gz) · 208,939 compounds (205,769 linked to a plant; 183,868 with RDKit descriptors;
+168,080 of 183,900 structured with a PubChem/ChEMBL/ChEBI/HMDB/DrugBank xref) · 1,013,231 plant-compound links · 62,407 genes · 4,569 pathways
+· 1,583 DOID + 1,351 CMAUP ICD-11 diseases · 15,155 trials · 25,756 bioactivity measurements · 74,263 publications.
+Module poppy_v2.5_drugcentral_chembl (CC BY-SA 4.0): 1,334 ProteinTarget + 18 MechanismOfAction nodes, 9,987 triples.
+Browse layer (`website/data/meta.json`): 39,941 plants · 205,769 compounds · 1,013,231 links.
+Build/validation history: `docs/recipes/ontology-v2-rebuild.md`; reports in `data/patches/v241_validation/`, `v25_validation/`.
 
 ## Hosting / deploy
 
@@ -61,7 +62,7 @@ algae + fungi-for-now) are being filtered from the browse.
   changes on stop/start, which would break DNS *and* cert renewal.
 - **EC2 is the only deployment.** GitHub Pages is NOT used (the Pages workflow was removed —
   it failed to run). Don't re-add a Pages workflow.
-- Full enriched ontology (RDF/XML, ~2 GB) lives on **Box**: https://upenn.box.com/v/poppyontology
+- Full ontology (POPPy v2.5: RDF/XML 1.5 GB + N-Triples .nt.gz 136 MB; DrugCentral/ChEMBL module separate, CC BY-SA 4.0) lives on **Box**: https://upenn.box.com/v/poppyontology
   (too large for git; linked from the Download page).
 
 ## Conventions / gotchas
