@@ -1,8 +1,10 @@
 {
- "version": "POPPy v2.4",
- "plants": 40109,
+ "version": "POPPy v2.5",
+ "plants": 39941,
  "compounds": 205769,
- "plant_compound_links": 1019280,
- "shard": "djb2(plantId)&255",
- "scope": "Viridiplantae (NCBI taxonomy validated). v2.4 (2026-10-05): v2.3 + literature rebuilt (COCONUT 2.0 DOIs for compounds; Dr. Duke's citations backing plant\u2013compound occurrences); evidence shards in data/evidence/. See docs/recipes/ontology-v2-rebuild.md."
+ "plant_compound_links": 1013231,
+ "targets": 758,
+ "compounds_with_targets": 3255,
+ "shard": "djb2(id)&255",
+ "scope": "Viridiplantae (NCBI taxonomy validated). v2.4 (2026-10-05): v2.3 + literature rebuilt (COCONUT 2.0 DOIs for compounds; Dr. Duke's citations backing plant\u2013compound occurrences); evidence shards in data/evidence/. See docs/recipes/ontology-v2-rebuild.md. v2.4.1 (2026-10-06): schema validation fixes. v2.5 (2026-10-06): plant nodes with the same species name merged (1,980 into 1,876); DrugCentral/ChEMBL protein targets moved to a separate CC BY-SA module; UniChem cross-references for 137,470 more compounds."
 }

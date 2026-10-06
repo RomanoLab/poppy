@@ -120,3 +120,66 @@ python3 scripts/cache_bust.py
 - Explore page: Evidence panel (clinical trials -> clinicaltrials.gov, bioactivity -> PubMed, literature -> doi.org /
   citation text), first 10 per block with "Show all"; compound rows now open in place.
 v2.4: 12,849,926 triples.
+
+## v2.4.1 (2026-10-06) — validation fixes (schema only)
+v2.4 was checked with Apache Jena `riot`, ROBOT 1.9.11 (`validate-profile --profile DL`, `report`, `reason` with
+HermiT/ELK) and full-file streaming checks. They found: 507 DOI IRIs with characters illegal in IRIs (SICI DOIs with
+`< > [ ]`); `commonName`/`scientificSynonym` punned as data + annotation properties and `skos:*` used undeclared
+(not OWL 2 DL); 9 RDKit count descriptors declared `xsd:double` but stored as `xsd:integer` (inconsistent under
+HermiT); `hasCommonName` domain that would re-infer the 318 non-compound constituents as `ChemicalConcept`;
+two contradictory unused properties (`interactsWith`, `hasInteractionsWith`); orphan OWL 1 `DataRange` lists; an
+empty blank-node label; logical axioms on deprecated classes; 15 missing labels; no title/description/licence.
+```bash
+python3 scripts/patch_v241.py poppy_v2.4.nt.gz poppy_v241.nt      # 93 triples dropped, 84 added, 507 IRIs encoded
+python3 scripts/finalize_nt.py poppy_v241.nt /dev/null poppy_v2.4.1.rdf
+gzip -c poppy_v241.nt > poppy_v2.4.1.nt.gz
+python3 scripts/validate/verify241.py poppy_v2.4.1.nt.gz            # every fix present / defect absent
+bash scripts/validate/run_checks.sh poppy_v2.4.1.nt.gz poppy_v2.4.1.rdf ~/work/val   # riot + ROBOT/HermiT + streaming checks
+```
+Also added: `owl:AllDisjointClasses` for the top-level domains, Gene/Pathway/ProteinTarget/DiseaseConcept, and
+ClinicalTrial/ScientificPaper/BioactivityMeasurement; `dcterms:license` CC BY-NC 4.0; `phyto:Gene`
+IAO:0100001 → `cmptx:Gene`; `hasReportedConstituent` domain Plant / range NonCompoundConstituent.
+The only data changes are the 507 re-encoded DOI IRIs and 46 `heuristicPhytochemicalClass "Unknown"` values removed
+from non-compound constituents.
+
+Results (reports in `data/patches/v241_validation/`, before/after): riot strict N-Triples + RDF/XML pass;
+12,849,917 triples; OWL 2 DL profile pass (schema, and schema + 16,976-triple ABox sample); HermiT consistent on
+schema + sample with disjointness; ROBOT report 0 errors (127 `missing_definition` warnings);
+`drcheck.py` 0 disjointness/domain/range violations over 13,569,594 checks; `dtcheck.py` 0 datatype mismatches;
+`iricheck.py` 0 invalid IRIs. HermiT was not run over all 12.85M triples — full-graph conformance rests on the
+streaming checks. `website/downloads/poppy-schema.rdf` regenerated from the v2.4.1 schema (586 triples).
+Browse data (`website/data`) is unchanged apart from the version string in `meta.json`.
+
+## v2.5 (2026-10-06) — plant deduplication, licence module, UniChem cross-references
+```bash
+gzip -dc poppy_v2.4.1.nt.gz > poppy_v241.nt
+python3 scripts/dedup_plants_v25.py poppy_v241.nt v25a.nt plant_merge_map.tsv
+python3 scripts/split_licence_module_v25.py v25a.nt v25b_core.nt module.nt unichem_worklist.tsv
+# on a machine with internet (~2.5 h at 8 workers, resumable):
+python3 scripts/fetch_unichem_xrefs.py unichem_worklist.tsv unichem_cache.jsonl --workers 8
+python3 scripts/apply_unichem_xrefs.py unichem_worklist.tsv unichem_cache.jsonl xrefs.nt
+python3 scripts/assemble_v25.py v25b_core.nt xrefs.nt poppy_v25.nt \
+    --replace data/patches/v25_validation/v25_tautomer_descriptor_fix.nt
+python3 scripts/finalize_nt.py poppy_v25.nt /dev/null poppy_v2.5.rdf && gzip -c poppy_v25.nt > poppy_v2.5.nt.gz
+LC_ALL=C sort -u module.nt > poppy_v2.5_drugcentral_chembl.nt
+python3 scripts/finalize_nt.py poppy_v2.5_drugcentral_chembl.nt /dev/null poppy_v2.5_drugcentral_chembl.rdf
+bash scripts/validate/make_inputs.sh poppy_v25.nt val
+python3 scripts/validate/drcheck.py poppy_v25.nt,poppy_v2.5_drugcentral_chembl.nt val/tbox.nt   # also dtcheck/iricheck
+python3 scripts/build_website_data.py poppy_v25.nt website/data --keep-names <previous plants_index.json>
+python3 scripts/build_evidence_data.py poppy_v25.nt website/data
+```
+- Plant dedup: nodes sharing genus + specific epithet (author strings and case ignored) merged, 1,980 into 1,876;
+  infraspecific names (ssp./var./f./cv./race/strain…), hybrids, aggregates, "sp./cf." and multi-taxon labels never
+  merged; 11 pairs with conflicting NCBI taxa kept apart. Merged labels -> skos:altLabel. Map:
+  `data/patches/v25_plant_merge_map.tsv.gz`. 43,828 plant nodes, 39,941 with compounds; 1,013,231 plant-compound links.
+- Licence module (CC BY-SA 4.0, `poppy_v2.5_drugcentral_chembl.*`, 9,987 triples): ProteinTarget (1,334) and
+  MechanismOfAction (18) nodes, targetsProtein 3,208, hasMechanismOfAction 307, hasATC 745. 150 empty legacy
+  TherapeuticEffect nodes dropped. ComptoxAI content stays in the core pending the author's licence OK.
+- UniChem: 154,787 compounds queried, 137,470 got >=1 new xref (118,763 new triples after removing ones already
+  present). Compounds with a PubChem/ChEMBL/ChEBI/HMDB/DrugBank xref: 168,080 of 183,900 with structure (91.4%);
+  PubChem 166,999, ChEMBL 37,396, ChEBI 18,355, HMDB 8,100, DrugBank 1,529, KEGG 0.
+- 7 compounds had two tautomeric SMILES and therefore two descriptor values: descriptors and canonical SMILES
+  recomputed from the RDKit canonical tautomer (RDKit 2026.03.6).
+- Validation: DL profile pass (schema; schema + per-predicate sample + full module; module alone), HermiT consistent,
+  ROBOT report 0 errors; drcheck 0 violations / 13,544,235 checks; dtcheck 0; iricheck 0; RDF/XML well-formed,
+  12,933,298 triples. riot to be re-run by the user. Reports: `data/patches/v25_validation/`.

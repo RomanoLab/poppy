@@ -39,5 +39,5 @@ make -C build all        # ontology + figures + web-data
 - [Recipes index](docs/recipes/README.md)
 - [Ontology data ingest guide](docs/recipes/ontology-data-ingest.md)
 ## Download the ontology
-The full enriched POPPy ontology (RDF/XML) is hosted on Box:
+The full POPPy ontology (v2.5; RDF/XML 1.5 GB, plus N-Triples .nt.gz 136 MB; CC BY-NC 4.0) and the separate DrugCentral/ChEMBL module (CC BY-SA 4.0) are hosted on Box:
 <https://upenn.box.com/v/poppyontology>
