@@ -7,6 +7,8 @@ publishes build stats and downloads.
 
 [![CI](https://github.com/RomanoLab/poppy/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/RomanoLab/poppy/actions/workflows/ci.yml)
 
+[![DOI](https://zenodo.org/badge/1051085319.svg)](https://doi.org/10.5281/zenodo.23243280)
+
 > See `INTEGRATION_NOTES.md` for a deeper tour of the structure and CSV/SQL mappings.
 
 ---
